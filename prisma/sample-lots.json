@@ -1,0 +1,4122 @@
+[
+ {
+  "slug": "unlocked-smartphones-graded-returns-s1",
+  "title": "Unlocked Smartphones — Graded Returns",
+  "category": "phones-computers",
+  "subcategory": "phones-computers-smartphones",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Online marketplace returns",
+  "available": 3,
+  "featured": true,
+  "priceCents": 209100,
+  "msrpCents": 1306800,
+  "units": 52,
+  "weightLbs": 27,
+  "daysAgo": 5,
+  "views": 97,
+  "description": "Headline items: 14 × Unlocked 128GB smartphone, 18 × Unlocked 64GB smartphone and 20 × Budget 32GB smartphone. This customer-return phones & computers load came in from online marketplace returns and totals 52 units across 3 manifest lines, packed as a case pack. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-PHO-S10",
+    "name": "Unlocked 128GB smartphone",
+    "qty": 14,
+    "unitMsrpCents": 42900
+   },
+   {
+    "sku": "PP-PHO-S11",
+    "name": "Unlocked 64GB smartphone",
+    "qty": 18,
+    "unitMsrpCents": 24900
+   },
+   {
+    "sku": "PP-PHO-S12",
+    "name": "Budget 32GB smartphone",
+    "qty": 20,
+    "unitMsrpCents": 12900
+   }
+  ]
+ },
+ {
+  "slug": "laptops-chromebooks-mix-s2",
+  "title": "Laptops & Chromebooks Mix",
+  "category": "phones-computers",
+  "subcategory": "phones-computers-laptops",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 2,
+  "featured": true,
+  "priceCents": 539600,
+  "msrpCents": 3372800,
+  "units": 72,
+  "weightLbs": 406,
+  "daysAgo": 10,
+  "views": 194,
+  "description": "Sourced from big-box retailer returns, this is a single pallet of customer-return phones & computers: 72 units in all. Top retail lines include 22 × 14in laptop, 8GB/256GB, 12 × 15.6in laptop, 16GB/512GB and 30 × 11in Chromebook; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-PHO-S20",
+    "name": "14in laptop, 8GB/256GB",
+    "qty": 22,
+    "unitMsrpCents": 54900
+   },
+   {
+    "sku": "PP-PHO-S21",
+    "name": "11in Chromebook",
+    "qty": 30,
+    "unitMsrpCents": 22900
+   },
+   {
+    "sku": "PP-PHO-S22",
+    "name": "15.6in laptop, 16GB/512GB",
+    "qty": 12,
+    "unitMsrpCents": 79900
+   },
+   {
+    "sku": "PP-PHO-S23",
+    "name": "2-in-1 touchscreen laptop",
+    "qty": 8,
+    "unitMsrpCents": 64900
+   }
+  ]
+ },
+ {
+  "slug": "tablets-e-readers-shelf-pulls-s3",
+  "title": "Tablets & E-readers Shelf Pulls",
+  "category": "phones-computers",
+  "subcategory": "phones-computers-tablets-e-readers",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Warehouse club",
+  "available": 3,
+  "featured": false,
+  "priceCents": 218900,
+  "msrpCents": 841800,
+  "units": 62,
+  "weightLbs": 41,
+  "daysAgo": 15,
+  "views": 291,
+  "description": "A case pack of phones & computers (shelf-pull) from warehouse club: 62 units over 3 manifest lines, led by 24 × 10in tablet 64GB, 18 × 6in e-reader and 20 × 8in kids tablet with case. Quantities were counted at our dock. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-PHO-S30",
+    "name": "10in tablet 64GB",
+    "qty": 24,
+    "unitMsrpCents": 17900
+   },
+   {
+    "sku": "PP-PHO-S31",
+    "name": "8in kids tablet with case",
+    "qty": 20,
+    "unitMsrpCents": 9900
+   },
+   {
+    "sku": "PP-PHO-S32",
+    "name": "6in e-reader",
+    "qty": 18,
+    "unitMsrpCents": 11900
+   }
+  ]
+ },
+ {
+  "slug": "monitors-desktop-pcs-s4",
+  "title": "Monitors & Desktop PCs",
+  "category": "phones-computers",
+  "subcategory": "phones-computers-desktops-monitors",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 2,
+  "featured": false,
+  "priceCents": 234000,
+  "msrpCents": 1462400,
+  "units": 56,
+  "weightLbs": 512,
+  "daysAgo": 20,
+  "views": 388,
+  "description": "56 customer-return phones & computers units packed as a single pallet, sourced from big-box retailer returns. The biggest lines by retail value are 10 × Compact desktop PC, 16 × 27in QHD monitor and 30 × 24in FHD monitor. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-PHO-S40",
+    "name": "24in FHD monitor",
+    "qty": 30,
+    "unitMsrpCents": 13900
+   },
+   {
+    "sku": "PP-PHO-S41",
+    "name": "27in QHD monitor",
+    "qty": 16,
+    "unitMsrpCents": 27900
+   },
+   {
+    "sku": "PP-PHO-S42",
+    "name": "Compact desktop PC",
+    "qty": 10,
+    "unitMsrpCents": 59900
+   }
+  ]
+ },
+ {
+  "slug": "keyboards-mice-webcams-s5",
+  "title": "Keyboards, Mice & Webcams",
+  "category": "phones-computers",
+  "subcategory": "phones-computers-computer-accessories",
+  "brand": "Logitech",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 426100,
+  "msrpCents": 1639000,
+  "units": 450,
+  "weightLbs": 565,
+  "daysAgo": 4,
+  "views": 485,
+  "description": "Headline items: 80 × 1080p webcam, 120 × Wireless keyboard & mouse combo and 160 × Wireless mouse. This shelf-pull phones & computers load came in from department store overstock and totals 450 units across 4 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-PHO-S50",
+    "name": "Wireless keyboard & mouse combo",
+    "qty": 120,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-PHO-S51",
+    "name": "1080p webcam",
+    "qty": 80,
+    "unitMsrpCents": 5900
+   },
+   {
+    "sku": "PP-PHO-S52",
+    "name": "Wireless mouse",
+    "qty": 160,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-PHO-S53",
+    "name": "USB-C hub 7-in-1",
+    "qty": 90,
+    "unitMsrpCents": 3500
+   }
+  ]
+ },
+ {
+  "slug": "tv-truckload-43in-to-75in-returns-s6",
+  "title": "TV Truckload — 43in to 75in Returns",
+  "category": "tvs-home-theater",
+  "subcategory": "tvs-home-theater-televisions",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "TRUCKLOAD",
+  "palletCount": 22,
+  "source": "Big-box retailer returns",
+  "available": 1,
+  "featured": true,
+  "priceCents": 2934600,
+  "msrpCents": 18341000,
+  "units": 390,
+  "weightLbs": 13596,
+  "daysAgo": 9,
+  "views": 582,
+  "description": "Sourced from big-box retailer returns, this is a 22-pallet truckload of customer-return tvs & home theater: 390 units in all. Top retail lines include 140 × 55in 4K smart TV, 90 × 65in 4K smart TV and 40 × 75in 4K smart TV; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-TVS-S60",
+    "name": "43in 4K smart TV",
+    "qty": 120,
+    "unitMsrpCents": 27900
+   },
+   {
+    "sku": "PP-TVS-S61",
+    "name": "55in 4K smart TV",
+    "qty": 140,
+    "unitMsrpCents": 42900
+   },
+   {
+    "sku": "PP-TVS-S62",
+    "name": "65in 4K smart TV",
+    "qty": 90,
+    "unitMsrpCents": 59900
+   },
+   {
+    "sku": "PP-TVS-S63",
+    "name": "75in 4K smart TV",
+    "qty": 40,
+    "unitMsrpCents": 89900
+   }
+  ]
+ },
+ {
+  "slug": "smart-tvs-pallet-50in-and-under-s7",
+  "title": "Smart TVs Pallet — 50in and Under",
+  "category": "tvs-home-theater",
+  "subcategory": "tvs-home-theater-televisions",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Online marketplace returns",
+  "available": 3,
+  "featured": false,
+  "priceCents": 96300,
+  "msrpCents": 601600,
+  "units": 24,
+  "weightLbs": 671,
+  "daysAgo": 14,
+  "views": 679,
+  "description": "A single pallet of tvs & home theater (customer-return) from online marketplace returns: 24 units over 3 manifest lines, led by 8 × 43in 4K smart TV, 6 × 50in 4K smart TV and 10 × 32in HD smart TV. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-TVS-S70",
+    "name": "32in HD smart TV",
+    "qty": 10,
+    "unitMsrpCents": 16900
+   },
+   {
+    "sku": "PP-TVS-S71",
+    "name": "43in 4K smart TV",
+    "qty": 8,
+    "unitMsrpCents": 27900
+   },
+   {
+    "sku": "PP-TVS-S72",
+    "name": "50in 4K smart TV",
+    "qty": 6,
+    "unitMsrpCents": 34900
+   }
+  ]
+ },
+ {
+  "slug": "soundbars-home-audio-s8",
+  "title": "Soundbars & Home Audio",
+  "category": "tvs-home-theater",
+  "subcategory": "tvs-home-theater-soundbars-home-audio",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 2,
+  "featured": false,
+  "priceCents": 477600,
+  "msrpCents": 1837000,
+  "units": 130,
+  "weightLbs": 724,
+  "daysAgo": 19,
+  "views": 76,
+  "description": "130 shelf-pull tvs & home theater units packed as a single pallet, sourced from department store overstock. The biggest lines by retail value are 40 × 2.1 soundbar with subwoofer, 60 × Compact soundbar and 30 × Bookshelf speaker pair. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-TVS-S80",
+    "name": "2.1 soundbar with subwoofer",
+    "qty": 40,
+    "unitMsrpCents": 19900
+   },
+   {
+    "sku": "PP-TVS-S81",
+    "name": "Compact soundbar",
+    "qty": 60,
+    "unitMsrpCents": 9900
+   },
+   {
+    "sku": "PP-TVS-S82",
+    "name": "Bookshelf speaker pair",
+    "qty": 30,
+    "unitMsrpCents": 14900
+   }
+  ]
+ },
+ {
+  "slug": "tv-mounts-cables-case-pack-s9",
+  "title": "TV Mounts & Cables Case Pack",
+  "category": "tvs-home-theater",
+  "subcategory": "tvs-home-theater-tv-mounts-accessories",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Manufacturer overstock",
+  "available": 4,
+  "featured": false,
+  "priceCents": 126000,
+  "msrpCents": 393600,
+  "units": 154,
+  "weightLbs": 23,
+  "daysAgo": 3,
+  "views": 173,
+  "description": "Headline items: 100 × HDMI 2.1 cable 6ft, 24 × Full-motion TV wall mount and 30 × Tilting TV mount. This new, unopened tvs & home theater load came in from manufacturer overstock and totals 154 units across 3 manifest lines, packed as a case pack. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-TVS-S90",
+    "name": "Full-motion TV wall mount",
+    "qty": 24,
+    "unitMsrpCents": 5900
+   },
+   {
+    "sku": "PP-TVS-S91",
+    "name": "Tilting TV mount",
+    "qty": 30,
+    "unitMsrpCents": 3400
+   },
+   {
+    "sku": "PP-TVS-S92",
+    "name": "HDMI 2.1 cable 6ft",
+    "qty": 100,
+    "unitMsrpCents": 1500
+   }
+  ]
+ },
+ {
+  "slug": "game-consoles-tested-returns-s10",
+  "title": "Game Consoles — Tested Returns",
+  "category": "video-games",
+  "subcategory": "video-games-consoles",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Online marketplace returns",
+  "available": 2,
+  "featured": true,
+  "priceCents": 150000,
+  "msrpCents": 937400,
+  "units": 26,
+  "weightLbs": 30,
+  "daysAgo": 8,
+  "views": 270,
+  "description": "Sourced from online marketplace returns, this is a case pack of customer-return video games: 26 units in all. Top retail lines include 8 × Current-gen home console, 12 × Handheld hybrid console and 6 × Previous-gen console 1TB; the complete manifest is below. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-VID-S100",
+    "name": "Current-gen home console",
+    "qty": 8,
+    "unitMsrpCents": 49900
+   },
+   {
+    "sku": "PP-VID-S101",
+    "name": "Handheld hybrid console",
+    "qty": 12,
+    "unitMsrpCents": 29900
+   },
+   {
+    "sku": "PP-VID-S102",
+    "name": "Previous-gen console 1TB",
+    "qty": 6,
+    "unitMsrpCents": 29900
+   }
+  ]
+ },
+ {
+  "slug": "video-games-overstock-mixed-titles-s11",
+  "title": "Video Games Overstock — Mixed Titles",
+  "category": "video-games",
+  "subcategory": "video-games-games",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Specialty retailer",
+  "available": 4,
+  "featured": false,
+  "priceCents": 465600,
+  "msrpCents": 1455000,
+  "units": 350,
+  "weightLbs": 37,
+  "daysAgo": 13,
+  "views": 367,
+  "description": "A case pack of video games (new, unopened) from specialty retailer: 350 units over 3 manifest lines, led by 120 × Current-gen game, sealed, 150 × Previous-gen game, sealed and 80 × Family & party game, sealed. Quantities were counted at our dock. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-VID-S110",
+    "name": "Current-gen game, sealed",
+    "qty": 120,
+    "unitMsrpCents": 5900
+   },
+   {
+    "sku": "PP-VID-S111",
+    "name": "Previous-gen game, sealed",
+    "qty": 150,
+    "unitMsrpCents": 2900
+   },
+   {
+    "sku": "PP-VID-S112",
+    "name": "Family & party game, sealed",
+    "qty": 80,
+    "unitMsrpCents": 3900
+   }
+  ]
+ },
+ {
+  "slug": "controllers-charging-docks-s12",
+  "title": "Controllers & Charging Docks",
+  "category": "video-games",
+  "subcategory": "video-games-controllers-accessories",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 2,
+  "featured": false,
+  "priceCents": 383000,
+  "msrpCents": 1473000,
+  "units": 270,
+  "weightLbs": 436,
+  "daysAgo": 18,
+  "views": 464,
+  "description": "270 shelf-pull video games units packed as a single pallet, sourced from big-box retailer returns. The biggest lines by retail value are 140 × Wireless controller, 40 × Pro-style controller and 90 × Dual charging dock. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-VID-S120",
+    "name": "Wireless controller",
+    "qty": 140,
+    "unitMsrpCents": 6400
+   },
+   {
+    "sku": "PP-VID-S121",
+    "name": "Dual charging dock",
+    "qty": 90,
+    "unitMsrpCents": 2900
+   },
+   {
+    "sku": "PP-VID-S122",
+    "name": "Pro-style controller",
+    "qty": 40,
+    "unitMsrpCents": 7900
+   }
+  ]
+ },
+ {
+  "slug": "gaming-headsets-chairs-2-pallets-s13",
+  "title": "Gaming Headsets & Chairs — 2 Pallets",
+  "category": "video-games",
+  "subcategory": "video-games-gaming-headsets-chairs",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 2,
+  "source": "Online marketplace returns",
+  "available": 2,
+  "featured": false,
+  "priceCents": 245700,
+  "msrpCents": 1535600,
+  "units": 164,
+  "weightLbs": 978,
+  "daysAgo": 2,
+  "views": 561,
+  "description": "Headline items: 60 × Wireless gaming headset, 24 × Gaming chair and 80 × Wired gaming headset. This customer-return video games load came in from online marketplace returns and totals 164 units across 3 manifest lines, packed as 2 pallets. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-VID-S130",
+    "name": "Wireless gaming headset",
+    "qty": 60,
+    "unitMsrpCents": 9900
+   },
+   {
+    "sku": "PP-VID-S131",
+    "name": "Wired gaming headset",
+    "qty": 80,
+    "unitMsrpCents": 4900
+   },
+   {
+    "sku": "PP-VID-S132",
+    "name": "Gaming chair",
+    "qty": 24,
+    "unitMsrpCents": 22900
+   }
+  ]
+ },
+ {
+  "slug": "cameras-drones-returns-s14",
+  "title": "Cameras & Drones Returns",
+  "category": "electronics",
+  "subcategory": "electronics-cameras-drones",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Online marketplace returns",
+  "available": 2,
+  "featured": false,
+  "priceCents": 152900,
+  "msrpCents": 955400,
+  "units": 46,
+  "weightLbs": 58,
+  "daysAgo": 7,
+  "views": 658,
+  "description": "Sourced from online marketplace returns, this is a case pack of customer-return electronics: 46 units in all. Top retail lines include 10 × 4K camera drone, 16 × Action camera and 20 × Instant camera; the complete manifest is below. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-ELE-S140",
+    "name": "4K camera drone",
+    "qty": 10,
+    "unitMsrpCents": 39900
+   },
+   {
+    "sku": "PP-ELE-S141",
+    "name": "Action camera",
+    "qty": 16,
+    "unitMsrpCents": 24900
+   },
+   {
+    "sku": "PP-ELE-S142",
+    "name": "Instant camera",
+    "qty": 20,
+    "unitMsrpCents": 7900
+   }
+  ]
+ },
+ {
+  "slug": "smartwatches-fitness-trackers-s15",
+  "title": "Smartwatches & Fitness Trackers",
+  "category": "electronics",
+  "subcategory": "electronics-wearables",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Warehouse club",
+  "available": 3,
+  "featured": false,
+  "priceCents": 252800,
+  "msrpCents": 972400,
+  "units": 76,
+  "weightLbs": 65,
+  "daysAgo": 12,
+  "views": 55,
+  "description": "A case pack of electronics (shelf-pull) from warehouse club: 76 units over 3 manifest lines, led by 20 × Smartwatch 44mm, 40 × Fitness tracker band and 16 × Kids smartwatch. Quantities were counted at our dock. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-ELE-S150",
+    "name": "Smartwatch 44mm",
+    "qty": 20,
+    "unitMsrpCents": 24900
+   },
+   {
+    "sku": "PP-ELE-S151",
+    "name": "Fitness tracker band",
+    "qty": 40,
+    "unitMsrpCents": 7900
+   },
+   {
+    "sku": "PP-ELE-S152",
+    "name": "Kids smartwatch",
+    "qty": 16,
+    "unitMsrpCents": 9900
+   }
+  ]
+ },
+ {
+  "slug": "refrigerators-scratch-dent-s16",
+  "title": "Refrigerators — Scratch & Dent",
+  "category": "appliances",
+  "subcategory": "appliances-refrigerators-freezers",
+  "brand": "",
+  "condition": "SALVAGE",
+  "lotSize": "TRUCKLOAD",
+  "palletCount": 20,
+  "source": "Home improvement retailer",
+  "available": 1,
+  "featured": true,
+  "priceCents": 479700,
+  "msrpCents": 6852600,
+  "units": 74,
+  "weightLbs": 12960,
+  "daysAgo": 17,
+  "views": 152,
+  "description": "74 salvage appliances units packed as a 20-pallet truckload, sourced from home improvement retailer. The biggest lines by retail value are 20 × French-door refrigerator, 24 × Top-freezer refrigerator and 30 × Chest freezer 7cu ft. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-APP-S160",
+    "name": "French-door refrigerator",
+    "qty": 20,
+    "unitMsrpCents": 189900
+   },
+   {
+    "sku": "PP-APP-S161",
+    "name": "Top-freezer refrigerator",
+    "qty": 24,
+    "unitMsrpCents": 89900
+   },
+   {
+    "sku": "PP-APP-S162",
+    "name": "Chest freezer 7cu ft",
+    "qty": 30,
+    "unitMsrpCents": 29900
+   }
+  ]
+ },
+ {
+  "slug": "washers-dryers-customer-returns-4-pallets-s17",
+  "title": "Washers & Dryers — Customer Returns — 4 Pallets",
+  "category": "appliances",
+  "subcategory": "appliances-washers-dryers",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 4,
+  "source": "Home improvement retailer",
+  "available": 2,
+  "featured": false,
+  "priceCents": 73500,
+  "msrpCents": 459400,
+  "units": 6,
+  "weightLbs": 2804,
+  "daysAgo": 1,
+  "views": 249,
+  "description": "Headline items: 2 × Front-load washer, 2 × Electric dryer and 2 × Top-load washer. This customer-return appliances load came in from home improvement retailer and totals 6 units across 3 manifest lines, packed as 4 pallets. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-APP-S170",
+    "name": "Front-load washer",
+    "qty": 2,
+    "unitMsrpCents": 89900
+   },
+   {
+    "sku": "PP-APP-S171",
+    "name": "Electric dryer",
+    "qty": 2,
+    "unitMsrpCents": 74900
+   },
+   {
+    "sku": "PP-APP-S172",
+    "name": "Top-load washer",
+    "qty": 2,
+    "unitMsrpCents": 64900
+   }
+  ]
+ },
+ {
+  "slug": "ranges-cooktops-mix-3-pallets-s18",
+  "title": "Ranges & Cooktops Mix — 3 Pallets",
+  "category": "appliances",
+  "subcategory": "appliances-ranges-cooktops",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 3,
+  "source": "Home improvement retailer",
+  "available": 1,
+  "featured": false,
+  "priceCents": 71900,
+  "msrpCents": 449300,
+  "units": 7,
+  "weightLbs": 2262,
+  "daysAgo": 6,
+  "views": 346,
+  "description": "Sourced from home improvement retailer, this is 3 pallets of customer-return appliances: 7 units in all. Top retail lines include 4 × Induction cooktop, 2 × 30in electric range and 1 × 30in gas range; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-APP-S180",
+    "name": "30in electric range",
+    "qty": 2,
+    "unitMsrpCents": 79900
+   },
+   {
+    "sku": "PP-APP-S181",
+    "name": "30in gas range",
+    "qty": 1,
+    "unitMsrpCents": 89900
+   },
+   {
+    "sku": "PP-APP-S182",
+    "name": "Induction cooktop",
+    "qty": 4,
+    "unitMsrpCents": 49900
+   }
+  ]
+ },
+ {
+  "slug": "microwaves-overstock-s19",
+  "title": "Microwaves Overstock",
+  "category": "appliances",
+  "subcategory": "appliances-microwaves",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Manufacturer overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 167900,
+  "msrpCents": 524800,
+  "units": 32,
+  "weightLbs": 307,
+  "daysAgo": 11,
+  "views": 443,
+  "description": "A single pallet of appliances (new, unopened) from manufacturer overstock: 32 units over 2 manifest lines, led by 24 × Countertop microwave 1.1 cu ft and 8 × Over-the-range microwave. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-APP-S190",
+    "name": "Countertop microwave 1.1 cu ft",
+    "qty": 24,
+    "unitMsrpCents": 11900
+   },
+   {
+    "sku": "PP-APP-S191",
+    "name": "Over-the-range microwave",
+    "qty": 8,
+    "unitMsrpCents": 29900
+   }
+  ]
+ },
+ {
+  "slug": "air-conditioners-space-heaters-2-pallets-s20",
+  "title": "Air Conditioners & Space Heaters — 2 Pallets",
+  "category": "appliances",
+  "subcategory": "appliances-air-conditioners-heaters",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 2,
+  "source": "Big-box retailer returns",
+  "available": 2,
+  "featured": false,
+  "priceCents": 297400,
+  "msrpCents": 1144000,
+  "units": 60,
+  "weightLbs": 720,
+  "daysAgo": 16,
+  "views": 540,
+  "description": "60 shelf-pull appliances units packed as 2 pallets, sourced from big-box retailer returns. The biggest lines by retail value are 20 × Window air conditioner 8,000 BTU, 10 × Portable air conditioner and 30 × Ceramic space heater. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-APP-S200",
+    "name": "Window air conditioner 8,000 BTU",
+    "qty": 20,
+    "unitMsrpCents": 29900
+   },
+   {
+    "sku": "PP-APP-S201",
+    "name": "Portable air conditioner",
+    "qty": 10,
+    "unitMsrpCents": 39900
+   },
+   {
+    "sku": "PP-APP-S202",
+    "name": "Ceramic space heater",
+    "qty": 30,
+    "unitMsrpCents": 4900
+   }
+  ]
+ },
+ {
+  "slug": "vacuums-floor-care-returns-s21",
+  "title": "Vacuums & Floor Care Returns",
+  "category": "appliances",
+  "subcategory": "appliances-vacuums-floor-care",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Online marketplace returns",
+  "available": 3,
+  "featured": true,
+  "priceCents": 202700,
+  "msrpCents": 1266600,
+  "units": 54,
+  "weightLbs": 413,
+  "daysAgo": 0,
+  "views": 637,
+  "description": "Headline items: 24 × Cordless stick vacuum, 14 × Robot vacuum and 10 × Upright vacuum. This customer-return appliances load came in from online marketplace returns and totals 54 units across 4 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-APP-S210",
+    "name": "Cordless stick vacuum",
+    "qty": 24,
+    "unitMsrpCents": 22900
+   },
+   {
+    "sku": "PP-APP-S211",
+    "name": "Robot vacuum",
+    "qty": 14,
+    "unitMsrpCents": 29900
+   },
+   {
+    "sku": "PP-APP-S212",
+    "name": "Upright vacuum",
+    "qty": 10,
+    "unitMsrpCents": 17900
+   },
+   {
+    "sku": "PP-APP-S213",
+    "name": "Carpet cleaner",
+    "qty": 6,
+    "unitMsrpCents": 19900
+   }
+  ]
+ },
+ {
+  "slug": "insulated-tumblers-water-bottles-s22",
+  "title": "Insulated Tumblers & Water Bottles",
+  "category": "home-kitchen",
+  "subcategory": "home-kitchen-drinkware",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Manufacturer overstock",
+  "available": 4,
+  "featured": false,
+  "priceCents": 537600,
+  "msrpCents": 1680000,
+  "units": 600,
+  "weightLbs": 466,
+  "daysAgo": 5,
+  "views": 34,
+  "description": "Sourced from manufacturer overstock, this is a single pallet of new, unopened home & kitchen: 600 units in all. Top retail lines include 240 × 30oz insulated tumbler, 200 × 24oz insulated water bottle and 160 × Kids 14oz tumbler; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-HOM-S220",
+    "name": "30oz insulated tumbler",
+    "qty": 240,
+    "unitMsrpCents": 2900
+   },
+   {
+    "sku": "PP-HOM-S221",
+    "name": "24oz insulated water bottle",
+    "qty": 200,
+    "unitMsrpCents": 3400
+   },
+   {
+    "sku": "PP-HOM-S222",
+    "name": "Kids 14oz tumbler",
+    "qty": 160,
+    "unitMsrpCents": 1900
+   }
+  ]
+ },
+ {
+  "slug": "storage-organization-overstock-s23",
+  "title": "Storage & Organization Overstock",
+  "category": "home-kitchen",
+  "subcategory": "home-kitchen-storage-organization",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 162000,
+  "msrpCents": 623000,
+  "units": 170,
+  "weightLbs": 519,
+  "daysAgo": 10,
+  "views": 131,
+  "description": "A single pallet of home & kitchen (shelf-pull) from department store overstock: 170 units over 3 manifest lines, led by 30 × Closet organizer, 60 × Stackable storage bins 6-pack and 80 × Drawer divider set. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-HOM-S230",
+    "name": "Stackable storage bins 6-pack",
+    "qty": 60,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-HOM-S231",
+    "name": "Closet organizer",
+    "qty": 30,
+    "unitMsrpCents": 7900
+   },
+   {
+    "sku": "PP-HOM-S232",
+    "name": "Drawer divider set",
+    "qty": 80,
+    "unitMsrpCents": 1900
+   }
+  ]
+ },
+ {
+  "slug": "mattresses-in-a-box-bed-frames-2-pallets-s24",
+  "title": "Mattresses-in-a-Box & Bed Frames — 2 Pallets",
+  "category": "furniture",
+  "subcategory": "furniture-bedroom-mattresses",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 2,
+  "source": "Online marketplace returns",
+  "available": 2,
+  "featured": false,
+  "priceCents": 274200,
+  "msrpCents": 857000,
+  "units": 30,
+  "weightLbs": 1144,
+  "daysAgo": 15,
+  "views": 228,
+  "description": "30 new, unopened furniture units packed as 2 pallets, sourced from online marketplace returns. The biggest lines by retail value are 10 × Queen memory foam mattress, 8 × Full hybrid mattress and 12 × Queen metal platform frame. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-FUR-S240",
+    "name": "Queen memory foam mattress",
+    "qty": 10,
+    "unitMsrpCents": 39900
+   },
+   {
+    "sku": "PP-FUR-S241",
+    "name": "Full hybrid mattress",
+    "qty": 8,
+    "unitMsrpCents": 34900
+   },
+   {
+    "sku": "PP-FUR-S242",
+    "name": "Queen metal platform frame",
+    "qty": 12,
+    "unitMsrpCents": 14900
+   }
+  ]
+ },
+ {
+  "slug": "women-s-clothing-department-store-mix-s25",
+  "title": "Women's Clothing — Department Store Mix",
+  "category": "apparel",
+  "subcategory": "apparel-womens-clothing",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 3,
+  "featured": true,
+  "priceCents": 811200,
+  "msrpCents": 3120000,
+  "units": 600,
+  "weightLbs": 625,
+  "daysAgo": 20,
+  "views": 325,
+  "description": "Headline items: 160 × Women's jeans, 220 × Women's blouse and 120 × Women's dress. This shelf-pull clothing load came in from department store overstock and totals 600 units across 4 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-APP-S250",
+    "name": "Women's blouse",
+    "qty": 220,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-APP-S251",
+    "name": "Women's jeans",
+    "qty": 160,
+    "unitMsrpCents": 5900
+   },
+   {
+    "sku": "PP-APP-S252",
+    "name": "Women's dress",
+    "qty": 120,
+    "unitMsrpCents": 6900
+   },
+   {
+    "sku": "PP-APP-S253",
+    "name": "Women's cardigan",
+    "qty": 100,
+    "unitMsrpCents": 4900
+   }
+  ]
+ },
+ {
+  "slug": "men-s-clothing-overstock-s26",
+  "title": "Men's Clothing Overstock",
+  "category": "apparel",
+  "subcategory": "apparel-mens-clothing",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 699500,
+  "msrpCents": 2186000,
+  "units": 500,
+  "weightLbs": 678,
+  "daysAgo": 4,
+  "views": 422,
+  "description": "Sourced from department store overstock, this is a single pallet of new, unopened clothing: 500 units in all. Top retail lines include 240 × Men's polo shirt, 140 × Men's chinos and 120 × Men's quarter-zip; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-APP-S260",
+    "name": "Men's polo shirt",
+    "qty": 240,
+    "unitMsrpCents": 3500
+   },
+   {
+    "sku": "PP-APP-S261",
+    "name": "Men's chinos",
+    "qty": 140,
+    "unitMsrpCents": 4900
+   },
+   {
+    "sku": "PP-APP-S262",
+    "name": "Men's quarter-zip",
+    "qty": 120,
+    "unitMsrpCents": 5500
+   }
+  ]
+ },
+ {
+  "slug": "department-store-apparel-truckload-s27",
+  "title": "Department Store Apparel Truckload",
+  "category": "apparel",
+  "subcategory": "apparel-department-store-apparel",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "TRUCKLOAD",
+  "palletCount": 24,
+  "source": "Department store overstock",
+  "available": 1,
+  "featured": false,
+  "priceCents": 5969600,
+  "msrpCents": 22960000,
+  "units": 7600,
+  "weightLbs": 17544,
+  "daysAgo": 9,
+  "views": 519,
+  "description": "A 24-pallet truckload of clothing (shelf-pull) from department store overstock: 7,600 units over 3 manifest lines, led by 3200 × Mixed women's apparel, 2400 × Mixed men's apparel and 2000 × Mixed kids' apparel. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-APP-S270",
+    "name": "Mixed women's apparel",
+    "qty": 3200,
+    "unitMsrpCents": 3400
+   },
+   {
+    "sku": "PP-APP-S271",
+    "name": "Mixed men's apparel",
+    "qty": 2400,
+    "unitMsrpCents": 3200
+   },
+   {
+    "sku": "PP-APP-S272",
+    "name": "Mixed kids' apparel",
+    "qty": 2000,
+    "unitMsrpCents": 2200
+   }
+  ]
+ },
+ {
+  "slug": "mixed-apparel-case-pack-s28",
+  "title": "Mixed Apparel Case Pack",
+  "category": "apparel",
+  "subcategory": "apparel-mixed-apparel",
+  "brand": "",
+  "condition": "MIXED",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 4,
+  "featured": false,
+  "priceCents": 45200,
+  "msrpCents": 322800,
+  "units": 112,
+  "weightLbs": 36,
+  "daysAgo": 14,
+  "views": 616,
+  "description": "112 mixed-condition clothing units packed as a case pack, sourced from big-box retailer returns. The biggest lines by retail value are 60 × Assorted tops, 40 × Assorted bottoms and 12 × Assorted outerwear. All 3 manifest lines are listed below, with quantities counted at our dock. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-APP-S280",
+    "name": "Assorted tops",
+    "qty": 60,
+    "unitMsrpCents": 2200
+   },
+   {
+    "sku": "PP-APP-S281",
+    "name": "Assorted bottoms",
+    "qty": 40,
+    "unitMsrpCents": 3000
+   },
+   {
+    "sku": "PP-APP-S282",
+    "name": "Assorted outerwear",
+    "qty": 12,
+    "unitMsrpCents": 5900
+   }
+  ]
+ },
+ {
+  "slug": "name-brand-running-shoes-s29",
+  "title": "Name-Brand Running Shoes",
+  "category": "shoes",
+  "subcategory": "shoes-athletic-sneakers",
+  "brand": "Nike",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Specialty retailer",
+  "available": 2,
+  "featured": true,
+  "priceCents": 787800,
+  "msrpCents": 3030000,
+  "units": 300,
+  "weightLbs": 337,
+  "daysAgo": 19,
+  "views": 13,
+  "description": "Headline items: 120 × Men's running shoe, 120 × Women's running shoe and 60 × Kids' running shoe. This shelf-pull shoes load came in from specialty retailer and totals 300 units across 3 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SHO-S290",
+    "name": "Men's running shoe",
+    "qty": 120,
+    "unitMsrpCents": 11000
+   },
+   {
+    "sku": "PP-SHO-S291",
+    "name": "Women's running shoe",
+    "qty": 120,
+    "unitMsrpCents": 11000
+   },
+   {
+    "sku": "PP-SHO-S292",
+    "name": "Kids' running shoe",
+    "qty": 60,
+    "unitMsrpCents": 6500
+   }
+  ]
+ },
+ {
+  "slug": "women-s-shoes-flats-heels-sandals-s30",
+  "title": "Women's Shoes — Flats, Heels & Sandals",
+  "category": "shoes",
+  "subcategory": "shoes-womens-shoes",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 2,
+  "featured": false,
+  "priceCents": 398400,
+  "msrpCents": 1245000,
+  "units": 250,
+  "weightLbs": 390,
+  "daysAgo": 3,
+  "views": 110,
+  "description": "Sourced from department store overstock, this is a single pallet of new, unopened shoes: 250 units in all. Top retail lines include 90 × Women's ballet flat, 60 × Women's block heel and 100 × Women's sandal; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SHO-S300",
+    "name": "Women's ballet flat",
+    "qty": 90,
+    "unitMsrpCents": 4900
+   },
+   {
+    "sku": "PP-SHO-S301",
+    "name": "Women's block heel",
+    "qty": 60,
+    "unitMsrpCents": 6900
+   },
+   {
+    "sku": "PP-SHO-S302",
+    "name": "Women's sandal",
+    "qty": 100,
+    "unitMsrpCents": 3900
+   }
+  ]
+ },
+ {
+  "slug": "men-s-dress-casual-shoes-s31",
+  "title": "Men's Dress & Casual Shoes",
+  "category": "shoes",
+  "subcategory": "shoes-mens-shoes",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 2,
+  "featured": false,
+  "priceCents": 423300,
+  "msrpCents": 1628000,
+  "units": 220,
+  "weightLbs": 443,
+  "daysAgo": 8,
+  "views": 207,
+  "description": "A single pallet of shoes (shelf-pull) from department store overstock: 220 units over 3 manifest lines, led by 70 × Men's leather oxford, 90 × Men's casual sneaker and 60 × Men's loafer. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SHO-S310",
+    "name": "Men's leather oxford",
+    "qty": 70,
+    "unitMsrpCents": 8900
+   },
+   {
+    "sku": "PP-SHO-S311",
+    "name": "Men's loafer",
+    "qty": 60,
+    "unitMsrpCents": 7900
+   },
+   {
+    "sku": "PP-SHO-S312",
+    "name": "Men's casual sneaker",
+    "qty": 90,
+    "unitMsrpCents": 5900
+   }
+  ]
+ },
+ {
+  "slug": "work-winter-boots-s32",
+  "title": "Work & Winter Boots",
+  "category": "shoes",
+  "subcategory": "shoes-boots",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Specialty retailer",
+  "available": 2,
+  "featured": false,
+  "priceCents": 515800,
+  "msrpCents": 1612000,
+  "units": 180,
+  "weightLbs": 496,
+  "daysAgo": 13,
+  "views": 304,
+  "description": "180 new, unopened shoes units packed as a single pallet, sourced from specialty retailer. The biggest lines by retail value are 50 × Men's steel-toe work boot, 70 × Women's winter boot and 60 × Kids' snow boot. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SHO-S320",
+    "name": "Men's steel-toe work boot",
+    "qty": 50,
+    "unitMsrpCents": 13900
+   },
+   {
+    "sku": "PP-SHO-S321",
+    "name": "Women's winter boot",
+    "qty": 70,
+    "unitMsrpCents": 8900
+   },
+   {
+    "sku": "PP-SHO-S322",
+    "name": "Kids' snow boot",
+    "qty": 60,
+    "unitMsrpCents": 4900
+   }
+  ]
+ },
+ {
+  "slug": "handbags-wallets-overstock-s33",
+  "title": "Handbags & Wallets Overstock",
+  "category": "accessories-jewelry",
+  "subcategory": "accessories-jewelry-handbags-wallets",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 3,
+  "featured": true,
+  "priceCents": 324200,
+  "msrpCents": 1013000,
+  "units": 170,
+  "weightLbs": 71,
+  "daysAgo": 18,
+  "views": 401,
+  "description": "Headline items: 40 × Leather crossbody bag, 50 × Tote bag and 80 × Leather wallet. This new, unopened accessories & jewelry load came in from department store overstock and totals 170 units across 3 manifest lines, packed as a case pack. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-ACC-S330",
+    "name": "Leather crossbody bag",
+    "qty": 40,
+    "unitMsrpCents": 8900
+   },
+   {
+    "sku": "PP-ACC-S331",
+    "name": "Tote bag",
+    "qty": 50,
+    "unitMsrpCents": 6900
+   },
+   {
+    "sku": "PP-ACC-S332",
+    "name": "Leather wallet",
+    "qty": 80,
+    "unitMsrpCents": 3900
+   }
+  ]
+ },
+ {
+  "slug": "fashion-watches-case-pack-s34",
+  "title": "Fashion Watches Case Pack",
+  "category": "accessories-jewelry",
+  "subcategory": "accessories-jewelry-watches",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 233700,
+  "msrpCents": 899000,
+  "units": 110,
+  "weightLbs": 78,
+  "daysAgo": 2,
+  "views": 498,
+  "description": "Sourced from department store overstock, this is a case pack of shelf-pull accessories & jewelry: 110 units in all. Top retail lines include 40 × Men's analog watch, 40 × Women's analog watch and 30 × Digital sport watch; the complete manifest is below. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-ACC-S340",
+    "name": "Men's analog watch",
+    "qty": 40,
+    "unitMsrpCents": 9900
+   },
+   {
+    "sku": "PP-ACC-S341",
+    "name": "Women's analog watch",
+    "qty": 40,
+    "unitMsrpCents": 8900
+   },
+   {
+    "sku": "PP-ACC-S342",
+    "name": "Digital sport watch",
+    "qty": 30,
+    "unitMsrpCents": 4900
+   }
+  ]
+ },
+ {
+  "slug": "fashion-jewelry-assortment-s35",
+  "title": "Fashion Jewelry Assortment",
+  "category": "accessories-jewelry",
+  "subcategory": "accessories-jewelry-jewelry",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Specialty retailer",
+  "available": 4,
+  "featured": false,
+  "priceCents": 376000,
+  "msrpCents": 1175000,
+  "units": 500,
+  "weightLbs": 25,
+  "daysAgo": 7,
+  "views": 595,
+  "description": "A case pack of accessories & jewelry (new, unopened) from specialty retailer: 500 units over 3 manifest lines, led by 150 × Necklace, 200 × Earrings and 150 × Bracelet. Quantities were counted at our dock. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-ACC-S350",
+    "name": "Necklace",
+    "qty": 150,
+    "unitMsrpCents": 2900
+   },
+   {
+    "sku": "PP-ACC-S351",
+    "name": "Earrings",
+    "qty": 200,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-ACC-S352",
+    "name": "Bracelet",
+    "qty": 150,
+    "unitMsrpCents": 2400
+   }
+  ]
+ },
+ {
+  "slug": "sunglasses-display-pulls-s36",
+  "title": "Sunglasses Display Pulls",
+  "category": "accessories-jewelry",
+  "subcategory": "accessories-jewelry-sunglasses",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 4,
+  "featured": false,
+  "priceCents": 185100,
+  "msrpCents": 712000,
+  "units": 260,
+  "weightLbs": 32,
+  "daysAgo": 12,
+  "views": 692,
+  "description": "260 shelf-pull accessories & jewelry units packed as a case pack, sourced from big-box retailer returns. The biggest lines by retail value are 120 × Polarized sunglasses, 80 × Sport sunglasses and 60 × Kids' sunglasses. All 3 manifest lines are listed below, with quantities counted at our dock. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-ACC-S360",
+    "name": "Polarized sunglasses",
+    "qty": 120,
+    "unitMsrpCents": 2900
+   },
+   {
+    "sku": "PP-ACC-S361",
+    "name": "Sport sunglasses",
+    "qty": 80,
+    "unitMsrpCents": 3500
+   },
+   {
+    "sku": "PP-ACC-S362",
+    "name": "Kids' sunglasses",
+    "qty": 60,
+    "unitMsrpCents": 1400
+   }
+  ]
+ },
+ {
+  "slug": "hats-gloves-scarves-s37",
+  "title": "Hats, Gloves & Scarves",
+  "category": "accessories-jewelry",
+  "subcategory": "accessories-jewelry-hats-cold-weather",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 571200,
+  "msrpCents": 1785000,
+  "units": 850,
+  "weightLbs": 761,
+  "daysAgo": 17,
+  "views": 89,
+  "description": "Headline items: 300 × Knit beanie, 200 × Touchscreen gloves and 200 × Baseball cap. This new, unopened accessories & jewelry load came in from department store overstock and totals 850 units across 4 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-ACC-S370",
+    "name": "Knit beanie",
+    "qty": 300,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-ACC-S371",
+    "name": "Touchscreen gloves",
+    "qty": 200,
+    "unitMsrpCents": 2200
+   },
+   {
+    "sku": "PP-ACC-S372",
+    "name": "Scarf",
+    "qty": 150,
+    "unitMsrpCents": 2500
+   },
+   {
+    "sku": "PP-ACC-S373",
+    "name": "Baseball cap",
+    "qty": 200,
+    "unitMsrpCents": 2000
+   }
+  ]
+ },
+ {
+  "slug": "skincare-shelf-pulls-s38",
+  "title": "Skincare Shelf Pulls",
+  "category": "health-beauty",
+  "subcategory": "health-beauty-skincare",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 3,
+  "featured": false,
+  "priceCents": 446200,
+  "msrpCents": 1716000,
+  "units": 1040,
+  "weightLbs": 314,
+  "daysAgo": 1,
+  "views": 186,
+  "description": "Sourced from big-box retailer returns, this is a single pallet of shelf-pull health & beauty: 1,040 units in all. Top retail lines include 300 × Daily moisturizer, 200 × Serum 1oz and 300 × Facial cleanser; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-HEA-S380",
+    "name": "Daily moisturizer",
+    "qty": 300,
+    "unitMsrpCents": 1800
+   },
+   {
+    "sku": "PP-HEA-S381",
+    "name": "Facial cleanser",
+    "qty": 300,
+    "unitMsrpCents": 1200
+   },
+   {
+    "sku": "PP-HEA-S382",
+    "name": "Serum 1oz",
+    "qty": 200,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-HEA-S383",
+    "name": "Sunscreen SPF 50",
+    "qty": 240,
+    "unitMsrpCents": 1400
+   }
+  ]
+ },
+ {
+  "slug": "fragrance-gift-sets-s39",
+  "title": "Fragrance & Gift Sets",
+  "category": "health-beauty",
+  "subcategory": "health-beauty-fragrance",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 2,
+  "featured": true,
+  "priceCents": 270700,
+  "msrpCents": 846000,
+  "units": 140,
+  "weightLbs": 53,
+  "daysAgo": 6,
+  "views": 283,
+  "description": "A case pack of health & beauty (new, unopened) from department store overstock: 140 units over 3 manifest lines, led by 40 × Eau de parfum 3.4oz, 40 × Cologne 3.4oz and 60 × Body mist gift set. Quantities were counted at our dock. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-HEA-S390",
+    "name": "Eau de parfum 3.4oz",
+    "qty": 40,
+    "unitMsrpCents": 8900
+   },
+   {
+    "sku": "PP-HEA-S391",
+    "name": "Cologne 3.4oz",
+    "qty": 40,
+    "unitMsrpCents": 7900
+   },
+   {
+    "sku": "PP-HEA-S392",
+    "name": "Body mist gift set",
+    "qty": 60,
+    "unitMsrpCents": 2900
+   }
+  ]
+ },
+ {
+  "slug": "bath-body-overstock-s40",
+  "title": "Bath & Body Overstock",
+  "category": "health-beauty",
+  "subcategory": "health-beauty-bath-body",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Warehouse club",
+  "available": 3,
+  "featured": false,
+  "priceCents": 290600,
+  "msrpCents": 908000,
+  "units": 940,
+  "weightLbs": 420,
+  "daysAgo": 11,
+  "views": 380,
+  "description": "940 new, unopened health & beauty units packed as a single pallet, sourced from warehouse club. The biggest lines by retail value are 400 × Body wash 18oz, 300 × Body lotion 16oz and 240 × Hand soap 3-pack. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-HEA-S400",
+    "name": "Body wash 18oz",
+    "qty": 400,
+    "unitMsrpCents": 800
+   },
+   {
+    "sku": "PP-HEA-S401",
+    "name": "Body lotion 16oz",
+    "qty": 300,
+    "unitMsrpCents": 1000
+   },
+   {
+    "sku": "PP-HEA-S402",
+    "name": "Hand soap 3-pack",
+    "qty": 240,
+    "unitMsrpCents": 1200
+   }
+  ]
+ },
+ {
+  "slug": "laundry-detergent-cleaning-supplies-s41",
+  "title": "Laundry Detergent & Cleaning Supplies",
+  "category": "household-essentials",
+  "subcategory": "household-essentials-laundry-cleaning",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Warehouse club",
+  "available": 4,
+  "featured": true,
+  "priceCents": 191000,
+  "msrpCents": 597000,
+  "units": 570,
+  "weightLbs": 473,
+  "daysAgo": 16,
+  "views": 477,
+  "description": "Headline items: 120 × Laundry detergent 92oz, 100 × Dishwasher pods 60ct and 150 × Dish soap 3-pack. This new, unopened household essentials load came in from warehouse club and totals 570 units across 4 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-HOU-S410",
+    "name": "Laundry detergent 92oz",
+    "qty": 120,
+    "unitMsrpCents": 1600
+   },
+   {
+    "sku": "PP-HOU-S411",
+    "name": "Multi-surface cleaner",
+    "qty": 200,
+    "unitMsrpCents": 500
+   },
+   {
+    "sku": "PP-HOU-S412",
+    "name": "Dish soap 3-pack",
+    "qty": 150,
+    "unitMsrpCents": 900
+   },
+   {
+    "sku": "PP-HOU-S413",
+    "name": "Dishwasher pods 60ct",
+    "qty": 100,
+    "unitMsrpCents": 1700
+   }
+  ]
+ },
+ {
+  "slug": "paper-towels-toilet-paper-wipes-s42",
+  "title": "Paper Towels, Toilet Paper & Wipes",
+  "category": "household-essentials",
+  "subcategory": "household-essentials-paper-goods-wipes",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Warehouse club",
+  "available": 4,
+  "featured": false,
+  "priceCents": 153600,
+  "msrpCents": 480000,
+  "units": 270,
+  "weightLbs": 526,
+  "daysAgo": 0,
+  "views": 574,
+  "description": "Sourced from warehouse club, this is a single pallet of new, unopened household essentials: 270 units in all. Top retail lines include 150 × Disinfecting wipes 3-pack, 60 × Toilet paper 24-roll and 60 × Paper towels 12-roll; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-HOU-S420",
+    "name": "Paper towels 12-roll",
+    "qty": 60,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-HOU-S421",
+    "name": "Toilet paper 24-roll",
+    "qty": 60,
+    "unitMsrpCents": 2600
+   },
+   {
+    "sku": "PP-HOU-S422",
+    "name": "Disinfecting wipes 3-pack",
+    "qty": 150,
+    "unitMsrpCents": 1200
+   }
+  ]
+ },
+ {
+  "slug": "diapers-baby-wipes-s43",
+  "title": "Diapers & Baby Wipes",
+  "category": "household-essentials",
+  "subcategory": "household-essentials-diapers-baby-care",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 3,
+  "featured": false,
+  "priceCents": 218900,
+  "msrpCents": 684000,
+  "units": 240,
+  "weightLbs": 579,
+  "daysAgo": 5,
+  "views": 671,
+  "description": "A single pallet of household essentials (new, unopened) from big-box retailer returns: 240 units over 3 manifest lines, led by 60 × Diapers, size 3, 120ct, 60 × Diapers, size 5, 96ct and 120 × Baby wipes 8-pack. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-HOU-S430",
+    "name": "Diapers, size 3, 120ct",
+    "qty": 60,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-HOU-S431",
+    "name": "Diapers, size 5, 96ct",
+    "qty": 60,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-HOU-S432",
+    "name": "Baby wipes 8-pack",
+    "qty": 120,
+    "unitMsrpCents": 1800
+   }
+  ]
+ },
+ {
+  "slug": "adult-care-essentials-s44",
+  "title": "Adult Care Essentials",
+  "category": "household-essentials",
+  "subcategory": "household-essentials-adult-care",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Warehouse club",
+  "available": 2,
+  "featured": false,
+  "priceCents": 178600,
+  "msrpCents": 558000,
+  "units": 200,
+  "weightLbs": 632,
+  "daysAgo": 10,
+  "views": 68,
+  "description": "200 new, unopened household essentials units packed as a single pallet, sourced from warehouse club. The biggest lines by retail value are 60 × Adult briefs, large, 56ct, 80 × Bed underpads 50ct and 60 × Protective underwear, medium, 64ct. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-HOU-S440",
+    "name": "Adult briefs, large, 56ct",
+    "qty": 60,
+    "unitMsrpCents": 3200
+   },
+   {
+    "sku": "PP-HOU-S441",
+    "name": "Bed underpads 50ct",
+    "qty": 80,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-HOU-S442",
+    "name": "Protective underwear, medium, 64ct",
+    "qty": 60,
+    "unitMsrpCents": 2900
+   }
+  ]
+ },
+ {
+  "slug": "towels-sheet-sets-s45",
+  "title": "Towels & Sheet Sets",
+  "category": "household-essentials",
+  "subcategory": "household-essentials-towels-linens",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 245200,
+  "msrpCents": 943000,
+  "units": 270,
+  "weightLbs": 685,
+  "daysAgo": 15,
+  "views": 165,
+  "description": "Headline items: 90 × Queen sheet set, 80 × Bath towel 6-piece set and 100 × Hand towel 4-pack. This shelf-pull household essentials load came in from department store overstock and totals 270 units across 3 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-HOU-S450",
+    "name": "Bath towel 6-piece set",
+    "qty": 80,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-HOU-S451",
+    "name": "Queen sheet set",
+    "qty": 90,
+    "unitMsrpCents": 4900
+   },
+   {
+    "sku": "PP-HOU-S452",
+    "name": "Hand towel 4-pack",
+    "qty": 100,
+    "unitMsrpCents": 1900
+   }
+  ]
+ },
+ {
+  "slug": "trash-bags-food-storage-s46",
+  "title": "Trash Bags & Food Storage",
+  "category": "household-essentials",
+  "subcategory": "household-essentials-trash-bags-food-storage",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Warehouse club",
+  "available": 4,
+  "featured": false,
+  "priceCents": 195500,
+  "msrpCents": 611000,
+  "units": 380,
+  "weightLbs": 738,
+  "daysAgo": 20,
+  "views": 262,
+  "description": "Sourced from warehouse club, this is a single pallet of new, unopened household essentials: 380 units in all. Top retail lines include 150 × Kitchen trash bags 90ct, 150 × Zipper storage bags 150ct and 80 × Food containers 20-piece; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-HOU-S460",
+    "name": "Kitchen trash bags 90ct",
+    "qty": 150,
+    "unitMsrpCents": 1700
+   },
+   {
+    "sku": "PP-HOU-S461",
+    "name": "Zipper storage bags 150ct",
+    "qty": 150,
+    "unitMsrpCents": 1200
+   },
+   {
+    "sku": "PP-HOU-S462",
+    "name": "Food containers 20-piece",
+    "qty": 80,
+    "unitMsrpCents": 2200
+   }
+  ]
+ },
+ {
+  "slug": "snacks-candy-short-dated-s47",
+  "title": "Snacks & Candy — Short-Dated",
+  "category": "grocery-beverages",
+  "subcategory": "grocery-beverages-snacks-candy",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Manufacturer overstock",
+  "available": 3,
+  "featured": true,
+  "priceCents": 106900,
+  "msrpCents": 334000,
+  "units": 340,
+  "weightLbs": 791,
+  "daysAgo": 4,
+  "views": 359,
+  "description": "A single pallet of grocery & beverages (new, unopened) from manufacturer overstock: 340 units over 3 manifest lines, led by 80 × Chips variety pack 30ct, 60 × Granola bars 48ct and 200 × Candy share-size bags. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-GRO-S470",
+    "name": "Chips variety pack 30ct",
+    "qty": 80,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-GRO-S471",
+    "name": "Granola bars 48ct",
+    "qty": 60,
+    "unitMsrpCents": 1700
+   },
+   {
+    "sku": "PP-GRO-S472",
+    "name": "Candy share-size bags",
+    "qty": 200,
+    "unitMsrpCents": 400
+   }
+  ]
+ },
+ {
+  "slug": "pantry-staples-pallet-s48",
+  "title": "Pantry Staples Pallet",
+  "category": "grocery-beverages",
+  "subcategory": "grocery-beverages-pantry-staples",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Closeout / store closure",
+  "available": 3,
+  "featured": false,
+  "priceCents": 105600,
+  "msrpCents": 330000,
+  "units": 1250,
+  "weightLbs": 344,
+  "daysAgo": 9,
+  "views": 456,
+  "description": "1,250 new, unopened grocery & beverages units packed as a single pallet, sourced from closeout / store closure. The biggest lines by retail value are 600 × Canned vegetables, 150 × Cereal family size and 400 × Pasta 1lb. All 4 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-GRO-S480",
+    "name": "Pasta 1lb",
+    "qty": 400,
+    "unitMsrpCents": 200
+   },
+   {
+    "sku": "PP-GRO-S481",
+    "name": "Canned vegetables",
+    "qty": 600,
+    "unitMsrpCents": 150
+   },
+   {
+    "sku": "PP-GRO-S482",
+    "name": "Cereal family size",
+    "qty": 150,
+    "unitMsrpCents": 600
+   },
+   {
+    "sku": "PP-GRO-S483",
+    "name": "Peanut butter 40oz",
+    "qty": 100,
+    "unitMsrpCents": 700
+   }
+  ]
+ },
+ {
+  "slug": "sparkling-water-soft-drinks-s49",
+  "title": "Sparkling Water & Soft Drinks",
+  "category": "grocery-beverages",
+  "subcategory": "grocery-beverages-beverages",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Manufacturer overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 83800,
+  "msrpCents": 262000,
+  "units": 310,
+  "weightLbs": 397,
+  "daysAgo": 14,
+  "views": 553,
+  "description": "Headline items: 100 × Sports drink 12-pack, 150 × Sparkling water 12-pack and 60 × Juice boxes 32-pack. This new, unopened grocery & beverages load came in from manufacturer overstock and totals 310 units across 3 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-GRO-S490",
+    "name": "Sparkling water 12-pack",
+    "qty": 150,
+    "unitMsrpCents": 600
+   },
+   {
+    "sku": "PP-GRO-S491",
+    "name": "Sports drink 12-pack",
+    "qty": 100,
+    "unitMsrpCents": 1000
+   },
+   {
+    "sku": "PP-GRO-S492",
+    "name": "Juice boxes 32-pack",
+    "qty": 60,
+    "unitMsrpCents": 1200
+   }
+  ]
+ },
+ {
+  "slug": "coffee-pods-tea-case-pack-s50",
+  "title": "Coffee Pods & Tea Case Pack",
+  "category": "grocery-beverages",
+  "subcategory": "grocery-beverages-coffee-tea",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Warehouse club",
+  "available": 4,
+  "featured": false,
+  "priceCents": 72000,
+  "msrpCents": 225000,
+  "units": 100,
+  "weightLbs": 70,
+  "daysAgo": 19,
+  "views": 650,
+  "description": "Sourced from warehouse club, this is a case pack of new, unopened grocery & beverages: 100 units in all. Top retail lines include 30 × Coffee pods 72ct, 30 × Ground coffee 40oz and 40 × Tea bags 100ct; the complete manifest is below. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-GRO-S500",
+    "name": "Coffee pods 72ct",
+    "qty": 30,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-GRO-S501",
+    "name": "Ground coffee 40oz",
+    "qty": 30,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-GRO-S502",
+    "name": "Tea bags 100ct",
+    "qty": 40,
+    "unitMsrpCents": 900
+   }
+  ]
+ },
+ {
+  "slug": "pet-food-supplies-s51",
+  "title": "Pet Food & Supplies",
+  "category": "grocery-beverages",
+  "subcategory": "grocery-beverages-pet-food-supplies",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 3,
+  "featured": false,
+  "priceCents": 86600,
+  "msrpCents": 333000,
+  "units": 130,
+  "weightLbs": 503,
+  "daysAgo": 3,
+  "views": 47,
+  "description": "A single pallet of grocery & beverages (shelf-pull) from big-box retailer returns: 130 units over 4 manifest lines, led by 20 × Dry dog food 30lb, 60 × Dog treats 2lb and 20 × Pet bed. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-GRO-S510",
+    "name": "Dry dog food 30lb",
+    "qty": 20,
+    "unitMsrpCents": 5400
+   },
+   {
+    "sku": "PP-GRO-S511",
+    "name": "Cat litter 35lb",
+    "qty": 30,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-GRO-S512",
+    "name": "Dog treats 2lb",
+    "qty": 60,
+    "unitMsrpCents": 1500
+   },
+   {
+    "sku": "PP-GRO-S513",
+    "name": "Pet bed",
+    "qty": 20,
+    "unitMsrpCents": 3900
+   }
+  ]
+ },
+ {
+  "slug": "big-box-store-returns-unsorted-s52",
+  "title": "Big-Box Store Returns — Unsorted",
+  "category": "general-merchandise",
+  "subcategory": "general-merchandise-store-returns",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 4,
+  "featured": false,
+  "priceCents": 112300,
+  "msrpCents": 702000,
+  "units": 270,
+  "weightLbs": 556,
+  "daysAgo": 8,
+  "views": 144,
+  "description": "270 customer-return general merchandise units packed as a single pallet, sourced from big-box retailer returns. The biggest lines by retail value are 90 × Assorted home goods, 40 × Assorted electronics and 80 × Assorted apparel. All 4 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-GEN-S520",
+    "name": "Assorted home goods",
+    "qty": 90,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-GEN-S521",
+    "name": "Assorted electronics",
+    "qty": 40,
+    "unitMsrpCents": 4900
+   },
+   {
+    "sku": "PP-GEN-S522",
+    "name": "Assorted toys",
+    "qty": 60,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-GEN-S523",
+    "name": "Assorted apparel",
+    "qty": 80,
+    "unitMsrpCents": 2200
+   }
+  ]
+ },
+ {
+  "slug": "online-marketplace-returns-high-piece-count-s53",
+  "title": "Online Marketplace Returns — High Piece Count",
+  "category": "general-merchandise",
+  "subcategory": "general-merchandise-store-returns",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Online marketplace returns",
+  "available": 5,
+  "featured": true,
+  "priceCents": 157400,
+  "msrpCents": 984000,
+  "units": 550,
+  "weightLbs": 609,
+  "daysAgo": 13,
+  "views": 241,
+  "description": "Headline items: 180 × Small electronics & accessories, 120 × Home & kitchen items and 160 × Beauty & personal care. This customer-return general merchandise load came in from online marketplace returns and totals 550 units across 4 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-GEN-S530",
+    "name": "Small electronics & accessories",
+    "qty": 180,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-GEN-S531",
+    "name": "Home & kitchen items",
+    "qty": 120,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-GEN-S532",
+    "name": "Beauty & personal care",
+    "qty": 160,
+    "unitMsrpCents": 1200
+   },
+   {
+    "sku": "PP-GEN-S533",
+    "name": "Toys & games",
+    "qty": 90,
+    "unitMsrpCents": 1800
+   }
+  ]
+ },
+ {
+  "slug": "discount-store-closeouts-s54",
+  "title": "Discount Store Closeouts",
+  "category": "general-merchandise",
+  "subcategory": "general-merchandise-overstock-closeouts",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Closeout / store closure",
+  "available": 4,
+  "featured": false,
+  "priceCents": 112000,
+  "msrpCents": 350000,
+  "units": 700,
+  "weightLbs": 662,
+  "daysAgo": 18,
+  "views": 338,
+  "description": "Sourced from closeout / store closure, this is a single pallet of new, unopened general merchandise: 700 units in all. Top retail lines include 300 × Household basics, 200 × Health & beauty and 200 × Party & seasonal; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-GEN-S540",
+    "name": "Household basics",
+    "qty": 300,
+    "unitMsrpCents": 500
+   },
+   {
+    "sku": "PP-GEN-S541",
+    "name": "Party & seasonal",
+    "qty": 200,
+    "unitMsrpCents": 400
+   },
+   {
+    "sku": "PP-GEN-S542",
+    "name": "Health & beauty",
+    "qty": 200,
+    "unitMsrpCents": 600
+   }
+  ]
+ },
+ {
+  "slug": "bin-store-starter-load-s55",
+  "title": "Bin Store Starter Load",
+  "category": "general-merchandise",
+  "subcategory": "general-merchandise-bin-store-loads",
+  "brand": "",
+  "condition": "MIXED",
+  "lotSize": "TRUCKLOAD",
+  "palletCount": 18,
+  "source": "Big-box retailer returns",
+  "available": 1,
+  "featured": false,
+  "priceCents": 1394400,
+  "msrpCents": 9960000,
+  "units": 6300,
+  "weightLbs": 12870,
+  "daysAgo": 2,
+  "views": 435,
+  "description": "A 18-pallet truckload of general merchandise (mixed-condition) from big-box retailer returns: 6,300 units over 3 manifest lines, led by 4200 × Mixed general merchandise, 900 × Mixed small electronics and 1200 × Mixed toys. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-GEN-S550",
+    "name": "Mixed general merchandise",
+    "qty": 4200,
+    "unitMsrpCents": 1400
+   },
+   {
+    "sku": "PP-GEN-S551",
+    "name": "Mixed small electronics",
+    "qty": 900,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-GEN-S552",
+    "name": "Mixed toys",
+    "qty": 1200,
+    "unitMsrpCents": 1600
+   }
+  ]
+ },
+ {
+  "slug": "kids-bikes-scooters-ride-ons-2-pallets-s56",
+  "title": "Kids' Bikes, Scooters & Ride-ons — 2 Pallets",
+  "category": "toys-baby",
+  "subcategory": "toys-baby-ride-ons-bikes",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 2,
+  "source": "Big-box retailer returns",
+  "available": 2,
+  "featured": false,
+  "priceCents": 59200,
+  "msrpCents": 370200,
+  "units": 38,
+  "weightLbs": 1536,
+  "daysAgo": 7,
+  "views": 532,
+  "description": "38 customer-return toys & baby units packed as 2 pallets, sourced from big-box retailer returns. The biggest lines by retail value are 24 × Kick scooter, 10 × Kids' 16in bike and 4 × 12V ride-on car. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-TOY-S560",
+    "name": "Kids' 16in bike",
+    "qty": 10,
+    "unitMsrpCents": 12900
+   },
+   {
+    "sku": "PP-TOY-S561",
+    "name": "Kick scooter",
+    "qty": 24,
+    "unitMsrpCents": 5900
+   },
+   {
+    "sku": "PP-TOY-S562",
+    "name": "12V ride-on car",
+    "qty": 4,
+    "unitMsrpCents": 24900
+   }
+  ]
+ },
+ {
+  "slug": "sealed-trading-card-boxes-s57",
+  "title": "Sealed Trading Card Boxes",
+  "category": "collectibles",
+  "subcategory": "collectibles-trading-cards",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Specialty retailer",
+  "available": 2,
+  "featured": true,
+  "priceCents": 85200,
+  "msrpCents": 266200,
+  "units": 38,
+  "weightLbs": 59,
+  "daysAgo": 12,
+  "views": 629,
+  "description": "Headline items: 8 × Sealed card game booster box, 6 × Sealed sports card hobby box and 24 × Sealed blaster box. This new, unopened collectibles & trading cards load came in from specialty retailer and totals 38 units across 3 manifest lines, packed as a case pack. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-COL-S570",
+    "name": "Sealed sports card hobby box",
+    "qty": 6,
+    "unitMsrpCents": 12900
+   },
+   {
+    "sku": "PP-COL-S571",
+    "name": "Sealed blaster box",
+    "qty": 24,
+    "unitMsrpCents": 2900
+   },
+   {
+    "sku": "PP-COL-S572",
+    "name": "Sealed card game booster box",
+    "qty": 8,
+    "unitMsrpCents": 14900
+   }
+  ]
+ },
+ {
+  "slug": "collectible-vinyl-action-figures-s58",
+  "title": "Collectible Vinyl & Action Figures",
+  "category": "collectibles",
+  "subcategory": "collectibles-collectible-figures",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Specialty retailer",
+  "available": 3,
+  "featured": false,
+  "priceCents": 137600,
+  "msrpCents": 430000,
+  "units": 200,
+  "weightLbs": 66,
+  "daysAgo": 17,
+  "views": 26,
+  "description": "Sourced from specialty retailer, this is a case pack of new, unopened collectibles & trading cards: 200 units in all. Top retail lines include 120 × Vinyl collectible figure, 60 × 6in action figure and 20 × Deluxe figure set; the complete manifest is below. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-COL-S580",
+    "name": "Vinyl collectible figure",
+    "qty": 120,
+    "unitMsrpCents": 1400
+   },
+   {
+    "sku": "PP-COL-S581",
+    "name": "6in action figure",
+    "qty": 60,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-COL-S582",
+    "name": "Deluxe figure set",
+    "qty": 20,
+    "unitMsrpCents": 5900
+   }
+  ]
+ },
+ {
+  "slug": "die-cast-cars-model-kits-s59",
+  "title": "Die-cast Cars & Model Kits",
+  "category": "collectibles",
+  "subcategory": "collectibles-die-cast-models",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Manufacturer overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 106200,
+  "msrpCents": 332000,
+  "units": 480,
+  "weightLbs": 73,
+  "daysAgo": 1,
+  "views": 123,
+  "description": "A case pack of collectibles & trading cards (new, unopened) from manufacturer overstock: 480 units over 3 manifest lines, led by 40 × Plastic model kit, 40 × 1:24 die-cast car and 400 × 1:64 die-cast car. Quantities were counted at our dock. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-COL-S590",
+    "name": "1:64 die-cast car",
+    "qty": 400,
+    "unitMsrpCents": 200
+   },
+   {
+    "sku": "PP-COL-S591",
+    "name": "1:24 die-cast car",
+    "qty": 40,
+    "unitMsrpCents": 2900
+   },
+   {
+    "sku": "PP-COL-S592",
+    "name": "Plastic model kit",
+    "qty": 40,
+    "unitMsrpCents": 3400
+   }
+  ]
+ },
+ {
+  "slug": "sports-fan-gear-memorabilia-s60",
+  "title": "Sports Fan Gear & Memorabilia",
+  "category": "collectibles",
+  "subcategory": "collectibles-memorabilia",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Specialty retailer",
+  "available": 2,
+  "featured": false,
+  "priceCents": 149000,
+  "msrpCents": 573000,
+  "units": 170,
+  "weightLbs": 20,
+  "daysAgo": 6,
+  "views": 220,
+  "description": "170 shelf-pull collectibles & trading cards units packed as a case pack, sourced from specialty retailer. The biggest lines by retail value are 30 × Fan jersey, 100 × Team pennant and 40 × Display case. All 3 manifest lines are listed below, with quantities counted at our dock. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-COL-S600",
+    "name": "Team pennant",
+    "qty": 100,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-COL-S601",
+    "name": "Display case",
+    "qty": 40,
+    "unitMsrpCents": 2900
+   },
+   {
+    "sku": "PP-COL-S602",
+    "name": "Fan jersey",
+    "qty": 30,
+    "unitMsrpCents": 8900
+   }
+  ]
+ },
+ {
+  "slug": "home-fitness-equipment-s61",
+  "title": "Home Fitness Equipment",
+  "category": "sports-outdoors",
+  "subcategory": "sports-outdoors-fitness-equipment",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Online marketplace returns",
+  "available": 2,
+  "featured": true,
+  "priceCents": 116000,
+  "msrpCents": 725000,
+  "units": 150,
+  "weightLbs": 533,
+  "daysAgo": 11,
+  "views": 317,
+  "description": "Headline items: 8 × Adjustable dumbbell pair, 80 × Resistance band set and 60 × Yoga mat. This customer-return sports & outdoors load came in from online marketplace returns and totals 150 units across 4 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SPO-S610",
+    "name": "Adjustable dumbbell pair",
+    "qty": 8,
+    "unitMsrpCents": 29900
+   },
+   {
+    "sku": "PP-SPO-S611",
+    "name": "Yoga mat",
+    "qty": 60,
+    "unitMsrpCents": 2900
+   },
+   {
+    "sku": "PP-SPO-S612",
+    "name": "Resistance band set",
+    "qty": 80,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-SPO-S613",
+    "name": "Folding treadmill",
+    "qty": 2,
+    "unitMsrpCents": 59900
+   }
+  ]
+ },
+ {
+  "slug": "camping-hiking-gear-s62",
+  "title": "Camping & Hiking Gear",
+  "category": "sports-outdoors",
+  "subcategory": "sports-outdoors-camping-hiking",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Specialty retailer",
+  "available": 2,
+  "featured": false,
+  "priceCents": 189500,
+  "msrpCents": 729000,
+  "units": 110,
+  "weightLbs": 586,
+  "daysAgo": 16,
+  "views": 414,
+  "description": "Sourced from specialty retailer, this is a single pallet of shelf-pull sports & outdoors: 110 units in all. Top retail lines include 20 × 4-person tent, 30 × Sleeping bag and 20 × Hiking backpack 40L; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SPO-S620",
+    "name": "4-person tent",
+    "qty": 20,
+    "unitMsrpCents": 12900
+   },
+   {
+    "sku": "PP-SPO-S621",
+    "name": "Sleeping bag",
+    "qty": 30,
+    "unitMsrpCents": 5900
+   },
+   {
+    "sku": "PP-SPO-S622",
+    "name": "Camp chair",
+    "qty": 40,
+    "unitMsrpCents": 3400
+   },
+   {
+    "sku": "PP-SPO-S623",
+    "name": "Hiking backpack 40L",
+    "qty": 20,
+    "unitMsrpCents": 7900
+   }
+  ]
+ },
+ {
+  "slug": "fishing-rods-reels-tackle-s63",
+  "title": "Fishing Rods, Reels & Tackle",
+  "category": "sports-outdoors",
+  "subcategory": "sports-outdoors-fishing",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Specialty retailer",
+  "available": 2,
+  "featured": false,
+  "priceCents": 188200,
+  "msrpCents": 588000,
+  "units": 120,
+  "weightLbs": 639,
+  "daysAgo": 0,
+  "views": 511,
+  "description": "A single pallet of sports & outdoors (new, unopened) from specialty retailer: 120 units over 3 manifest lines, led by 40 × Spinning rod & reel combo, 20 × Baitcasting reel and 60 × Tackle box kit. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SPO-S630",
+    "name": "Spinning rod & reel combo",
+    "qty": 40,
+    "unitMsrpCents": 5900
+   },
+   {
+    "sku": "PP-SPO-S631",
+    "name": "Baitcasting reel",
+    "qty": 20,
+    "unitMsrpCents": 8900
+   },
+   {
+    "sku": "PP-SPO-S632",
+    "name": "Tackle box kit",
+    "qty": 60,
+    "unitMsrpCents": 2900
+   }
+  ]
+ },
+ {
+  "slug": "hunting-accessories-blinds-seats-optics-s64",
+  "title": "Hunting Accessories — Blinds, Seats & Optics",
+  "category": "sports-outdoors",
+  "subcategory": "sports-outdoors-hunting-accessories",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Specialty retailer",
+  "available": 1,
+  "featured": false,
+  "priceCents": 182500,
+  "msrpCents": 702000,
+  "units": 80,
+  "weightLbs": 692,
+  "daysAgo": 5,
+  "views": 608,
+  "description": "80 shelf-pull sports & outdoors units packed as a single pallet, sourced from specialty retailer. The biggest lines by retail value are 30 × Trail camera, 20 × Binoculars 10x42 and 10 × Ground blind. All 4 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SPO-S640",
+    "name": "Ground blind",
+    "qty": 10,
+    "unitMsrpCents": 14900
+   },
+   {
+    "sku": "PP-SPO-S641",
+    "name": "Tree stand seat",
+    "qty": 20,
+    "unitMsrpCents": 5900
+   },
+   {
+    "sku": "PP-SPO-S642",
+    "name": "Trail camera",
+    "qty": 30,
+    "unitMsrpCents": 7900
+   },
+   {
+    "sku": "PP-SPO-S643",
+    "name": "Binoculars 10x42",
+    "qty": 20,
+    "unitMsrpCents": 9900
+   }
+  ]
+ },
+ {
+  "slug": "adult-bikes-e-scooters-2-pallets-s65",
+  "title": "Adult Bikes & E-scooters — 2 Pallets",
+  "category": "sports-outdoors",
+  "subcategory": "sports-outdoors-bikes-scooters",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 2,
+  "source": "Big-box retailer returns",
+  "available": 1,
+  "featured": false,
+  "priceCents": 128900,
+  "msrpCents": 805400,
+  "units": 46,
+  "weightLbs": 1490,
+  "daysAgo": 10,
+  "views": 5,
+  "description": "Headline items: 10 × Electric scooter, 6 × Adult hybrid bike and 30 × Bike helmet. This customer-return sports & outdoors load came in from big-box retailer returns and totals 46 units across 3 manifest lines, packed as 2 pallets. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SPO-S650",
+    "name": "Adult hybrid bike",
+    "qty": 6,
+    "unitMsrpCents": 39900
+   },
+   {
+    "sku": "PP-SPO-S651",
+    "name": "Electric scooter",
+    "qty": 10,
+    "unitMsrpCents": 44900
+   },
+   {
+    "sku": "PP-SPO-S652",
+    "name": "Bike helmet",
+    "qty": 30,
+    "unitMsrpCents": 3900
+   }
+  ]
+ },
+ {
+  "slug": "team-sports-equipment-s66",
+  "title": "Team Sports Equipment",
+  "category": "sports-outdoors",
+  "subcategory": "sports-outdoors-team-sports",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Closeout / store closure",
+  "available": 2,
+  "featured": false,
+  "priceCents": 198400,
+  "msrpCents": 620000,
+  "units": 200,
+  "weightLbs": 798,
+  "daysAgo": 15,
+  "views": 102,
+  "description": "Sourced from closeout / store closure, this is a single pallet of new, unopened sports & outdoors: 200 units in all. Top retail lines include 80 × Basketball, 40 × Baseball glove and 80 × Soccer ball; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SPO-S660",
+    "name": "Basketball",
+    "qty": 80,
+    "unitMsrpCents": 2900
+   },
+   {
+    "sku": "PP-SPO-S661",
+    "name": "Soccer ball",
+    "qty": 80,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-SPO-S662",
+    "name": "Baseball glove",
+    "qty": 40,
+    "unitMsrpCents": 4900
+   }
+  ]
+ },
+ {
+  "slug": "christmas-decor-lights-s67",
+  "title": "Christmas Decor & Lights",
+  "category": "seasonal",
+  "subcategory": "seasonal-christmas",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Closeout / store closure",
+  "available": 3,
+  "featured": true,
+  "priceCents": 274900,
+  "msrpCents": 859000,
+  "units": 310,
+  "weightLbs": 351,
+  "daysAgo": 20,
+  "views": 199,
+  "description": "A single pallet of seasonal & holiday (new, unopened) from closeout / store closure: 310 units over 4 manifest lines, led by 200 × LED string lights, 80 × Ornament set 50pc and 10 × Artificial 6.5ft tree. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SEA-S670",
+    "name": "Artificial 6.5ft tree",
+    "qty": 10,
+    "unitMsrpCents": 14900
+   },
+   {
+    "sku": "PP-SEA-S671",
+    "name": "LED string lights",
+    "qty": 200,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-SEA-S672",
+    "name": "Ornament set 50pc",
+    "qty": 80,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-SEA-S673",
+    "name": "Inflatable yard decor",
+    "qty": 20,
+    "unitMsrpCents": 6900
+   }
+  ]
+ },
+ {
+  "slug": "halloween-costumes-decor-s68",
+  "title": "Halloween Costumes & Decor",
+  "category": "seasonal",
+  "subcategory": "seasonal-halloween",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Closeout / store closure",
+  "available": 2,
+  "featured": false,
+  "priceCents": 281000,
+  "msrpCents": 878000,
+  "units": 220,
+  "weightLbs": 404,
+  "daysAgo": 4,
+  "views": 296,
+  "description": "220 new, unopened seasonal & holiday units packed as a single pallet, sourced from closeout / store closure. The biggest lines by retail value are 80 × Adult costume, 120 × Kids' costume and 20 × Animated yard prop. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SEA-S680",
+    "name": "Kids' costume",
+    "qty": 120,
+    "unitMsrpCents": 2900
+   },
+   {
+    "sku": "PP-SEA-S681",
+    "name": "Adult costume",
+    "qty": 80,
+    "unitMsrpCents": 4400
+   },
+   {
+    "sku": "PP-SEA-S682",
+    "name": "Animated yard prop",
+    "qty": 20,
+    "unitMsrpCents": 8900
+   }
+  ]
+ },
+ {
+  "slug": "summer-pool-overstock-s69",
+  "title": "Summer & Pool Overstock",
+  "category": "seasonal",
+  "subcategory": "seasonal-summer-pool",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 2,
+  "featured": false,
+  "priceCents": 183200,
+  "msrpCents": 572400,
+  "units": 276,
+  "weightLbs": 457,
+  "daysAgo": 9,
+  "views": 393,
+  "description": "Headline items: 120 × Inflatable pool float, 150 × Beach towel and 6 × Above-ground pool 10ft. This new, unopened seasonal & holiday load came in from big-box retailer returns and totals 276 units across 3 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SEA-S690",
+    "name": "Inflatable pool float",
+    "qty": 120,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-SEA-S691",
+    "name": "Above-ground pool 10ft",
+    "qty": 6,
+    "unitMsrpCents": 19900
+   },
+   {
+    "sku": "PP-SEA-S692",
+    "name": "Beach towel",
+    "qty": 150,
+    "unitMsrpCents": 1500
+   }
+  ]
+ },
+ {
+  "slug": "back-to-school-supplies-s70",
+  "title": "Back-to-School Supplies",
+  "category": "seasonal",
+  "subcategory": "seasonal-back-to-school",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Manufacturer overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 263000,
+  "msrpCents": 822000,
+  "units": 680,
+  "weightLbs": 510,
+  "daysAgo": 14,
+  "views": 490,
+  "description": "Sourced from manufacturer overstock, this is a single pallet of new, unopened seasonal & holiday: 680 units in all. Top retail lines include 80 × Backpack, 300 × Notebook 5-pack and 300 × Pencil & marker kit; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SEA-S700",
+    "name": "Backpack",
+    "qty": 80,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-SEA-S701",
+    "name": "Notebook 5-pack",
+    "qty": 300,
+    "unitMsrpCents": 900
+   },
+   {
+    "sku": "PP-SEA-S702",
+    "name": "Pencil & marker kit",
+    "qty": 300,
+    "unitMsrpCents": 800
+   }
+  ]
+ },
+ {
+  "slug": "brand-name-cordless-tools-20v-s71",
+  "title": "Brand-Name Cordless Tools — 20V",
+  "category": "tools-hardware",
+  "subcategory": "tools-hardware-power-tools",
+  "brand": "DeWALT",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Home improvement retailer",
+  "available": 2,
+  "featured": true,
+  "priceCents": 280500,
+  "msrpCents": 1753400,
+  "units": 106,
+  "weightLbs": 563,
+  "daysAgo": 19,
+  "views": 587,
+  "description": "A single pallet of tools & hardware (customer-return) from home improvement retailer: 106 units over 4 manifest lines, led by 40 × 20V 5Ah battery, 30 × 20V drill/driver kit and 24 × 20V impact driver. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-TOO-S710",
+    "name": "20V drill/driver kit",
+    "qty": 30,
+    "unitMsrpCents": 17900
+   },
+   {
+    "sku": "PP-TOO-S711",
+    "name": "20V impact driver",
+    "qty": 24,
+    "unitMsrpCents": 15900
+   },
+   {
+    "sku": "PP-TOO-S712",
+    "name": "20V circular saw",
+    "qty": 12,
+    "unitMsrpCents": 19900
+   },
+   {
+    "sku": "PP-TOO-S713",
+    "name": "20V 5Ah battery",
+    "qty": 40,
+    "unitMsrpCents": 14900
+   }
+  ]
+ },
+ {
+  "slug": "cordless-tools-18v-mixed-s72",
+  "title": "Cordless Tools — 18V Mixed",
+  "category": "tools-hardware",
+  "subcategory": "tools-hardware-power-tools",
+  "brand": "Ryobi",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Home improvement retailer",
+  "available": 2,
+  "featured": false,
+  "priceCents": 155400,
+  "msrpCents": 971000,
+  "units": 90,
+  "weightLbs": 616,
+  "daysAgo": 3,
+  "views": 684,
+  "description": "90 customer-return tools & hardware units packed as a single pallet, sourced from home improvement retailer. The biggest lines by retail value are 40 × 18V 4Ah battery, 30 × 18V drill kit and 10 × 18V string trimmer. All 4 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-TOO-S720",
+    "name": "18V drill kit",
+    "qty": 30,
+    "unitMsrpCents": 9900
+   },
+   {
+    "sku": "PP-TOO-S721",
+    "name": "18V string trimmer",
+    "qty": 10,
+    "unitMsrpCents": 14900
+   },
+   {
+    "sku": "PP-TOO-S722",
+    "name": "18V leaf blower",
+    "qty": 10,
+    "unitMsrpCents": 12900
+   },
+   {
+    "sku": "PP-TOO-S723",
+    "name": "18V 4Ah battery",
+    "qty": 40,
+    "unitMsrpCents": 9900
+   }
+  ]
+ },
+ {
+  "slug": "m18-tool-returns-s73",
+  "title": "M18 Tool Returns",
+  "category": "tools-hardware",
+  "subcategory": "tools-hardware-power-tools",
+  "brand": "Milwaukee",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Home improvement retailer",
+  "available": 1,
+  "featured": false,
+  "priceCents": 68100,
+  "msrpCents": 425800,
+  "units": 22,
+  "weightLbs": 51,
+  "daysAgo": 8,
+  "views": 81,
+  "description": "Headline items: 10 × M18 5Ah battery, 6 × M18 hammer drill and 6 × M18 impact driver. This customer-return tools & hardware load came in from home improvement retailer and totals 22 units across 3 manifest lines, packed as a case pack. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-TOO-S730",
+    "name": "M18 hammer drill",
+    "qty": 6,
+    "unitMsrpCents": 22900
+   },
+   {
+    "sku": "PP-TOO-S731",
+    "name": "M18 impact driver",
+    "qty": 6,
+    "unitMsrpCents": 19900
+   },
+   {
+    "sku": "PP-TOO-S732",
+    "name": "M18 5Ah battery",
+    "qty": 10,
+    "unitMsrpCents": 16900
+   }
+  ]
+ },
+ {
+  "slug": "lawn-mowers-outdoor-power-3-pallets-s74",
+  "title": "Lawn Mowers & Outdoor Power — 3 Pallets",
+  "category": "tools-hardware",
+  "subcategory": "tools-hardware-outdoor-power-equipment",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 3,
+  "source": "Home improvement retailer",
+  "available": 1,
+  "featured": false,
+  "priceCents": 135200,
+  "msrpCents": 845200,
+  "units": 28,
+  "weightLbs": 2166,
+  "daysAgo": 13,
+  "views": 178,
+  "description": "Sourced from home improvement retailer, this is 3 pallets of customer-return tools & hardware: 28 units in all. Top retail lines include 6 × Cordless mower kit, 6 × 21in gas push mower and 10 × Gas string trimmer; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-TOO-S740",
+    "name": "21in gas push mower",
+    "qty": 6,
+    "unitMsrpCents": 34900
+   },
+   {
+    "sku": "PP-TOO-S741",
+    "name": "Cordless mower kit",
+    "qty": 6,
+    "unitMsrpCents": 44900
+   },
+   {
+    "sku": "PP-TOO-S742",
+    "name": "Gas string trimmer",
+    "qty": 10,
+    "unitMsrpCents": 19900
+   },
+   {
+    "sku": "PP-TOO-S743",
+    "name": "Backpack leaf blower",
+    "qty": 6,
+    "unitMsrpCents": 27900
+   }
+  ]
+ },
+ {
+  "slug": "tool-chests-storage-2-pallets-s75",
+  "title": "Tool Chests & Storage — 2 Pallets",
+  "category": "tools-hardware",
+  "subcategory": "tools-hardware-tool-storage",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 2,
+  "source": "Home improvement retailer",
+  "available": 1,
+  "featured": false,
+  "priceCents": 143600,
+  "msrpCents": 552400,
+  "units": 76,
+  "weightLbs": 1550,
+  "daysAgo": 18,
+  "views": 275,
+  "description": "2 pallets of tools & hardware (shelf-pull) from home improvement retailer: 76 units over 3 manifest lines, led by 6 × Rolling tool chest, 40 × Wall-mount storage rail kit and 30 × Tool box 22in. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-TOO-S750",
+    "name": "Rolling tool chest",
+    "qty": 6,
+    "unitMsrpCents": 39900
+   },
+   {
+    "sku": "PP-TOO-S751",
+    "name": "Tool box 22in",
+    "qty": 30,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-TOO-S752",
+    "name": "Wall-mount storage rail kit",
+    "qty": 40,
+    "unitMsrpCents": 4900
+   }
+  ]
+ },
+ {
+  "slug": "auto-parts-accessories-s76",
+  "title": "Auto Parts & Accessories",
+  "category": "automotive",
+  "subcategory": "automotive-parts-accessories",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Specialty retailer",
+  "available": 3,
+  "featured": false,
+  "priceCents": 357800,
+  "msrpCents": 1118000,
+  "units": 370,
+  "weightLbs": 328,
+  "daysAgo": 2,
+  "views": 372,
+  "description": "370 new, unopened automotive units packed as a single pallet, sourced from specialty retailer. The biggest lines by retail value are 150 × Wiper blades pair, 60 × Brake pad set and 40 × Floor mats set. All 4 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-AUT-S760",
+    "name": "Brake pad set",
+    "qty": 60,
+    "unitMsrpCents": 4900
+   },
+   {
+    "sku": "PP-AUT-S761",
+    "name": "Air filter",
+    "qty": 120,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-AUT-S762",
+    "name": "Wiper blades pair",
+    "qty": 150,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-AUT-S763",
+    "name": "Floor mats set",
+    "qty": 40,
+    "unitMsrpCents": 5900
+   }
+  ]
+ },
+ {
+  "slug": "tires-wheels-new-overstock-s77",
+  "title": "Tires & Wheels — New Overstock",
+  "category": "automotive",
+  "subcategory": "automotive-wheels-tires",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Specialty retailer",
+  "available": 2,
+  "featured": true,
+  "priceCents": 196000,
+  "msrpCents": 612400,
+  "units": 36,
+  "weightLbs": 381,
+  "daysAgo": 7,
+  "views": 469,
+  "description": "Headline items: 16 × All-season tire 17in, 12 × All-season tire 18in and 8 × Alloy wheel 18in. This new, unopened automotive load came in from specialty retailer and totals 36 units across 3 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-AUT-S770",
+    "name": "All-season tire 17in",
+    "qty": 16,
+    "unitMsrpCents": 14900
+   },
+   {
+    "sku": "PP-AUT-S771",
+    "name": "All-season tire 18in",
+    "qty": 12,
+    "unitMsrpCents": 17900
+   },
+   {
+    "sku": "PP-AUT-S772",
+    "name": "Alloy wheel 18in",
+    "qty": 8,
+    "unitMsrpCents": 19900
+   }
+  ]
+ },
+ {
+  "slug": "dash-cams-car-electronics-s78",
+  "title": "Dash Cams & Car Electronics",
+  "category": "automotive",
+  "subcategory": "automotive-car-electronics",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Online marketplace returns",
+  "available": 3,
+  "featured": false,
+  "priceCents": 142900,
+  "msrpCents": 893000,
+  "units": 170,
+  "weightLbs": 26,
+  "daysAgo": 12,
+  "views": 566,
+  "description": "Sourced from online marketplace returns, this is a case pack of customer-return automotive: 170 units in all. Top retail lines include 40 × Dash cam, 30 × Portable jump starter and 100 × Car phone mount; the complete manifest is below. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-AUT-S780",
+    "name": "Dash cam",
+    "qty": 40,
+    "unitMsrpCents": 8900
+   },
+   {
+    "sku": "PP-AUT-S781",
+    "name": "Car phone mount",
+    "qty": 100,
+    "unitMsrpCents": 2400
+   },
+   {
+    "sku": "PP-AUT-S782",
+    "name": "Portable jump starter",
+    "qty": 30,
+    "unitMsrpCents": 9900
+   }
+  ]
+ },
+ {
+  "slug": "car-care-detailing-s79",
+  "title": "Car Care & Detailing",
+  "category": "automotive",
+  "subcategory": "automotive-car-care",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Manufacturer overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 168000,
+  "msrpCents": 525000,
+  "units": 450,
+  "weightLbs": 487,
+  "daysAgo": 17,
+  "views": 663,
+  "description": "A single pallet of automotive (new, unopened) from manufacturer overstock: 450 units over 3 manifest lines, led by 150 × Microfiber towels 12-pack, 150 × Car wash soap 64oz and 150 × Tire shine spray. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-AUT-S790",
+    "name": "Car wash soap 64oz",
+    "qty": 150,
+    "unitMsrpCents": 1200
+   },
+   {
+    "sku": "PP-AUT-S791",
+    "name": "Microfiber towels 12-pack",
+    "qty": 150,
+    "unitMsrpCents": 1400
+   },
+   {
+    "sku": "PP-AUT-S792",
+    "name": "Tire shine spray",
+    "qty": 150,
+    "unitMsrpCents": 900
+   }
+  ]
+ },
+ {
+  "slug": "garage-shop-equipment-2-pallets-s80",
+  "title": "Garage & Shop Equipment — 2 Pallets",
+  "category": "automotive",
+  "subcategory": "automotive-garage-shop",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 2,
+  "source": "Home improvement retailer",
+  "available": 1,
+  "featured": false,
+  "priceCents": 103000,
+  "msrpCents": 396000,
+  "units": 40,
+  "weightLbs": 1080,
+  "daysAgo": 1,
+  "views": 60,
+  "description": "40 shelf-pull automotive units packed as 2 pallets, sourced from home improvement retailer. The biggest lines by retail value are 10 × Hydraulic floor jack, 20 × Jack stands pair and 10 × Shop vacuum 12gal. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-AUT-S800",
+    "name": "Hydraulic floor jack",
+    "qty": 10,
+    "unitMsrpCents": 17900
+   },
+   {
+    "sku": "PP-AUT-S801",
+    "name": "Jack stands pair",
+    "qty": 20,
+    "unitMsrpCents": 5900
+   },
+   {
+    "sku": "PP-AUT-S802",
+    "name": "Shop vacuum 12gal",
+    "qty": 10,
+    "unitMsrpCents": 9900
+   }
+  ]
+ },
+ {
+  "slug": "pallet-jacks-hand-trucks-s81",
+  "title": "Pallet Jacks & Hand Trucks",
+  "category": "warehouse-industrial",
+  "subcategory": "warehouse-industrial-material-handling",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 2,
+  "source": "Manufacturer overstock",
+  "available": 2,
+  "featured": false,
+  "priceCents": 159200,
+  "msrpCents": 497600,
+  "units": 24,
+  "weightLbs": 1186,
+  "daysAgo": 6,
+  "views": 157,
+  "description": "Headline items: 10 × Convertible hand truck, 4 × Manual pallet jack 5,500lb and 10 × Platform cart. This new, unopened warehouse & industrial load came in from manufacturer overstock and totals 24 units across 3 manifest lines, packed as 2 pallets. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-WAR-S810",
+    "name": "Manual pallet jack 5,500lb",
+    "qty": 4,
+    "unitMsrpCents": 44900
+   },
+   {
+    "sku": "PP-WAR-S811",
+    "name": "Convertible hand truck",
+    "qty": 10,
+    "unitMsrpCents": 18900
+   },
+   {
+    "sku": "PP-WAR-S812",
+    "name": "Platform cart",
+    "qty": 10,
+    "unitMsrpCents": 12900
+   }
+  ]
+ },
+ {
+  "slug": "steel-shelving-units-2-pallets-s82",
+  "title": "Steel Shelving Units — 2 Pallets",
+  "category": "warehouse-industrial",
+  "subcategory": "warehouse-industrial-shelving-racking",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 2,
+  "source": "Closeout / store closure",
+  "available": 2,
+  "featured": false,
+  "priceCents": 137000,
+  "msrpCents": 527000,
+  "units": 30,
+  "weightLbs": 1292,
+  "daysAgo": 11,
+  "views": 254,
+  "description": "Sourced from closeout / store closure, this is 2 pallets of shelf-pull warehouse & industrial: 30 units in all. Top retail lines include 20 × 5-tier steel shelving 72in and 10 × Boltless rack 48in; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-WAR-S820",
+    "name": "5-tier steel shelving 72in",
+    "qty": 20,
+    "unitMsrpCents": 14900
+   },
+   {
+    "sku": "PP-WAR-S821",
+    "name": "Boltless rack 48in",
+    "qty": 10,
+    "unitMsrpCents": 22900
+   }
+  ]
+ },
+ {
+  "slug": "empty-48x40-wooden-pallets-bundle-of-20-s83",
+  "title": "Empty 48x40 Wooden Pallets — Bundle of 20",
+  "category": "warehouse-industrial",
+  "subcategory": "warehouse-industrial-empty-pallets",
+  "brand": "",
+  "condition": "MIXED",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Closeout / store closure",
+  "available": 10,
+  "featured": false,
+  "priceCents": 3400,
+  "msrpCents": 24000,
+  "units": 20,
+  "weightLbs": 699,
+  "daysAgo": 16,
+  "views": 351,
+  "description": "A single pallet of warehouse & industrial (mixed-condition) from closeout / store closure: 20 units over 1 manifest lines, led by 20 × Used 48x40 wooden pallet, grade A. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-WAR-S830",
+    "name": "Used 48x40 wooden pallet, grade A",
+    "qty": 20,
+    "unitMsrpCents": 1200
+   }
+  ]
+ },
+ {
+  "slug": "shipping-boxes-tape-stretch-wrap-s84",
+  "title": "Shipping Boxes, Tape & Stretch Wrap",
+  "category": "warehouse-industrial",
+  "subcategory": "warehouse-industrial-packaging-shipping-supplies",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Manufacturer overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 181800,
+  "msrpCents": 568000,
+  "units": 220,
+  "weightLbs": 752,
+  "daysAgo": 0,
+  "views": 448,
+  "description": "220 new, unopened warehouse & industrial units packed as a single pallet, sourced from manufacturer overstock. The biggest lines by retail value are 60 × Shipping boxes 12x12x12, 25-pack, 100 × Packing tape 6-roll and 60 × Stretch wrap roll 18in. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-WAR-S840",
+    "name": "Shipping boxes 12x12x12, 25-pack",
+    "qty": 60,
+    "unitMsrpCents": 3400
+   },
+   {
+    "sku": "PP-WAR-S841",
+    "name": "Packing tape 6-roll",
+    "qty": 100,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-WAR-S842",
+    "name": "Stretch wrap roll 18in",
+    "qty": 60,
+    "unitMsrpCents": 2900
+   }
+  ]
+ },
+ {
+  "slug": "wood-pellets-charcoal-s85",
+  "title": "Wood Pellets & Charcoal",
+  "category": "warehouse-industrial",
+  "subcategory": "warehouse-industrial-firewood-pellets-charcoal",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Manufacturer overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 51500,
+  "msrpCents": 161000,
+  "units": 150,
+  "weightLbs": 305,
+  "daysAgo": 5,
+  "views": 545,
+  "description": "Headline items: 60 × Charcoal briquettes 16lb, 50 × Hardwood pellets 40lb and 40 × Kiln-dried firewood bundle. This new, unopened warehouse & industrial load came in from manufacturer overstock and totals 150 units across 3 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-WAR-S850",
+    "name": "Hardwood pellets 40lb",
+    "qty": 50,
+    "unitMsrpCents": 900
+   },
+   {
+    "sku": "PP-WAR-S851",
+    "name": "Charcoal briquettes 16lb",
+    "qty": 60,
+    "unitMsrpCents": 1400
+   },
+   {
+    "sku": "PP-WAR-S852",
+    "name": "Kiln-dried firewood bundle",
+    "qty": 40,
+    "unitMsrpCents": 800
+   }
+  ]
+ },
+ {
+  "slug": "projectors-streaming-sticks-s86",
+  "title": "Projectors & Streaming Sticks",
+  "category": "tvs-home-theater",
+  "subcategory": "tvs-home-theater-projectors-streaming",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "CASE",
+  "palletCount": 1,
+  "source": "Online marketplace returns",
+  "available": 3,
+  "featured": false,
+  "priceCents": 118300,
+  "msrpCents": 739200,
+  "units": 88,
+  "weightLbs": 22,
+  "daysAgo": 10,
+  "views": 642,
+  "description": "Sourced from online marketplace returns, this is a case pack of customer-return tvs & home theater: 88 units in all. Top retail lines include 60 × 4K streaming stick, 12 × 1080p home projector and 16 × Portable mini projector; the complete manifest is below. Ships by parcel in sealed cartons.",
+  "manifest": [
+   {
+    "sku": "PP-TVS-S860",
+    "name": "1080p home projector",
+    "qty": 12,
+    "unitMsrpCents": 19900
+   },
+   {
+    "sku": "PP-TVS-S861",
+    "name": "4K streaming stick",
+    "qty": 60,
+    "unitMsrpCents": 4900
+   },
+   {
+    "sku": "PP-TVS-S862",
+    "name": "Portable mini projector",
+    "qty": 16,
+    "unitMsrpCents": 12900
+   }
+  ]
+ },
+ {
+  "slug": "mixed-electronics-pallet-untested-s87",
+  "title": "Mixed Electronics Pallet — Untested",
+  "category": "electronics",
+  "subcategory": "electronics-mixed-electronics",
+  "brand": "",
+  "condition": "MIXED",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 4,
+  "featured": false,
+  "priceCents": 105800,
+  "msrpCents": 756000,
+  "units": 240,
+  "weightLbs": 411,
+  "daysAgo": 15,
+  "views": 39,
+  "description": "A single pallet of electronics (mixed-condition) from big-box retailer returns: 240 units over 4 manifest lines, led by 60 × Wireless earbuds, 40 × Bluetooth speaker and 60 × Portable charger. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-ELE-S870",
+    "name": "Bluetooth speaker",
+    "qty": 40,
+    "unitMsrpCents": 4900
+   },
+   {
+    "sku": "PP-ELE-S871",
+    "name": "Wireless earbuds",
+    "qty": 60,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-ELE-S872",
+    "name": "Smart plug",
+    "qty": 80,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-ELE-S873",
+    "name": "Portable charger",
+    "qty": 60,
+    "unitMsrpCents": 2900
+   }
+  ]
+ },
+ {
+  "slug": "dishwashers-scratch-dent-4-pallets-s88",
+  "title": "Dishwashers — Scratch & Dent — 4 Pallets",
+  "category": "appliances",
+  "subcategory": "appliances-dishwashers",
+  "brand": "",
+  "condition": "SALVAGE",
+  "lotSize": "PALLET",
+  "palletCount": 4,
+  "source": "Home improvement retailer",
+  "available": 1,
+  "featured": false,
+  "priceCents": 27900,
+  "msrpCents": 399200,
+  "units": 8,
+  "weightLbs": 1856,
+  "daysAgo": 20,
+  "views": 136,
+  "description": "8 salvage appliances units packed as 4 pallets, sourced from home improvement retailer. The biggest lines by retail value are 4 × 24in built-in dishwasher and 4 × Portable countertop dishwasher. All 2 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-APP-S880",
+    "name": "24in built-in dishwasher",
+    "qty": 4,
+    "unitMsrpCents": 64900
+   },
+   {
+    "sku": "PP-APP-S881",
+    "name": "Portable countertop dishwasher",
+    "qty": 4,
+    "unitMsrpCents": 34900
+   }
+  ]
+ },
+ {
+  "slug": "bedding-bath-overstock-s89",
+  "title": "Bedding & Bath Overstock",
+  "category": "home-kitchen",
+  "subcategory": "home-kitchen-bedding-bath",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 242800,
+  "msrpCents": 934000,
+  "units": 260,
+  "weightLbs": 517,
+  "daysAgo": 4,
+  "views": 233,
+  "description": "Headline items: 40 × Queen comforter set, 60 × Bath towel set and 80 × Shower curtain. This shelf-pull home & kitchen load came in from department store overstock and totals 260 units across 4 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-HOM-S890",
+    "name": "Queen comforter set",
+    "qty": 40,
+    "unitMsrpCents": 8900
+   },
+   {
+    "sku": "PP-HOM-S891",
+    "name": "Bath towel set",
+    "qty": 60,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-HOM-S892",
+    "name": "Bath mat",
+    "qty": 80,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-HOM-S893",
+    "name": "Shower curtain",
+    "qty": 80,
+    "unitMsrpCents": 2400
+   }
+  ]
+ },
+ {
+  "slug": "living-room-furniture-returns-3-pallets-s90",
+  "title": "Living Room Furniture Returns — 3 Pallets",
+  "category": "furniture",
+  "subcategory": "furniture-living-room",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 3,
+  "source": "Online marketplace returns",
+  "available": 1,
+  "featured": false,
+  "priceCents": 73100,
+  "msrpCents": 457000,
+  "units": 30,
+  "weightLbs": 1710,
+  "daysAgo": 9,
+  "views": 330,
+  "description": "Sourced from online marketplace returns, this is 3 pallets of customer-return furniture: 30 units in all. Top retail lines include 6 × Accent chair, 6 × TV stand 60in and 8 × Coffee table; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-FUR-S900",
+    "name": "Accent chair",
+    "qty": 6,
+    "unitMsrpCents": 24900
+   },
+   {
+    "sku": "PP-FUR-S901",
+    "name": "Coffee table",
+    "qty": 8,
+    "unitMsrpCents": 14900
+   },
+   {
+    "sku": "PP-FUR-S902",
+    "name": "TV stand 60in",
+    "qty": 6,
+    "unitMsrpCents": 19900
+   },
+   {
+    "sku": "PP-FUR-S903",
+    "name": "Side table",
+    "qty": 10,
+    "unitMsrpCents": 6900
+   }
+  ]
+ },
+ {
+  "slug": "kids-clothing-new-with-tags-s91",
+  "title": "Kids' Clothing — New with Tags",
+  "category": "apparel",
+  "subcategory": "apparel-kids-clothing",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Department store overstock",
+  "available": 3,
+  "featured": false,
+  "priceCents": 409600,
+  "msrpCents": 1280000,
+  "units": 650,
+  "weightLbs": 623,
+  "daysAgo": 14,
+  "views": 427,
+  "description": "A single pallet of clothing (new, unopened) from department store overstock: 650 units over 3 manifest lines, led by 200 × Kids' joggers, 300 × Kids' graphic tee and 150 × Kids' hoodie. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-APP-S910",
+    "name": "Kids' graphic tee",
+    "qty": 300,
+    "unitMsrpCents": 1400
+   },
+   {
+    "sku": "PP-APP-S911",
+    "name": "Kids' joggers",
+    "qty": 200,
+    "unitMsrpCents": 2200
+   },
+   {
+    "sku": "PP-APP-S912",
+    "name": "Kids' hoodie",
+    "qty": 150,
+    "unitMsrpCents": 2800
+   }
+  ]
+ },
+ {
+  "slug": "kids-shoes-assortment-s92",
+  "title": "Kids' Shoes Assortment",
+  "category": "shoes",
+  "subcategory": "shoes-kids-shoes",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 2,
+  "featured": false,
+  "priceCents": 283900,
+  "msrpCents": 1092000,
+  "units": 300,
+  "weightLbs": 676,
+  "daysAgo": 19,
+  "views": 524,
+  "description": "300 shelf-pull shoes units packed as a single pallet, sourced from big-box retailer returns. The biggest lines by retail value are 120 × Kids' sneakers, 80 × Kids' light-up shoes and 100 × Toddler sandals. All 3 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SHO-S920",
+    "name": "Kids' sneakers",
+    "qty": 120,
+    "unitMsrpCents": 4500
+   },
+   {
+    "sku": "PP-SHO-S921",
+    "name": "Kids' light-up shoes",
+    "qty": 80,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-SHO-S922",
+    "name": "Toddler sandals",
+    "qty": 100,
+    "unitMsrpCents": 2400
+   }
+  ]
+ },
+ {
+  "slug": "sandals-slides-closeout-s93",
+  "title": "Sandals & Slides Closeout",
+  "category": "shoes",
+  "subcategory": "shoes-sandals-slides",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Closeout / store closure",
+  "available": 3,
+  "featured": false,
+  "priceCents": 364800,
+  "msrpCents": 1140000,
+  "units": 500,
+  "weightLbs": 729,
+  "daysAgo": 3,
+  "views": 621,
+  "description": "Headline items: 150 × Women's sandals, 150 × Men's slides and 200 × Flip-flops. This new, unopened shoes load came in from closeout / store closure and totals 500 units across 3 manifest lines, packed as a single pallet. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SHO-S930",
+    "name": "Men's slides",
+    "qty": 150,
+    "unitMsrpCents": 2500
+   },
+   {
+    "sku": "PP-SHO-S931",
+    "name": "Women's sandals",
+    "qty": 150,
+    "unitMsrpCents": 3500
+   },
+   {
+    "sku": "PP-SHO-S932",
+    "name": "Flip-flops",
+    "qty": 200,
+    "unitMsrpCents": 1200
+   }
+  ]
+ },
+ {
+  "slug": "backpacks-carry-on-luggage-2-pallets-s94",
+  "title": "Backpacks & Carry-on Luggage — 2 Pallets",
+  "category": "accessories-jewelry",
+  "subcategory": "accessories-jewelry-backpacks-luggage",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 2,
+  "source": "Online marketplace returns",
+  "available": 2,
+  "featured": false,
+  "priceCents": 178700,
+  "msrpCents": 1117000,
+  "units": 130,
+  "weightLbs": 1564,
+  "daysAgo": 8,
+  "views": 18,
+  "description": "Sourced from online marketplace returns, this is 2 pallets of customer-return accessories & jewelry: 130 units in all. Top retail lines include 80 × Laptop backpack, 30 × Carry-on spinner suitcase and 20 × Checked spinner suitcase; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-ACC-S940",
+    "name": "Carry-on spinner suitcase",
+    "qty": 30,
+    "unitMsrpCents": 12900
+   },
+   {
+    "sku": "PP-ACC-S941",
+    "name": "Checked spinner suitcase",
+    "qty": 20,
+    "unitMsrpCents": 16900
+   },
+   {
+    "sku": "PP-ACC-S942",
+    "name": "Laptop backpack",
+    "qty": 80,
+    "unitMsrpCents": 4900
+   }
+  ]
+ },
+ {
+  "slug": "hair-dryers-straighteners-hair-care-s95",
+  "title": "Hair Dryers, Straighteners & Hair Care",
+  "category": "health-beauty",
+  "subcategory": "health-beauty-hair-tools",
+  "brand": "",
+  "condition": "CUSTOMER_RETURN",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 3,
+  "featured": false,
+  "priceCents": 155500,
+  "msrpCents": 972000,
+  "units": 280,
+  "weightLbs": 335,
+  "daysAgo": 13,
+  "views": 115,
+  "description": "A single pallet of health & beauty (customer-return) from big-box retailer returns: 280 units over 4 manifest lines, led by 60 × Hair dryer, 60 × Flat iron and 120 × Shampoo & conditioner set. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-HEA-S950",
+    "name": "Hair dryer",
+    "qty": 60,
+    "unitMsrpCents": 5900
+   },
+   {
+    "sku": "PP-HEA-S951",
+    "name": "Flat iron",
+    "qty": 60,
+    "unitMsrpCents": 4900
+   },
+   {
+    "sku": "PP-HEA-S952",
+    "name": "Curling wand",
+    "qty": 40,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-HEA-S953",
+    "name": "Shampoo & conditioner set",
+    "qty": 120,
+    "unitMsrpCents": 1400
+   }
+  ]
+ },
+ {
+  "slug": "mystery-mix-pallet-unmanifested-mix-s96",
+  "title": "Mystery Mix Pallet — Unmanifested Mix",
+  "category": "general-merchandise",
+  "subcategory": "general-merchandise-mystery-mix",
+  "brand": "",
+  "condition": "MIXED",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Big-box retailer returns",
+  "available": 6,
+  "featured": false,
+  "priceCents": 52500,
+  "msrpCents": 375000,
+  "units": 250,
+  "weightLbs": 388,
+  "daysAgo": 18,
+  "views": 212,
+  "description": "250 mixed-condition general merchandise units packed as a single pallet, sourced from big-box retailer returns. The biggest lines by retail value are 250 × Assorted general merchandise (sample count). All 1 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-GEN-S960",
+    "name": "Assorted general merchandise (sample count)",
+    "qty": 250,
+    "unitMsrpCents": 1500
+   }
+  ]
+ },
+ {
+  "slug": "outdoor-play-swings-slides-water-toys-2-pallets-s97",
+  "title": "Outdoor Play — Swings, Slides & Water Toys — 2 Pallets",
+  "category": "toys-baby",
+  "subcategory": "toys-baby-outdoor-play",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 2,
+  "source": "Big-box retailer returns",
+  "available": 2,
+  "featured": false,
+  "priceCents": 99800,
+  "msrpCents": 383800,
+  "units": 102,
+  "weightLbs": 882,
+  "daysAgo": 2,
+  "views": 309,
+  "description": "Headline items: 80 × Water blaster 3-pack, 4 × Kids' swing set and 10 × Toddler slide. This shelf-pull toys & baby load came in from big-box retailer returns and totals 102 units across 4 manifest lines, packed as 2 pallets. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-TOY-S970",
+    "name": "Kids' swing set",
+    "qty": 4,
+    "unitMsrpCents": 24900
+   },
+   {
+    "sku": "PP-TOY-S971",
+    "name": "Toddler slide",
+    "qty": 10,
+    "unitMsrpCents": 6900
+   },
+   {
+    "sku": "PP-TOY-S972",
+    "name": "Water blaster 3-pack",
+    "qty": 80,
+    "unitMsrpCents": 1900
+   },
+   {
+    "sku": "PP-TOY-S973",
+    "name": "Sandbox with cover",
+    "qty": 8,
+    "unitMsrpCents": 7900
+   }
+  ]
+ },
+ {
+  "slug": "party-supplies-decorations-s98",
+  "title": "Party Supplies & Decorations",
+  "category": "seasonal",
+  "subcategory": "seasonal-party-supplies",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Closeout / store closure",
+  "available": 4,
+  "featured": false,
+  "priceCents": 196800,
+  "msrpCents": 615000,
+  "units": 500,
+  "weightLbs": 494,
+  "daysAgo": 7,
+  "views": 406,
+  "description": "Sourced from closeout / store closure, this is a single pallet of new, unopened seasonal & holiday: 500 units in all. Top retail lines include 200 × Balloon kit, 150 × Party tableware set and 150 × Banner & decor pack; the complete manifest is below. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-SEA-S980",
+    "name": "Balloon kit",
+    "qty": 200,
+    "unitMsrpCents": 1200
+   },
+   {
+    "sku": "PP-SEA-S981",
+    "name": "Party tableware set",
+    "qty": 150,
+    "unitMsrpCents": 1500
+   },
+   {
+    "sku": "PP-SEA-S982",
+    "name": "Banner & decor pack",
+    "qty": 150,
+    "unitMsrpCents": 1000
+   }
+  ]
+ },
+ {
+  "slug": "lighting-electrical-overstock-s99",
+  "title": "Lighting & Electrical Overstock",
+  "category": "tools-hardware",
+  "subcategory": "tools-hardware-lighting-electrical",
+  "brand": "",
+  "condition": "NEW",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Home improvement retailer",
+  "available": 3,
+  "featured": false,
+  "priceCents": 272600,
+  "msrpCents": 852000,
+  "units": 380,
+  "weightLbs": 547,
+  "daysAgo": 12,
+  "views": 503,
+  "description": "A single pallet of tools & hardware (new, unopened) from home improvement retailer: 380 units over 4 manifest lines, led by 200 × LED bulb 4-pack, 60 × LED shop light 4ft and 60 × Smart light switch. Quantities were counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-TOO-S990",
+    "name": "LED shop light 4ft",
+    "qty": 60,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-TOO-S991",
+    "name": "LED bulb 4-pack",
+    "qty": 200,
+    "unitMsrpCents": 1200
+   },
+   {
+    "sku": "PP-TOO-S992",
+    "name": "Outdoor extension cord 50ft",
+    "qty": 60,
+    "unitMsrpCents": 2900
+   },
+   {
+    "sku": "PP-TOO-S993",
+    "name": "Smart light switch",
+    "qty": 60,
+    "unitMsrpCents": 3400
+   }
+  ]
+ },
+ {
+  "slug": "plumbing-fixtures-faucets-s100",
+  "title": "Plumbing Fixtures & Faucets",
+  "category": "tools-hardware",
+  "subcategory": "tools-hardware-plumbing",
+  "brand": "",
+  "condition": "SHELF_PULL",
+  "lotSize": "PALLET",
+  "palletCount": 1,
+  "source": "Home improvement retailer",
+  "available": 2,
+  "featured": false,
+  "priceCents": 286500,
+  "msrpCents": 1102000,
+  "units": 160,
+  "weightLbs": 600,
+  "daysAgo": 17,
+  "views": 600,
+  "description": "160 shelf-pull tools & hardware units packed as a single pallet, sourced from home improvement retailer. The biggest lines by retail value are 30 × Kitchen faucet with pull-down sprayer, 40 × Bathroom faucet and 60 × Showerhead. All 4 manifest lines are listed below, with quantities counted at our dock. Stretch-wrapped on standard 48×40 pallets.",
+  "manifest": [
+   {
+    "sku": "PP-TOO-S1000",
+    "name": "Kitchen faucet with pull-down sprayer",
+    "qty": 30,
+    "unitMsrpCents": 14900
+   },
+   {
+    "sku": "PP-TOO-S1001",
+    "name": "Bathroom faucet",
+    "qty": 40,
+    "unitMsrpCents": 7900
+   },
+   {
+    "sku": "PP-TOO-S1002",
+    "name": "Showerhead",
+    "qty": 60,
+    "unitMsrpCents": 3900
+   },
+   {
+    "sku": "PP-TOO-S1003",
+    "name": "Toilet seat",
+    "qty": 30,
+    "unitMsrpCents": 3500
+   }
+  ]
+ }
+]

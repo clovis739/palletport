@@ -1,0 +1,53 @@
+{
+  "name": "palletport",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "email:check": "node --env-file=.env --import tsx scripts/test-email.ts",
+    "email:test": "node --env-file=.env --import tsx scripts/test-email.ts --send",
+    "build": "next build",
+    "start": "next start",
+    "db:push": "prisma db push",
+    "db:seed": "tsx prisma/seed.ts",
+    "catalog:fetch-jax": "node scripts/fetch-jax-products.mjs",
+    "catalog:import-jax": "node --env-file=.env --import tsx scripts/import-jax-products.ts",
+    "catalog:publish-jax": "node --env-file=.env --import tsx scripts/publish-jax-products.ts",
+    "setup": "prisma db push && tsx prisma/seed.ts",
+    "build:full": "prisma generate && next build",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@prisma/client": "^6.16.0",
+    "@vercel/blob": "^2.8.0",
+    "bcryptjs": "^2.4.3",
+    "gsap": "^3.13.0",
+    "jose": "^5.9.6",
+    "lenis": "^1.3.0",
+    "lucide-react": "^0.469.0",
+    "next": "^15.5.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "server-only": "^0.0.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "postcss": "^8.5.0",
+    "prisma": "^6.16.0",
+    "tailwindcss": "^4.1.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "allowScripts": {
+    "@prisma/client@6.19.3": true,
+    "@prisma/engines@6.19.3": true,
+    "prisma@6.19.3": true,
+    "esbuild@0.28.2": true
+  }
+}

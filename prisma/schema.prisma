@@ -1,0 +1,413 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Postgres (Neon). DATABASE_URL = pooled connection (used by the app), DATABASE_URL_UNPOOLED = direct connection
+// (used by `prisma db push` / migrations). The Neon integration on Vercel sets both; copy them into .env locally.
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+// role: ADMIN (owner) | MANAGER | EDITOR (staff, see src/lib/permissions.ts) | BUYER  (SELLER is legacy, treated as BUYER)
+// certStatus: NONE | PENDING | APPROVED | REJECTED  (resale certificate / Net 30 approval)
+model User {
+  id             String          @id @default(cuid())
+  email          String          @unique
+  name           String
+  businessName   String?
+  businessType   String?
+  phone          String?
+  passwordHash   String
+  role           String          @default("BUYER")
+  certStatus     String          @default("NONE")
+  certNumber     String?
+  certState      String?
+  isPro          Boolean         @default(false)
+  referralCode   String          @unique @default(cuid())
+  referredBy     String?
+  shipAddress    String?
+  shipCity       String?
+  shipRegion     String?
+  shipPostal     String?
+  shipCountry    String?
+  // Admin note from the last resale-certificate review (commerce admin, additive).
+  certNote       String?
+  createdAt      DateTime        @default(now())
+  seller         Seller?
+  cartItems      CartItem[]
+  orders         Order[]
+  favorites      Favorite[]
+  follows        Follow[]
+  conversations  Conversation[]
+  messages       Message[]
+  reviews        Review[]
+  passwordResets PasswordReset[]
+}
+
+// badges: comma-separated keys from BADGES in src/lib/format.ts
+model Seller {
+  id            String         @id @default(cuid())
+  userId        String?        @unique
+  user          User?          @relation(fields: [userId], references: [id])
+  name          String
+  slug          String         @unique
+  location      String
+  bio           String
+  verified      Boolean        @default(false)
+  rating        Float          @default(0)
+  badges        String         @default("")
+  minOrderCents Int            @default(0)
+  bannerHue     Int            @default(215)
+  pickup        Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  lots          Lot[]
+  orderItems    OrderItem[]
+  followers     Follow[]
+  conversations Conversation[]
+  reviews       Review[]
+  promos        Promo[]
+  payouts       Payout[]
+}
+
+// Catalogue tree: department group (Category.group) → Category → Subcategory. Brands live on Lot.brand.
+// Managed in Admin → Categories; the standard structure is src/lib/taxonomy.ts.
+model Category {
+  id            String        @id @default(cuid())
+  name          String
+  slug          String        @unique
+  blurb         String
+  hue           Int           @default(24)
+  // Department group label for menus (e.g. "Electronics & Tech"), see CATEGORY_GROUPS in src/lib/taxonomy.ts.
+  group         String        @default("")
+  // Menu order within the group (lower first).
+  position      Int           @default(0)
+  // Image ref (stock photo key or media URL). Empty = the default photo for the slug.
+  image         String        @default("")
+  // Hidden categories stay reachable by URL and search but are left out of menus and category lists.
+  hidden        Boolean       @default(false)
+  lots          Lot[]
+  subcategories Subcategory[]
+
+  @@index([group, position])
+}
+
+model Subcategory {
+  id         String   @id @default(cuid())
+  name       String
+  slug       String   @unique
+  position   Int      @default(0)
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  lots       Lot[]
+
+  @@index([categoryId, position])
+}
+
+// condition: NEW | SHELF_PULL | CUSTOMER_RETURN | MIXED | SALVAGE
+// status: ACTIVE | SOLD_OUT | DRAFT
+// lotSize: CASE | PALLET | TRUCKLOAD
+// Fixed-price listing: priceCents is the price buyers pay per lot; `available` is how many identical lots are in stock.
+model Lot {
+  id                       String         @id @default(cuid())
+  slug                     String         @unique
+  externalSku              String?        @unique
+  externalUrl              String?
+  sourceCondition          String?
+  sourceDelivery           String?
+  sourceOriginalPriceCents Int?
+  title                    String
+  description              String
+  condition                String
+  priceCents               Int
+  msrpCents                Int
+  units                    Int
+  palletCount              Int            @default(1)
+  weightLbs                Int
+  shipsFrom                String
+  available                Int            @default(1)
+  status                   String         @default("ACTIVE")
+  featured                 Boolean        @default(false)
+  views                    Int            @default(0)
+  lotSize                  String         @default("PALLET")
+  source                   String         @default("")
+  // Main brand in the lot ("" = mixed / unbranded). Filterable on the storefront; managed in Admin → Categories → Brands.
+  brand                    String         @default("")
+  // Newline-separated photo URLs (first = cover). Empty = show a labelled category stock photo.
+  images                   String         @default("")
+  createdAt                DateTime       @default(now())
+  categoryId               String
+  category                 Category       @relation(fields: [categoryId], references: [id])
+  subcategoryId            String?
+  subcategory              Subcategory?   @relation(fields: [subcategoryId], references: [id])
+  sellerId                 String
+  seller                   Seller         @relation(fields: [sellerId], references: [id])
+  manifest                 ManifestItem[]
+  cartItems                CartItem[]
+  orderItems               OrderItem[]
+  favorites                Favorite[]
+
+  @@index([categoryId])
+  @@index([subcategoryId])
+  @@index([brand])
+  @@index([sellerId])
+  @@index([status])
+}
+
+model ManifestItem {
+  id            String @id @default(cuid())
+  lotId         String
+  lot           Lot    @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  sku           String
+  name          String
+  qty           Int
+  unitMsrpCents Int
+}
+
+model CartItem {
+  id       String @id @default(cuid())
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lotId    String
+  lot      Lot    @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  quantity Int    @default(1)
+
+  @@unique([userId, lotId])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lotId     String
+  lot       Lot      @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, lotId])
+}
+
+model Follow {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sellerId  String
+  seller    Seller   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, sellerId])
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  buyerId   String
+  buyer     User      @relation(fields: [buyerId], references: [id], onDelete: Cascade)
+  sellerId  String
+  seller    Seller    @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  subject   String    @default("General question")
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+  messages  Message[]
+
+  @@unique([buyerId, sellerId])
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  body           String
+  readAt         DateTime?
+  createdAt      DateTime     @default(now())
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sellerId  String
+  seller    Seller   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  rating    Int
+  body      String
+  createdAt DateTime @default(now())
+
+  @@unique([orderId, sellerId])
+}
+
+// sellerId null = site-wide promo. percentOff OR amountOffCents.
+model Promo {
+  id               String    @id @default(cuid())
+  code             String    @unique
+  description      String    @default("")
+  sellerId         String?
+  seller           Seller?   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  percentOff       Int?
+  amountOffCents   Int?
+  minSubtotalCents Int       @default(0)
+  firstOrderOnly   Boolean   @default(false)
+  active           Boolean   @default(true)
+  expiresAt        DateTime?
+  uses             Int       @default(0)
+  createdAt        DateTime  @default(now())
+}
+
+// status: PENDING | CONFIRMED | SHIPPED | DELIVERED | CANCELLED
+// paymentMethod: CARD | NET30 | WIRE
+model Order {
+  id              String      @id @default(cuid())
+  number          String      @unique
+  userId          String
+  user            User        @relation(fields: [userId], references: [id])
+  status          String      @default("PENDING")
+  paymentMethod   String
+  subtotalCents   Int
+  discountCents   Int         @default(0)
+  promoCode       String?
+  shippingCents   Int
+  totalCents      Int
+  shipName        String
+  shipAddress     String
+  shipCity        String
+  shipRegion      String
+  shipPostal      String
+  shipCountry     String
+  dockAccess      Boolean     @default(false)
+  deliveryMethod  String      @default("FREIGHT") // FREIGHT | PICKUP
+  residential     Boolean     @default(false)
+  poNumber        String?
+  notes           String?
+  trackingNo      String?
+  createdAt       DateTime    @default(now())
+  // Commerce admin (additive): payment received, fulfilment timestamps, carrier, internal notes.
+  paidAt          DateTime?
+  carrier         String?
+  shippedAt       DateTime?
+  deliveredAt     DateTime?
+  cancelledAt     DateTime?
+  adminNotes      String?
+  // Warehouse visit (pickup) orders booked from a lot page: visit start time (UTC, 50-minute slot), the amount due
+  // up front (35% refundable deposit for orders of $600+, otherwise the full total) and what has been paid so far.
+  visitAt         DateTime?
+  dueNowCents     Int         @default(0)
+  amountPaidCents Int         @default(0)
+  items           OrderItem[]
+  reviews         Review[]
+
+  @@index([createdAt])
+  @@index([status])
+  @@index([visitAt])
+}
+
+model OrderItem {
+  id         String @id @default(cuid())
+  orderId    String
+  order      Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  lotId      String
+  lot        Lot    @relation(fields: [lotId], references: [id])
+  sellerId   String
+  seller     Seller @relation(fields: [sellerId], references: [id])
+  title      String
+  priceCents Int
+  quantity   Int
+}
+
+// status: SCHEDULED | PAID
+model Payout {
+  id          String   @id @default(cuid())
+  sellerId    String
+  seller      Seller   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  amountCents Int
+  status      String   @default("SCHEDULED")
+  arrivesAt   DateTime
+  createdAt   DateTime @default(now())
+}
+
+model PasswordReset {
+  token     String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  usedAt    DateTime?
+}
+
+// Contact form, program applications and newsletter sign-ups.
+// topic: CONTACT | NEWSLETTER | PRO | VOLUME | AFFILIATE | EVENTS | INTEGRATIONS
+model Inquiry {
+  id        String   @id @default(cuid())
+  topic     String
+  name      String   @default("")
+  email     String
+  company   String   @default("")
+  body      String   @default("")
+  handled   Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// ---------------------------------------------------------------------------------------------
+// Admin / CMS (see docs/ADMIN.md). All additive: `npx prisma db push` adds these tables only.
+// ---------------------------------------------------------------------------------------------
+
+// Editable site settings, one row per key (business, navigation, announcement, home, about, seo).
+// value = JSON validated by the zod schemas in src/lib/settings.ts and deep-merged over DEFAULTS.
+model SiteSetting {
+  key         String   @id
+  value       String // JSON
+  updatedAt   DateTime @updatedAt
+  updatedById String?
+}
+
+// Blog posts, guides, help articles, legal pages and free-form pages edited in the block editor.
+// type: POST | GUIDE | HELP | LEGAL | PAGE     status: DRAFT | PUBLISHED
+// blocks = JSON Block[] (src/lib/blocks.ts); meta = JSON EntryMeta (cover, hue, readMins, date, updated, seo…)
+model ContentEntry {
+  id          String    @id @default(cuid())
+  type        String
+  slug        String
+  title       String
+  excerpt     String    @default("")
+  category    String    @default("")
+  tags        String    @default("[]") // JSON string[]
+  author      String    @default("")
+  status      String    @default("DRAFT")
+  blocks      String    @default("[]") // JSON Block[]
+  meta        String    @default("{}") // JSON EntryMeta
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  updatedById String?
+
+  @@unique([type, slug])
+  @@index([type, status])
+}
+
+// Media library: images uploaded through the admin, stored in uploads/media, served by /media/lib/[file].
+model Media {
+  id           String   @id @default(cuid())
+  url          String
+  filename     String
+  mime         String
+  size         Int
+  width        Int?
+  height       Int?
+  alt          String   @default("")
+  createdAt    DateTime @default(now())
+  uploadedById String?
+}
+
+// Who did what in the admin. action: dotted verb, e.g. "settings.save", "lot.delete", "order.status".
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  userEmail String   @default("")
+  action    String
+  target    String   @default("")
+  detail    String   @default("")
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([userId])
+}
