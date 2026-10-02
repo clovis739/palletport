@@ -15,3 +15,4 @@ prisma/goldstack-import-backup.json
 prisma/goldstack-raw-products.json
 tmp/location-update/
 tmp/watermark-audit/
+tmp/cloudinary-upload/

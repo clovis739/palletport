@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "photos:cloudinary": "node --env-file=.env scripts/upload-project-images.mjs --upload",
     "security:check": "node --import tsx scripts/check-admin-security.mjs",
     "merchant:export": "node --env-file=.env --import tsx scripts/export-merchant-feed.ts",
     "merchant:check": "node --import tsx scripts/check-merchant-feed.ts",
@@ -23,6 +24,7 @@
     "catalog:import-jax": "node --env-file=.env --import tsx scripts/import-jax-products.ts",
     "catalog:publish-jax": "node --env-file=.env --import tsx scripts/publish-jax-products.ts",
     "catalog:jax-drafts": "node --env-file=.env --import tsx scripts/draft-jax-lots.ts",
+    "user:password": "node --env-file=.env --import tsx scripts/set-password.ts",
     "setup": "prisma db push && tsx prisma/seed.ts",
     "build:full": "prisma generate && next build",
     "postinstall": "prisma generate",
