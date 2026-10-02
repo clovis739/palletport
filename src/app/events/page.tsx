@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ProgramPage } from "@/components/ProgramPage";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "Warehouse Days: buying events & lot drops",
   description:
     "Online buying events where we release batches of manifested lots at once. Join the list to get dates. Warehouse visits are by appointment only.",

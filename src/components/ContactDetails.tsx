@@ -8,9 +8,12 @@ import type { BusinessSettings } from "@/lib/settings-schema";
  */
 type B = Pick<BusinessSettings, "email" | "salesEmail" | "phone" | "whatsapp" | "addressStreet" | "addressCity" | "addressRegion" | "addressPostal" | "country" | "hours">;
 
-export function formatAddress(b: Pick<B, "addressStreet" | "addressCity" | "addressRegion" | "addressPostal" | "country">) {
+/** "1150 Corrugated Way, Columbus, OH 43201". `full` adds the country too ("…, USA"); otherwise it is only shown outside the US. */
+export function formatAddress(b: Pick<B, "addressStreet" | "addressCity" | "addressRegion" | "addressPostal" | "country">, full = false) {
   const cityLine = [[b.addressCity, b.addressRegion].filter(Boolean).join(", "), b.addressPostal].filter(Boolean).join(" ");
-  return [b.addressStreet, cityLine, b.country && b.country.toUpperCase() !== "US" ? b.country : ""].filter(Boolean).join(", ");
+  const code = (b.country || "").trim().toUpperCase();
+  const country = !code ? "" : ["US", "USA"].includes(code) ? (full ? "USA" : "") : b.country;
+  return [b.addressStreet, cityLine, country].filter(Boolean).join(", ");
 }
 
 export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
@@ -21,13 +24,13 @@ export function hasDirectContact(b: Pick<B, "email" | "salesEmail" | "phone" | "
   return !!(b.email || b.salesEmail || b.phone || b.whatsapp || b.addressStreet);
 }
 
-export function ContactDetails({ business: b, tone = "light", showHours = true, className = "" }: { business: B; tone?: "light" | "dark"; showHours?: boolean; className?: string }) {
+export function ContactDetails({ business: b, tone = "light", showHours = true, fullAddress = false, className = "" }: { business: B; tone?: "light" | "dark"; showHours?: boolean; /** Include the country (e.g. "USA") in the address. */ fullAddress?: boolean; className?: string }) {
   const rows: { icon: typeof Mail; label: string; value: string; href?: string }[] = [];
   if (b.email) rows.push({ icon: Mail, label: "Email", value: b.email, href: `mailto:${b.email}` });
   if (b.salesEmail) rows.push({ icon: Mail, label: "Sales", value: b.salesEmail, href: `mailto:${b.salesEmail}` });
   if (b.phone) rows.push({ icon: Phone, label: "Phone", value: b.phone, href: telHref(b.phone) });
   if (b.whatsapp) rows.push({ icon: MessageCircle, label: "WhatsApp", value: b.whatsapp, href: whatsappHref(b.whatsapp) });
-  if (b.addressStreet) rows.push({ icon: MapPin, label: "Warehouse", value: formatAddress(b) });
+  if (b.addressStreet) rows.push({ icon: MapPin, label: "Warehouse", value: formatAddress(b, fullAddress) });
   if (showHours && b.hours && rows.length) rows.push({ icon: Clock, label: "Hours", value: b.hours });
   if (!rows.length) return null;
   const dark = tone === "dark";

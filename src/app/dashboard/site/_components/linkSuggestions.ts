@@ -1,5 +1,7 @@
 import "server-only";
 import { db } from "@/lib/db";
+import { getBrand } from "@/lib/brand";
+import { rebrandDeep } from "@/lib/settings-schema";
 import { COLLECTIONS } from "@/lib/collections";
 import { getHelpArticles, getLegalPages, getPublishedGuides, getPublishedPages, getPublishedPosts } from "@/lib/content";
 import type { LinkGroup } from "./fields";
@@ -33,7 +35,6 @@ const STATIC: [string, string][] = [
   ["My orders", "/orders"],
   ["Refer a business", "/account/referrals"],
   ["Site map", "/site-map"],
-  ["Photo credits", "/credits"],
 ];
 
 /** Internal routes offered by the link picker in the Site editors. */
@@ -57,5 +58,5 @@ export async function linkSuggestions(): Promise<LinkGroup[]> {
     { label: "Help articles", links: help.map((h) => ({ label: h.title, href: `/help/${h.slug}` })) },
     { label: "Legal", links: legal.map((l) => ({ label: l.title, href: `/legal/${l.slug}` })) },
   ];
-  return groups.filter((g) => g.links.length);
+  return rebrandDeep(groups.filter((g) => g.links.length), await getBrand());
 }

@@ -7,7 +7,7 @@ import { ContactDetails, SocialLinks } from "@/components/ContactDetails";
 import { saveBusiness } from "@/app/actions/site";
 import type { BusinessSettings } from "@/lib/settings-schema";
 import { SettingsForm } from "../_components/SettingsForm";
-import { SortableList, Text } from "../_components/fields";
+import { MediaField, SortableList, Text } from "../_components/fields";
 
 type Value = BusinessSettings & { storeLocation: string };
 
@@ -17,7 +17,7 @@ function Preview({ b }: { b: Value }) {
       <div>
         <p className="label">Footer preview</p>
         <div className="overflow-hidden rounded-2xl bg-ink p-4 text-white/80" aria-label="Footer preview">
-          <Logo className="text-white" />
+          <Logo className="text-white" name={b.name || "Your business"} accent={b.logoAccent ?? ""} />
           <div className="mt-3 space-y-3">
             <ContactDetails business={b} tone="dark" className="text-white/70" />
             <SocialLinks links={b.socialLinks.filter((l) => l.label && l.href)} tone="dark" />
@@ -45,7 +45,11 @@ export function BusinessForm({ initial }: { initial: Value }) {
       {(f) => (
         <Card>
           <FormSection title="Business" description="Your trading name and one-line description. The name and location are also used on lots, the About page and checkout.">
-            <Text f={f} path="name" label="Business name" required autoComplete="organization" />
+            <Text f={f} path="name" label="Business name" required autoComplete="organization" hint="Your brand everywhere: header and footer logo, page titles, Google results, emails, invoices and policies. Text that mentions the old name updates too." />
+            <Text f={f} path="logoAccent" label="Logo highlight" max={30} hint="The part of the name shown in orange in the logo, e.g. “Port” in PalletPort. Must appear in the name; leave empty for one colour." />
+            {f.value.logoAccent && !f.value.name.includes(f.value.logoAccent) && (
+              <p className="-mt-2 text-xs font-medium text-rust">“{f.value.logoAccent}” isn&apos;t in the business name, so the logo shows in one colour. Change it or clear it.</p>
+            )}
             <Text f={f} path="tagline" label="Tagline" max={160} hint="One sentence about what you sell." />
             <div>
               <Text f={f} path="storeLocation" label="Warehouse location" required hint='Shown as "Warehouse in …", e.g. Columbus, OH.' />
@@ -62,7 +66,7 @@ export function BusinessForm({ initial }: { initial: Value }) {
           </FormSection>
 
           <FormSection title="Contact" description="Leave a field empty to hide it. Phone numbers: include the country code if you sell abroad.">
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 @sm:grid-cols-2">
               <Text f={f} path="email" type="email" label="Support email" placeholder="help@example.com" autoComplete="email" />
               <Text f={f} path="salesEmail" type="email" label="Sales email" placeholder="sales@example.com" hint="For bulk and truckload enquiries." />
               <Text f={f} path="phone" type="tel" label="Phone" placeholder="+1 614 555 0100" autoComplete="tel" />
@@ -72,7 +76,7 @@ export function BusinessForm({ initial }: { initial: Value }) {
 
           <FormSection title="Warehouse address" description="The street address is only shown when you fill it in. Pickup stays by appointment.">
             <Text f={f} path="addressStreet" label="Street" autoComplete="street-address" />
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 @sm:grid-cols-2">
               <Text f={f} path="addressCity" label="City" autoComplete="address-level2" />
               <Text f={f} path="addressRegion" label="State / region" autoComplete="address-level1" />
               <Text f={f} path="addressPostal" label="ZIP / postal code" autoComplete="postal-code" />
@@ -90,6 +94,21 @@ export function BusinessForm({ initial }: { initial: Value }) {
             <Text f={f} path="googleMapsUrl" label="Google profile link" placeholder="https://maps.app.goo.gl/…" hint="In Google Maps, open your business → Share → Copy link." />
           </FormSection>
 
+          <FormSection title="Live chat" description="A Smartsupp chat bubble on every storefront page. Answer chats from smartsupp.com or the Smartsupp mobile app. Leave empty to hide it.">
+            <Text f={f} path="smartsuppKey" label="Smartsupp chat key" placeholder="Key or full Smartsupp chat code" hint="In Smartsupp: Settings → Chat box → Chat code. Paste the key, or paste the whole chat code and we keep just the key. To switch to another Smartsupp account, paste its key here and save; the site uses it straight away. Leave empty to remove the chat." />
+          </FormSection>
+
+          <FormSection
+            title="Warehouse photos"
+            description="Real photos of your warehouse: the outside with your sign, the loading dock, racks of pallets. They appear on the Contact page and are given to Google as your business images. Use your own photos only. Bright, sharp, landscape, at least 1200 px wide, no text or logos added on top."
+          >
+            <div className="grid gap-4 @xl:grid-cols-2">
+              {(f.value.photos ?? []).map((_, i) => (
+                <MediaField key={i} f={f} path={`photos.${i}`} label={i === 0 ? "Main photo (outside / sign)" : `Photo ${i + 1}`} allowStock={false} />
+              ))}
+            </div>
+          </FormSection>
+
           <FormSection title="Social links" description="Profiles you want customers to find. Links must start with https://.">
             <SortableList
               f={f}
@@ -101,7 +120,7 @@ export function BusinessForm({ initial }: { initial: Value }) {
               itemName={(it, i) => (it as { label: string }).label || `social link ${i + 1}`}
               empty={<p className="text-sm text-muted">No social links yet.</p>}
               render={(p) => (
-                <div className="grid gap-3 sm:grid-cols-[minmax(0,10rem)_minmax(0,1fr)]">
+                <div className="grid gap-3 @sm:grid-cols-[minmax(0,10rem)_minmax(0,1fr)]">
                   <Text f={f} path={`${p}.label`} label="Label" placeholder="Facebook" />
                   <Text f={f} path={`${p}.href`} type="url" label="URL" placeholder="https://facebook.com/…" />
                 </div>

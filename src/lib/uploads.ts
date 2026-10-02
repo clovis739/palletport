@@ -1,24 +1,83 @@
 import "server-only";
 import { mkdir, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import type { Media } from "@prisma/client";
-import { isBlobUrl } from "./mediaUrls";
+import { isBlobUrl, isCloudinaryUrl } from "./mediaUrls";
 
-// Where uploaded files go:
-// - Vercel Blob when BLOB_READ_WRITE_TOKEN is set (production on Vercel: add a Blob store in the project's
-//   Storage tab and the token is set for you). Files: lots/<file> and media/<file>, public URLs.
-// - Otherwise the local disk (development): <project>/uploads/lots → /media/lots/[file],
-//   <project>/uploads/media → /media/lib/[file]. (Files written to public/ after a build aren't served.)
-// Vercel's servers can't keep files on disk, so uploads there require the Blob store.
+// Where uploaded files go (first one configured wins):
+// 1. Cloudinary when CLOUDINARY_URL (cloudinary://KEY:SECRET@CLOUD) or CLOUDINARY_CLOUD_NAME + CLOUDINARY_API_KEY +
+//    CLOUDINARY_API_SECRET are set. Files go to <CLOUDINARY_FOLDER or "palletport">/lots and /media, public CDN URLs.
+//    Recommended for Netlify (photos load from Cloudinary, so they don't use the site's own bandwidth).
+// 2. Vercel Blob when BLOB_READ_WRITE_TOKEN is set. Files: lots/<file> and media/<file>, public URLs.
+// 3. Otherwise the local disk (development): <project>/uploads/lots → /media/lots/[file],
+//    <project>/uploads/media → /media/lib/[file]. (Files written to public/ after a build aren't served.)
+// Hosted servers (Netlify, Vercel) can't keep files on disk, so uploads there need 1 or 2.
+
+type CloudinaryCfg = { cloud: string; key: string; secret: string; folder: string };
+
+function cloudinaryCfg(): CloudinaryCfg | null {
+  const folder = (process.env.CLOUDINARY_FOLDER || "palletport").replace(/^\/+|\/+$/g, "");
+  const url = process.env.CLOUDINARY_URL?.trim();
+  if (url) {
+    const m = url.match(/^cloudinary:\/\/([^:]+):([^@]+)@(.+)$/);
+    if (m) return { key: m[1], secret: m[2], cloud: m[3], folder };
+  }
+  const cloud = process.env.CLOUDINARY_CLOUD_NAME?.trim();
+  const key = process.env.CLOUDINARY_API_KEY?.trim();
+  const secret = process.env.CLOUDINARY_API_SECRET?.trim();
+  return cloud && key && secret ? { cloud, key, secret, folder } : null;
+}
+
 const useBlob = () => !!process.env.BLOB_READ_WRITE_TOKEN;
+const hosted = () => !!(process.env.NETLIFY || process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
 
-/** Message when a deployment has nowhere to keep uploads (Vercel without a Blob store). */
+/** Message when a deployment has nowhere to keep uploads. */
 function storageMissing(): string | null {
-  return !useBlob() && process.env.VERCEL ? "Photo storage isn't set up yet: add a Blob store in Vercel → Storage, then redeploy." : null;
+  if (cloudinaryCfg() || useBlob() || !hosted()) return null;
+  return "Photo storage isn't set up yet: add your Cloudinary keys (CLOUDINARY_URL) in the hosting settings, then redeploy.";
+}
+
+/** Cloudinary signature: SHA-1 of the sorted params plus the API secret. */
+function cloudinarySign(params: Record<string, string>, secret: string) {
+  const base = Object.keys(params).sort().map((k) => `${k}=${params[k]}`).join("&");
+  return createHash("sha1").update(base + secret).digest("hex");
+}
+
+async function cloudinaryUpload(cfg: CloudinaryCfg, folder: string, name: string, buf: Buffer, contentType: string) {
+  const params = { folder: `${cfg.folder}/${folder}`, public_id: name.replace(/\.[^.]+$/, ""), timestamp: String(Math.floor(Date.now() / 1000)) };
+  const form = new FormData();
+  form.append("file", new Blob([new Uint8Array(buf)], { type: contentType }), name);
+  for (const [k, v] of Object.entries(params)) form.append(k, v);
+  form.append("api_key", cfg.key);
+  form.append("signature", cloudinarySign(params, cfg.secret));
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${encodeURIComponent(cfg.cloud)}/image/upload`, { method: "POST", body: form, signal: AbortSignal.timeout(30000) });
+  const data = (await res.json().catch(() => ({}))) as { secure_url?: string; error?: { message?: string } };
+  if (!res.ok || !data.secure_url) throw new Error(`Photo upload failed (${res.status})${data.error?.message ? `: ${data.error.message}` : ""}`);
+  return data.secure_url;
+}
+
+/** public_id from a Cloudinary delivery URL: .../image/upload/[transforms/][v123/]<public_id>.<ext> */
+function cloudinaryPublicId(url: string) {
+  const m = new URL(url).pathname.match(/\/image\/upload\/(?:[^/]*,[^/]*\/)*(?:v\d+\/)?(.+)\.[a-z0-9]+$/i);
+  return m ? decodeURIComponent(m[1]) : null;
+}
+
+async function cloudinaryDelete(url: string) {
+  const cfg = cloudinaryCfg();
+  const publicId = cfg && cloudinaryPublicId(url);
+  if (!cfg || !publicId || !publicId.startsWith(`${cfg.folder}/`)) return;
+  const params = { public_id: publicId, timestamp: String(Math.floor(Date.now() / 1000)) };
+  const form = new FormData();
+  for (const [k, v] of Object.entries(params)) form.append(k, v);
+  form.append("api_key", cfg.key);
+  form.append("signature", cloudinarySign(params, cfg.secret));
+  await fetch(`https://api.cloudinary.com/v1_1/${encodeURIComponent(cfg.cloud)}/image/destroy`, { method: "POST", body: form, signal: AbortSignal.timeout(15000) }).catch(() => {});
 }
 
 async function storeFile(folder: "lots" | "media", name: string, buf: Buffer, contentType: string, diskDir: string, diskPrefix: string) {
+  const cfg = cloudinaryCfg();
+  if (cfg) return cloudinaryUpload(cfg, folder, name, buf, contentType);
   if (useBlob()) {
     const { put } = await import("@vercel/blob");
     const blob = await put(`${folder}/${name}`, buf, { access: "public", contentType, addRandomSuffix: false });
@@ -29,7 +88,9 @@ async function storeFile(folder: "lots" | "media", name: string, buf: Buffer, co
   return diskPrefix + name;
 }
 
+/** Deletes a file we stored remotely (Cloudinary or Vercel Blob). Local files are handled by the callers. */
 async function removeBlob(url: string) {
+  if (isCloudinaryUrl(url)) return cloudinaryDelete(url);
   if (!isBlobUrl(url) || !useBlob()) return;
   const { del } = await import("@vercel/blob");
   await del(url).catch(() => {});
@@ -67,7 +128,7 @@ export async function saveLotPhotos(files: File[], lotId: string): Promise<{ url
 }
 
 export async function deleteLotPhoto(url: string) {
-  if (isBlobUrl(url)) return removeBlob(url);
+  if (isBlobUrl(url) || isCloudinaryUrl(url)) return removeBlob(url);
   if (!url.startsWith(MEDIA_PREFIX)) return;
   const name = url.slice(MEDIA_PREFIX.length);
   if (!FILE_NAME.test(name)) return;
@@ -82,7 +143,7 @@ export async function deleteLotPhoto(url: string) {
 export const MEDIA_DIR = path.join(process.cwd(), "uploads", "media");
 export const MEDIA_LIB_PREFIX = "/media/lib/";
 export const MEDIA_FILE_NAME = /^[a-z0-9-]{8,100}\.(jpg|png|webp|gif)$/;
-export const MEDIA_MAX_BYTES = 4 * 1024 * 1024; // matches MEDIA_MAX_MB (Vercel request limit is 4.5 MB)
+export const MEDIA_MAX_BYTES = 4 * 1024 * 1024; // matches MEDIA_MAX_MB (Vercel request limit is 4.5 MB, Netlify 6 MB)
 export const MEDIA_TYPES = { jpg: "image/jpeg", png: "image/png", webp: "image/webp", gif: "image/gif" } as const;
 export type MediaExt = keyof typeof MEDIA_TYPES;
 
@@ -179,7 +240,7 @@ export async function deleteMedia(id: string) {
   const m = await db.media.findUnique({ where: { id } });
   if (!m) return null;
   await db.media.delete({ where: { id } });
-  if (isBlobUrl(m.url)) await removeBlob(m.url);
+  if (isBlobUrl(m.url) || isCloudinaryUrl(m.url)) await removeBlob(m.url);
   else if (m.url.startsWith(MEDIA_LIB_PREFIX)) {
     const name = m.url.slice(MEDIA_LIB_PREFIX.length);
     if (MEDIA_FILE_NAME.test(name)) await unlink(path.join(MEDIA_DIR, name)).catch(() => {});

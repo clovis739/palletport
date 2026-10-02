@@ -57,10 +57,12 @@ export function SeoForm({ initial, host, aiAllowed }: { initial: SeoSettings; ho
           <Card>
             <FormSection title="Titles" description="Search engines show about 60 characters of a title.">
               <Text f={f} path="defaultTitle" label="Default title" max={70} ideal={[30, 60]} required hint="Used for the homepage tab and any page without its own title." />
-              <Text f={f} path="titleTemplate" label="Title template" max={60} required hint={<>Every other page: <code className="rounded bg-sand px-1">%s</code> is replaced by the page title, e.g. “%s · PalletPort”.</>} />
+              <Text f={f} path="titleTemplate" label="Title template" max={60} required hint={<>Every other page: <code className="rounded bg-sand px-1">%s</code> is replaced by the page title, e.g. “%s · Your business name”.</>} />
             </FormSection>
             <FormSection title="Description" description="The snippet under your title in search results. Aim for 120–160 characters.">
               <Text f={f} path="defaultDescription" label="Default description" rows={3} max={200} ideal={[120, 160]} />
+              <Text f={f} path="googleVerification" label="Google Search Console verification" placeholder="e.g. AbC123…" max={100} hint="In Search Console choose the “HTML tag” method and paste only the content value. Leave empty if you verify by DNS." />
+              <Text f={f} path="gaMeasurementId" label="Google Analytics Measurement ID" placeholder="G-AB12CD34EF" max={24} hint="In Google Analytics: Admin → Data streams → your web stream → Measurement ID. Leave empty to turn analytics off. Signed-in staff are never tracked." />
             </FormSection>
             <FormSection title="Social image" description="Shown when a link to your site is shared (Facebook, LinkedIn, WhatsApp, X). Best at 1200×630.">
               <MediaField f={f} path="ogImage" label="Default social image" hint="Leave empty to use the generated image with your logo." />

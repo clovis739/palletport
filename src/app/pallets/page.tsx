@@ -1,7 +1,7 @@
 import { LotBrowser, type SearchParams } from "@/components/browse/LotBrowser";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "Manifested liquidation pallets for resale",
   description:
     "Manifested liquidation pallets shipped by LTL freight — customer returns, shelf pulls and overstock by the single pallet or a few at a time.",

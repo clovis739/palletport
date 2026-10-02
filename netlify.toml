@@ -1,0 +1,11 @@
+# Netlify build settings for PalletPort (Next.js). Netlify detects Next.js and adds its Next.js runtime
+# automatically. Environment variables (DATABASE_URL, AUTH_SECRET, CLOUDINARY_URL, …) are set in
+# Netlify → Site configuration → Environment variables, never in this file.
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Don't let Netlify's default telemetry prompt or cache issues block the build.
+  NEXT_TELEMETRY_DISABLED = "1"

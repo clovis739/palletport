@@ -12,6 +12,7 @@ export const isExternalHref = (href: string) => /^(https?:|mailto:|tel:)/i.test(
 
 /** Link that uses next/link for internal paths and a plain <a> (new tab for http) for external ones. */
 export function SmartLink({ href, className, children, onClick }: { href: string; className?: string; children: React.ReactNode; onClick?: () => void }) {
+  if (href.split(/[?#]/)[0] === "/credits") return null;
   if (isExternalHref(href)) {
     const http = /^https?:/i.test(href);
     return (

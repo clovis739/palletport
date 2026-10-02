@@ -22,8 +22,11 @@ export async function signSession(payload: SessionPayload) {
 export async function verifySession(token: string | undefined): Promise<SessionPayload | null> {
   if (!token) return null;
   try {
-    const { payload } = await jwtVerify(token, key());
-    return payload as unknown as SessionPayload;
+    const { payload } = await jwtVerify(token, key(), { algorithms: ["HS256"] });
+    if (typeof payload.userId !== "string" || !payload.userId.trim() ||
+        typeof payload.role !== "string" || !payload.role.trim() ||
+        typeof payload.name !== "string" || typeof payload.exp !== "number") return null;
+    return { userId: payload.userId, role: payload.role, name: payload.name };
   } catch {
     return null;
   }

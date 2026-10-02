@@ -1,0 +1,4751 @@
+{
+  "analyzedImages": 2844,
+  "adjustedImages": 593,
+  "mode": "CSS display correction; original files and feed image URLs preserved",
+  "measurements": [
+    {
+      "src": "/images/products/72c6ac6f895fed51.webp",
+      "mean": 48,
+      "median": 43,
+      "highlights": 80,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/87bdb76ede4c9af2.webp",
+      "mean": 50,
+      "median": 39,
+      "highlights": 93,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/185331c450f2904a.webp",
+      "mean": 52,
+      "median": 26,
+      "highlights": 147,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6a37b9e68c4b8193.webp",
+      "mean": 52,
+      "median": 26,
+      "highlights": 147,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/0456a23e67766aaa.webp",
+      "mean": 60,
+      "median": 41,
+      "highlights": 122,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/d58c3003aaca0f1b.webp",
+      "mean": 60,
+      "median": 41,
+      "highlights": 122,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0456a23e67766aaa.webp",
+      "mean": 60,
+      "median": 41,
+      "highlights": 122,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/23fd9f4f67221053.webp",
+      "mean": 60,
+      "median": 41,
+      "highlights": 122,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/bab94eeca7f56efb.webp",
+      "mean": 61,
+      "median": 50,
+      "highlights": 124,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4a2e65cee19576c4.webp",
+      "mean": 61,
+      "median": 50,
+      "highlights": 124,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/38b1f9b68c063950.webp",
+      "mean": 64,
+      "median": 58,
+      "highlights": 115,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/01611ee266689c79.webp",
+      "mean": 64,
+      "median": 58,
+      "highlights": 114,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/dbcaa342b1367c18.webp",
+      "mean": 64,
+      "median": 58,
+      "highlights": 114,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/38b1f9b68c063950.webp",
+      "mean": 64,
+      "median": 58,
+      "highlights": 115,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/c6f5fc22a5f0a69a.webp",
+      "mean": 65,
+      "median": 43,
+      "highlights": 159,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/e212a33245c8509b.webp",
+      "mean": 65,
+      "median": 36,
+      "highlights": 172,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c3a832e8a6e587f2.webp",
+      "mean": 65,
+      "median": 57,
+      "highlights": 116,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e212a33245c8509b.webp",
+      "mean": 65,
+      "median": 36,
+      "highlights": 172,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c6f5fc22a5f0a69a.webp",
+      "mean": 65,
+      "median": 43,
+      "highlights": 159,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6691213814c5bc38.webp",
+      "mean": 66,
+      "median": 46,
+      "highlights": 181,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0a6965cedde3f0fb.webp",
+      "mean": 67,
+      "median": 60,
+      "highlights": 155,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/75e1997262c6994e.webp",
+      "mean": 67,
+      "median": 62,
+      "highlights": 125,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ce4eeba858bcc0be.webp",
+      "mean": 68,
+      "median": 48,
+      "highlights": 156,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0db4d3a117d5f4db.webp",
+      "mean": 68,
+      "median": 49,
+      "highlights": 153,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/clean-26f622b7c0ce76bd.webp",
+      "mean": 69,
+      "median": 73,
+      "highlights": 111,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/4356d461bcef3154.webp",
+      "mean": 69,
+      "median": 73,
+      "highlights": 111,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/fd6bb5cce285ab00.webp",
+      "mean": 69,
+      "median": 49,
+      "highlights": 145,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/71f3460a35865697.webp",
+      "mean": 69,
+      "median": 62,
+      "highlights": 117,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4356d461bcef3154.webp",
+      "mean": 69,
+      "median": 73,
+      "highlights": 111,
+      "brightness": 1.1,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/21fa88dc5dcbb316.webp",
+      "mean": 72,
+      "median": 53,
+      "highlights": 151,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a60a58435cfdaf29.webp",
+      "mean": 73,
+      "median": 67,
+      "highlights": 144,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/29b97d932acf7b63.webp",
+      "mean": 73,
+      "median": 67,
+      "highlights": 137,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/bfefe8871fe589e2.webp",
+      "mean": 74,
+      "median": 54,
+      "highlights": 165,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/16fdbc521ac925a6.webp",
+      "mean": 74,
+      "median": 61,
+      "highlights": 177,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4f5a09f5ff24e31d.webp",
+      "mean": 74,
+      "median": 46,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9a926bdbccc08e7f.webp",
+      "mean": 74,
+      "median": 46,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/111c239a701d7757.webp",
+      "mean": 74,
+      "median": 77,
+      "highlights": 124,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c7170be3e9e8cce6.webp",
+      "mean": 74,
+      "median": 76,
+      "highlights": 93,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/55e282f5644db6fe.webp",
+      "mean": 75,
+      "median": 78,
+      "highlights": 133,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/clean-6acb6eb58adf837a.webp",
+      "mean": 75,
+      "median": 78,
+      "highlights": 133,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/55e282f5644db6fe.webp",
+      "mean": 75,
+      "median": 78,
+      "highlights": 133,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2254159216657240.webp",
+      "mean": 76,
+      "median": 79,
+      "highlights": 123,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/03bc48fb85e3600c.webp",
+      "mean": 77,
+      "median": 69,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e016385cecc2b245.webp",
+      "mean": 77,
+      "median": 59,
+      "highlights": 154,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/3bcddd8becbbec0b.webp",
+      "mean": 77,
+      "median": 70,
+      "highlights": 121,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9f70735f523060ee.webp",
+      "mean": 77,
+      "median": 68,
+      "highlights": 160,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/990941d613182a54.webp",
+      "mean": 78,
+      "median": 71,
+      "highlights": 147,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f90300a5f587882d.webp",
+      "mean": 78,
+      "median": 68,
+      "highlights": 145,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/cdce1968143cb5d0.webp",
+      "mean": 78,
+      "median": 70,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/97f1a24574b8ee80.webp",
+      "mean": 78,
+      "median": 70,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5c90953367ddead9.webp",
+      "mean": 78,
+      "median": 70,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/990941d613182a54.webp",
+      "mean": 78,
+      "median": 71,
+      "highlights": 147,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c1f810aa005d59dc.webp",
+      "mean": 78,
+      "median": 70,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/14610527cb171793.webp",
+      "mean": 78,
+      "median": 70,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c6cc630f230fe8df.webp",
+      "mean": 78,
+      "median": 70,
+      "highlights": 142,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/62f66ed4fa762a7f.webp",
+      "mean": 79,
+      "median": 86,
+      "highlights": 126,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a8e0da2b7e027633.webp",
+      "mean": 79,
+      "median": 86,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8f01f5f587b84924.webp",
+      "mean": 79,
+      "median": 63,
+      "highlights": 152,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b6ba3fb6b2edfb6c.webp",
+      "mean": 79,
+      "median": 67,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a66eafab1984fc91.webp",
+      "mean": 79,
+      "median": 66,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/62f66ed4fa762a7f.webp",
+      "mean": 79,
+      "median": 86,
+      "highlights": 126,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/491e60160e86049f.webp",
+      "mean": 79,
+      "median": 62,
+      "highlights": 147,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/abd978ca2ac8043c.webp",
+      "mean": 79,
+      "median": 62,
+      "highlights": 147,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4e2f014084abfdff.webp",
+      "mean": 79,
+      "median": 62,
+      "highlights": 147,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a83455b6b9e6d948.webp",
+      "mean": 79,
+      "median": 62,
+      "highlights": 147,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/239848e72bfa3e34.webp",
+      "mean": 80,
+      "median": 55,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/d0c025fcdb612545.webp",
+      "mean": 80,
+      "median": 69,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2aa5ba525003fb3f.webp",
+      "mean": 80,
+      "median": 71,
+      "highlights": 142,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/239848e72bfa3e34.webp",
+      "mean": 80,
+      "median": 55,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d0c025fcdb612545.webp",
+      "mean": 80,
+      "median": 69,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/dcd9e15aa47ec631.webp",
+      "mean": 81,
+      "median": 66,
+      "highlights": 164,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5951fae6b269feb2.webp",
+      "mean": 81,
+      "median": 73,
+      "highlights": 164,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/dcd9e15aa47ec631.webp",
+      "mean": 81,
+      "median": 66,
+      "highlights": 164,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1a55013c2d473093.webp",
+      "mean": 81,
+      "median": 85,
+      "highlights": 140,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2701a341d1658a7a.webp",
+      "mean": 81,
+      "median": 75,
+      "highlights": 141,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/666ac11401dcce6d.webp",
+      "mean": 81,
+      "median": 73,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/feb86829fa1fab4c.webp",
+      "mean": 81,
+      "median": 60,
+      "highlights": 171,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e3c8093c554c7f5f.webp",
+      "mean": 81,
+      "median": 74,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/12db7d7753e1a2b7.webp",
+      "mean": 82,
+      "median": 69,
+      "highlights": 176,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/662f9fb80aa75447.webp",
+      "mean": 82,
+      "median": 70,
+      "highlights": 156,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2150b1bcd1a0bc83.webp",
+      "mean": 82,
+      "median": 70,
+      "highlights": 156,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4e795bdf34282cff.webp",
+      "mean": 82,
+      "median": 71,
+      "highlights": 162,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/0514b492b3d9c10c.webp",
+      "mean": 83,
+      "median": 77,
+      "highlights": 154,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/48aa64cab9e8515b.webp",
+      "mean": 83,
+      "median": 78,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/48aa64cab9e8515b.webp",
+      "mean": 83,
+      "median": 78,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0514b492b3d9c10c.webp",
+      "mean": 83,
+      "median": 77,
+      "highlights": 154,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/08ba28d82ed9744e.webp",
+      "mean": 83,
+      "median": 69,
+      "highlights": 163,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/022661bbbd835d2f.webp",
+      "mean": 84,
+      "median": 69,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/5bb872c384d7c234.webp",
+      "mean": 84,
+      "median": 71,
+      "highlights": 159,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/78811af1c87b33b7.webp",
+      "mean": 84,
+      "median": 80,
+      "highlights": 164,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/a17675ccce352f54.webp",
+      "mean": 84,
+      "median": 84,
+      "highlights": 126,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/aa76d4710971c9fb.webp",
+      "mean": 84,
+      "median": 64,
+      "highlights": 186,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/f65a7b066981a87c.webp",
+      "mean": 84,
+      "median": 63,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/a2f3aff6884b8ab1.webp",
+      "mean": 84,
+      "median": 80,
+      "highlights": 164,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9c38a5a93e552326.webp",
+      "mean": 84,
+      "median": 60,
+      "highlights": 177,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/59d03aa7eacf95f6.webp",
+      "mean": 84,
+      "median": 70,
+      "highlights": 167,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ac1ea8cb8b9053e3.webp",
+      "mean": 84,
+      "median": 76,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0657035b5be4a221.webp",
+      "mean": 84,
+      "median": 84,
+      "highlights": 126,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/78811af1c87b33b7.webp",
+      "mean": 84,
+      "median": 80,
+      "highlights": 164,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d8660d80f1fe1f2b.webp",
+      "mean": 84,
+      "median": 80,
+      "highlights": 164,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/022661bbbd835d2f.webp",
+      "mean": 84,
+      "median": 69,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8bd3ba0c71808afb.webp",
+      "mean": 84,
+      "median": 84,
+      "highlights": 126,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5bb872c384d7c234.webp",
+      "mean": 84,
+      "median": 71,
+      "highlights": 159,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/cf3ab5309d4b797a.webp",
+      "mean": 84,
+      "median": 69,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f65a7b066981a87c.webp",
+      "mean": 84,
+      "median": 63,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/aa76d4710971c9fb.webp",
+      "mean": 84,
+      "median": 64,
+      "highlights": 186,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b05d1460e4ba4ef3.webp",
+      "mean": 84,
+      "median": 84,
+      "highlights": 126,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a17675ccce352f54.webp",
+      "mean": 84,
+      "median": 84,
+      "highlights": 126,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/86f3fff2f53f0dcf.webp",
+      "mean": 85,
+      "median": 75,
+      "highlights": 162,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/62f9fc2aba08357e.webp",
+      "mean": 85,
+      "median": 75,
+      "highlights": 162,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/40d7371eb61d1ece.webp",
+      "mean": 85,
+      "median": 69,
+      "highlights": 192,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0f04fdbbef284764.webp",
+      "mean": 85,
+      "median": 79,
+      "highlights": 156,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8fd7ac25d9b06504.webp",
+      "mean": 85,
+      "median": 71,
+      "highlights": 160,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d687d30e52473986.webp",
+      "mean": 85,
+      "median": 69,
+      "highlights": 152,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8e490395f7abef52.webp",
+      "mean": 85,
+      "median": 81,
+      "highlights": 185,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e0e55969a7e80d82.webp",
+      "mean": 85,
+      "median": 75,
+      "highlights": 162,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/86f3fff2f53f0dcf.webp",
+      "mean": 85,
+      "median": 75,
+      "highlights": 162,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b048df8f0886d830.webp",
+      "mean": 85,
+      "median": 76,
+      "highlights": 163,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/f9819b2994f6747e.webp",
+      "mean": 86,
+      "median": 72,
+      "highlights": 179,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/62138d20f9cbb0df.webp",
+      "mean": 86,
+      "median": 81,
+      "highlights": 124,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8bffa8974d2c4f7f.webp",
+      "mean": 86,
+      "median": 72,
+      "highlights": 169,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a4c4fe9302e99202.webp",
+      "mean": 86,
+      "median": 77,
+      "highlights": 134,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/bfe209ca1760457e.webp",
+      "mean": 86,
+      "median": 70,
+      "highlights": 150,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/81c225da9a4c86e4.webp",
+      "mean": 86,
+      "median": 73,
+      "highlights": 185,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/aee76111c2bb8b4e.webp",
+      "mean": 86,
+      "median": 75,
+      "highlights": 159,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9af5ae6083c40338.webp",
+      "mean": 86,
+      "median": 78,
+      "highlights": 145,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/29697458014af299.webp",
+      "mean": 86,
+      "median": 80,
+      "highlights": 142,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f9819b2994f6747e.webp",
+      "mean": 86,
+      "median": 72,
+      "highlights": 179,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ac3186244cfcb1ac.webp",
+      "mean": 86,
+      "median": 75,
+      "highlights": 159,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f4ada571b79d804d.webp",
+      "mean": 86,
+      "median": 75,
+      "highlights": 159,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5693c011ab77b010.webp",
+      "mean": 86,
+      "median": 82,
+      "highlights": 152,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/69eb22d3e06601a1.webp",
+      "mean": 86,
+      "median": 82,
+      "highlights": 152,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2cf457fd670dfe3a.webp",
+      "mean": 86,
+      "median": 84,
+      "highlights": 152,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/3d82c51315c6416d.webp",
+      "mean": 87,
+      "median": 78,
+      "highlights": 157,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/534df3c35197adc8.webp",
+      "mean": 87,
+      "median": 90,
+      "highlights": 162,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/500377f4fb495a8e.webp",
+      "mean": 87,
+      "median": 90,
+      "highlights": 128,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6626dfa27fdbda29.webp",
+      "mean": 87,
+      "median": 92,
+      "highlights": 130,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/591e4a305357f0cf.webp",
+      "mean": 87,
+      "median": 73,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/534df3c35197adc8.webp",
+      "mean": 87,
+      "median": 90,
+      "highlights": 162,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/41bb4a0f39fa6fc7.webp",
+      "mean": 87,
+      "median": 92,
+      "highlights": 152,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/044f0dcdaee4774c.webp",
+      "mean": 87,
+      "median": 84,
+      "highlights": 168,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/3d82c51315c6416d.webp",
+      "mean": 87,
+      "median": 78,
+      "highlights": 157,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/40575a397695db53.webp",
+      "mean": 87,
+      "median": 92,
+      "highlights": 130,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/14a37cb16fc3206c.webp",
+      "mean": 87,
+      "median": 80,
+      "highlights": 110,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b9b07071bf968bcb.webp",
+      "mean": 87,
+      "median": 66,
+      "highlights": 194,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/2e295fe0141a099f.webp",
+      "mean": 88,
+      "median": 82,
+      "highlights": 158,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f8e87a5d16db05c3.webp",
+      "mean": 88,
+      "median": 90,
+      "highlights": 141,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2ed07f7da3557095.webp",
+      "mean": 88,
+      "median": 79,
+      "highlights": 156,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2e295fe0141a099f.webp",
+      "mean": 88,
+      "median": 82,
+      "highlights": 158,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e429b6eb3293f014.webp",
+      "mean": 88,
+      "median": 82,
+      "highlights": 158,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/3de013e334b32aa5.webp",
+      "mean": 88,
+      "median": 63,
+      "highlights": 199,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1495dd756259ed67.webp",
+      "mean": 88,
+      "median": 81,
+      "highlights": 146,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/1e87f110e2a81aa7.webp",
+      "mean": 89,
+      "median": 71,
+      "highlights": 185,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/09099e16272b55ce.webp",
+      "mean": 89,
+      "median": 89,
+      "highlights": 138,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/4bfd174beb378c69.webp",
+      "mean": 89,
+      "median": 69,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/8f375963ad4a4db5.webp",
+      "mean": 89,
+      "median": 93,
+      "highlights": 135,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/bd5a86ce3b34af5a.webp",
+      "mean": 89,
+      "median": 83,
+      "highlights": 156,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8c2b35664d0b3625.webp",
+      "mean": 89,
+      "median": 94,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/bd5a86ce3b34af5a.webp",
+      "mean": 89,
+      "median": 83,
+      "highlights": 156,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/41b343aa1b3eea7b.webp",
+      "mean": 89,
+      "median": 88,
+      "highlights": 150,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2251730c025d822b.webp",
+      "mean": 89,
+      "median": 83,
+      "highlights": 141,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/894197d0a0ddc02e.webp",
+      "mean": 89,
+      "median": 84,
+      "highlights": 158,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5ecc4009a46df5f2.webp",
+      "mean": 89,
+      "median": 93,
+      "highlights": 135,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8f375963ad4a4db5.webp",
+      "mean": 89,
+      "median": 93,
+      "highlights": 135,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4153a74b9ffbf078.webp",
+      "mean": 89,
+      "median": 83,
+      "highlights": 156,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/aad3aad5fad44bcc.webp",
+      "mean": 89,
+      "median": 84,
+      "highlights": 158,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4bfd174beb378c69.webp",
+      "mean": 89,
+      "median": 69,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/09099e16272b55ce.webp",
+      "mean": 89,
+      "median": 89,
+      "highlights": 138,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/648e05cb4063ec20.webp",
+      "mean": 89,
+      "median": 69,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/4005ec1b99df3ec4.webp",
+      "mean": 90,
+      "median": 93,
+      "highlights": 154,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/a25c3cffaab16a80.webp",
+      "mean": 90,
+      "median": 74,
+      "highlights": 184,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/d3a96e836a1c90b3.webp",
+      "mean": 90,
+      "median": 77,
+      "highlights": 167,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/f5b9e0bbe826c9b5.webp",
+      "mean": 90,
+      "median": 74,
+      "highlights": 184,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/193106beae6ff964.webp",
+      "mean": 90,
+      "median": 74,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6c369ef17ff303f3.webp",
+      "mean": 90,
+      "median": 85,
+      "highlights": 157,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4005ec1b99df3ec4.webp",
+      "mean": 90,
+      "median": 93,
+      "highlights": 154,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8cd9e5546599f0c1.webp",
+      "mean": 90,
+      "median": 92,
+      "highlights": 150,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1780392576d2774c.webp",
+      "mean": 90,
+      "median": 81,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4caf5c18dc9e9979.webp",
+      "mean": 90,
+      "median": 74,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a25c3cffaab16a80.webp",
+      "mean": 90,
+      "median": 74,
+      "highlights": 184,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8e270f582565d440.webp",
+      "mean": 90,
+      "median": 78,
+      "highlights": 191,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d3a96e836a1c90b3.webp",
+      "mean": 90,
+      "median": 77,
+      "highlights": 167,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/35e05b7acbf74462.webp",
+      "mean": 90,
+      "median": 77,
+      "highlights": 167,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6c7821990007b71f.webp",
+      "mean": 90,
+      "median": 78,
+      "highlights": 169,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/960a5a4db0b48fc0.webp",
+      "mean": 90,
+      "median": 74,
+      "highlights": 184,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9ce1337286f6566f.webp",
+      "mean": 90,
+      "median": 79,
+      "highlights": 164,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/1569af7d8b609c15.webp",
+      "mean": 91,
+      "median": 85,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/44ac161a5d2bfd0f.webp",
+      "mean": 91,
+      "median": 83,
+      "highlights": 139,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/43e3f7dddc0709f6.webp",
+      "mean": 91,
+      "median": 86,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/e6729e8e893ae0c0.webp",
+      "mean": 91,
+      "median": 86,
+      "highlights": 153,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/e60e616f64ac915a.webp",
+      "mean": 91,
+      "median": 85,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/43e3f7dddc0709f6.webp",
+      "mean": 91,
+      "median": 86,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c76eeee24a235053.webp",
+      "mean": 91,
+      "median": 81,
+      "highlights": 169,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/05613f52db7b6909.webp",
+      "mean": 91,
+      "median": 76,
+      "highlights": 189,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/73f24f82fb0a9791.webp",
+      "mean": 91,
+      "median": 76,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/84c3b6a7888acb1f.webp",
+      "mean": 91,
+      "median": 88,
+      "highlights": 145,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/90af319393a9eb4a.webp",
+      "mean": 91,
+      "median": 90,
+      "highlights": 149,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/44ac161a5d2bfd0f.webp",
+      "mean": 91,
+      "median": 83,
+      "highlights": 139,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1569af7d8b609c15.webp",
+      "mean": 91,
+      "median": 85,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e6729e8e893ae0c0.webp",
+      "mean": 91,
+      "median": 86,
+      "highlights": 153,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d8c6d45f78b5c396.webp",
+      "mean": 91,
+      "median": 83,
+      "highlights": 139,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/44e7f35a4d6331c9.webp",
+      "mean": 91,
+      "median": 85,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9039cf99e967a2f2.webp",
+      "mean": 91,
+      "median": 90,
+      "highlights": 142,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f7d1af1a8b0f48c2.webp",
+      "mean": 91,
+      "median": 84,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/7070223dbc13b4ce.webp",
+      "mean": 92,
+      "median": 76,
+      "highlights": 185,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/56ab9e56db479f91.webp",
+      "mean": 92,
+      "median": 91,
+      "highlights": 167,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2fc197d8e5c63fea.webp",
+      "mean": 92,
+      "median": 86,
+      "highlights": 176,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/37688e535444ff6c.webp",
+      "mean": 92,
+      "median": 86,
+      "highlights": 151,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c1aa1f2ee4feea3b.webp",
+      "mean": 92,
+      "median": 67,
+      "highlights": 200,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0bca583b7f30bd41.webp",
+      "mean": 92,
+      "median": 81,
+      "highlights": 187,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6075d8ec50bf61b6.webp",
+      "mean": 92,
+      "median": 88,
+      "highlights": 163,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7504da8394e1f47f.webp",
+      "mean": 92,
+      "median": 88,
+      "highlights": 163,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7070223dbc13b4ce.webp",
+      "mean": 92,
+      "median": 76,
+      "highlights": 185,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0ae147972735f83f.webp",
+      "mean": 92,
+      "median": 90,
+      "highlights": 168,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ec5e259fcbea4543.webp",
+      "mean": 92,
+      "median": 90,
+      "highlights": 168,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/741e42f25eec821c.webp",
+      "mean": 93,
+      "median": 60,
+      "highlights": 206,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/86e407d0f11d5752.webp",
+      "mean": 93,
+      "median": 72,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9cedcaf2f127a85f.webp",
+      "mean": 93,
+      "median": 68,
+      "highlights": 202,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1d166dd28aa913c1.webp",
+      "mean": 93,
+      "median": 90,
+      "highlights": 157,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1ba85352a23f20a9.webp",
+      "mean": 93,
+      "median": 90,
+      "highlights": 157,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/82275077137b0751.webp",
+      "mean": 93,
+      "median": 83,
+      "highlights": 178,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/244bb49d17c47ad1.webp",
+      "mean": 93,
+      "median": 87,
+      "highlights": 150,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e8abb43940d394a3.webp",
+      "mean": 93,
+      "median": 73,
+      "highlights": 197,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/835eed6cd6e7e39e.webp",
+      "mean": 94,
+      "median": 86,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/a002ca3eaad8558d.webp",
+      "mean": 94,
+      "median": 93,
+      "highlights": 146,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/a36fe592b9d33ea5.webp",
+      "mean": 94,
+      "median": 85,
+      "highlights": 177,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/103f996f854a8fca.webp",
+      "mean": 94,
+      "median": 86,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a002ca3eaad8558d.webp",
+      "mean": 94,
+      "median": 93,
+      "highlights": 146,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/fd8d4f28af7db916.webp",
+      "mean": 94,
+      "median": 97,
+      "highlights": 157,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d0812a9c5c2e487b.webp",
+      "mean": 94,
+      "median": 99,
+      "highlights": 145,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1c2a1eb700f06c30.webp",
+      "mean": 94,
+      "median": 92,
+      "highlights": 134,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/53f338e62b125847.webp",
+      "mean": 94,
+      "median": 97,
+      "highlights": 151,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0055718754ed38eb.webp",
+      "mean": 94,
+      "median": 97,
+      "highlights": 159,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2398e194dc89c7ac.webp",
+      "mean": 94,
+      "median": 81,
+      "highlights": 169,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7eb793ae7fd6e495.webp",
+      "mean": 94,
+      "median": 91,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a36fe592b9d33ea5.webp",
+      "mean": 94,
+      "median": 85,
+      "highlights": 177,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b9fa271e6ecd5c0b.webp",
+      "mean": 94,
+      "median": 83,
+      "highlights": 192,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/835eed6cd6e7e39e.webp",
+      "mean": 94,
+      "median": 86,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d637c4a278ce2277.webp",
+      "mean": 94,
+      "median": 96,
+      "highlights": 157,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/88fa9c4e2177d7a5.webp",
+      "mean": 94,
+      "median": 90,
+      "highlights": 167,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/92f02bc3396d5130.webp",
+      "mean": 94,
+      "median": 93,
+      "highlights": 146,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9123695759379292.webp",
+      "mean": 94,
+      "median": 86,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/694531248c66f855.webp",
+      "mean": 94,
+      "median": 86,
+      "highlights": 160,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7ab38d8cc290c120.webp",
+      "mean": 94,
+      "median": 88,
+      "highlights": 189,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/c26d6c8500754f31.webp",
+      "mean": 95,
+      "median": 82,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/f6f48710cb1cf393.webp",
+      "mean": 95,
+      "median": 91,
+      "highlights": 161,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/f7c9cc0a57147b61.webp",
+      "mean": 95,
+      "median": 93,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c98df525e3e7424d.webp",
+      "mean": 95,
+      "median": 78,
+      "highlights": 186,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a9127225ce98574c.webp",
+      "mean": 95,
+      "median": 75,
+      "highlights": 184,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4302b3fd2339378a.webp",
+      "mean": 95,
+      "median": 87,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e37aa9a1522cb49e.webp",
+      "mean": 95,
+      "median": 83,
+      "highlights": 193,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/422c6437489787e2.webp",
+      "mean": 95,
+      "median": 87,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8786e26280ac4e03.webp",
+      "mean": 95,
+      "median": 84,
+      "highlights": 176,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c26d6c8500754f31.webp",
+      "mean": 95,
+      "median": 82,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/dcf3e6e446d4e2ff.webp",
+      "mean": 95,
+      "median": 90,
+      "highlights": 152,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/bcfdd4c89dc660a4.webp",
+      "mean": 95,
+      "median": 93,
+      "highlights": 182,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f6f48710cb1cf393.webp",
+      "mean": 95,
+      "median": 91,
+      "highlights": 161,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f7c9cc0a57147b61.webp",
+      "mean": 95,
+      "median": 93,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ce22de28c39cf9a3.webp",
+      "mean": 95,
+      "median": 93,
+      "highlights": 182,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/926fd0d740bfe2e3.webp",
+      "mean": 95,
+      "median": 79,
+      "highlights": 195,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6ec7604a37c02fe2.webp",
+      "mean": 95,
+      "median": 93,
+      "highlights": 159,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5bdc61aec8f56154.webp",
+      "mean": 95,
+      "median": 67,
+      "highlights": 206,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a55c8cdc9b6d4501.webp",
+      "mean": 95,
+      "median": 89,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/3c8b1059f4cf7cc6.webp",
+      "mean": 96,
+      "median": 93,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/899a0a0b2987067e.webp",
+      "mean": 96,
+      "median": 85,
+      "highlights": 176,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/f391e7f3a6bdf1fb.webp",
+      "mean": 96,
+      "median": 94,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/df90be146dde014e.webp",
+      "mean": 96,
+      "median": 94,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/899a0a0b2987067e.webp",
+      "mean": 96,
+      "median": 85,
+      "highlights": 176,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a1fe0381361adee9.webp",
+      "mean": 96,
+      "median": 84,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/12e7dd70583700aa.webp",
+      "mean": 96,
+      "median": 100,
+      "highlights": 167,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a2456b2adeb15d4a.webp",
+      "mean": 96,
+      "median": 81,
+      "highlights": 168,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d1fd22db007158b1.webp",
+      "mean": 96,
+      "median": 95,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/89855ab800765f55.webp",
+      "mean": 96,
+      "median": 91,
+      "highlights": 179,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7e052aab655d4257.webp",
+      "mean": 96,
+      "median": 86,
+      "highlights": 179,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/81cd28911a8c56d4.webp",
+      "mean": 96,
+      "median": 89,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6865586cb5dd30c9.webp",
+      "mean": 96,
+      "median": 97,
+      "highlights": 158,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/df08238be5c19bc2.webp",
+      "mean": 96,
+      "median": 93,
+      "highlights": 160,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c43aceb9cce20e58.webp",
+      "mean": 96,
+      "median": 88,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d59629cd42067e67.webp",
+      "mean": 96,
+      "median": 76,
+      "highlights": 204,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f391e7f3a6bdf1fb.webp",
+      "mean": 96,
+      "median": 94,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/cf435c5791b31754.webp",
+      "mean": 96,
+      "median": 92,
+      "highlights": 176,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2661790c7e1137d4.webp",
+      "mean": 96,
+      "median": 88,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/fe6737230ec08df2.webp",
+      "mean": 96,
+      "median": 95,
+      "highlights": 147,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/73af9662c8f23639.webp",
+      "mean": 96,
+      "median": 87,
+      "highlights": 169,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a5b5c1ede195e6b6.webp",
+      "mean": 96,
+      "median": 93,
+      "highlights": 147,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0ffff85d90621e65.webp",
+      "mean": 96,
+      "median": 88,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7f132c576881d718.webp",
+      "mean": 96,
+      "median": 90,
+      "highlights": 165,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/254ce34f2b2facc0.webp",
+      "mean": 96,
+      "median": 92,
+      "highlights": 176,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/3c8b1059f4cf7cc6.webp",
+      "mean": 96,
+      "median": 93,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0c6cd82e42db4208.webp",
+      "mean": 96,
+      "median": 94,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/faf29e999a2c4484.webp",
+      "mean": 96,
+      "median": 84,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/818d51971dcb2b9a.webp",
+      "mean": 96,
+      "median": 79,
+      "highlights": 200,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/bb15282819c26333.webp",
+      "mean": 96,
+      "median": 97,
+      "highlights": 163,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/131d5e97e36cca2d.webp",
+      "mean": 97,
+      "median": 98,
+      "highlights": 165,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/2a5fefb323e88da6.webp",
+      "mean": 97,
+      "median": 103,
+      "highlights": 189,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/4ddeff599f185307.webp",
+      "mean": 97,
+      "median": 84,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/66f5e446ae6a0e65.webp",
+      "mean": 97,
+      "median": 93,
+      "highlights": 178,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/74d5de0272f93df7.webp",
+      "mean": 97,
+      "median": 73,
+      "highlights": 204,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/02a20e032fc0b259.webp",
+      "mean": 97,
+      "median": 89,
+      "highlights": 159,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/f5c569eba8e0a24c.webp",
+      "mean": 97,
+      "median": 103,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/66c08aae988f1968.webp",
+      "mean": 97,
+      "median": 87,
+      "highlights": 201,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/66f5e446ae6a0e65.webp",
+      "mean": 97,
+      "median": 93,
+      "highlights": 178,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/dcf9835af498e936.webp",
+      "mean": 97,
+      "median": 104,
+      "highlights": 168,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1c5079e637ed9f5f.webp",
+      "mean": 97,
+      "median": 89,
+      "highlights": 183,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/12df570cb1f9fed8.webp",
+      "mean": 97,
+      "median": 87,
+      "highlights": 184,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ca4056ebab321268.webp",
+      "mean": 97,
+      "median": 76,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/da2fec98571b8f2f.webp",
+      "mean": 97,
+      "median": 99,
+      "highlights": 169,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4d883128bfa9de76.webp",
+      "mean": 97,
+      "median": 88,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/bfb62cdbd8963d39.webp",
+      "mean": 97,
+      "median": 100,
+      "highlights": 164,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/bcca67288999f0f7.webp",
+      "mean": 97,
+      "median": 86,
+      "highlights": 196,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b230715d048ef7a0.webp",
+      "mean": 97,
+      "median": 83,
+      "highlights": 197,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/58c40df0f516a802.webp",
+      "mean": 97,
+      "median": 91,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c3646dbc6c0b0d29.webp",
+      "mean": 97,
+      "median": 90,
+      "highlights": 191,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ca40d3cb877f616c.webp",
+      "mean": 97,
+      "median": 68,
+      "highlights": 207,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/131d5e97e36cca2d.webp",
+      "mean": 97,
+      "median": 98,
+      "highlights": 165,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f4ea82f68f7aaa5d.webp",
+      "mean": 97,
+      "median": 74,
+      "highlights": 196,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/646082f5325236e7.webp",
+      "mean": 97,
+      "median": 93,
+      "highlights": 178,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2a5fefb323e88da6.webp",
+      "mean": 97,
+      "median": 103,
+      "highlights": 189,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/fbcde7f19579bc26.webp",
+      "mean": 97,
+      "median": 90,
+      "highlights": 177,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b1d6d1c5b02c0317.webp",
+      "mean": 97,
+      "median": 93,
+      "highlights": 163,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8485c7d57bcd5997.webp",
+      "mean": 97,
+      "median": 91,
+      "highlights": 177,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/74d5de0272f93df7.webp",
+      "mean": 97,
+      "median": 73,
+      "highlights": 204,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5c3b11fd9653b817.webp",
+      "mean": 97,
+      "median": 80,
+      "highlights": 179,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5cfb3be787064216.webp",
+      "mean": 97,
+      "median": 92,
+      "highlights": 163,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4ddeff599f185307.webp",
+      "mean": 97,
+      "median": 84,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/91f57eec1da3e5a0.webp",
+      "mean": 97,
+      "median": 90,
+      "highlights": 159,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/49592fac430a8cbb.webp",
+      "mean": 97,
+      "median": 73,
+      "highlights": 195,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0f953ee882dd5c2d.webp",
+      "mean": 97,
+      "median": 98,
+      "highlights": 165,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9507baee10622e52.webp",
+      "mean": 97,
+      "median": 103,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e7651919caa5f581.webp",
+      "mean": 97,
+      "median": 95,
+      "highlights": 129,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6a0bfb1195f30c49.webp",
+      "mean": 97,
+      "median": 87,
+      "highlights": 196,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d08b4734560f5c7f.webp",
+      "mean": 97,
+      "median": 97,
+      "highlights": 170,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/8080c60e2264ff08.webp",
+      "mean": 98,
+      "median": 96,
+      "highlights": 167,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/ba0f6533bd82d45c.webp",
+      "mean": 98,
+      "median": 85,
+      "highlights": 202,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/ee5187d4a5c5ba50.webp",
+      "mean": 98,
+      "median": 95,
+      "highlights": 187,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/83f78e54e15ff9fe.webp",
+      "mean": 98,
+      "median": 85,
+      "highlights": 202,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/3383eff606c8ffe5.webp",
+      "mean": 98,
+      "median": 94,
+      "highlights": 160,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8080c60e2264ff08.webp",
+      "mean": 98,
+      "median": 96,
+      "highlights": 167,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/453abf13345b1eb2.webp",
+      "mean": 98,
+      "median": 76,
+      "highlights": 193,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2b18fe6c02a20fd6.webp",
+      "mean": 98,
+      "median": 91,
+      "highlights": 154,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d96f9ded5135f763.webp",
+      "mean": 98,
+      "median": 95,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f6a0cc77997f17f8.webp",
+      "mean": 98,
+      "median": 94,
+      "highlights": 171,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5174ac28f3b43d6a.webp",
+      "mean": 98,
+      "median": 93,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ee5187d4a5c5ba50.webp",
+      "mean": 98,
+      "median": 95,
+      "highlights": 187,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7b4c151ab29acd51.webp",
+      "mean": 98,
+      "median": 94,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5f5c24ed5a1a213e.webp",
+      "mean": 98,
+      "median": 85,
+      "highlights": 202,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ba0f6533bd82d45c.webp",
+      "mean": 98,
+      "median": 85,
+      "highlights": 202,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9f9750d5de509abb.webp",
+      "mean": 98,
+      "median": 76,
+      "highlights": 193,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/3213afcdc2292efa.webp",
+      "mean": 98,
+      "median": 63,
+      "highlights": 199,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/010dd79f204c19c8.webp",
+      "mean": 98,
+      "median": 93,
+      "highlights": 183,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c944951ba2233ab5.webp",
+      "mean": 98,
+      "median": 94,
+      "highlights": 160,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8b7b094e31852e73.webp",
+      "mean": 98,
+      "median": 76,
+      "highlights": 193,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/27c42491e06ebd99.webp",
+      "mean": 98,
+      "median": 94,
+      "highlights": 160,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f9d2df6173ebb5ed.webp",
+      "mean": 98,
+      "median": 94,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f555a32e44f2f2a5.webp",
+      "mean": 98,
+      "median": 93,
+      "highlights": 183,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/fdda3d542bc68568.webp",
+      "mean": 98,
+      "median": 94,
+      "highlights": 160,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/dcf95754d90940a4.webp",
+      "mean": 98,
+      "median": 76,
+      "highlights": 193,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2e5bcd1634bddbeb.webp",
+      "mean": 98,
+      "median": 76,
+      "highlights": 193,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a2f115375a7c45d6.webp",
+      "mean": 98,
+      "median": 76,
+      "highlights": 193,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b89de0a932404601.webp",
+      "mean": 98,
+      "median": 96,
+      "highlights": 166,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d71290b6dfddc17a.webp",
+      "mean": 98,
+      "median": 109,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9a9b9e3d342a6629.webp",
+      "mean": 98,
+      "median": 92,
+      "highlights": 164,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7737cb3853b4a551.webp",
+      "mean": 98,
+      "median": 89,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/05cb52a67939e51a.webp",
+      "mean": 98,
+      "median": 93,
+      "highlights": 130,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1f66e5c66ffb6b9e.webp",
+      "mean": 98,
+      "median": 95,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/42aa886c2d459b75.webp",
+      "mean": 99,
+      "median": 92,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/6f7648b35df7106e.webp",
+      "mean": 99,
+      "median": 77,
+      "highlights": 203,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/b6b27fb04b74bc73.webp",
+      "mean": 99,
+      "median": 91,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1123f9bd2af3cd54.webp",
+      "mean": 99,
+      "median": 94,
+      "highlights": 185,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/bd0004ca8b1e0b85.webp",
+      "mean": 99,
+      "median": 101,
+      "highlights": 154,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/84c8413f53bc1c09.webp",
+      "mean": 99,
+      "median": 71,
+      "highlights": 206,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/232dd5a36457df9b.webp",
+      "mean": 99,
+      "median": 90,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/051669810825150d.webp",
+      "mean": 99,
+      "median": 92,
+      "highlights": 169,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2e100e0c76f491a4.webp",
+      "mean": 99,
+      "median": 91,
+      "highlights": 186,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/17c5cd08f159fa32.webp",
+      "mean": 99,
+      "median": 81,
+      "highlights": 205,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2648842f2aa53fc1.webp",
+      "mean": 99,
+      "median": 97,
+      "highlights": 171,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2dbf2d9a91e78bb2.webp",
+      "mean": 99,
+      "median": 89,
+      "highlights": 191,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e7de3daa6a02a7bb.webp",
+      "mean": 99,
+      "median": 86,
+      "highlights": 185,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/340790a8f8105638.webp",
+      "mean": 99,
+      "median": 97,
+      "highlights": 169,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6a634c452d8eab49.webp",
+      "mean": 99,
+      "median": 92,
+      "highlights": 187,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6f7648b35df7106e.webp",
+      "mean": 99,
+      "median": 77,
+      "highlights": 203,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a76c83c0ed5c008c.webp",
+      "mean": 99,
+      "median": 77,
+      "highlights": 203,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/af8ff757fd9a1887.webp",
+      "mean": 99,
+      "median": 98,
+      "highlights": 159,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/42aa886c2d459b75.webp",
+      "mean": 99,
+      "median": 92,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b6b27fb04b74bc73.webp",
+      "mean": 99,
+      "median": 91,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/df4559791f1b91bd.webp",
+      "mean": 99,
+      "median": 87,
+      "highlights": 185,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/cb4e4f7864fc8d56.webp",
+      "mean": 99,
+      "median": 97,
+      "highlights": 157,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7004cfc27040eb62.webp",
+      "mean": 99,
+      "median": 89,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/df01d74714588c54.webp",
+      "mean": 99,
+      "median": 79,
+      "highlights": 196,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b1211cdd40dba4ee.webp",
+      "mean": 99,
+      "median": 94,
+      "highlights": 161,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0ef51ad42da8d8dd.webp",
+      "mean": 99,
+      "median": 101,
+      "highlights": 154,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/48ee1e5b6ae937ed.webp",
+      "mean": 99,
+      "median": 97,
+      "highlights": 171,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0d6498de59df6118.webp",
+      "mean": 99,
+      "median": 101,
+      "highlights": 154,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a7913e23a8252289.webp",
+      "mean": 99,
+      "median": 97,
+      "highlights": 171,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c7ac3691422d05ed.webp",
+      "mean": 99,
+      "median": 90,
+      "highlights": 187,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9407d01650a604d8.webp",
+      "mean": 99,
+      "median": 94,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b805ade65c0077a5.webp",
+      "mean": 99,
+      "median": 91,
+      "highlights": 162,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/63ddffbbd6f9e4a2.webp",
+      "mean": 99,
+      "median": 98,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ebfeb6b6f30ef85f.webp",
+      "mean": 99,
+      "median": 98,
+      "highlights": 159,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/76793d65c268b769.webp",
+      "mean": 99,
+      "median": 92,
+      "highlights": 187,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/898ce857847c893b.webp",
+      "mean": 99,
+      "median": 85,
+      "highlights": 183,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2b8ad1e2c3e563c0.webp",
+      "mean": 99,
+      "median": 83,
+      "highlights": 201,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/048541fdb3ae43af.webp",
+      "mean": 100,
+      "median": 94,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/2ba405cfbae2f623.webp",
+      "mean": 100,
+      "median": 88,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/643e4e6d5c69cf6e.webp",
+      "mean": 100,
+      "median": 96,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/8b92d4fb697c291a.webp",
+      "mean": 100,
+      "median": 89,
+      "highlights": 200,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/8d9577a738f4f347.webp",
+      "mean": 100,
+      "median": 98,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/a3371967cdfc9f7d.webp",
+      "mean": 100,
+      "median": 92,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/a49db87a70d61dcb.webp",
+      "mean": 100,
+      "median": 98,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/b90ffb31e1ba4ad0.webp",
+      "mean": 100,
+      "median": 96,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/e2122f15c4434ef7.webp",
+      "mean": 100,
+      "median": 102,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/623c5a3262c06233.webp",
+      "mean": 100,
+      "median": 90,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d85a54f591f315a6.webp",
+      "mean": 100,
+      "median": 86,
+      "highlights": 183,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7519b9aeca48b44b.webp",
+      "mean": 100,
+      "median": 103,
+      "highlights": 166,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/211f0080693807db.webp",
+      "mean": 100,
+      "median": 101,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1d84b51a52048a14.webp",
+      "mean": 100,
+      "median": 90,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/719318577f82da9d.webp",
+      "mean": 100,
+      "median": 93,
+      "highlights": 193,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/cbab93cdccb6797b.webp",
+      "mean": 100,
+      "median": 85,
+      "highlights": 202,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/fe179d489bac360e.webp",
+      "mean": 100,
+      "median": 88,
+      "highlights": 163,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/292789cbb3559a7d.webp",
+      "mean": 100,
+      "median": 106,
+      "highlights": 190,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8b92d4fb697c291a.webp",
+      "mean": 100,
+      "median": 89,
+      "highlights": 200,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8d9577a738f4f347.webp",
+      "mean": 100,
+      "median": 98,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/643e4e6d5c69cf6e.webp",
+      "mean": 100,
+      "median": 96,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c21f5f390829ca52.webp",
+      "mean": 100,
+      "median": 96,
+      "highlights": 170,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b76d2885187ecdc7.webp",
+      "mean": 100,
+      "median": 96,
+      "highlights": 152,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/96d98c6124e8d8cd.webp",
+      "mean": 100,
+      "median": 99,
+      "highlights": 151,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2ba405cfbae2f623.webp",
+      "mean": 100,
+      "median": 88,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b90ffb31e1ba4ad0.webp",
+      "mean": 100,
+      "median": 96,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/048541fdb3ae43af.webp",
+      "mean": 100,
+      "median": 94,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/aad2dd5600086e92.webp",
+      "mean": 100,
+      "median": 96,
+      "highlights": 152,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9e12fa1cfd4bc5e2.webp",
+      "mean": 100,
+      "median": 99,
+      "highlights": 151,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a3371967cdfc9f7d.webp",
+      "mean": 100,
+      "median": 92,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a49db87a70d61dcb.webp",
+      "mean": 100,
+      "median": 98,
+      "highlights": 148,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ec72c081bdeb303c.webp",
+      "mean": 100,
+      "median": 96,
+      "highlights": 152,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/beeca458f3511650.webp",
+      "mean": 100,
+      "median": 99,
+      "highlights": 151,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e2122f15c4434ef7.webp",
+      "mean": 100,
+      "median": 102,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b4de153f94a9576a.webp",
+      "mean": 100,
+      "median": 99,
+      "highlights": 170,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/aa458c6c578813f4.webp",
+      "mean": 100,
+      "median": 92,
+      "highlights": 184,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/95b066e6e39d3fef.webp",
+      "mean": 100,
+      "median": 92,
+      "highlights": 184,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/0bbd37b9d0dfeb60.webp",
+      "mean": 101,
+      "median": 98,
+      "highlights": 190,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/704e572bdb538fb4.webp",
+      "mean": 101,
+      "median": 97,
+      "highlights": 177,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/a87b33f1a7b60ea2.webp",
+      "mean": 101,
+      "median": 92,
+      "highlights": 182,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/0e54d7bce0563395.webp",
+      "mean": 101,
+      "median": 98,
+      "highlights": 190,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/704e572bdb538fb4.webp",
+      "mean": 101,
+      "median": 97,
+      "highlights": 177,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/47521fe834d96f4c.webp",
+      "mean": 101,
+      "median": 84,
+      "highlights": 202,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/13a80fa45c918882.webp",
+      "mean": 101,
+      "median": 90,
+      "highlights": 186,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c8965a60f61c74b3.webp",
+      "mean": 101,
+      "median": 95,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/10ca793aac515311.webp",
+      "mean": 101,
+      "median": 109,
+      "highlights": 156,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/581f42afd00d950d.webp",
+      "mean": 101,
+      "median": 95,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c479ba2ec119c03f.webp",
+      "mean": 101,
+      "median": 96,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/164b85aeae01e5fb.webp",
+      "mean": 101,
+      "median": 90,
+      "highlights": 169,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0bbd37b9d0dfeb60.webp",
+      "mean": 101,
+      "median": 98,
+      "highlights": 190,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c6902c9153f662bf.webp",
+      "mean": 101,
+      "median": 98,
+      "highlights": 190,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/034544c49a14e7cd.webp",
+      "mean": 101,
+      "median": 103,
+      "highlights": 156,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2ef927778fcd957e.webp",
+      "mean": 101,
+      "median": 104,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a87b33f1a7b60ea2.webp",
+      "mean": 101,
+      "median": 92,
+      "highlights": 182,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5f05affb9193a5c2.webp",
+      "mean": 101,
+      "median": 77,
+      "highlights": 207,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5d63518a13ff1e9a.webp",
+      "mean": 101,
+      "median": 107,
+      "highlights": 150,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1eef8767132dc10c.webp",
+      "mean": 101,
+      "median": 94,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ebba971705713fd2.webp",
+      "mean": 101,
+      "median": 90,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f815592deb2fb2d8.webp",
+      "mean": 101,
+      "median": 94,
+      "highlights": 196,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/9fd85bf9d0f78cdc.webp",
+      "mean": 101,
+      "median": 91,
+      "highlights": 196,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d627f600c330e8f5.webp",
+      "mean": 101,
+      "median": 86,
+      "highlights": 202,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/52f21085d2e12734.webp",
+      "mean": 101,
+      "median": 85,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/43e6b7ea88b03d97.webp",
+      "mean": 102,
+      "median": 101,
+      "highlights": 204,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/4dd998d452d329d1.webp",
+      "mean": 102,
+      "median": 95,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/6857f03883483a76.webp",
+      "mean": 102,
+      "median": 100,
+      "highlights": 151,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/clean-1826.png",
+      "mean": 102,
+      "median": 91,
+      "highlights": 197,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/9306ae7fce5de55f.webp",
+      "mean": 102,
+      "median": 95,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/43e6b7ea88b03d97.webp",
+      "mean": 102,
+      "median": 101,
+      "highlights": 204,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/58fe528a4558c8ee.webp",
+      "mean": 102,
+      "median": 101,
+      "highlights": 204,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/23bc6063a866a157.webp",
+      "mean": 102,
+      "median": 97,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c666ed3e4a774394.webp",
+      "mean": 102,
+      "median": 105,
+      "highlights": 169,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4c514f2a001444ab.webp",
+      "mean": 102,
+      "median": 98,
+      "highlights": 186,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c67d66a7f6961d20.webp",
+      "mean": 102,
+      "median": 99,
+      "highlights": 186,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/75ec2033bc7c02d5.webp",
+      "mean": 102,
+      "median": 98,
+      "highlights": 184,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ce9d8357e855a129.webp",
+      "mean": 102,
+      "median": 87,
+      "highlights": 208,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/5342a301aebc35ee.webp",
+      "mean": 102,
+      "median": 95,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d177e972c735a228.webp",
+      "mean": 102,
+      "median": 93,
+      "highlights": 183,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4dd998d452d329d1.webp",
+      "mean": 102,
+      "median": 95,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/33a04b91f29c19f3.webp",
+      "mean": 102,
+      "median": 95,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/clean-93e955b711e8f2a5.png",
+      "mean": 102,
+      "median": 91,
+      "highlights": 197,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6857f03883483a76.webp",
+      "mean": 102,
+      "median": 100,
+      "highlights": 151,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/392645ee88bf80c5.webp",
+      "mean": 102,
+      "median": 94,
+      "highlights": 192,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7da9851439ab0ab8.webp",
+      "mean": 102,
+      "median": 93,
+      "highlights": 183,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/31f291d0ce769d9a.webp",
+      "mean": 102,
+      "median": 98,
+      "highlights": 186,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/80400fefc27af17c.webp",
+      "mean": 102,
+      "median": 90,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ac66c4a79ae77f5e.webp",
+      "mean": 102,
+      "median": 97,
+      "highlights": 191,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8f4fc95968e6a1ca.webp",
+      "mean": 102,
+      "median": 96,
+      "highlights": 186,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6a4f4a8c7782ce44.webp",
+      "mean": 102,
+      "median": 96,
+      "highlights": 186,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/3da61af51d4bd6db.webp",
+      "mean": 103,
+      "median": 104,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/8298f19c1429f673.webp",
+      "mean": 103,
+      "median": 95,
+      "highlights": 202,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/a393a352e3910c12.webp",
+      "mean": 103,
+      "median": 103,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/db7c39ce97fd5a0b.webp",
+      "mean": 103,
+      "median": 94,
+      "highlights": 209,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/f4b2dab208020b33.webp",
+      "mean": 103,
+      "median": 106,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/f2d4e35797a44a87.webp",
+      "mean": 103,
+      "median": 104,
+      "highlights": 161,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/e08f6649387c8656.webp",
+      "mean": 103,
+      "median": 106,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/e42130ee5100dfdf.webp",
+      "mean": 103,
+      "median": 95,
+      "highlights": 203,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/fb3509c99ff3946c.webp",
+      "mean": 103,
+      "median": 91,
+      "highlights": 191,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8aafff38be416fc6.webp",
+      "mean": 103,
+      "median": 87,
+      "highlights": 185,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/07199f22a084f22b.webp",
+      "mean": 103,
+      "median": 49,
+      "highlights": 207,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/49373a7d85645a85.webp",
+      "mean": 103,
+      "median": 92,
+      "highlights": 165,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8b7547e88813fac7.webp",
+      "mean": 103,
+      "median": 92,
+      "highlights": 163,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/d27b5c46de43a45b.webp",
+      "mean": 103,
+      "median": 97,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/fe44bb057a89710e.webp",
+      "mean": 103,
+      "median": 99,
+      "highlights": 188,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ba5aaa71b51e151d.webp",
+      "mean": 103,
+      "median": 106,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7b1553e2aeaef62e.webp",
+      "mean": 103,
+      "median": 108,
+      "highlights": 150,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f4b2dab208020b33.webp",
+      "mean": 103,
+      "median": 106,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/51209d3ddc005e52.webp",
+      "mean": 103,
+      "median": 108,
+      "highlights": 150,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/cfac3f134400f6d6.webp",
+      "mean": 103,
+      "median": 102,
+      "highlights": 167,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/3da61af51d4bd6db.webp",
+      "mean": 103,
+      "median": 104,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/db7c39ce97fd5a0b.webp",
+      "mean": 103,
+      "median": 94,
+      "highlights": 209,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/17115c617b5395b8.webp",
+      "mean": 103,
+      "median": 91,
+      "highlights": 194,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c5eb2d218e781d00.webp",
+      "mean": 103,
+      "median": 100,
+      "highlights": 179,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a393a352e3910c12.webp",
+      "mean": 103,
+      "median": 103,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8298f19c1429f673.webp",
+      "mean": 103,
+      "median": 95,
+      "highlights": 202,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/c9f0e115ee6d9b1e.webp",
+      "mean": 103,
+      "median": 99,
+      "highlights": 150,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/444464d2f0cdfc9a.webp",
+      "mean": 103,
+      "median": 103,
+      "highlights": 152,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0c2b829308705575.webp",
+      "mean": 103,
+      "median": 108,
+      "highlights": 184,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b1bc1e6b68ef0c40.webp",
+      "mean": 103,
+      "median": 103,
+      "highlights": 152,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ec7c10adbd5ab496.webp",
+      "mean": 103,
+      "median": 105,
+      "highlights": 161,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/145059878443dac7.webp",
+      "mean": 103,
+      "median": 95,
+      "highlights": 203,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0f5cb2ad4bd6fd3a.webp",
+      "mean": 103,
+      "median": 90,
+      "highlights": 189,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/14db572ae3c50069.webp",
+      "mean": 104,
+      "median": 104,
+      "highlights": 165,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/1ff913e5ea4ece4b.webp",
+      "mean": 104,
+      "median": 97,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/2399b205d57957ce.webp",
+      "mean": 104,
+      "median": 107,
+      "highlights": 163,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/2a968ee7dcbdca18.webp",
+      "mean": 104,
+      "median": 97,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/3bfeb3b7741214ba.webp",
+      "mean": 104,
+      "median": 94,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/72fd2f5152c969c1.webp",
+      "mean": 104,
+      "median": 105,
+      "highlights": 176,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/e3270f353b5628b3.webp",
+      "mean": 104,
+      "median": 97,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/ff1c1f3d51600c0f.webp",
+      "mean": 104,
+      "median": 97,
+      "highlights": 187,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/58cacb80b57ddafa.webp",
+      "mean": 104,
+      "median": 104,
+      "highlights": 165,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/de1d58d5378e54c1.webp",
+      "mean": 104,
+      "median": 97,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2c93042eef3ffcdf.webp",
+      "mean": 104,
+      "median": 102,
+      "highlights": 182,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4dfb9f52374d904c.webp",
+      "mean": 104,
+      "median": 99,
+      "highlights": 167,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/14db572ae3c50069.webp",
+      "mean": 104,
+      "median": 104,
+      "highlights": 165,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/45383540973eb848.webp",
+      "mean": 104,
+      "median": 94,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/3371ad4e09c2bcf9.webp",
+      "mean": 104,
+      "median": 92,
+      "highlights": 201,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1ff913e5ea4ece4b.webp",
+      "mean": 104,
+      "median": 97,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ff1c1f3d51600c0f.webp",
+      "mean": 104,
+      "median": 97,
+      "highlights": 187,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8dddb938ac4d705c.webp",
+      "mean": 104,
+      "median": 95,
+      "highlights": 192,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/64a9fb4ea8eba389.webp",
+      "mean": 104,
+      "median": 97,
+      "highlights": 177,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f338dc622a1ab6a9.webp",
+      "mean": 104,
+      "median": 92,
+      "highlights": 199,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/fa13fee86bbbb9eb.webp",
+      "mean": 104,
+      "median": 97,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ec99b6c805390a6f.webp",
+      "mean": 104,
+      "median": 100,
+      "highlights": 193,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/f528d40751f94069.webp",
+      "mean": 104,
+      "median": 100,
+      "highlights": 199,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/bdb792e46e40024e.webp",
+      "mean": 104,
+      "median": 89,
+      "highlights": 180,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b6496bed8318de03.webp",
+      "mean": 104,
+      "median": 96,
+      "highlights": 192,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/aeb8a5482163666c.webp",
+      "mean": 104,
+      "median": 100,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2a968ee7dcbdca18.webp",
+      "mean": 104,
+      "median": 97,
+      "highlights": 172,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/126bc76dc683cbfa.webp",
+      "mean": 104,
+      "median": 100,
+      "highlights": 175,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/3d5c3252907a2102.webp",
+      "mean": 104,
+      "median": 99,
+      "highlights": 167,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/3bfeb3b7741214ba.webp",
+      "mean": 104,
+      "median": 94,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e3270f353b5628b3.webp",
+      "mean": 104,
+      "median": 97,
+      "highlights": 173,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/72fd2f5152c969c1.webp",
+      "mean": 104,
+      "median": 105,
+      "highlights": 176,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2399b205d57957ce.webp",
+      "mean": 104,
+      "median": 107,
+      "highlights": 163,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1724534cccef9b17.webp",
+      "mean": 104,
+      "median": 93,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/7475f32589ef0499.webp",
+      "mean": 104,
+      "median": 93,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1df52df26c8ae06b.webp",
+      "mean": 104,
+      "median": 90,
+      "highlights": 190,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2f0948241b83bcb7.webp",
+      "mean": 104,
+      "median": 104,
+      "highlights": 165,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0157e7a18d7c6b4d.webp",
+      "mean": 104,
+      "median": 97,
+      "highlights": 183,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/747a925e006d8e16.webp",
+      "mean": 104,
+      "median": 106,
+      "highlights": 174,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/16734e90a8d64fb9.webp",
+      "mean": 104,
+      "median": 95,
+      "highlights": 200,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/80075b0e5dcece23.webp",
+      "mean": 104,
+      "median": 99,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/eb67e3a68697f893.webp",
+      "mean": 104,
+      "median": 89,
+      "highlights": 194,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/02a320e931671da2.webp",
+      "mean": 105,
+      "median": 99,
+      "highlights": 182,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/4d4eb422404f12fd.webp",
+      "mean": 105,
+      "median": 93,
+      "highlights": 199,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/a63992c6bdc738f7.webp",
+      "mean": 105,
+      "median": 99,
+      "highlights": 161,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/catalog/4df049a9eb198ba5.webp",
+      "mean": 105,
+      "median": 100,
+      "highlights": 185,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/691eaccd7b5558ad.webp",
+      "mean": 105,
+      "median": 100,
+      "highlights": 184,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/3d976226f964cd99.webp",
+      "mean": 105,
+      "median": 104,
+      "highlights": 190,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/08485f042e53cd70.webp",
+      "mean": 105,
+      "median": 99,
+      "highlights": 153,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a105dc31e4b73248.webp",
+      "mean": 105,
+      "median": 102,
+      "highlights": 207,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2d2a9d52dcdc0951.webp",
+      "mean": 105,
+      "median": 105,
+      "highlights": 190,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/1818f35c45f8c5af.webp",
+      "mean": 105,
+      "median": 98,
+      "highlights": 150,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8f973d1d12fe137e.webp",
+      "mean": 105,
+      "median": 100,
+      "highlights": 189,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/6e6636ce1bc00035.webp",
+      "mean": 105,
+      "median": 102,
+      "highlights": 170,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/b81a63d152b65a32.webp",
+      "mean": 105,
+      "median": 97,
+      "highlights": 181,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/02a320e931671da2.webp",
+      "mean": 105,
+      "median": 99,
+      "highlights": 182,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4b869e682d016c9d.webp",
+      "mean": 105,
+      "median": 105,
+      "highlights": 154,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8d6c77ae93ecdccd.webp",
+      "mean": 105,
+      "median": 109,
+      "highlights": 168,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8bef072529246e3d.webp",
+      "mean": 105,
+      "median": 105,
+      "highlights": 155,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/30cd9169f3265002.webp",
+      "mean": 105,
+      "median": 109,
+      "highlights": 168,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/4d4eb422404f12fd.webp",
+      "mean": 105,
+      "median": 93,
+      "highlights": 199,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/ae3c2960324e9d3b.webp",
+      "mean": 105,
+      "median": 93,
+      "highlights": 202,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/0c92be90dde7c470.webp",
+      "mean": 105,
+      "median": 109,
+      "highlights": 168,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/8d588baff7ce569f.webp",
+      "mean": 105,
+      "median": 104,
+      "highlights": 190,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/2f7eadc9e0e6a0ab.webp",
+      "mean": 105,
+      "median": 109,
+      "highlights": 168,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/a63992c6bdc738f7.webp",
+      "mean": 105,
+      "median": 99,
+      "highlights": 161,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/cf9aa1b754a192de.webp",
+      "mean": 105,
+      "median": 99,
+      "highlights": 182,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/e9c21158d46f3f1f.webp",
+      "mean": 105,
+      "median": 105,
+      "highlights": 176,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/cbd4d2cc571c32e3.webp",
+      "mean": 105,
+      "median": 102,
+      "highlights": 193,
+      "brightness": 1.07,
+      "contrast": 1.025
+    },
+    {
+      "src": "/images/products/eafda176b5d33951.webp",
+      "mean": 105,
+      "median": 103,
+      "highlights": 189,
+      "brightness": 1.07,
+      "contrast": 1.025
+    }
+  ]
+}

@@ -7,6 +7,7 @@ import { getPublishedGuides } from "@/lib/content";
 import { getSetting, fillTokens } from "@/lib/settings";
 import { Photo } from "@/components/Photo";
 import { SiteImage } from "@/components/content/SiteImage";
+import { HeroBackground } from "@/components/content/HeroBackground";
 import { GUIDE_PHOTOS, photoFor } from "@/content/photos";
 import { NextIcon } from "@/components/Icons";
 import { SmartLink } from "@/components/NavDropdown";
@@ -14,7 +15,7 @@ import { JsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
 import { SiteFaq } from "@/components/content/SiteFaq";
 import { GoogleReviews } from "@/components/content/GoogleReviews";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "About our Columbus-area liquidation warehouse",
   description:
     "PalletPort sells manifested liquidation lots direct from our own warehouse — returns, shelf pulls and overstock by the case, pallet or truckload.",
@@ -61,25 +62,19 @@ export default async function About() {
       <JsonLd data={webPageJsonLd("AboutPage", `About ${store.name}`, "/about", store.bio)} />
       {/* Hero */}
       <section className="relative overflow-hidden bg-ink text-white">
-        <div className="container-pp grid items-center gap-10 py-10 sm:py-16 md:grid-cols-[1.3fr_1fr] md:py-20">
-          <div>
+        <HeroBackground refStr={about.heroBg} />
+        {/* Same treatment as the homepage hero: solid navy behind the text, fading so the warehouse shows on the right. */}
+        <div className="absolute inset-0 bg-linear-to-r from-ink via-ink/85 to-signal-dark/40" />
+        <div className="container-pp relative py-12 sm:py-16 md:py-24">
+          <div className="max-w-3xl">
             {about.heroEyebrow && <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">{about.heroEyebrow}</p>}
-            <h1 className="mt-3 font-display text-3xl font-bold leading-[1.05] sm:text-5xl">{about.heroTitle}</h1>
-            {about.heroIntro && <p className="mt-5 max-w-xl text-base text-white/70 sm:text-lg">{fillTokens(about.heroIntro, { name: store.name, location: store.location })}</p>}
+            <h1 className="mt-3 font-display text-3xl font-bold leading-[1.1] sm:text-5xl sm:leading-[1.05] lg:text-6xl">{about.heroTitle}</h1>
+            {about.heroIntro && <p className="mt-5 max-w-2xl text-base text-white/75 sm:text-lg">{fillTokens(about.heroIntro, { name: store.name, location: store.location })}</p>}
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/register" className="btn-primary px-6 py-3">Get started</Link>
               <Link href="/how-it-works" className="rounded-full px-6 py-3 text-sm font-semibold hover:bg-white/10">How it works</Link>
             </div>
           </div>
-          {about.heroPhotos.length > 0 && (
-            <div className="grid grid-cols-2 gap-3">
-              {about.heroPhotos.slice(0, 4).map((ref, i) => (
-                <div key={`${ref}-${i}`} className={`overflow-hidden rounded-2xl ${i % 2 ? "translate-y-6" : ""}`}>
-                  <SiteImage src={ref} width={400} ratio={4 / 3} sizes="(max-width: 1024px) 50vw, 25vw" priority={i < 2} className="aspect-[4/3] w-full" />
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </section>
 

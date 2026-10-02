@@ -2,9 +2,10 @@ import "server-only";
 import { money } from "@/lib/format";
 import { emailConfigured, sendEmail, validEmail } from "@/lib/email";
 import { db } from "@/lib/db";
-import { ORDER_STATUS_LABEL, PAYMENT_LABEL } from "@/lib/commerce";
+import { ORDER_STATUS_LABEL, paymentLabel } from "@/lib/commerce";
 import { formatVisit } from "@/lib/visits";
-import { BRAND, callout, emailBase, emailLayout, esc, factTable, sectionTitle } from "@/lib/email-layout";
+import { BRAND, callout, emailBase, emailLayout, esc, factTable, paragraph, sectionTitle } from "@/lib/email-layout";
+import { getSetting } from "@/lib/settings";
 
 type OrderNotice = {
   id: string; number: string; status: string; paymentMethod: string;
@@ -26,7 +27,7 @@ function orderFacts(order: OrderNotice) {
     ?? order.phone ?? "";
   const customerNotes = savedNotes.replace(/^\[Delivery phone: [^\]]+\](?:\n|$)/, "").replace(/^Phone: [^\r\n]+(?:\n|$)/, "").trim();
   return [
-    ["Order number", order.number], ["Order status", ORDER_STATUS_LABEL[order.status] ?? order.status], ["Payment method", PAYMENT_LABEL[order.paymentMethod] ?? order.paymentMethod],
+    ["Order number", order.number], ["Order status", ORDER_STATUS_LABEL[order.status] ?? order.status], ["Payment method", paymentLabel(order.paymentMethod)],
     ["Receiving name", order.shipName],
     ["Delivery", order.deliveryMethod === "PICKUP" ? "Warehouse pickup" : "Freight delivery"],
     ...(order.deliveryMethod === "PICKUP" ? [["Visit time", order.visitAt ? formatVisit(order.visitAt) : "To be arranged"]] : [["Ship to", shipTo]]),
@@ -37,7 +38,10 @@ function orderFacts(order: OrderNotice) {
   ];
 }
 
-function emailHtml(order: OrderNotice, audience: "customer" | "team") {
+/** Payment instructions for manual methods (Zelle, Wire, …) from Admin → Site settings → Checkout. */
+type PayNote = { name: string; instructions: string } | null;
+
+function emailHtml(order: OrderNotice, audience: "customer" | "team", pay: PayNote = null) {
   const base = emailBase();
   const orderUrl = `${base}/orders/${encodeURIComponent(order.id)}`;
   const isBooking = Boolean(order.visitAt);
@@ -58,6 +62,7 @@ function emailHtml(order: OrderNotice, audience: "customer" | "team") {
   const grand = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse"><tr><td style="padding:14px 0 0;border-top:2px solid ${BRAND.ink};color:${BRAND.ink};font-family:'Space Grotesk',Inter,Helvetica,Arial,sans-serif;font-size:15px;font-weight:700">${isBooking ? "Visit total" : "Order total"}</td><td style="padding:14px 0 0;border-top:2px solid ${BRAND.ink};color:${BRAND.ink};font-family:'Space Grotesk',Inter,Helvetica,Arial,sans-serif;font-size:20px;font-weight:700;text-align:right;white-space:nowrap">${money(order.totalCents)}</td></tr></table>`;
   const body =
     callout(isBooking ? "Booking number" : "Order number", order.number) +
+    (audience === "customer" && pay ? sectionTitle(`How to pay with ${pay.name}`) + paragraph(esc(pay.instructions).replace(/\n/g, "<br>")) : "") +
     sectionTitle(isBooking ? "Items for your visit" : "Items ordered") +
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">${items}</table>` +
     factTable(totals, false) + grand +
@@ -100,11 +105,18 @@ export async function notifyStoreOfOrder(order: OrderNotice) {
     return;
   }
   const jobs: Promise<unknown>[] = [];
+  let pay: PayNote = null;
+  try {
+    const m = (await getSetting("checkout")).paymentMethods.find((x) => x.id === order.paymentMethod);
+    if (m?.instructions && order.status === "PENDING") pay = { name: m.name, instructions: m.instructions };
+  } catch {
+    /* settings unavailable: send without payment instructions */
+  }
   jobs.push(sendEmail({
     to: order.user.email,
     subject: `${order.visitAt ? "Visit booking received" : "Order received"} · ${order.number} | PalletPort`,
-    text: orderText(order, "customer"),
-    html: emailHtml(order, "customer"),
+    text: orderText(order, "customer") + (pay ? `\n\nHow to pay with ${pay.name}:\n${pay.instructions}` : ""),
+    html: emailHtml(order, "customer", pay),
     idempotencyKey: `order-customer/${order.id}`,
   }).catch(() => console.warn(`Order ${order.number} was saved, but its customer confirmation could not be sent.`)));
   if (validEmail(adminTo)) {

@@ -17,7 +17,7 @@ export const LEGAL: Article[] = [
   {
     slug: "privacy", title: "Privacy Policy", date: "2026-09-23", excerpt: "What we collect, why, and your choices.",
     body: [
-      { h: "What we collect", list: ["Account details: name, business name, email, phone and addresses.", "Verification details: resale certificate number and issuing state.", "Transaction details: orders, questions you send us and reviews.", "Usage data: pages viewed and lots saved, used to improve the marketplace."] },
+      { h: "What we collect", list: ["Account details: name, business name, email, phone and addresses.", "Verification details: resale certificate number and issuing state.", "Transaction details: orders, questions you send us and reviews.", "Usage data: pages viewed and lots saved, used to improve the marketplace. We use Google Analytics to measure visits and purchases in aggregate; it is not used for advertising, and visitors who send a Global Privacy Control signal are not tracked.", "Live chat: if you message us through the chat box, the messages and any details you choose to share are handled by our chat provider, Smartsupp, so our team can reply."] },
       { h: "How we use it", p: ["To run the store, process orders, verify businesses, prevent fraud, and send service messages. We share delivery details only with the carrier that delivers your order."] },
       { h: "Your choices", p: ["You can update your details in your account at any time and ask us to delete your account by contacting support. We keep transaction records as required by law."] },
     ],
@@ -25,7 +25,7 @@ export const LEGAL: Article[] = [
   {
     slug: "cookies", title: "Cookie Policy", date: "2026-09-23", excerpt: "The small number of cookies we use.",
     body: [
-      { p: ["PalletPort uses a session cookie to keep you signed in and a short-lived cookie to remember a promo code in your cart. We do not use advertising cookies. If you add analytics later, list those tools here."] },
+      { p: ["PalletPort uses a session cookie to keep you signed in and a short-lived cookie to remember a promo code in your cart. We do not use advertising cookies.", "We use Google Analytics to understand how visitors use the site (pages viewed, how they arrived, and completed orders, counted in aggregate). It sets first-party cookies named _ga and _ga_<ID> that last up to two years. Google signals and ad personalisation are turned off. If your browser sends a Global Privacy Control signal, Google Analytics does not run for you. You can also block these cookies in your browser settings or with Google’s opt-out add-on at tools.google.com/dlpage/gaoptout.", "Our live chat box is provided by Smartsupp. It uses its own cookies to keep your conversation open as you move between pages and to recognise you if you come back."] },
     ],
   },
   {

@@ -19,7 +19,7 @@ export async function generateMetadata({ params, searchParams }: { params: Param
   const p = await getPost((await params).slug, { preview });
   if (!p) return { title: "Article not found", robots: { index: false } };
   const img = imageRefUrl(postCover(p));
-  const md = pageMetadata({
+  const md = await pageMetadata({
     title: p.meta.seoTitle || p.title,
     description: p.meta.seoDescription || p.excerpt,
     path: `/blog/${p.slug}`,

@@ -19,6 +19,9 @@ export const BRAND = {
   moss: "#2d6a4c",
 } as const;
 
+/** Logo wordmark in the email header. sendEmail() (src/lib/email.ts) swaps it for the current business name. */
+export const LOGO_WORDMARK = `Pallet<span style="color:${BRAND.signal}">Port</span>`;
+
 const SANS = "Inter,'Helvetica Neue',Helvetica,Arial,sans-serif";
 const DISPLAY = "'Space Grotesk',Inter,'Helvetica Neue',Helvetica,Arial,sans-serif";
 
@@ -119,7 +122,7 @@ export function emailLayout({ title, preheader, eyebrow, heading, introHtml = ""
       <a href="${esc(base)}" style="text-decoration:none">
         <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse"><tr>
           <td style="padding-right:10px;vertical-align:middle">${logoMark()}</td>
-          <td style="vertical-align:middle;font-family:${DISPLAY};font-size:22px;font-weight:700;color:${BRAND.ink};line-height:1">Pallet<span style="color:${BRAND.signal}">Port</span></td>
+          <td style="vertical-align:middle;font-family:${DISPLAY};font-size:22px;font-weight:700;color:${BRAND.ink};line-height:1">${LOGO_WORDMARK}</td>
         </tr></table>
       </a>
     </td></tr>

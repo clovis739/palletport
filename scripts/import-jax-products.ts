@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { withWarehouseAddress } from '../src/lib/warehouse';
+import { cleanProductPhotos } from '../src/lib/product-photos';
 
 type Product = {
   url: string; slug: string; sku: string; title: string; category: string;
@@ -63,21 +65,21 @@ try {
   for (const product of file.products) {
     const data = {
       title: product.title,
-      description: product.description,
+      description: withWarehouseAddress(product.description, seller.location),
       condition: condition(product.condition),
       priceCents: product.priceCents,
       msrpCents: 0, // Source sale/list price is not an estimated retail value.
       units: 0, // Source does not consistently publish an exact per-lot unit count.
       weightLbs: 0, // Source does not consistently publish a shipping weight.
-      shipsFrom: product.warehouse || "Warehouse location unconfirmed",
+      shipsFrom: seller.location,
       available: product.inStock ? product.available : 0,
       lotSize: lotSize(product),
-      source: "Jax Wholesale & Liquidation",
-      images: product.images.join("\n"),
+      source: "",
+      images: cleanProductPhotos(product.images).join("\n"),
       externalSku: product.sku,
       externalUrl: product.url,
       sourceCondition: product.condition,
-      sourceDelivery: product.delivery,
+      sourceDelivery: withWarehouseAddress(product.delivery, seller.location),
       sourceOriginalPriceCents: product.originalPriceCents,
       categoryId: categories.get(categorySlug(product)) ?? categories.get("general-merchandise")!,
       sellerId: seller.id,

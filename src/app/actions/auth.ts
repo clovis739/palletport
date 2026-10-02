@@ -8,6 +8,7 @@ import { db } from "@/lib/db";
 import { SESSION_COOKIE, sessionCookieOptions, signSession } from "@/lib/session";
 import { LIMITS, clientIp, rateLimit } from "@/lib/rateLimit";
 import { sendWelcomeEmail } from "@/lib/status-email";
+import { findReferrer, newReferralCode } from "@/lib/referrals";
 
 export type FormState = { error?: string } | undefined;
 
@@ -44,10 +45,13 @@ export async function register(_: FormState, formData: FormData): Promise<FormSt
   const user = await db.user.create({
     data: {
       name,
+      role: "BUYER",
       businessName,
       email,
       businessType: businessType || null,
-      referredBy: ref && (await db.user.findUnique({ where: { referralCode: ref } })) ? ref : null,
+      referralCode: await newReferralCode(businessName || name),
+      // Stored as the referrer's exact code, so links typed in any letter case still count.
+      referredBy: (await findReferrer(ref))?.referralCode ?? null,
       passwordHash: await bcrypt.hash(password, 10),
     },
   });

@@ -4,7 +4,7 @@ import { requireStaff } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { getSetting } from "@/lib/settings";
 import { conditionLabel, money, LOT_SIZES } from "@/lib/format";
-import { DELIVERY_LABEL, PAYMENT_LABEL, isPaid } from "@/lib/commerce";
+import { DELIVERY_LABEL, isPaid, paymentLabel } from "@/lib/commerce";
 import { Tabs } from "@/components/admin/Tabs";
 import { PrintButton } from "./PrintButton";
 
@@ -168,7 +168,7 @@ export default async function PrintOrder({ params, searchParams }: { params: Pro
             </>
           ) : (
             <>
-              <p>Payment: {PAYMENT_LABEL[order.paymentMethod] ?? order.paymentMethod}{order.paymentMethod === "NET30" ? " — due 30 days from the invoice date." : ""}</p>
+              <p>Payment: {paymentLabel(order.paymentMethod)}{order.paymentMethod === "NET30" ? " — due 30 days from the invoice date." : ""}</p>
               <p className="sm:text-right">Liquidation goods are sold as described in the lot listing and manifest. Thank you for your business.</p>
             </>
           )}

@@ -61,12 +61,17 @@ export function Toggle({ label, description, className = "", ...input }: InputHT
 /** Two-column form group: title/description left on lg, fields right. */
 export function FormSection({ title, description, children, className = "" }: { title: ReactNode; description?: ReactNode; children: ReactNode; className?: string }) {
   return (
-    <section className={`grid gap-4 py-6 first:pt-0 last:pb-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-8 ${className}`}>
-      <div className="min-w-0">
-        <h2 className="font-display text-base font-bold">{title}</h2>
-        {description && <p className="mt-1 text-sm text-muted">{description}</p>}
+    // Responsive to the space the card actually has (container queries), not the window: with the admin sidebar
+    // and a preview column open, a wide window can still leave a narrow card. Title beside the fields from 42rem;
+    // grids inside the fields column can use @sm:/@md: (the fields column is a container too).
+    <section className={`@container py-6 first:pt-0 last:pb-0 ${className}`}>
+      <div className="grid gap-4 @2xl:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] @2xl:gap-8">
+        <div className="min-w-0">
+          <h2 className="font-display text-base font-bold">{title}</h2>
+          {description && <p className="mt-1 text-sm text-muted">{description}</p>}
+        </div>
+        <div className="@container min-w-0 space-y-4">{children}</div>
       </div>
-      <div className="min-w-0 space-y-4">{children}</div>
     </section>
   );
 }

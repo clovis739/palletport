@@ -1,12 +1,13 @@
 // Lot photos: real uploads when the lot has them, otherwise a category stock photo that the UI labels as such.
 import { CATEGORY_POOLS, LOT_TOPICS, PHOTOS, photoSrc, type StockPhoto } from "@/content/photos";
+import { cleanProductPhotos } from './product-photos';
 
 export const MAX_LOT_PHOTOS = 10;
 
 export type LotImage = { src: string; alt: string; stock: boolean };
 
 export function parseImages(images?: string | null): string[] {
-  return (images ?? "").split("\n").map((s) => s.trim()).filter(Boolean);
+  return cleanProductPhotos(images);
 }
 
 /** Stable number for a lot: the "-<n>" suffix on seeded slugs, otherwise a hash of the slug. */
@@ -21,7 +22,8 @@ function lotNumber(slug: string) {
 /** Photos that match the lot's title (falls back to its category), rotated so neighbouring lots differ. */
 function stockFor(slug: string, title: string, categorySlug?: string): StockPhoto[] {
   const topic = LOT_TOPICS.find((t) => t.keywords.test(title));
-  const pool = topic?.photos ?? (CATEGORY_POOLS[categorySlug ?? ""] ?? CATEGORY_POOLS["general-merchandise"]).map((k) => PHOTOS[k]);
+  const candidates = topic?.photos ?? (CATEGORY_POOLS[categorySlug ?? ""] ?? CATEGORY_POOLS["general-merchandise"]).map((k) => PHOTOS[k]);
+  const pool = [...new Map(candidates.map(photo => [photo.id, photo])).values()];
   const start = lotNumber(slug) % pool.length;
   return [...pool.slice(start), ...pool.slice(0, start)];
 }

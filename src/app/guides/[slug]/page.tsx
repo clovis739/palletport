@@ -19,7 +19,7 @@ export async function generateMetadata({ params, searchParams }: { params: Param
   const g = await getGuide(slug, { preview });
   if (!g) return { title: "Guide not found", robots: { index: false } };
   const img = g.source === "db" ? imageRefUrl(g.meta.cover) : undefined;
-  const md = pageMetadata({
+  const md = await pageMetadata({
     title: g.meta.seoTitle || `${g.title} — buying guide`,
     description: g.meta.seoDescription || `${g.excerpt} ${sectionsText(g.body)}`,
     path: `/guides/${slug}`,

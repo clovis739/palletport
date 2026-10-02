@@ -88,7 +88,7 @@ export default async function CartPage() {
           <dl className="space-y-2 text-sm">
             <div className="flex justify-between"><dt>Subtotal</dt><dd className="font-semibold">{money(cart.subtotalCents)}</dd></div>
             {cart.discountCents > 0 && (
-              <div className="flex justify-between text-moss"><dt>Promo {cart.promoCode}</dt><dd className="font-semibold">−{money(cart.discountCents)}</dd></div>
+              <div className="flex justify-between text-moss"><dt>{cart.discountLabel}</dt><dd className="font-semibold">−{money(cart.discountCents)}</dd></div>
             )}
             <div className="flex justify-between gap-3"><dt>Est. freight{cart.freightOpts.toZip ? ` to ${cart.freightOpts.toZip}` : ""}</dt><dd className="font-semibold">{cart.shippingCents ? money(cart.shippingCents) : "Free"}</dd></div>
             <div className="flex justify-between pt-2 text-base"><dt className="font-semibold">Total</dt><dd className="font-display font-bold">{money(cart.totalCents)}</dd></div>
@@ -96,6 +96,10 @@ export default async function CartPage() {
           {toFree > 0 && (
             <p className="rounded-lg bg-sand p-3 text-xs">Add <strong>{money(toFree)}</strong> more to unlock free freight.</p>
           )}
+          {cart.referralApplied && (
+            <p className="rounded-lg bg-moss/10 p-3 text-xs text-moss">Your $100 referral {cart.referralApplied.code === "REFERRAL-WELCOME" ? "welcome discount" : "reward"} is applied. Using a promo code instead saves the referral discount for a later order.</p>
+          )}
+          {cart.referralHint && <p className="rounded-lg bg-sand p-3 text-xs">{cart.referralHint}</p>}
           {cart.promo && !cart.promo.ok ? (
             <p className="text-xs font-medium text-rust">{cart.promoCode}: {cart.promo.error}</p>
           ) : null}

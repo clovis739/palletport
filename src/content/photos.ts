@@ -1,128 +1,134 @@
-// Stock photography used on marketing pages (homepage, categories, About, How it works, blog).
-// All photos are from Unsplash under the Unsplash License (free for commercial use, no permission needed).
-// https://unsplash.com/license — credits are listed on /credits and in PHOTO-CREDITS.md.
-//
-// Lot pages deliberately do NOT use stock photos: a buyer must see the actual pallet they are buying.
-//
-// Images are served from Unsplash's CDN, resized on the fly. To self-host instead, run
-// `node scripts/download-photos.mjs` (saves them to public/images/stock) and set NEXT_PUBLIC_LOCAL_PHOTOS=1.
+// Representative supplier photography, served from local verified image files.
+// Legacy image keys remain stable for saved settings and content references.
+import sourcePhotos from "./source-photos.json";
 
 export type StockPhoto = {
-  id: string; // images.unsplash.com/photo-<id>
+  id: string;
+  src: string;
+  sourceUrl: string;
   alt: string;
-  by: string; // photographer
-  page: string; // unsplash.com photo page (for credit)
+  by: string;
+  page: string;
+  width: number;
+  height: number;
 };
 
-const p = (id: string, alt: string, by: string, page: string): StockPhoto => ({ id, alt, by, page: `https://unsplash.com/photos/${page}` });
+const sourceById = new Map(sourcePhotos.map(photo => [photo.id, photo]));
+function supplierPhoto(id: string): StockPhoto {
+  const photo = sourceById.get(id);
+  if (!photo) throw new Error(`Missing supplier photo: ${id}`);
+  return photo;
+}
+const SOURCE_LIBRARY = Object.fromEntries(sourcePhotos.map(photo => [`supplier_${photo.id}`, photo])) as Record<`supplier_${string}`, StockPhoto>;
 
 export const PHOTOS = {
+  ...SOURCE_LIBRARY,
   // Warehouse / brand
-  heroWarehouse: p("1689942010216-dc412bb1e7a9", "Warehouse aisle stacked high with wrapped pallets", "AFINIS Group", "OnbSOhz0oig"),
-  forklift: p("1645736315000-6f788915923b", "Forklift moving through a warehouse filled with pallets", "Bernd Dittrich", "F2C_mSrb6iM"),
-  boxesOnRacks: p("1587293852726-70cdb56c2866", "Cardboard boxes on warehouse racking", "CHUTTERSNAP", "BNBA1h-NgdY"),
-  warehouseBoxes: p("1672552226380-486fe900b322", "Warehouse floor filled with boxes and pallets", "Arum Visuals", "VnMbc9Szs-E"),
-  warehouseBoxes2: p("1672552226650-796f40198c47", "Stacked boxes in a large warehouse", "Arum Visuals", "wpSTbotzfGw"),
-  boxStack: p("1709804945989-c8be542e04db", "Large stack of boxes in a warehouse", "Ali Mkumbwa", "DU2ybvshovg"),
-  shelving: p("1714650601435-67a4d51a0798", "Tall warehouse shelving full of stock", "Rack Manufacturing Expert", "wHfvgx506PM"),
-  shelvingBoxes: p("1749244768351-2726dc23d26c", "Warehouse shelves filled with boxes", "Russ Murray", "M7G_m5XJ-go"),
-  aisleTeam: p("1664382953403-fc1ac77073a0", "Two staff walking a warehouse aisle", "Centre for Ageing Better", "ZlOlRnWk8zU"),
-  woodenPallets: p("1594571194668-7112042d8f54", "Stack of empty wooden pallets", "Lucas van Oort", "tWLgDQCKRYU"),
-  palletPile: p("1631630935045-bcf9f5872335", "Pile of reusable wooden pallets", "Dylan Hunter", "BoFRFnzE5Gk"),
-  boxLot: p("1570086625846-f33f679eb4f5", "Assorted cardboard boxes ready to ship", "Wonderlane", "OFfEOcIFiIc"),
-  boxesOnShelf: p("1627915589334-14a3c3e3a741", "Returned product boxes on a shelf", "CPG.IO", "CBTmEZqUaM0"),
-  openBox: p("1647489238347-dbd651c2f37a", "Open carton of mixed merchandise", "Ainur Iman", "sFawrnFtYvs"),
+  heroWarehouse: supplierPhoto("09099e16272b55ce"),
+  forklift: supplierPhoto("0ca89317e28c3ac8"),
+  boxesOnRacks: supplierPhoto("1130831b8f3e6a8d"),
+  warehouseBoxes: supplierPhoto("131d5e97e36cca2d"),
+  warehouseBoxes2: supplierPhoto("14db572ae3c50069"),
+  boxStack: supplierPhoto("19f59eedb40b8a98"),
+  shelving: supplierPhoto("1a3147ca3770db24"),
+  shelvingBoxes: supplierPhoto("22cbd24af6baab9f"),
+  aisleTeam: supplierPhoto("22da2d4b0ba0afba"),
+  woodenPallets: supplierPhoto("30077b694c5f33ad"),
+  palletPile: supplierPhoto("f9dc6b544b25627d"),
+  boxLot: supplierPhoto("326c8206296e9aa5"),
+  boxesOnShelf: supplierPhoto("32cb1fe3d0ee1d0f"),
+  openBox: supplierPhoto("b90ffb31e1ba4ad0"),
   // Freight
-  semiTruck: p("1695222833131-54ee679ae8e5", "Semi truck on the highway", "Artem Balashevsky", "ZhNYKwjRMh4"),
-  freightTruck: p("1616432043562-3671ea2e5242", "Freight truck on the road", "Caleb Ruiter", "EmEQ6kK_5P0"),
-  loadingVan: p("1620455800201-7f00aeef12ed", "Loading boxes into a delivery van", "Claudio Schwarz", "a85IYeAXgxU"),
-  truckCity: p("1711942179703-fce59b6afac6", "Semi truck driving through town", "Bernd Dittrich", "OtbeW0R6RFo"),
+  semiTruck: supplierPhoto("cbe1f2241613915f"),
+  freightTruck: supplierPhoto("6ceb8b997d43b42f"),
+  loadingVan: supplierPhoto("36d6c4aa5421afe3"),
+  truckCity: supplierPhoto("067f15382888b687"),
   // Buying / retail
-  checklist: p("1642188537432-41c8a331ebdb", "Clipboard with a checklist", "Testeur de CBD", "UFb4LPahwHQ"),
-  clipboard: p("1646808914973-e4fce4514ab5", "Clipboard with a notepad", "aceofnet", "fTM-hp2q3Cs"),
-  storeDisplay: p("1601600576337-c1d8a0d1373c", "Assorted products on display in a store", "Eduardo Soares", "e4EmPx91Aj4"),
-  storeShelf: p("1631856954913-c751a44490ec", "Store shelf filled with different items", "Oxana Melis", "KzT5IWf0yHQ"),
+  checklist: supplierPhoto("38e04b5c2b889269"),
+  clipboard: supplierPhoto("3b8b075c49581161"),
+  storeDisplay: supplierPhoto("3bfeb3b7741214ba"),
+  storeShelf: supplierPhoto("3c65dbcbb78d2ff7"),
   // Categories
-  electronics: p("1725832533422-7b225e601e9c", "Table of electronics and boxes", "Yuri Krupenin", "AaffVi9CVoo"),
-  homeKitchen: p("1556909212-d5b604d0c90d", "Cooking pots and a pepper mill", "Becca Tapert", "sY5RjMB1KkE"),
-  blender: p("1570222094114-d054a817e56b", "Countertop blender", "Daniel Norris", "ZN_86cZrSN0"),
-  apparel: p("1532453288672-3a27e9be9efd", "Rack of assorted shirts", "Marcus Loke", "xXJ6utyoSw0"),
-  tools: p("1426927308491-6380b6a9936f", "Hand tools hanging on a tool rack", "Barn Images", "t5YUoHW6zRo"),
-  carpentryTools: p("1567361808960-dec9cb578182", "Carpentry tools on a workbench", "Louis Hansel", "Rf9eElW3Qxo"),
-  hammer: p("1581783898377-1c85bf937427", "Hammer and screwdriver", "Julie Molliver", "Z3vFp7szCAY"),
-  toys: p("1558060370-d644479cb6f7", "Assorted colourful toys on a table", "Huy Hung Trinh", "zoyBqT7ytLU"),
-  woodenTrain: p("1596461404969-9ae70f2830c1", "Wooden toy train set", "Jerry Wang", "qBrF1yu5Wys"),
-  beauty: p("1598440947619-2c35fc9aa908", "Skincare products and a jade roller", "michela ampolo", "7tDGb3HrITg"),
-  cosmetics: p("1583209814683-c023dd293cc6", "Pink cosmetic containers and a brush", "pmv chamara", "dMjkQJs58uo"),
-  lotion: p("1620916566398-39f1143ab7be", "Tube of body lotion", "Mathilde Langevin", "p3O5f4u95Lo"),
-  furniture: p("1592078615290-033ee584e267", "Wooden chair", "Suchit Poojari", "ljRiZl00n18"),
-  armchair: p("1505843490538-5133c6c7d0e1", "White wooden armchair", "Dillon Mangum", "9489sFfgk4c"),
+  electronics: supplierPhoto("2d783ab0bf7fef98"),
+  homeKitchen: supplierPhoto("ad2bd79a07d2cad5"),
+  blender: supplierPhoto("510216d687cdcdae"),
+  apparel: supplierPhoto("81c3215840e7a6c4"),
+  tools: supplierPhoto("df90be146dde014e"),
+  carpentryTools: supplierPhoto("131d5e97e36cca2d"),
+  hammer: supplierPhoto("19f59eedb40b8a98"),
+  toys: supplierPhoto("2c3e618cd3f533c3"),
+  woodenTrain: supplierPhoto("42dc91d83e9adab8"),
+  beauty: supplierPhoto("4e8a65c8ec735933"),
+  cosmetics: supplierPhoto("432fc77d4599801f"),
+  lotion: supplierPhoto("62a35e648ed16799"),
+  furniture: supplierPhoto("4b3aedd5d79061a2"),
+  armchair: supplierPhoto("4b3aedd5d79061a2"),
   // Added to keep every marketing slot unique
-  sweaters: p("1582719188393-bb71ca45dbb9", "Rows of colourful sweaters on a clothing rack", "Markus Winkler", "PQmXUxmfR44"),
-  deviceTable: p("1730967844913-29eb5cae5f34", "Electronic devices laid out on a table", "Jakub Żerdzicki", "uxYLtGRyGKQ"),
-  metalTool: p("1611288875785-f62fb9b044a7", "Hands holding a metal repair tool", "Recha Oktaviani", "5tYUk7sZzqc"),
-  baubles: p("1482517967863-00e15c9b44be", "Baubles on a holiday tree", "Chad Madden", "SUTfFCAHV_A"),
-  cardboardLot: p("1507560461415-997cd00bfd45", "Flattened cardboard boxes", "Jon Moore", "1PxGp8kkQyk"),
-  boxStackBrown: p("1624137527136-66e631bdaa0e", "Stack of brown cardboard boxes", "Kadarius Seegars", "DevJkLB3hWE"),
-  boxesLeaning: p("1562534315-64dba645d0f9", "Boxes leaning on a cardboard box", "Matthew Hamilton", "twWIq9MxPRg"),
-  truckField: p("1694113372786-2553caec0c76", "Truck driving past green fields", "Artem Balashevsky", "C-y-iAXoY_M"),
-  emptyShelves: p("1584568694489-f71bdbac55e2", "Empty store shelves waiting for stock", "Mick Haupt", "VE9DQ7zm22Y"),
-  shelfBoxes: p("1606824722920-4c652a70f348", "Labelled boxes on store shelves", "Egor Litvinov", "ncKxCn5SI3A"),
-  twoPhones: p("1524226108234-3cccbbbfa86d", "Two smartphones on a white table", "Steve A Johnson", "f-gxmsZlj9c"),
-  clawHammer: p("1586864387789-628af9feed72", "Claw hammer", "iMattSmart", "sm0Bkoj5bnA"),
-  yellowTruck: p("1605705658744-45f0fe8f9663", "Yellow truck parked beside trees", "Nur Alamin", "xifUN_Mkf8Y"),
-  warehouseBig: p("1675388773022-e82caedee672", "Large warehouse filled with boxes", "william wang", "B4ojJGZPO98"),
-  warehouseWide: p("1672552226686-17ae189fbf2c", "Wide view of a warehouse full of boxes", "Arum Visuals", "k16Uqg-WK64"),
-  vanBoxes: p("1580674285054-bed31e145f59", "Shipping boxes stacked in a delivery van", "Claudio Schwarz", "q8kR_ie6WnI"),
-  recycleBox: p("1654078054613-a56cfcabdb84", "Cardboard box with a recycling symbol", "Ochir-Erdene Oyunmedeg", "nHVrk02meXs"),
-  boxesOnPallets: p("1528323273322-d81458248d40", "Assorted boxes on wooden pallets", "Alfonso Navarro", "qph7tJfcDys"),
+  sweaters: supplierPhoto("b6b27fb04b74bc73"),
+  deviceTable: supplierPhoto("eeb3b5ede4b443f1"),
+  metalTool: supplierPhoto("86f3fff2f53f0dcf"),
+  baubles: supplierPhoto("3d82c51315c6416d"),
+  cardboardLot: supplierPhoto("645b12b284e411aa"),
+  boxStackBrown: supplierPhoto("67b88ea1ccb355aa"),
+  boxesLeaning: supplierPhoto("6b190a19790c0463"),
+  truckField: supplierPhoto("2399b205d57957ce"),
+  emptyShelves: supplierPhoto("755ced485d145761"),
+  shelfBoxes: supplierPhoto("785f626603b5331a"),
+  twoPhones: supplierPhoto("c665432c58e077d8"),
+  clawHammer: supplierPhoto("ed53a5551fa982d6"),
+  yellowTruck: supplierPhoto("59ee20baea37c4c3"),
+  warehouseBig: supplierPhoto("835eed6cd6e7e39e"),
+  warehouseWide: supplierPhoto("86f3fff2f53f0dcf"),
+  vanBoxes: supplierPhoto("89eb00cf2886168c"),
+  recycleBox: supplierPhoto("8a4071241a8affc8"),
+  boxesOnPallets: supplierPhoto("8be33dbb60ecc955"),
   // v0.8 departments (category cards and lot stock photos)
-  tvOn: p("1560169897-fc0cdbdfa4d5", "Flat-screen TV switched on", "Glenn Carstens-Peters", "EOQhsfFBhRk"),
-  tvOff: p("1567690187548-f07b1d7bf5a9", "Wall-mounted flat-screen TV", "Dario", "KzGhmrQmB6I"),
-  tvBlack: p("1509281373149-e957c6296406", "Black television on a stand", "Ajeet Mestry", "UBhpOIHnazM"),
-  laptopDesk: p("1541807084-5c52b6b3adef", "Open laptop on a wooden desk", "Howard Bouchevereau", "RSCirJ70NDM"),
-  laptopTable: p("1496181133206-80ce9b88a853", "Laptop on a brown table", "Kari Shea", "1SAnrIxw5OY"),
-  laptopBed: p("1649972904349-6e44c42644a7", "Person working on a laptop", "Surface", "xSiQBSq-I0M"),
-  phoneHand: p("1592890288564-76628a30a657", "Hand holding a black smartphone", "Jonas Leupe", "wK-elt11pF0"),
-  phoneWhite: p("1512428559087-560fa5ceab42", "Hand holding a white smartphone", "NordWood Themes", "q8U1YgBaRQk"),
-  phoneScreen: p("1598327105666-5b89351aff97", "Smartphone home screen", "Shiwa ID", "Uae7ouMw91A"),
-  controllerNeon: p("1612287230202-1ff1d85d1bdf", "Wireless game controller under coloured light", "Javier Martínez", "hUD0PUczwJQ"),
-  controllerWood: p("1552820728-8b83bb6b773f", "Game controller on a wooden surface", "Alexey Savchenko", "k4Akpt5-Sfk"),
-  controllerHand: p("1509198397868-475647b2a1e5", "White game controller held in a hand", "Nikita Kachanovsky", "FJFPuE1MAOM"),
-  washer: p("1626806787461-102c1bfaaea1", "White front-load washing machine", "PlanetCare", "5cpBWEl6y6c"),
-  washerCabinet: p("1622473590925-e3616c0a41bf", "Front-load washer beside a cabinet", "Raychan", "vkpVPcIBU5U"),
-  fridge: p("1630459065645-549fe5a56db4", "Black top-mount refrigerator", "Erik Mclean", "xK8QreBEjcc"),
-  sneakersPastel: p("1595950653106-6c9ebd614d3a", "Pastel sneakers with white laces", "Ryan Plomp", "jvoZ-Aux9aw"),
-  sneakersBox: p("1560769629-975ec94e6a86", "Athletic shoes on a shoe box", "Irene Kredenets", "dwKiHoqqxk8"),
-  handbagRed: p("1584917865442-de89df76afd3", "Red leather handbag", "Arno Senoner", "oCXVxwTFwqE"),
-  handbagBrown: p("1590874103328-eac38a683ce7", "Brown leather handbag on a table", "Arno Senoner", "ZT16YkAYueo"),
-  handbagBlack: p("1705909237050-7a7625b47fac", "Black leather bag", "Mobina Ghazazani", "lnbuoKz2GlM"),
-  watch: p("1523170335258-f5ed11844a49", "Analog wristwatch", "John Torcasio", "TJrkkhdB39E"),
-  necklaces: p("1599643478518-a784e5dc4c8f", "Two gold necklaces with pendants", "Andres Vera", "202NAwjisYA"),
-  rings: p("1543294001-f7cd5d7fb516", "Three gold rings", "Cornelia Ng", "zZLhoEwGCeM"),
-  perfumeBlack: p("1594035910387-fea47794261f", "Black and gold perfume bottle", "Laura Chouette", "4sKdeIMiFEI"),
-  perfumeClear: p("1458538977777-0549b2370168", "Clear perfume bottle", "Jessica Weiller", "So4eFi-d1nc"),
-  sprayBottle: p("1563453392212-326f5e854473", "Hand holding a cleaning spray bottle", "JESHOOTS.COM", "__ZMnefoI3k"),
-  sprayBottles: p("1528740561666-dc2479dc08ab", "Two spray bottles on a table", "Daiga Ellaby", "uooMllXe6gE"),
-  paperRolls: p("1631524254770-03abe3f42a0d", "Pile of toilet paper rolls", "colourblindkevin.art", "jEMcrcWSf3M"),
-  paperRoll: p("1584556812952-905ffd0c611a", "Paper roll on a wooden table", "Erik Mclean", "Sss9uGhSiPw"),
-  snackAisle: p("1688217170693-e821c6e18d72", "Store display full of snacks", "Di Weng", "2lu4hpLgBxY"),
-  pantryShelf: p("1585341840941-98553e474d84", "Packaged food on a shelf", "Estera", "5HgdQjUdYpc"),
-  coffeeSack: p("1524350876685-274059332603", "Coffee beans in a sack", "Tina Guina", "obV_LM0KjxY"),
-  sportsCards: p("1551306683-9e7cf1661af1", "Baseball trading cards on a table", "Mick Haupt", "AOyR7aMFHyU"),
-  toyCar: p("1780675625636-1ebb87b66aed", "Vintage red toy car", "Defrino Maasy", "tMFu8QOifyo"),
-  fishingReel: p("1593442998882-7cb49031174b", "Fishing reel", "Harrison Kugler", "YLLhafrInyI"),
-  fishingRod: p("1566014727723-20aa739a7b11", "Fishing rod", "Matthew McBrayer", "GcGz0yYy3bg"),
-  tent: p("1504280390367-361c6d9f38f4", "Orange camping tent among trees", "Scott Goodwill", "y8Ngwq34_Ak"),
-  dumbbellRack: p("1576678927484-cc907957088c", "Row of dumbbells on a rack", "Samuel Girven", "VJ2s0c20qCo"),
-  dumbbells: p("1638536532686-d610adfc8e5c", "Pair of black dumbbells", "VD Photography", "H-qxKCedhcc"),
-  tirePile: p("1578844251758-2f71da64c96f", "Piles of car tires", "Robert Laursoo", "WHPOFFzY9gU"),
-  tires: p("1571335746824-742511d49bce", "Four vehicle tires", "Shadrach Warid", "-gqb3xbGa5Y"),
-  engine: p("1663642775693-6628f65358be", "Car engine bay", "Manuel E Sankitts", "i2kOA2p0DTo"),
-  firewood: p("1571040195944-85a412548a43", "Stack of firewood", "Andreas Pajuvirta", "VfJ600bfjdc"),
-  jackOLantern: p("1509558567730-6c838437b06b", "Lit jack-o'-lantern", "Quilia", "ASNSoeead70"),
-  mower: p("1458245201577-fc8a130b8829", "Lawn mower on grass", "Daniel Watson", "8vBpYpTGo90"),
-  pushMower: p("1590820292118-e256c3ac2676", "Push lawn mower on grass", "Andres Siimon", "zfwyrIA6bFw"),
+  tvOn: supplierPhoto("fb75e668fa3116be"),
+  tvOff: supplierPhoto("5f5f627d8b430b56"),
+  tvBlack: supplierPhoto("5013fc1354288980"),
+  laptopDesk: supplierPhoto("a2d912c9c37c1428"),
+  laptopTable: supplierPhoto("857ce6f2340c80ae"),
+  laptopBed: supplierPhoto("a7aa30897743676d"),
+  phoneHand: supplierPhoto("9d58b795c2ccc07b"),
+  phoneWhite: supplierPhoto("a6e720e7c3e7fdf7"),
+  phoneScreen: supplierPhoto("adc0317cbcff4908"),
+  controllerNeon: supplierPhoto("ba4a93268554f689"),
+  controllerWood: supplierPhoto("e15aeafaa916a71d"),
+  controllerHand: supplierPhoto("eaeffbc072494071"),
+  washer: supplierPhoto("1a3147ca3770db24"),
+  washerCabinet: supplierPhoto("aa76d4710971c9fb"),
+  fridge: supplierPhoto("f65a7b066981a87c"),
+  sneakersPastel: supplierPhoto("12882d531edb00f8"),
+  sneakersBox: supplierPhoto("2a5fefb323e88da6"),
+  handbagRed: supplierPhoto("f431ade6a4e448b9"),
+  handbagBrown: supplierPhoto("26f622b7c0ce76bd"),
+  handbagBlack: supplierPhoto("4356d461bcef3154"),
+  watch: supplierPhoto("82d078e6286c2551"),
+  necklaces: supplierPhoto("eee88fd51933c00a"),
+  rings: supplierPhoto("eee88fd51933c00a"),
+  perfumeBlack: supplierPhoto("e3270f353b5628b3"),
+  perfumeClear: supplierPhoto("ef1ef677107b5ef4"),
+  sprayBottle: supplierPhoto("755ced485d145761"),
+  sprayBottles: supplierPhoto("82e9412332a599a5"),
+  paperRolls: supplierPhoto("6ceb8b997d43b42f"),
+  paperRoll: supplierPhoto("80bccd2851fad274"),
+  snackAisle: supplierPhoto("e762ba4a14269022"),
+  pantryShelf: supplierPhoto("091c1cc2d628e315"),
+  coffeeSack: supplierPhoto("8a2c4fbaf9a6b7e7"),
+  sportsCards: supplierPhoto("bc3fdabdf49e2979"),
+  toyCar: supplierPhoto("c69ad5117e1ad14d"),
+  fishingReel: supplierPhoto("9fdadf92704dda10"),
+  fishingRod: supplierPhoto("b194441495ac90f2"),
+  tent: supplierPhoto("4bf728630d351d83"),
+  dumbbellRack: supplierPhoto("a824734f481ac7bf"),
+  dumbbells: supplierPhoto("18e0e625db5b0b6b"),
+  tirePile: supplierPhoto("91a3785c8edf13d3"),
+  tires: supplierPhoto("ca824058802d200a"),
+  engine: supplierPhoto("063cc6cd80fd73b4"),
+  firewood: supplierPhoto("f7c9cc0a57147b61"),
+  jackOLantern: supplierPhoto("48df0de6f86fee51"),
+  mower: supplierPhoto("ba6c6d6847f009c8"),
+  pushMower: supplierPhoto("ba6c6d6847f009c8"),
 } satisfies Record<string, StockPhoto>;
 
 export type PhotoKey = keyof typeof PHOTOS;
@@ -213,7 +219,6 @@ export const COLLECTION_PHOTOS: Record<string, PhotoKey> = {
  * Matched to the lot title by keywords; each topic has three photos and lots rotate through them,
  * so two lots with the same kind of goods still get different cover photos.
  */
-const lp = (id: string, alt: string, by: string, page: string) => p(id, alt, by, page);
 export const LOT_TOPICS: { keywords: RegExp; photos: StockPhoto[] }[] = [
   // Department-specific topics first (v0.8), so e.g. "video game controllers" doesn't fall into the toy topic.
   { keywords: /\btvs?\b|television|home theater|soundbar|projector/i, photos: [PHOTOS.tvOn, PHOTOS.tvOff, PHOTOS.tvBlack] },
@@ -236,94 +241,94 @@ export const LOT_TOPICS: { keywords: RegExp; photos: StockPhoto[] }[] = [
   { keywords: /lawn|mower|string trimmer|hedge trimmer|leaf blower|outdoor power/i, photos: [PHOTOS.mower, PHOTOS.pushMower] },
   { keywords: /halloween/i, photos: [PHOTOS.jackOLantern, PHOTOS.baubles] },
   { keywords: /earbud|headphone|audio|speaker/i, photos: [
-    lp("1606220588913-b3aacb4d2f46", "Black and blue wireless earbuds", "TheRegisti", "qt9_OfTaaeY"),
-    lp("1505740420928-5e560c06d30e", "Wireless headphones flat lay", "C D-X", "PDX_a_82obo"),
-    lp("1578319439584-104c94d37305", "Black wireless earphones", "Roger Cai", "HuTUDQqr88c"),
+    supplierPhoto("bb0ee9a07d07f237"),
+    supplierPhoto("c7c9a902ad405193"),
+    supplierPhoto("bb0ee9a07d07f237"),
   ] },
   { keywords: /smart home|smart plug|smart bulb|doorbell|camera/i, photos: [
-    lp("1532007271951-c487760934ae", "White smart LED bulb", "Federico Bottos", "TuAtSs8peoM"),
-    lp("1707733260992-73ff6dbed163", "Phone controlling a smart light switch", "Jakub Żerdzicki", "We56jns_zLE"),
-    lp("1674659719067-8735479ba10c", "Smart light bulb on a table", "Ian Talmacs", "iEDKPLfJrEo"),
+    supplierPhoto("645b12b284e411aa"),
+    supplierPhoto("6b190a19790c0463"),
+    supplierPhoto("6b87b46b7668d548"),
   ] },
   { keywords: /phone|charger|cable|power bank|accessor/i, photos: [
-    lp("1557767382-97b28f5488e7", "Smartphone with charging cable connected", "Andreas Haslinger", "W9Z87k4hV08"),
-    lp("1572721546624-05bf65ad7679", "Bundle of orange USB cables", "Lucian Alexe", "yh0UtueiZ-I"),
-    lp("1603539444875-76e7684265f6", "White USB charging cable", "Solen Feyissa", "115YGe1M28I"),
+    supplierPhoto("d9835dabcf52a3f6"),
+    supplierPhoto("fc0e8532d48e5369"),
+    supplierPhoto("3f0d177d63c7480c"),
   ] },
   { keywords: /appliance|air fryer|blender|coffee|kettle|toaster/i, photos: [
-    lp("1608354580875-30bd4168b351", "Black and silver drip coffee maker", "Nathan Dumlao", "xPSBoaJNs2g"),
-    lp("1630617867674-3905ea203152", "Black and silver electric kettle", "Nancy Hughes", "mdrDZpt1RrA"),
-    lp("1618506408870-64d8bec48248", "Stainless steel toaster", "Quilia", "G_GWtt1tiUs"),
+    supplierPhoto("510216d687cdcdae"),
+    supplierPhoto("67b88ea1ccb355aa"),
+    supplierPhoto("8a4071241a8affc8"),
   ] },
   { keywords: /cookware|bakeware|\bpans?\b|\bpots?\b|utensil/i, photos: [
-    lp("1556911164-1297abe8527c", "Orange enamel cookware set", "Jason Briscoe", "PkkLkjJdUZw"),
-    lp("1584990347193-6bebebfeaeee", "Three stainless steel cooking pots", "Cooker King", "AOVtEuU9UGc"),
-    lp("1518291344630-4857135fb581", "Frying pan beside tomatoes", "Icons8 Team", "seDjj4dmC9s"),
+    supplierPhoto("d9b76fa6adf7a006"),
+    supplierPhoto("ee5187d4a5c5ba50"),
+    supplierPhoto("7871dad0ac8c5931"),
   ] },
   { keywords: /decor|pillow|lamp|mirror/i, photos: [
-    lp("1531592762598-58a792d73aed", "Throw pillows on a sofa", "DESIGNECOLOGIST", "40NvXW1VPyQ"),
-    lp("1592195985871-2d326ada5d51", "Green and white table lamp", "wu yi", "lfkos4iarZA"),
-    lp("1579888028917-47462bb03ca9", "Clear glass table lamp", "Kari Shea", "heISypiCno4"),
+    supplierPhoto("1001a30ac0681a6e"),
+    supplierPhoto("6ceb8b997d43b42f"),
+    supplierPhoto("7603d294389a620d"),
   ] },
   { keywords: /activewear|legging|athletic|sportswear|hoodie/i, photos: [
-    lp("1523654999808-59842135e652", "Black and grey athletic pants", "Hey Beauti Magazine", "xn2Zh8b4yqw"),
-    lp("1626026397008-3316047db4fc", "Black leggings and white tank top on a yoga mat", "Katerina May", "K_w5UNRxh-8"),
-    lp("1618355281951-a174b87198e2", "Black leggings and long-sleeve top", "Ryan Hoffman", "Y_oWhp2dqMY"),
+    supplierPhoto("4bf830baa4c0eed7"),
+    supplierPhoto("5ebfcb68bdd105c7"),
+    supplierPhoto("e5609aedf389abc4"),
   ] },
   { keywords: /footwear|shoe|sneaker|boot/i, photos: [
-    lp("1595950653106-6c9ebd614d3a", "Pastel sneakers", "Ryan Plomp", "jvoZ-Aux9aw"),
-    lp("1560769629-975ec94e6a86", "White and orange athletic shoes", "Irene Kredenets", "dwKiHoqqxk8"),
-    lp("1608231387042-66d1773070a5", "White sneaker on a dark background", "The DK Photography", "NUoPWImmjCU"),
+    supplierPhoto("afb9b44aede3e77b"),
+    supplierPhoto("b0e1b22b5aa2c597"),
+    supplierPhoto("b3dbbbd01b5e1eec"),
   ] },
   { keywords: /power tool|drill|driver|cordless/i, photos: [
-    lp("1622044939413-0b829c342434", "Green cordless drill", "Jonathan Cooper", "7sZwThSntdw"),
-    lp("1504148455328-c376907d081c", "Red cordless power drill", "Quilia", "CuDoRFyTkAQ"),
-    lp("1632095710940-ad578e8cbe6b", "Hand holding a cordless drill", "Sean", "XolHGHlwy7Q"),
+    supplierPhoto("ab0254021119c3f9"),
+    supplierPhoto("da27d0a17242f692"),
+    supplierPhoto("19f59eedb40b8a98"),
   ] },
   { keywords: /hand tool|tool storage|socket|wrench|tool/i, photos: [
-    lp("1581166397057-235af2b3c6dd", "Red and silver hand tool", "Elena Rouame", "9JU2CKqtw0M"),
-    lp("1671040690726-b78261eff126", "Hand tools hanging on a wall", "Anton Savinov", "2Qlj2Gaft7w"),
-    lp("1508873535684-277a3cbcc4e8", "Four hand tools on a board", "Hunter Haley", "s8OO2-t-HmQ"),
+    supplierPhoto("22da2d4b0ba0afba"),
+    supplierPhoto("3c65dbcbb78d2ff7"),
+    supplierPhoto("3c6f06ff6c6a8a3a"),
   ] },
   { keywords: /toy|game|puzzle/i, photos: [
-    lp("1629760946220-5693ee4c46ac", "Board game pieces and dice", "Nik Korba", "3WceTBlUoMs"),
-    lp("1545558014-8692077e9b5c", "Multicoloured learning toys", "Xavi Cabrera", "gDiRwIYAMA8"),
-    lp("1611996575749-79a3a250f948", "Colourful letter cubes spelling GAME", "Andrey Metelev", "DEuansgqjns"),
+    supplierPhoto("7a4a66589464f51a"),
+    supplierPhoto("7da5f9277116dac6"),
+    supplierPhoto("8080c60e2264ff08"),
   ] },
   { keywords: /nursery|baby|crib|infant/i, photos: [
-    lp("1543346242-2b8e41fb91ca", "White sheep baby mobile", "charlesdeluvio", "2vfwTakDTIo"),
-    lp("1505043203398-7e4c111acbfa", "White crib mobile", "insung yoon", "iioAHjNYA_o"),
-    lp("1642685464968-5d85bb7cffe0", "Crib with a white pillow", "Jenna Duxbury", "KZ7cfMnSDh8"),
+    supplierPhoto("46963f39ba6d3df1"),
+    supplierPhoto("48df0de6f86fee51"),
+    supplierPhoto("1001a30ac0681a6e"),
   ] },
   { keywords: /beauty|cosmetic|makeup|lipstick/i, photos: [
-    lp("1571646034647-52e6ea84b28c", "Five lipsticks in assorted colours", "Marek Studzinski", "mzstXkKH8DI"),
-    lp("1512496015851-a90fb38ba796", "Assorted cosmetics close-up", "Jazmin Quaynor", "FoeIOgztCXo"),
-    lp("1596462502278-27bfdc403348", "Makeup brush set", "Shamblen Studios", "xwM61TPMlYk"),
+    supplierPhoto("432fc77d4599801f"),
+    supplierPhoto("66417461a9fc41b4"),
+    supplierPhoto("8d9577a738f4f347"),
   ] },
   { keywords: /personal care|toothbrush|trimmer|grooming/i, photos: [
-    lp("1559671216-bda69517c47f", "Four electric toothbrushes", "Goby", "zHMpGLOD8nI"),
-    lp("1575325342632-92615b50d3e2", "Two white electric toothbrushes", "Goby", "7fqy0iDE5e8"),
-    lp("1641130331708-dd0cc94ae8e5", "Electric toothbrush on a travel case", "Cosmin Ursea", "WhNaHxPE934"),
+    supplierPhoto("62a35e648ed16799"),
+    supplierPhoto("0964f4c6d0c49318"),
+    supplierPhoto("62a35e648ed16799"),
   ] },
   { keywords: /office|desk|chair|bookshelf/i, photos: [
-    lp("1612372606404-0ab33e7187ee", "Rolling office chair beside a plant", "Kelly Sikkema", "Pvse_0mSm6Y"),
-    lp("1688578735352-9a6f2ac3b70a", "Grey office chair next to a desk", "EFFYDESK", "7mfNpV5eJH0"),
-    lp("1594235048794-fae8583a5af5", "Black office chairs around a table", "Uneebo Office Design", "UgYT5nkXdK4"),
+    supplierPhoto("97521e357a912505"),
+    supplierPhoto("d539108232915839"),
+    supplierPhoto("4b3aedd5d79061a2"),
   ] },
   { keywords: /patio|outdoor|garden/i, photos: [
-    lp("1623625434531-d130448273c1", "Wicker patio chairs and table", "Alen Rojnić", "jDlTJSrjlgI"),
-    lp("1613317447829-eea2ed59640f", "Black metal bistro table and chairs", "David Hunter", "M9gGS4ggbq4"),
-    lp("1602860739945-9a61573cd62d", "Wooden outdoor table and chairs", "Arcwind", "-OKp-rhSWE4"),
+    supplierPhoto("3c8b1059f4cf7cc6"),
+    supplierPhoto("4b3aedd5d79061a2"),
+    supplierPhoto("4b3aedd5d79061a2"),
   ] },
   { keywords: /seasonal|holiday|christmas|halloween/i, photos: [
-    lp("1545048702-79362596cdc9", "Assorted holiday ornaments", "JESHOOTS.COM", "7VOyZ0-iO0o"),
-    lp("1511268011861-691ed210aae8", "Holiday wreath on a red background", "Toni Cuenca", "CvFARq2qu8Y"),
-    lp("1576919228236-a097c32a5cd4", "Red bauble", "Markus Spiske", "B40ztSGQTZY"),
+    supplierPhoto("0514b492b3d9c10c"),
+    supplierPhoto("0caaf3db7ba1cae1"),
+    supplierPhoto("2ba405cfbae2f623"),
   ] },
   { keywords: /returns|truckload|general|assorted|mixed|big-box/i, photos: [
-    lp("1700165644892-3dd6b67b25bc", "Open brown cardboard boxes", "Luke Heibert", "gthSas4oYC0"),
-    lp("1766040923580-16ad32fae8b4", "Large pile of taped cardboard boxes", "Rohit Choudhari", "qO2ztAz5g7A"),
-    lp("1513672494107-cd9d848a383e", "Cardboard box lot", "CHUTTERSNAP", "fyaTq-fIlro"),
+    supplierPhoto("7871dad0ac8c5931"),
+    supplierPhoto("791065cbf0a1a419"),
+    supplierPhoto("82e9412332a599a5"),
   ] },
 ];
 
@@ -370,9 +375,7 @@ export function photoKeyFor(key: string, map?: Record<string, PhotoKey>): PhotoK
   return FALLBACKS[h % FALLBACKS.length];
 }
 
-/** CDN URL for a stock photo. With `ratio` (width / height) the CDN crops to that aspect so the file matches its slot. */
-export function photoSrc(photo: StockPhoto, width = 800, ratio?: number) {
-  if (process.env.NEXT_PUBLIC_LOCAL_PHOTOS === "1") return `/images/stock/${photo.id}.jpg`;
-  const h = ratio ? `&h=${Math.round(width / ratio)}` : "";
-  return `https://images.unsplash.com/photo-${photo.id}?auto=format&fit=crop&w=${width}${h}&q=70`;
+/** Local representative image. Layout cropping is handled by the image component. */
+export function photoSrc(photo: StockPhoto, _width = 800, _ratio?: number) {
+  return photo.src;
 }

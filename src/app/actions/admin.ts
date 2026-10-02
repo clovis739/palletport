@@ -1,19 +1,16 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { forbidden, redirect } from "next/navigation";
+import { forbidden } from "next/navigation";
 import { db } from "@/lib/db";
-import { getSession } from "@/lib/auth";
-import { can, isStaff, type Perm } from "@/lib/permissions";
+import { requireStaff } from "@/lib/auth";
+import { can, type Perm } from "@/lib/permissions";
 import { logAudit } from "@/lib/audit";
 import { sendCertificateEmail } from "@/lib/status-email";
 
 /** Staff with `perm` only (see src/lib/permissions.ts). Returns the acting user for the audit log. */
 async function staffWith(perm: Perm) {
-  const session = await getSession();
-  if (!session) redirect("/login?next=/dashboard/inbox");
-  const user = await db.user.findUnique({ where: { id: session.userId }, select: { id: true, email: true, role: true } });
-  if (!user || !isStaff(user.role) || !can(user.role, perm)) forbidden();
+  const { user } = await requireStaff(perm);
   return user;
 }
 
@@ -73,10 +70,8 @@ export async function setInquiryHandled(formData: FormData) {
  * activity log). Allowed for staff with "inbox" or "customers".
  */
 export async function reviewCertificate(formData: FormData) {
-  const session = await getSession();
-  if (!session) redirect("/login?next=/dashboard/inbox");
-  const user = await db.user.findUnique({ where: { id: session.userId }, select: { id: true, email: true, role: true } });
-  if (!user || !isStaff(user.role) || !(can(user.role, "inbox") || can(user.role, "customers"))) forbidden();
+  const { user } = await requireStaff();
+  if (!(can(user.role, "inbox") || can(user.role, "customers"))) forbidden();
   const status = String(formData.get("status"));
   if (!["APPROVED", "REJECTED"].includes(status)) return;
   const note = String(formData.get("note") ?? "").trim().slice(0, 500);

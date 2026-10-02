@@ -23,6 +23,7 @@ export function LotGallery({ images, badge }: { images: LotImage[]; badge?: Reac
           className="aspect-[16/10] w-full object-cover"
         />
         {badge && <div className="absolute left-3 top-3 flex gap-1.5">{badge}</div>}
+        {img.stock && <span className="absolute bottom-3 left-3 rounded-md bg-ink/80 px-2 py-1 text-[11px] font-semibold text-white">Representative image</span>}
         {n > 1 && (
           <>
             <span className="absolute bottom-3 right-3 rounded-md bg-ink/80 px-2 py-1 text-[11px] font-semibold text-white">{active + 1} / {n}</span>

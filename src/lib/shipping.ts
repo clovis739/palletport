@@ -1,6 +1,7 @@
 // Freight estimator. Pure functions (no DB) so it runs on the server and in the browser.
 // Replace with a live LTL rate API (e.g. via a freight broker) before launch — see README.
 
+import { stateOf } from './format';
 export type DeliveryMethod = "FREIGHT" | "PICKUP";
 
 export type FreightOptions = {
@@ -13,7 +14,7 @@ export type FreightOptions = {
 export type ShipLine = {
   sellerId: string;
   sellerName: string;
-  shipsFrom: string; // "City, ST"
+  shipsFrom: string; // Full warehouse address or "City, ST".
   lotSize: string; // CASE | PALLET | TRUCKLOAD
   palletCount: number;
   weightLbs: number;
@@ -59,7 +60,7 @@ export function validZip(zip?: string | null) {
 }
 
 function zoneBetween(shipsFrom: string, toZip?: string | null) {
-  const st = shipsFrom.split(",").pop()?.trim().toUpperCase() ?? "";
+  const st = stateOf(shipsFrom).toUpperCase();
   const from = STATE_ZIP_DIGIT[st] ?? 4;
   const to = validZip(toZip) ? Number(toZip!.trim()[0]) : 4;
   return Math.abs(from - to);

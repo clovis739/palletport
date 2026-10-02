@@ -163,3 +163,10 @@ body {
   from { opacity: 0; transform: translateY(-6px) scale(0.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* Hide the Smartsupp chat bubble while one of our own dialogs is open (e.g. the WhatsApp groups sheet). */
+html.pp-modal-open #smartsupp-widget-container,
+html.pp-modal-open #chat-application-iframe,
+html.pp-modal-open #chat-application {
+  visibility: hidden !important;
+}

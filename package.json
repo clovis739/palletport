@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "security:check": "node --import tsx scripts/check-admin-security.mjs",
+    "merchant:export": "node --env-file=.env --import tsx scripts/export-merchant-feed.ts",
+    "merchant:check": "node --import tsx scripts/check-merchant-feed.ts",
     "dev": "next dev",
     "email:check": "node --env-file=.env --import tsx scripts/test-email.ts",
     "email:test": "node --env-file=.env --import tsx scripts/test-email.ts --send",
@@ -11,11 +14,21 @@
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
     "catalog:fetch-jax": "node scripts/fetch-jax-products.mjs",
+    "photos:fetch": "node scripts/import-source-photos.mjs",
+    "photos:check": "node --import tsx scripts/check-source-photos.mjs",
+    "photos:lighting": "node scripts/analyze-photo-lighting.mjs",
+    "catalog:fetch-suppliers": "node scripts/fetch-supplier-products.mjs",
+    "catalog:check-suppliers": "node --import tsx scripts/import-supplier-products.ts --check",
+    "catalog:import-suppliers": "node --env-file=.env --import tsx scripts/import-supplier-products.ts",
     "catalog:import-jax": "node --env-file=.env --import tsx scripts/import-jax-products.ts",
     "catalog:publish-jax": "node --env-file=.env --import tsx scripts/publish-jax-products.ts",
+    "catalog:jax-drafts": "node --env-file=.env --import tsx scripts/draft-jax-lots.ts",
     "setup": "prisma db push && tsx prisma/seed.ts",
     "build:full": "prisma generate && next build",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "catalog:fetch-goldstack": "node scripts/fetch-goldstack-products.mjs",
+    "catalog:check-goldstack": "node --import tsx scripts/import-supplier-products.ts --goldstack --check",
+    "catalog:import-goldstack": "node --env-file=.env --import tsx scripts/import-supplier-products.ts --goldstack"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -40,6 +53,7 @@
     "@types/react-dom": "^19.1.0",
     "postcss": "^8.5.0",
     "prisma": "^6.16.0",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4.1.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"

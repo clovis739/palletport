@@ -99,7 +99,15 @@ export const PAYMENT_LABEL: Record<string, string> = {
   CARD: "Card",
   NET30: "Net 30",
   WIRE: "Wire / ACH",
+  ZELLE: "Zelle",
+  APPLE_PAY: "Apple Pay",
+  CHIME: "Chime",
 };
+
+/** Label for any payment method code, including ones the owner added in Admin → Checkout ("CASH_APP" → "Cash App"). */
+export function paymentLabel(id: string): string {
+  return PAYMENT_LABEL[id] ?? id.toLowerCase().split("_").filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(" ");
+}
 
 export const DELIVERY_LABEL: Record<string, string> = { FREIGHT: "Freight delivery", PICKUP: "Warehouse pickup" };
 
@@ -133,7 +141,7 @@ export function parseOrderFilters(sp: SP): OrderFilters {
   return {
     q: one(sp.q).trim().slice(0, 100),
     status: (ORDER_STATUSES as readonly string[]).includes(status) || status === "OPEN" ? status : "",
-    pay: PAYMENT_LABEL[pay] ? pay : "",
+    pay: /^[A-Z0-9_]{2,24}$/.test(pay) ? pay : "",
     delivery: DELIVERY_LABEL[delivery] ? delivery : "",
     from: isDate(from) ? from : "",
     to: isDate(to) ? to : "",

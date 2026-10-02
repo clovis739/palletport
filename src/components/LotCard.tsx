@@ -66,6 +66,7 @@ export function LotCard({ lot, priority = false }: { lot: LotCardData; priority?
           </span>
         )}
         {lot.msrpCents > 0 && <span className="absolute bottom-3 right-3 rounded-md bg-white/90 px-2 py-1 font-display text-xs font-bold text-ink">{pct}% of retail</span>}
+        {cover.stock && <span className="absolute bottom-3 left-3 rounded-md bg-ink/80 px-2 py-1 text-[11px] font-semibold text-white">Representative image</span>}
         {soldOut && <span className="absolute inset-0 bg-white/40" />}
       </Link>
 

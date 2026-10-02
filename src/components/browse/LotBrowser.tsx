@@ -6,7 +6,7 @@ import { brandCounts, getCatalog } from "@/lib/catalog";
 import { groupCategories } from "@/lib/taxonomy";
 import { Pager, pageCount, pageParam } from "@/components/ui/Pager";
 import { LotCard } from "@/components/LotCard";
-import { CONDITIONS, LOT_SIZES, SOURCES, US_STATES } from "@/lib/format";
+import { CONDITIONS, LOT_SIZES, US_STATES } from "@/lib/format";
 import { FilterPanel } from "./FilterPanel";
 import { Select } from "@/components/ui/Select";
 import { getStore } from "@/lib/store";
@@ -61,7 +61,6 @@ export async function LotBrowser({
   const brand = get("brand").trim().slice(0, 60);
   const condition = get("condition");
   const size = get("size");
-  const source = get("source");
   const state = get("state");
   const min = Number(get("min")) || 0;
   const max = Number(get("max")) || 0;
@@ -76,18 +75,17 @@ export async function LotBrowser({
     ...(sub ? { subcategory: { slug: sub } } : {}),
     ...(brand ? { brand } : {}),
     ...(size && LOT_SIZES[size] ? { lotSize: size } : {}),
-    ...(source ? { source } : {}),
     ...(state ? { shipsFrom: { endsWith: `, ${state}`, ...CI } } : {}),
     ...(min || max ? { priceCents: { ...(min ? { gte: min * 100 } : {}), ...(max ? { lte: max * 100 } : {}) } } : {}),
     ...(q
       ? {
           OR: [
             { title: { contains: q, ...CI } },
+            { sku: { contains: q, ...CI } },
             { brand: { contains: q, ...CI } },
             { id: { endsWith: q.toLowerCase() } },
             { manifest: { some: { sku: { contains: q, ...CI } } } },
             { description: { contains: q, ...CI } },
-            { source: { contains: q, ...CI } },
             { manifest: { some: { name: { contains: q, ...CI } } } },
           ],
         }
@@ -116,7 +114,7 @@ export async function LotBrowser({
   const page = pageParam(get("page"), pageCount(sorted.length, PAGE_SIZE));
   const lots = sorted.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
-  const current: Record<string, string> = { q, category, sub, brand, condition, size, source, state, min: min ? String(min) : "", max: max ? String(max) : "", sort: sort === defaultSort ? "" : sort, sold: showSold ? "1" : "" };
+  const current: Record<string, string> = { q, category, sub, brand, condition, size, state, min: min ? String(min) : "", max: max ? String(max) : "", sort: sort === defaultSort ? "" : sort, sold: showSold ? "1" : "" };
   for (const k of Object.keys(fixed)) delete current[k];
   const params = new URLSearchParams();
   for (const [k, v] of Object.entries(current)) if (v) params.set(k, v);
@@ -166,7 +164,7 @@ export async function LotBrowser({
 
       <form action={basePath} className="mb-5 flex max-w-2xl gap-2">
         {hidden(["q"])}
-        <input name="q" type="search" defaultValue={q} placeholder="Search by product, brand, SKU or source" className="input rounded-full" aria-label="Search lots" />
+        <input name="q" type="search" defaultValue={q} placeholder="Search by product, brand or SKU" className="input rounded-full" aria-label="Search lots" />
         <button className="btn-primary shrink-0 px-4 sm:px-5" aria-label="Search"><Search aria-hidden className="h-4 w-4" /><span className="hidden sm:inline">Search</span></button>
       </form>
 
@@ -248,12 +246,7 @@ export async function LotBrowser({
             </div>
           </div>
           <form action={basePath} className="space-y-2">
-            {hidden(["source", "state"])}
-            <h3 className="label">Source</h3>
-            <Select name="source" defaultValue={source} className="input py-2">
-              <option value="">Any source</option>
-              {SOURCES.map((s) => <option key={s}>{s}</option>)}
-            </Select>
+            {hidden(["state"])}
             <h3 className="label pt-2">Ships from</h3>
             <Select name="state" defaultValue={state} className="input py-2">
               <option value="">Any state</option>

@@ -24,7 +24,7 @@ import { CONDITIONS, LOT_SIZES } from "@/lib/format";
 import { parseImages } from "@/lib/lotImages";
 import { resolveImageRef } from "@/lib/imageRef";
 import { photoSrc } from "@/content/photos";
-import { DEFAULTS, type BusinessSettings, type SeoSettings } from "@/lib/settings-schema";
+import { DEFAULTS, rebrandText, type BusinessSettings, type SeoSettings } from "@/lib/settings-schema";
 
 export { JsonLd } from "@/components/JsonLd";
 
@@ -107,7 +107,7 @@ export function trimDescription(text: string | null | undefined, max = 155) {
  * Per-page metadata. Keep `title` ≤ ~60 characters including the " · PalletPort" suffix the root template adds
  * (so aim for ≤ 47 characters here), and write the description for a buyer, not a search engine.
  */
-export function pageMetadata({
+export async function pageMetadata({
   title,
   description,
   path,
@@ -132,16 +132,22 @@ export function pageMetadata({
   publishedTime?: string;
   modifiedTime?: string;
   authors?: string[];
-}): Metadata {
+}): Promise<Metadata> {
+  // Brand name from Admin → Business profile; text written with the original name follows a rename.
+  const { getBrand } = await import("@/lib/brand");
+  const brand = await getBrand();
+  title = rebrandText(title, brand);
+  description = description ? rebrandText(description, brand) : description;
+  if (imageAlt) imageAlt = rebrandText(imageAlt, brand);
   const desc = description ? trimDescription(description) : undefined;
-  const fullTitle = absoluteTitle || title.includes(SITE_NAME) ? title : `${title} · ${SITE_NAME}`;
+  const fullTitle = absoluteTitle || title.includes(brand) ? title : `${title} · ${brand}`;
   const img = { url: image ?? DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: imageAlt ?? fullTitle };
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description: desc,
     alternates: { canonical: path },
     openGraph: {
-      siteName: SITE_NAME,
+      siteName: brand,
       locale: "en_US",
       url: path,
       title: fullTitle,
@@ -168,22 +174,44 @@ export function ogImageUrl(ref: string | null | undefined) {
  * While the title/template are untouched, a STORE_NAME env override still replaces "PalletPort" in them.
  */
 export function siteMetadata(seo: SeoSettings, brand = SITE_NAME, base = siteUrl()): Metadata {
-  const swap = (v: string, d: string) => (v === d && brand !== "PalletPort" ? v.replace(/PalletPort/g, brand) : v);
+  const swap = (v: string, _d: string) => rebrandText(v, brand);
   const title = swap(seo.defaultTitle, DEFAULTS.seo.defaultTitle);
   const template = swap(seo.titleTemplate, DEFAULTS.seo.titleTemplate);
   const image = ogImageUrl(seo.ogImage);
   const custom = image !== DEFAULT_OG_IMAGE;
+  const description = seo.defaultDescription || undefined;
+  // Shorter share text for social cards (falls back to the meta description).
+  const shareDescription = "Manifested liquidation pallets, truckloads and case packs at fixed prices, sold direct from our Columbus, Ohio warehouse.";
+  const ogImage = custom ? { url: image, width: 1200, height: 630, alt: title } : { url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: `${brand}: wholesale liquidation pallets` };
+  const google = (seo.googleVerification || process.env.GOOGLE_SITE_VERIFICATION || "").trim();
   return {
     metadataBase: new URL(base),
-    title: { default: title, template },
-    description: seo.defaultDescription || undefined,
     applicationName: brand,
-    keywords: ["liquidation pallets", "wholesale pallets", "truckload liquidation", "customer returns pallets", "overstock pallets", "case packs", "bin store inventory"],
+    title: { default: title, template },
+    description,
+    keywords: [
+      "liquidation pallets",
+      "wholesale liquidation",
+      "liquidation pallets for sale",
+      "customer returns pallets",
+      "overstock pallets",
+      "truckload liquidation",
+      "case packs",
+      "bin store inventory",
+      "liquidation pallets Columbus Ohio",
+    ],
+    authors: [{ name: brand, url: base }],
+    creator: brand,
+    publisher: brand,
+    category: "Wholesale Liquidation",
+    referrer: "origin-when-cross-origin",
+    manifest: "/manifest.webmanifest",
     alternates: { canonical: "/" },
-    openGraph: { siteName: brand, locale: "en_US", type: "website", url: "/", images: [custom ? { url: image, width: 1200, height: 630 } : { url: DEFAULT_OG_IMAGE, width: 1200, height: 630 }] },
-    twitter: { card: "summary_large_image", images: [image] },
-    robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
     formatDetection: { telephone: false, email: false, address: false },
+    robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 } },
+    openGraph: { type: "website", locale: "en_US", url: "/", siteName: brand, title, description: shareDescription, images: [ogImage] },
+    twitter: { card: "summary_large_image", title, description: shareDescription, images: [ogImage.url] },
+    ...(google ? { verification: { google } } : {}),
   };
 }
 
@@ -237,7 +265,7 @@ function parseLocation(location: string) {
 }
 
 /** Business contact facts used in JSON-LD (the `business` settings, already merged with STORE_* env by getSettings()). */
-export type OrgBusiness = Pick<BusinessSettings, "email" | "phone" | "addressStreet" | "addressCity" | "addressRegion" | "addressPostal" | "country" | "socialLinks"> & { googleMapsUrl?: string };
+export type OrgBusiness = Pick<BusinessSettings, "email" | "phone" | "addressStreet" | "addressCity" | "addressRegion" | "addressPostal" | "country" | "socialLinks"> & { googleMapsUrl?: string; hours?: string; photos?: string[] };
 
 function postalAddress(store: StoreLike, b?: OrgBusiness): Json | undefined {
   const parsed = parseLocation(store.location);
@@ -267,6 +295,15 @@ function parseHours(spec: string | undefined): Json[] | undefined {
   return out.length ? out : undefined;
 }
 
+/** "Monday–Friday, 8am–6pm ET" → opening hours (the free-text hours from Business settings). Undefined if it doesn't parse. */
+function parseFriendlyHours(text: string | undefined): Json[] | undefined {
+  const m = text?.match(/^\s*(mon|tue|wed|thu|fri|sat|sun)[a-z]*\.?\s*(?:[–—-]|to)\s*(mon|tue|wed|thu|fri|sat|sun)[a-z]*\.?,?\s+(\d{1,2})(?::(\d{2}))?\s*(am|pm)\s*(?:[–—-]|to)\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm)/i);
+  if (!m) return undefined;
+  const key = (d: string) => d.slice(0, 2).replace(/^./, (c) => c.toUpperCase());
+  const t = (h: string, min: string | undefined, ap: string) => `${String((Number(h) % 12) + (ap.toLowerCase() === "pm" ? 12 : 0)).padStart(2, "0")}:${min ?? "00"}`;
+  return parseHours(`${key(m[1])}-${key(m[2])} ${t(m[3], m[4], m[5])}-${t(m[6], m[7], m[8])}`);
+}
+
 /** Organization (OnlineStore) JSON-LD. Pass the `business` settings to prefer them over the STORE_* env vars. */
 export function organizationJsonLd(store: StoreLike, business?: OrgBusiness): Json {
   const phone = business?.phone || env("STORE_PHONE");
@@ -278,21 +315,28 @@ export function organizationJsonLd(store: StoreLike, business?: OrgBusiness): Js
   ].filter((s, i, all) => /^https?:\/\//.test(s) && all.indexOf(s) === i);
   const address = postalAddress(store, business);
   const street = business?.addressStreet || env("STORE_STREET");
-  const hours = parseHours(env("STORE_HOURS"));
+  const hours = parseHours(env("STORE_HOURS")) ?? parseFriendlyHours(business?.hours);
+  // Real warehouse photos (Business settings → Warehouse photos) first, then the logo.
+  const photos = (business?.photos ?? []).filter((p) => /^(https?:\/\/|\/)/.test(p)).map((p) => absoluteUrl(p));
+  // With a published street address the store is also a physical place (LocalBusiness), so Google can tie the
+  // site to the address, photos and hours of the warehouse.
+  const physical = Boolean(street && address);
   return {
     "@context": "https://schema.org",
-    "@type": "OnlineStore",
+    "@type": physical ? ["OnlineStore", "WholesaleStore"] : "OnlineStore",
     "@id": ORG_ID(),
     name: store.name,
     url: `${siteUrl()}/`,
     logo: { "@type": "ImageObject", url: absoluteUrl(LOGO_PATH), width: 512, height: 512 },
-    image: absoluteUrl(LOGO_PATH),
+    image: [...photos, absoluteUrl(LOGO_PATH)],
     description: store.bio,
     address,
+    hasMap: physical && business?.googleMapsUrl ? business.googleMapsUrl : undefined,
+    openingHoursSpecification: physical ? hours : undefined,
     // A pickup location is only described when the owner has published a real street address.
     location:
       store.pickup && street && address
-        ? { "@type": "Place", name: `${store.name} warehouse`, address, openingHoursSpecification: hours }
+        ? { "@type": "Place", name: `${store.name} warehouse`, address, photo: photos.length ? photos : undefined, openingHoursSpecification: hours }
         : undefined,
     contactPoint:
       phone || email
@@ -350,6 +394,7 @@ type LotForSchema = {
   title: string;
   description: string;
   externalSku?: string | null;
+  sku: string;
   condition: string;
   priceCents: number;
   msrpCents: number;
@@ -387,7 +432,7 @@ export function productJsonLd(lot: LotForSchema, sellerName = SITE_NAME): Json {
     "@id": `${url}#product`,
     name: lot.title,
     description: lot.description,
-    sku: lot.externalSku ?? lotNumber(lot),
+    sku: lot.sku,
     url,
     category: lot.subcategory && lot.category ? `${lot.category.name} > ${lot.subcategory.name}` : lot.category?.name,
     brand: lot.brand ? { "@type": "Brand", name: lot.brand } : undefined,

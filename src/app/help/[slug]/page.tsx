@@ -15,7 +15,7 @@ export async function generateMetadata({ params, searchParams }: { params: Param
   const preview = await canPreview(searchParams);
   const a = await getHelpArticle(slug, { preview });
   if (!a) return { title: "Help article not found", robots: { index: false } };
-  const md = pageMetadata({
+  const md = await pageMetadata({
     title: a.meta.seoTitle || `${a.title} — Help`,
     description: a.meta.seoDescription || `${a.excerpt} ${sectionsText(a.body)}`,
     path: `/help/${slug}`,

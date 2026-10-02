@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
-import { SITE_NAME } from "@/lib/seo";
+import { getBrand } from "@/lib/brand";
 
-export default function manifest(): MetadataRoute.Manifest {
+export default async function manifest(): Promise<MetadataRoute.Manifest> {
+  const SITE_NAME = await getBrand();
   return {
     name: `${SITE_NAME} — Wholesale liquidation pallets`,
     short_name: SITE_NAME,

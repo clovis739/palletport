@@ -1,7 +1,7 @@
 import { requireStaff } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { logAudit } from "@/lib/audit";
-import { DELIVERY_LABEL, PAYMENT_LABEL, csvCell, orderWhere, parseOrderFilters } from "@/lib/commerce";
+import { DELIVERY_LABEL, csvCell, orderWhere, parseOrderFilters, paymentLabel } from "@/lib/commerce";
 
 export const dynamic = "force-dynamic";
 
@@ -24,7 +24,7 @@ export async function GET(req: Request) {
   const $ = (c: number) => (c / 100).toFixed(2);
   const lines = orders.map((o) =>
     [
-      o.number, o.createdAt.toISOString(), o.status, PAYMENT_LABEL[o.paymentMethod] ?? o.paymentMethod, o.paidAt?.toISOString() ?? "",
+      o.number, o.createdAt.toISOString(), o.status, paymentLabel(o.paymentMethod), o.paidAt?.toISOString() ?? "",
       o.user.name, o.user.businessName ?? "", o.user.email,
       o.items.map((i) => `${i.quantity}x ${i.title} @ ${$(i.priceCents)}`).join("; "),
       $(o.subtotalCents), $(o.discountCents), o.promoCode ?? "", $(o.shippingCents), $(o.totalCents),

@@ -7,6 +7,8 @@ import { placeOrder } from "@/app/actions/orders";
 import { SubmitButton } from "@/components/SubmitButton";
 import { estimateShipments, freightTotal, MODE_LABEL, validZip, type ShipLine } from "@/lib/shipping";
 import { NextIcon, PathSep } from "@/components/Icons";
+import { PaymentSelect, type PaymentOption } from "@/components/checkout/PaymentSelect";
+import type { CheckoutCustomField, CheckoutFieldSetting, PaymentIcon } from "@/lib/settings-schema";
 
 type Item = {
   id: string; slug: string; title: string; hue: number; img: string; sellerId: string; sellerName: string;
@@ -18,11 +20,13 @@ function usd(c: number) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format(c / 100);
 }
 
-const PAYMENT = [
-  { value: "CARD", title: "Credit or debit card", note: "Charged when we confirm your order. (Connect Stripe to take live payments.)" },
-  { value: "WIRE", title: "Wire / ACH transfer", note: "We email bank details and an invoice. Ships once funds clear (1–2 business days)." },
-  { value: "NET30", title: "Net 30 terms", note: "Invoice due 30 days after delivery. For verified resellers." },
-];
+/** What the checkout page passes in from Admin → Site settings → Checkout (enabled methods only, in order). */
+export type CheckoutConfig = {
+  paymentTitle: string;
+  methods: { id: string; name: string; description: string; icon: PaymentIcon; logo: string }[];
+  fields: { phone: CheckoutFieldSetting; poNumber: CheckoutFieldSetting; notes: CheckoutFieldSetting };
+  customFields: CheckoutCustomField[];
+};
 
 function Step({ n, title, children, aside, className = "" }: { n: number; title: string; children: React.ReactNode; aside?: React.ReactNode; className?: string }) {
   return (
@@ -45,19 +49,28 @@ export function CheckoutForm(props: {
   subtotalCents: number;
   discountCents: number;
   promoCode: string;
+  /** "Promo SAVE10", "Referral reward", … */
+  discountLabel?: string;
   pickupAvailable: boolean;
   net30Approved: boolean;
   taxExempt: boolean;
   email: string;
   defaults: Defaults;
+  config: CheckoutConfig;
 }) {
-  const { items, shipLines, subtotalCents, discountCents, promoCode, pickupAvailable, net30Approved, taxExempt, email, defaults } = props;
+  const { items, shipLines, subtotalCents, discountCents, promoCode, discountLabel, pickupAvailable, net30Approved, taxExempt, email, defaults, config } = props;
+  const paymentOptions: PaymentOption[] = config.methods.map((m) => ({
+    ...m,
+    locked: m.id === "NET30" && !net30Approved,
+    lockedNote: "Verify your business to unlock (Account → Business verification).",
+  }));
+  const { phone: phoneField, poNumber: poField, notes: notesField } = config.fields;
   const [state, action] = useActionState(placeOrder, undefined);
   const [zip, setZip] = useState(defaults.shipPostal);
   const [method, setMethod] = useState<"FREIGHT" | "PICKUP">("FREIGHT");
   const [dock, setDock] = useState(false);
   const [residential, setResidential] = useState(false);
-  const [payment, setPayment] = useState("CARD");
+  const [payment, setPayment] = useState(() => paymentOptions.find((o) => !o.locked)?.id ?? "");
 
   const hasFreight = items.some((i) => i.lotSize !== "CASE");
   const shipments = useMemo(
@@ -139,32 +152,43 @@ export function CheckoutForm(props: {
           </div>
         </Step>
 
-        <Step n={3} title="Payment">
-          <div className="space-y-2">
-            {PAYMENT.map((p) => {
-              const locked = p.value === "NET30" && !net30Approved;
-              return (
-                <label key={p.value} className={`flex min-w-0 gap-3 rounded-xl p-4 ${payment === p.value ?"bg-sand/50":""} ${locked ?"opacity-60":"cursor-pointer"}`}>
-                  <input type="radio" name="paymentMethod" value={p.value} checked={payment === p.value} onChange={() => setPayment(p.value)} disabled={locked} className="mt-1 shrink-0 accent-signal" />
-                  <span className="min-w-0">
-                    <span className="block font-semibold">{p.title}</span>
-                    <span className="text-sm text-muted">{p.note}</span>
-                    {locked && <a href="/account/verification" className="mt-1 block text-xs font-semibold text-signal-dark hover:underline">Verify your business to unlock<NextIcon /></a>}
-                  </span>
-                </label>
-              );
-            })}
-          </div>
+        <Step n={3} title={config.paymentTitle}>
+          <PaymentSelect name="paymentMethod" options={paymentOptions} value={payment} onChange={setPayment} />
+          {paymentOptions.some((o) => o.locked) && (
+            <a href="/account/verification" className="mt-2 inline-block text-xs font-semibold text-signal-dark hover:underline">Verify your business to unlock Net 30 terms<NextIcon /></a>
+          )}
           {payment === "CARD" && (
             <div className="mt-4 rounded-xl p-4 text-sm text-muted">
               Card entry appears here once Stripe is connected (see README<PathSep />Payments). For now, orders are recorded and marked confirmed.
             </div>
           )}
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div><label className="label" htmlFor="poNumber">PO number (optional)</label><input id="poNumber" name="poNumber" maxLength={40} className="input" /></div>
-            <div><label className="label" htmlFor="phone">Delivery contact phone</label><input id="phone" name="phone" defaultValue={defaults.phone} className="input" inputMode="tel" autoComplete="tel" /></div>
-          </div>
-          <div className="mt-4"><label className="label" htmlFor="notes">Notes for our team / carrier (optional)</label><textarea id="notes" name="notes" rows={2} maxLength={500} className="input" placeholder="Dock hours, gate code, appointment needed…" /></div>
+          {(poField.show || phoneField.show) && (
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {poField.show && (
+                <div><label className="label" htmlFor="poNumber">{poField.label}</label><input id="poNumber" name="poNumber" maxLength={40} required={poField.required} placeholder={poField.placeholder || undefined} className="input" /></div>
+              )}
+              {phoneField.show && (
+                <div><label className="label" htmlFor="phone">{phoneField.label}</label><input id="phone" name="phone" defaultValue={defaults.phone} required={phoneField.required} placeholder={phoneField.placeholder || undefined} className="input" inputMode="tel" autoComplete="tel" /></div>
+              )}
+            </div>
+          )}
+          {config.customFields.length > 0 && (
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {config.customFields.map((cf) => (
+                <div key={cf.id} className={cf.type === "textarea" ? "sm:col-span-2" : ""}>
+                  <label className="label" htmlFor={`cf_${cf.id}`}>{cf.label}</label>
+                  {cf.type === "textarea" ? (
+                    <textarea id={`cf_${cf.id}`} name={`cf_${cf.id}`} rows={2} maxLength={500} required={cf.required} placeholder={cf.placeholder || undefined} className="input" />
+                  ) : (
+                    <input id={`cf_${cf.id}`} name={`cf_${cf.id}`} maxLength={200} required={cf.required} placeholder={cf.placeholder || undefined} className="input" />
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+          {notesField.show && (
+            <div className="mt-4"><label className="label" htmlFor="notes">{notesField.label}</label><textarea id="notes" name="notes" rows={2} maxLength={500} required={notesField.required} className="input" placeholder={notesField.placeholder || undefined} /></div>
+          )}
         </Step>
 
         <Step n={4} title="Review & place order" className="max-lg:order-last">
@@ -209,7 +233,7 @@ export function CheckoutForm(props: {
           </div>
           <dl className="space-y-2 px-4 py-4 text-sm sm:px-5">
             <div className="flex justify-between"><dt>Subtotal</dt><dd>{usd(subtotalCents)}</dd></div>
-            {discountCents > 0 && <div className="flex justify-between text-moss"><dt>Promo {promoCode}</dt><dd>−{usd(discountCents)}</dd></div>}
+            {discountCents > 0 && <div className="flex justify-between text-moss"><dt>{discountLabel || `Promo ${promoCode}`}</dt><dd>−{usd(discountCents)}</dd></div>}
             <div className="flex justify-between"><dt>{method === "PICKUP" ? "Warehouse pickup" : "Freight"}</dt><dd>{!zipOk ? "Enter ZIP" : freight ? usd(freight) : "Free"}</dd></div>
             <div className="flex justify-between gap-3"><dt>Sales tax</dt><dd className="text-right">{taxExempt ? "Exempt (certificate on file)" : "Calculated on invoice"}</dd></div>
             <div className="flex justify-between pt-3 text-base font-bold"><dt>Total</dt><dd className="font-display text-xl">{usd(total)}</dd></div>

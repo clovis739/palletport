@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { db } from "@/lib/db";
 import { conditionLabel, LOT_SIZES, money, pctOfRetail } from "@/lib/format";
-import { SITE_NAME } from "@/lib/seo";
+import { getBrandLogo } from "@/lib/brand";
 
 // Social card for a lot: title, price, % of retail and condition. Text only — no product photo, so a stock
 // picture is never presented as the actual lot.
@@ -10,6 +10,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function LotOgImage({ params }: { params: Promise<{ slug: string }> }) {
+  const brand = await getBrandLogo();
   const { slug } = await params;
   const lot = await db.lot.findUnique({
     where: { slug },
@@ -24,13 +25,14 @@ export default async function LotOgImage({ params }: { params: Promise<{ slug: s
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#13233f", color: "#fbf8f1", padding: 64 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", fontSize: 36, fontWeight: 700 }}>
-            {SITE_NAME === "PalletPort" ? (
+            {brand.accent && brand.name.includes(brand.accent) ? (
               <>
-                <span>Pallet</span>
-                <span style={{ color: "#f0641e" }}>Port</span>
+                <span>{brand.name.slice(0, brand.name.lastIndexOf(brand.accent))}</span>
+                <span style={{ color: "#f0641e" }}>{brand.accent}</span>
+                <span>{brand.name.slice(brand.name.lastIndexOf(brand.accent) + brand.accent.length)}</span>
               </>
             ) : (
-              <span>{SITE_NAME}</span>
+              <span>{brand.name}</span>
             )}
           </div>
           {visible && (

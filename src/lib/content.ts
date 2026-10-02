@@ -3,6 +3,7 @@ import { cache } from "react";
 import { revalidatePath } from "next/cache";
 import { db } from "./db";
 import { logAudit, type AuditActor } from "./audit";
+import { DEFAULT_BRAND, rebrandDeep } from "./settings-schema";
 import {
   CONTENT_TYPES,
   articleToRowData,
@@ -32,6 +33,13 @@ const typeInDb = cache(async (type: ContentType): Promise<boolean> => {
   }
 });
 
+/** Blog posts, guides, help and legal text follow a business rename (see rebrandText in settings-schema). */
+async function rebrandArticles(list: ContentArticle[]): Promise<ContentArticle[]> {
+  const { getBrand } = await import("./brand");
+  const brand = await getBrand();
+  return brand === DEFAULT_BRAND ? list : rebrandDeep(list, brand);
+}
+
 const byDateDesc = (a: ContentArticle, b: ContentArticle) => (b.date ?? "").localeCompare(a.date ?? "");
 
 /**
@@ -41,13 +49,13 @@ const byDateDesc = (a: ContentArticle, b: ContentArticle) => (b.date ?? "").loca
 export const listEntries = cache(async (type: ContentType, opts: { status?: ContentStatus | "ALL" } = {}): Promise<ContentArticle[]> => {
   const status = opts.status ?? "PUBLISHED";
   if (!(await typeInDb(type))) {
-    return status === "DRAFT" ? [] : codeContent(type);
+    return status === "DRAFT" ? [] : rebrandArticles(codeContent(type));
   }
   const rows = await db.contentEntry.findMany({
     where: { type, ...(status === "ALL" ? {} : { status }) },
     orderBy: [{ publishedAt: "desc" }, { updatedAt: "desc" }],
   });
-  return rows.map(rowToArticle);
+  return rebrandArticles(rows.map(rowToArticle));
 });
 
 /**
@@ -55,11 +63,14 @@ export const listEntries = cache(async (type: ContentType, opts: { status?: Cont
  * Returns null when missing.
  */
 export async function getEntry(type: ContentType, slug: string, opts: { preview?: boolean } = {}): Promise<ContentArticle | null> {
-  if (!(await typeInDb(type))) return codeContent(type).find((a) => a.slug === slug) ?? null;
+  if (!(await typeInDb(type))) {
+    const a = codeContent(type).find((x) => x.slug === slug);
+    return a ? (await rebrandArticles([a]))[0] : null;
+  }
   const row = await db.contentEntry.findUnique({ where: { type_slug: { type, slug } } });
   if (!row) return null;
   if (row.status !== "PUBLISHED" && !opts.preview) return null;
-  return rowToArticle(row);
+  return (await rebrandArticles([rowToArticle(row)]))[0];
 }
 
 /** Admin: one entry by id (any status). */

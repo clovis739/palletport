@@ -59,7 +59,7 @@ export default async function CategoriesAdmin() {
       </div>
 
       {(missingCats > 0 || missingSubs > 0) && (
-        <Card className="mb-6" title="Standard structure available" description={`${missingCats} categories and ${missingSubs} subcategories from the standard PalletPort structure aren't in your shop yet. Adding them never renames, moves or deletes what you have.`}>
+        <Card className="mb-6" title="Standard structure available" description={`${missingCats} categories and ${missingSubs} subcategories from the standard catalogue structure aren't in your shop yet. Adding them never renames, moves or deletes what you have.`}>
           <form action={syncTaxonomy}>
             <SubmitButton className="btn-dark" pendingText="Adding…"><Wand2 aria-hidden className="h-4 w-4" /> Add the missing ones</SubmitButton>
           </form>

@@ -87,12 +87,12 @@ export function Switch({ f, path, label, description }: { f: F; path: string; la
   return <Toggle name={path} label={label} description={description} checked={checked} onChange={(e) => f.update((d) => setPath(d, path, e.target.checked))} />;
 }
 
-export function MediaField({ f, path, label, hint, allowEmpty = true }: { f: F; path: string; label: string; hint?: string; allowEmpty?: boolean }) {
+export function MediaField({ f, path, label, hint, allowEmpty = true, allowStock = true }: { f: F; path: string; label: string; hint?: string; allowEmpty?: boolean; /** false = own photos only (no stock tab). */ allowStock?: boolean }) {
   const v = String(getPath(f.value, path) ?? "");
   const e = f.err(path);
   return (
     <div>
-      <MediaPicker label={label} hint={hint} value={v} allowEmpty={allowEmpty} onChange={(ref) => f.update((d) => setPath(d, path, ref))} />
+      <MediaPicker label={label} hint={hint} value={v} allowEmpty={allowEmpty} allowStock={allowStock} onChange={(ref) => f.update((d) => setPath(d, path, ref))} />
       {e && <p className="mt-1 text-xs font-medium text-rust">{e}</p>}
     </div>
   );

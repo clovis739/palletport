@@ -4,8 +4,9 @@ import { COLLECTIONS } from "@/lib/collections";
 import { LEGAL } from "@/content/legal";
 import { GUIDES } from "@/content/guides";
 import { pageMetadata } from "@/lib/seo";
+import { getBrand } from "@/lib/brand";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "Site map",
   description:
     "Every public section of PalletPort on one page: lots by sale type, size and category, collections, buying guides, help articles, the blog and policies.",
@@ -14,13 +15,14 @@ export const metadata = pageMetadata({
 export const dynamic = "force-dynamic";
 
 export default async function SiteMap() {
+  const brand = await getBrand();
   const [categories] = await Promise.all([
     db.category.findMany({ where: { hidden: false }, orderBy: [{ position: "asc" }, { name: "asc" }], include: { subcategories: { orderBy: [{ position: "asc" }, { name: "asc" }] } } }),
   ]);
   const groups: [string, [string, string][]][] = [
     ["Shop", [["Truckloads", "/truckloads"], ["Pallets", "/pallets"], ["Case packs", "/case-packs"], ["All lots", "/lots"], ["Categories", "/categories"], ["New arrivals", "/new"], ["Trending", "/trending"], ["Collections", "/collections"]]],
     ["Buyers", [["How to order", "/how-to-buy"], ["Create an account", "/register"], ["Sign in", "/login"], ["Cart", "/cart"], ["Orders", "/orders"], ["Saved lots", "/account/favorites"], ["Account", "/account"], ["Business verification", "/account/verification"], ["Refer a business", "/account/referrals"]]],
-    ["Programs", [["PalletPort Pro", "/pro"], ["Volume buyers", "/volume-buyers"], ["Affiliates", "/affiliates"], ["Warehouse Days", "/events"], ["Integrations", "/integrations"]]],
+    ["Programs", [[`${brand} Pro`, "/pro"], ["Volume buyers", "/volume-buyers"], ["Affiliates", "/affiliates"], ["Warehouse Days", "/events"], ["Integrations", "/integrations"]]],
     ["Learn", [["How it works", "/how-it-works"], ["Help center", "/help"], ["The Loading Dock blog", "/blog"], ["Market reports", "/reports"], ["Guides", "/guides"], ...GUIDES.map((g) => [g.title, `/guides/${g.slug}`] as [string, string])]],
     ["Company", [["About", "/about"], ["Columbus, Ohio liquidation pallets", "/liquidation-pallets-columbus-ohio"], ["Contact", "/contact"], ...LEGAL.map((l) => [l.title, `/legal/${l.slug}`] as [string, string])]],
     ["Collections", COLLECTIONS.map((c) => [c.title, `/collections/${c.slug}`])],

@@ -4,7 +4,7 @@ import { SiteImage } from "@/components/content/SiteImage";
 import { GUIDE_PHOTOS } from "@/content/photos";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "Liquidation buying guides by store type",
   description:
     "What to buy and skip for bin stores, online resellers, flea-market vendors, discount stores and exporters: which categories, grades and lot sizes fit.",

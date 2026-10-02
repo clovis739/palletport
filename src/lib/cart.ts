@@ -4,6 +4,7 @@ import { db } from "./db";
 import { purchasePrice } from "./format";
 import { estimateShipments, freightTotal, type FreightOptions, type ShipLine } from "./shipping";
 import { evaluatePromo, type PromoResult } from "./promo";
+import { referralDiscount } from "./referrals";
 
 export const PROMO_COOKIE = "pp_promo";
 
@@ -49,7 +50,10 @@ export async function getCart(userId: string, freight?: Partial<FreightOptions>)
       items.map((i) => ({ sellerId: i.lot.sellerId, priceCents: i.unitCents, quantity: i.quantity })),
     );
   }
-  const discountCents = promo?.ok ? promo.discountCents : 0;
+  // One discount per order: a valid promo code wins; otherwise any referral reward applies automatically.
+  const referral = items.length && !promo?.ok ? await referralDiscount(userId, subtotalCents) : { discount: null, hint: "" };
+  const discountCents = promo?.ok ? promo.discountCents : (referral.discount?.cents ?? 0);
+  const discountLabel = promo?.ok ? `Promo ${code}` : (referral.discount?.label ?? "");
 
   // Seller minimums: each seller may require a minimum spend.
   const bySeller = new Map<string, { name: string; min: number; total: number }>();
@@ -72,6 +76,11 @@ export async function getCart(userId: string, freight?: Partial<FreightOptions>)
     promoCode: code,
     promo,
     discountCents,
+    discountLabel,
+    /** Referral discount applied to this cart (null when a promo code is used or there's no reward). */
+    referralApplied: promo?.ok ? null : referral.discount,
+    /** e.g. "Add $120 more to get your $100 referral welcome discount". */
+    referralHint: referral.hint,
     minimumsUnmet,
     totalCents: subtotalCents - discountCents + shippingCents,
   };

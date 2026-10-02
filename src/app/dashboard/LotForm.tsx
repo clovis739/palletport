@@ -54,7 +54,6 @@ export function LotForm({
   const [catId, setCatId] = useState(defaults.categoryId ?? "");
   const subs = categories.find((c) => c.id === catId)?.subcategories ?? [];
   const grouped = groupCategories(categories.map((c) => ({ ...c, group: c.group ?? "" })));
-  const sourceOptions = [...new Set([...SOURCES, ...sources])];
   const editing = !!defaults.id;
 
   return (
@@ -103,11 +102,6 @@ export function LotForm({
                     {Object.entries(LOT_SIZES).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
                   </Select>
                 </div>
-                <div>
-                  <label className="label" htmlFor="source">Source</label>
-                  <input id="source" name="source" list="lot-sources" className="input" defaultValue={defaults.source ?? ""} maxLength={80} placeholder="Choose or type, e.g. Warehouse club" />
-                  <datalist id="lot-sources">{sourceOptions.map((s) => <option key={s} value={s} />)}</datalist>
-                </div>
               </div>
               <div>
                 <label className="label" htmlFor="brand">Brand</label>
@@ -117,7 +111,7 @@ export function LotForm({
               </div>
               <div>
                 <label className="label" htmlFor="description">Description</label>
-                <textarea id="description" name="description" rows={5} defaultValue={defaults.description} className="input resize-y" placeholder="Source, packaging, grading notes, pickup options…" required minLength={20} />
+                <textarea id="description" name="description" rows={5} defaultValue={defaults.description} className="input resize-y" placeholder="Packaging, grading notes, pickup options…" required minLength={20} />
                 <p className="mt-1 text-xs text-muted">At least 20 characters.</p>
               </div>
             </div>

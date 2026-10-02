@@ -14,7 +14,7 @@ export async function generateMetadata({ params, searchParams }: { params: Param
   const preview = await canPreview(searchParams);
   const doc = await getLegalPage(slug, { preview });
   if (!doc) return { title: "Policy not found", robots: { index: false } };
-  const md = pageMetadata({ title: doc.meta.seoTitle || doc.title, description: doc.meta.seoDescription || doc.excerpt, path: `/legal/${slug}`, noIndex: !!doc.meta.noindex });
+  const md = await pageMetadata({ title: doc.meta.seoTitle || doc.title, description: doc.meta.seoDescription || doc.excerpt, path: `/legal/${slug}`, noIndex: !!doc.meta.noindex });
   return preview ? { ...md, robots: PREVIEW_ROBOTS } : md;
 }
 

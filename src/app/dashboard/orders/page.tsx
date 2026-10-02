@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Prisma } from "@prisma/client";
 import { Download, ShoppingBag } from "lucide-react";
 import { requireStaff } from "@/lib/auth";
+import { getSetting } from "@/lib/settings";
 import { db } from "@/lib/db";
 import { money } from "@/lib/format";
 import {
@@ -10,6 +11,7 @@ import {
   ORDER_STATUSES,
   ORDER_STATUS_LABEL,
   PAYMENT_LABEL,
+  paymentLabel,
   isPaid,
   orderWhere,
   parseOrderFilters,
@@ -36,6 +38,9 @@ type SP = Record<string, string | undefined>;
 export default async function OrdersPage({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
   await requireStaff("orders", BASE);
+  // Filter options: built-ins, every method configured in Admin → Checkout, and any code already used on an order.
+  const [checkoutCfg, usedPay] = await Promise.all([getSetting("checkout"), db.order.findMany({ distinct: ["paymentMethod"], select: { paymentMethod: true } })]);
+  const payOptions = [...new Set([...Object.keys(PAYMENT_LABEL), ...checkoutCfg.paymentMethods.map((m) => m.id), ...usedPay.map((o) => o.paymentMethod)])];
   const f = parseOrderFilters(sp);
   const { sort, dir } = parseSort(sp.sort, sp.dir, Object.keys(ORDER_SORTS) as (keyof typeof ORDER_SORTS)[], "created");
   const page = parsePage(sp.page);
@@ -91,7 +96,7 @@ export default async function OrdersPage({ searchParams }: { searchParams: Promi
         <div className="w-40">
           <Select name="pay" form="toolbar-form" defaultValue={f.pay} aria-label="Payment method" className="input py-2">
             <option value="">Any payment</option>
-            {Object.entries(PAYMENT_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+            {payOptions.map((k) => <option key={k} value={k}>{paymentLabel(k)}</option>)}
           </Select>
         </div>
         <div className="w-40">
@@ -152,7 +157,7 @@ export default async function OrdersPage({ searchParams }: { searchParams: Promi
               header: "Payment",
               cell: (o) => (
                 <span className="inline-flex flex-wrap items-center gap-1 text-xs">
-                  {PAYMENT_LABEL[o.paymentMethod] ?? o.paymentMethod}
+                  {paymentLabel(o.paymentMethod)}
                   {isPaid(o) ? <Badge tone="moss">Paid</Badge> : o.status !== "CANCELLED" && o.amountPaidCents > 0 ? <Badge tone="signal">Deposit</Badge> : o.status !== "CANCELLED" ? <Badge tone="amber">Unpaid</Badge> : null}
                   {o.visitAt && <Badge tone="ink">Visit {o.visitAt.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "America/New_York" })}</Badge>}
                 </span>

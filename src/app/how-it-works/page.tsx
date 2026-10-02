@@ -3,22 +3,24 @@ import { CONDITIONS, FREE_FREIGHT_THRESHOLD_CENTS, money } from "@/lib/format";
 import { Photo } from "@/components/Photo";
 import { PHOTOS } from "@/content/photos";
 import { pageMetadata } from "@/lib/seo";
+import { getBrand } from "@/lib/brand";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "How our liquidation warehouse works",
   description:
     "We buy customer returns and overstock by the truckload, then sort, grade and manifest every pallet in our own Columbus-area warehouse to sell direct.",
   path: "/how-it-works",
 });
 
-export default function HowItWorks() {
+export default async function HowItWorks() {
+  const brand = await getBrand();
   return (
     <>
       <section className="relative overflow-hidden bg-ink text-white">
         <Photo photo={PHOTOS.warehouseWide} width={1600} ratio={16 / 9} sizes="100vw" priority alt="" className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 bg-ink/75" />
         <div className="container-pp relative py-12 sm:py-20 text-center">
-          <h1 className="font-display text-3xl font-bold sm:text-5xl">How PalletPort works</h1>
+          <h1 className="font-display text-3xl font-bold sm:text-5xl">How {brand} works</h1>
           <p className="mx-auto mt-3 max-w-2xl text-white/70">We buy returns and overstock by the truckload, sort and manifest every pallet in our own warehouse, and sell it direct to resellers — so you see exactly what's on a pallet before you buy.</p>
         </div>
       </section>

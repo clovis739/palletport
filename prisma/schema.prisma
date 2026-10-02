@@ -1,5 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  // "native" for your PC, rhel-openssl-3.0.x for Netlify Functions (AWS Lambda); Vercel also works with these.
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 // Postgres (Neon). DATABASE_URL = pooled connection (used by the app), DATABASE_URL_UNPOOLED = direct connection
@@ -112,6 +114,7 @@ model Subcategory {
 model Lot {
   id                       String         @id @default(cuid())
   slug                     String         @unique
+  sku                      String         @unique @default(dbgenerated("('PP-'::text || upper(substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)))"))
   externalSku              String?        @unique
   externalUrl              String?
   sourceCondition          String?

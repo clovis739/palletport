@@ -41,6 +41,7 @@ const STATIC: { path: string; listing?: Prisma.LotWhereInput }[] = [
   { path: "/help" },
   { path: "/guides" },
   { path: "/blog" },
+  { path: "/reports" },
   { path: "/about" },
   { path: "/liquidation-pallets-columbus-ohio" },
   { path: "/contact" },
@@ -50,7 +51,6 @@ const STATIC: { path: string; listing?: Prisma.LotWhereInput }[] = [
   { path: "/events" },
   { path: "/integrations" },
   { path: "/site-map" },
-  { path: "/credits" },
 ];
 
 const date = (d?: string) => (d ? new Date(`${d}T12:00:00Z`) : undefined);

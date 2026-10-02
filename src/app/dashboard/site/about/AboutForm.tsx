@@ -73,12 +73,8 @@ export function AboutForm({ initial, storeName, storeLocation }: { initial: Abou
                 </p>
               )}
             </FormSection>
-            <FormSection title="Photos" description="Up to four photos in a staggered 2×2 grid (4:3). Empty slots are skipped.">
-              <div className="grid gap-4 sm:grid-cols-2">
-                {[0, 1, 2, 3].map((i) => (
-                  <MediaField key={i} f={f} path={`heroPhotos.${i}`} label={`Photo ${i + 1}`} />
-                ))}
-              </div>
+            <FormSection title="Background photo" description="Full-width photo behind the hero text, darkened on the left so the text stays readable (like the homepage). Landscape, at least 1600 px wide. Your own warehouse photo works best.">
+              <MediaField f={f} path="heroBg" label="Background photo" />
             </FormSection>
             <FormSection title="Numbers heading" description="Heading above the live stats cards.">
               <Text f={f} path="statsTitle" label="Heading" />

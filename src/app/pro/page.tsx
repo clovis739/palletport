@@ -1,7 +1,7 @@
 import { ProgramPage } from "@/components/ProgramPage";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "PalletPort Pro: membership for weekly pallet buyers",
   absoluteTitle: true,
   description:

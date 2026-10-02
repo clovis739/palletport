@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { AuthForm } from "./AuthForm";
 import { privateMetadata } from "@/lib/seo";
+import { getBrand } from "@/lib/brand";
 
 export const metadata = privateMetadata("Sign in");
 
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string; reset?: string; expired?: string }> }) {
+  const brand = await getBrand();
   const { next = "/", reset, expired } = await searchParams;
   return (
     <div className="container-pp grid max-w-md py-10 sm:py-16">
@@ -16,9 +18,8 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
       {reset && <p className="mb-4 rounded-lg bg-moss/10 p-3 text-sm font-medium text-moss">Password updated. Sign in with your new password.</p>}
       <AuthForm mode="login" next={next} />
       <p className="mt-6 text-center text-sm">
-        New to PalletPort? <Link href={`/register?next=${encodeURIComponent(next)}`} className="font-semibold text-signal-dark hover:underline">Create an account</Link>
+        New to {brand}? <Link href={`/register?next=${encodeURIComponent(next)}`} className="font-semibold text-signal-dark hover:underline">Create an account</Link>
       </p>
-      <p className="mt-4 rounded-lg bg-sand p-3 text-center text-xs text-muted">Demo: buyer@palletport.test / password123</p>
     </div>
   );
 }

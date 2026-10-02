@@ -1,7 +1,7 @@
 import { ProgramPage } from "@/components/ProgramPage";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "Integrations",
   description:
     "Turn manifests into inventory without retyping. We're building point-of-sale, marketplace and accounting integrations — tell us which you use.",

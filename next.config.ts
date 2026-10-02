@@ -12,6 +12,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Allows verification builds to avoid a running development server's cache.
+  distDir: process.env.PALLET_BUILD_DIR || ".next",
   serverExternalPackages: ["bcryptjs"],
   poweredByHeader: false,
   experimental: {
@@ -43,7 +45,13 @@ const nextConfig: NextConfig = {
     ];
   },
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      { source: "/dashboard/:path*", headers: [
+        { key: "Cache-Control", value: "private, no-store" },
+        { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+      ] },
+    ];
   },
 };
 

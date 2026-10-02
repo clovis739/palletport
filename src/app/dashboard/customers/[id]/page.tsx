@@ -5,7 +5,7 @@ import { requireStaff } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { BUSINESS_TYPES, money, timeAgo } from "@/lib/format";
 import { ROLE_INFO, ROLES, asRole, isStaff } from "@/lib/permissions";
-import { PAYMENT_LABEL, REVENUE_STATUSES } from "@/lib/commerce";
+import { REVENUE_STATUSES, paymentLabel } from "@/lib/commerce";
 import { PageHeader } from "@/components/admin/PageHeader";
 import { Card } from "@/components/admin/Card";
 import { StatCard } from "@/components/admin/StatCard";
@@ -83,7 +83,7 @@ export default async function CustomerDetail({ params }: { params: Promise<{ id:
                 { key: "no", header: "Order", cell: (o) => <Link href={`/dashboard/orders/${o.id}`} className="font-mono font-semibold hover:underline">{o.number}</Link> },
                 { key: "date", header: "Date", cell: (o) => <span className="text-xs">{o.createdAt.toLocaleDateString()}</span> },
                 { key: "lots", header: "Lots", hideOnMobile: true, cell: (o) => <span className="block max-w-[14rem] truncate text-xs">{o.items.map((i) => i.title).join(", ")}</span> },
-                { key: "pay", header: "Payment", hideOnMobile: true, cell: (o) => <span className="text-xs">{PAYMENT_LABEL[o.paymentMethod] ?? o.paymentMethod}</span> },
+                { key: "pay", header: "Payment", hideOnMobile: true, cell: (o) => <span className="text-xs">{paymentLabel(o.paymentMethod)}</span> },
                 { key: "status", header: "Status", cell: (o) => <StatusPill status={o.status} /> },
                 { key: "total", header: "Total", align: "right", cell: (o) => <span className="font-semibold tabular-nums">{money(o.totalCents)}</span> },
               ]}

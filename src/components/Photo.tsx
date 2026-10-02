@@ -1,4 +1,6 @@
 import { photoSrc, type StockPhoto } from "@/content/photos";
+import Image from "next/image";
+import { photoLightingStyle } from '@/lib/photo-lighting';
 
 /** Responsive stock photo. The parent controls size; the image fills it with object-cover. */
 export function Photo({
@@ -14,7 +16,7 @@ export function Photo({
   className?: string;
   /** Display width in CSS px (the 1x candidate). */
   width?: number;
-  /** Aspect ratio (width / height) of the slot; the CDN crops to it and width/height attrs reserve the space. */
+  /** Aspect ratio of the slot; object-cover crops the local source image. */
   ratio?: number;
   /** LCP image: loads eagerly with high fetch priority. */
   priority?: boolean;
@@ -22,12 +24,10 @@ export function Photo({
   sizes?: string;
   alt?: string;
 }) {
-  const half = Math.round(width / 2);
   return (
-    // eslint-disable-next-line @next/next/no-img-element -- Unsplash's CDN already resizes and serves modern formats
-    <img
+    <Image
       src={photoSrc(photo, width, ratio)}
-      srcSet={`${photoSrc(photo, half, ratio)} ${half}w, ${photoSrc(photo, width, ratio)} ${width}w, ${photoSrc(photo, width * 2, ratio)} ${width * 2}w`}
+      style={photoLightingStyle(photo.src)}
       sizes={sizes ?? `(max-width: 640px) 100vw, ${width}px`}
       width={width}
       height={Math.round(width / ratio)}

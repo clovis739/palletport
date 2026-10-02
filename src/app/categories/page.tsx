@@ -2,8 +2,9 @@ import Link from "next/link";
 import { getCategoryGroups, categoryImage } from "@/lib/catalog";
 import { SiteImage } from "@/components/content/SiteImage";
 import { JsonLd, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { getBrand } from "@/lib/brand";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "Shop liquidation pallets by category",
   description:
     "Every liquidation lot we sell, sorted by department: phones and computers, TVs, video games, appliances, clothing, shoes, household essentials, tools, automotive and more, with live lot counts.",
@@ -14,12 +15,13 @@ export const dynamic = "force-dynamic";
 const anchor = (g: string) => g.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 export default async function CategoriesPage() {
+  const brand = await getBrand();
   const groups = await getCategoryGroups();
   return (
     <div className="container-pp py-10">
       <JsonLd data={breadcrumbJsonLd([{ name: "Categories", path: "/categories" }])} />
       <h1 className="font-display text-3xl font-bold">All categories</h1>
-      <p className="text-muted">Every lot on PalletPort, organised by department and what&apos;s inside.</p>
+      <p className="text-muted">Every lot on {brand}, organised by department and what&apos;s inside.</p>
 
       {groups.length > 1 && (
         <nav aria-label="Departments" className="-mx-4 mt-5 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0 [&::-webkit-scrollbar]:hidden">

@@ -1,12 +1,15 @@
 import { ImageResponse } from "next/og";
-import { SITE_NAME } from "@/lib/seo";
+import { getBrandLogo } from "@/lib/brand";
 
 // Default social card for every page that doesn't have its own (lot pages do: lots/[slug]/opengraph-image.tsx).
-export const alt = `${SITE_NAME} — wholesale liquidation pallets, truckloads and case packs`;
+export const alt = "Wholesale liquidation pallets, truckloads and case packs";
+// Re-rendered every 10 minutes so a new business name (Admin → Business profile) shows up on share cards.
+export const revalidate = 600;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+export default async function OpengraphImage() {
+  const brand = await getBrandLogo();
   return new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#13233f", color: "#fbf8f1", padding: 72 }}>
@@ -20,13 +23,14 @@ export default function OpengraphImage() {
             <rect x="23" y="23" width="4" height="5" fill="#fbf8f1" />
           </svg>
           <div style={{ display: "flex", fontSize: 52, fontWeight: 700 }}>
-            {SITE_NAME === "PalletPort" ? (
+            {brand.accent && brand.name.includes(brand.accent) ? (
               <>
-                <span>Pallet</span>
-                <span style={{ color: "#f0641e" }}>Port</span>
+                <span>{brand.name.slice(0, brand.name.lastIndexOf(brand.accent))}</span>
+                <span style={{ color: "#f0641e" }}>{brand.accent}</span>
+                <span>{brand.name.slice(brand.name.lastIndexOf(brand.accent) + brand.accent.length)}</span>
               </>
             ) : (
-              <span>{SITE_NAME}</span>
+              <span>{brand.name}</span>
             )}
           </div>
         </div>

@@ -9,6 +9,7 @@ import {
   SETTINGS_SCHEMAS,
   deepMerge,
   isSettingsKey,
+  rebrandDeep,
   type DeepPartial,
   type SettingsKey,
   type SettingsMap,
@@ -33,7 +34,8 @@ export const getStoredSettings = cache(async (): Promise<SettingsMap> => {
     if (!isSettingsKey(row.key)) continue;
     setKey(out, row.key, row.value);
   }
-  return out;
+  // Renamed business: every settings text that still says the original brand shows the new name instead.
+  return rebrandDeep(out, out.business.name);
 });
 
 function setKey<K extends SettingsKey>(out: SettingsMap, key: K, raw: string) {

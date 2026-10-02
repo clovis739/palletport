@@ -6,7 +6,7 @@ import { Pager, pageCount, pageParam } from "@/components/ui/Pager";
 
 const PER_PAGE = 24;
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "New liquidation pallet arrivals (last 14 days)",
   description:
     "Every liquidation lot listed in the last 14 days, grouped by day: fixed-price pallets, truckloads and case packs, each manifested and graded by our warehouse team.",

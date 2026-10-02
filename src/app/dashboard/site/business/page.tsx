@@ -18,7 +18,7 @@ export default async function BusinessPage() {
         actions={<AreaActions area="business" />}
       />
       {/* The store record (commerce) is the source of the store name and location: edit both here. */}
-      <BusinessForm initial={{ ...business, name: seller.name, storeLocation: seller.location }} />
+      <BusinessForm initial={{ ...business, photos: [...(business.photos ?? []), "", "", "", "", "", ""].slice(0, 6), name: seller.name, storeLocation: seller.location }} />
     </>
   );
 }

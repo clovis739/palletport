@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { BlogIndex } from "@/components/blog/BlogIndex";
 import { categoryFromSlug } from "@/lib/blog";
-import { JsonLd, SITE_NAME, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { JsonLd, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Params }) {
   if (!c) return { title: "Blog", robots: { index: false } };
   return pageMetadata({
     title: `${c} — liquidation reselling blog`,
-    description: `${c} from The Loading Dock, the ${SITE_NAME} blog for businesses that buy and resell liquidation pallets, truckloads and case packs.`,
+    description: `${c} from The Loading Dock, the PalletPort blog for businesses that buy and resell liquidation pallets, truckloads and case packs.`,
     path: `/blog/category/${slug}`,
   });
 }

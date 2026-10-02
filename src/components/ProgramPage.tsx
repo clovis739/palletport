@@ -2,10 +2,12 @@ import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { InquiryForm } from "./InquiryForm";
 import { JsonLd } from "./JsonLd";
 import { faqJsonLd } from "@/lib/seo";
+import { getBrand } from "@/lib/brand";
+import { rebrandDeep } from "@/lib/settings-schema";
 
 type Topic = "PRO" | "VOLUME" | "AFFILIATE" | "EVENTS" | "INTEGRATIONS";
 
-export function ProgramPage({
+function ProgramPageView({
   eyebrow,
   title,
   lead,
@@ -80,4 +82,9 @@ export function ProgramPage({
       </section>
     </>
   );
+}
+
+/** Program pages (Pro, Volume buyers, Affiliates, Events, Integrations): text follows the business name. */
+export async function ProgramPage(props: Parameters<typeof ProgramPageView>[0]) {
+  return <ProgramPageView {...rebrandDeep(props, await getBrand())} />;
 }

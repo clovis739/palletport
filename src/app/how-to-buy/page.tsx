@@ -2,7 +2,7 @@ import Link from "next/link";
 import { LOT_SIZES, money } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "How to order liquidation pallets",
   description:
     "How ordering works: find a lot, check the manifest, add it to your cart and check out at the listed price. Payment options, freight, delivery and pickup.",
@@ -10,7 +10,7 @@ export const metadata = pageMetadata({
 });
 
 const STEPS: [string, string][] = [
-  ["Find a lot", "Browse by lot size or category, or search by product, brand or SKU. Filter by condition, source and price."],
+  ["Find a lot", "Browse by lot size or category, or search by product, brand or SKU. Filter by condition, category and price."],
   ["Check the manifest", "Every lot page lists the SKUs, quantities, retail values and condition grade, plus a freight estimate for your ZIP."],
   ["Add to cart", "Choose a quantity where more than one identical lot is in stock. Use Buy now to go straight to checkout."],
   ["Check out", "Enter your delivery details and pay the listed price plus freight. Card orders are confirmed right away."],

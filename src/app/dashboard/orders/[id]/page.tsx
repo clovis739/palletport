@@ -6,7 +6,7 @@ import { requireStaff } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { money, conditionLabel } from "@/lib/format";
 import { lotCover } from "@/lib/lotImages";
-import { CARRIERS, DELIVERY_LABEL, PAYMENT_LABEL, auditLabel, isPaid } from "@/lib/commerce";
+import { CARRIERS, DELIVERY_LABEL, auditLabel, isPaid, paymentLabel } from "@/lib/commerce";
 import { formatVisit } from "@/lib/visits";
 import { PageHeader } from "@/components/admin/PageHeader";
 import { Card } from "@/components/admin/Card";
@@ -44,7 +44,7 @@ export default async function OrderDetail({ params }: { params: Promise<{ id: st
 
   // ---- Timeline: order fields + audit entries for this order ----
   const events: Event[] = [
-    { at: order.createdAt, title: "Order placed", detail: `${PAYMENT_LABEL[order.paymentMethod] ?? order.paymentMethod} · ${money(order.totalCents)}` },
+    { at: order.createdAt, title: "Order placed", detail: `${paymentLabel(order.paymentMethod)} · ${money(order.totalCents)}` },
   ];
   for (const a of audit) events.push({ at: a.createdAt, title: auditLabel(a.action), detail: a.detail, who: a.userEmail });
   const has = (action: string) => audit.some((a) => a.action === action || (a.action === "order.status" && a.detail.startsWith(action)));
@@ -256,7 +256,7 @@ export default async function OrderDetail({ params }: { params: Promise<{ id: st
 
           <Card title="Payment">
             <dl className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-1.5 text-sm">
-              <dt className="text-muted">Method</dt><dd>{PAYMENT_LABEL[order.paymentMethod] ?? order.paymentMethod}</dd>
+              <dt className="text-muted">Method</dt><dd>{paymentLabel(order.paymentMethod)}</dd>
               <dt className="text-muted">Status</dt><dd>{paid ? `Paid${order.paidAt ? ` ${order.paidAt.toLocaleDateString()}` : " (card at checkout)"}` : order.amountPaidCents > 0 ? `Deposit ${money(order.amountPaidCents)} received` : "Not paid"}</dd>
               {order.poNumber && (<><dt className="text-muted">PO #</dt><dd className="break-all font-mono">{order.poNumber}</dd></>)}
               {order.promoCode && (<><dt className="text-muted">Promo</dt><dd className="font-mono">{order.promoCode} (−{money(order.discountCents)})</dd></>)}

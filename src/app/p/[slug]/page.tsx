@@ -22,7 +22,7 @@ export async function generateMetadata({ params, searchParams }: { params: Param
   const page = await getPage(slug, { preview });
   if (!page) return { title: "Page not found", robots: { index: false } };
   const img = imageRefUrl(page.meta.cover);
-  const md = pageMetadata({
+  const md = await pageMetadata({
     title: page.meta.seoTitle || page.title,
     description: page.meta.seoDescription || page.excerpt || blocksText(page.blocks),
     path: `/p/${page.slug}`,

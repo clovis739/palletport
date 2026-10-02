@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Building2, CircleHelp, ExternalLink, Home, Info, Megaphone, Menu as MenuIcon, Search, type LucideIcon } from "lucide-react";
+import { Building2, CircleHelp, CreditCard, ExternalLink, Home, Info, Mail, Megaphone, Menu as MenuIcon, Search, type LucideIcon } from "lucide-react";
 import { ConfirmButton } from "@/components/admin/ConfirmButton";
 import { resetArea } from "@/app/actions/site";
 import type { SettingsKey } from "@/lib/settings-schema";
@@ -12,6 +12,8 @@ export const SITE_AREAS: { key: SettingsKey; title: string; description: string;
   { key: "home", title: "Homepage", description: "Hero text and photo, stats, and every homepage section: show, hide, rename and reorder.", href: "/dashboard/site/homepage", preview: "/", icon: Home },
   { key: "about", title: "About page", description: "Hero, photos, mission, sustainability, buying promises, advantages and thank-you cards.", href: "/dashboard/site/about", preview: "/about", icon: Info },
   { key: "faqs", title: "FAQs", description: "The questions and answers at the bottom of the homepage, about page and blog.", href: "/dashboard/site/faqs", preview: "/#faq", icon: CircleHelp },
+  { key: "contact", title: "Contact page", description: "Heading, intro, help notes, form labels, pickup message, map and reviews on the Contact us page.", href: "/dashboard/site/contact", preview: "/contact", icon: Mail },
+  { key: "checkout", title: "Checkout", description: "Payment methods (add, remove, reorder, turn on/off, logos and instructions) and the checkout fields buyers fill in.", href: "/dashboard/site/checkout", preview: "/checkout", icon: CreditCard },
   { key: "seo", title: "SEO defaults", description: "Default page title, title template, description and social sharing image.", href: "/dashboard/site/seo", preview: "/", icon: Search },
 ];
 

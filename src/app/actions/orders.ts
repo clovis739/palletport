@@ -14,6 +14,8 @@ import { LIMITS, rateLimit } from "@/lib/rateLimit";
 import type { FormState } from "./auth";
 import { notifyCreatedOrder } from "@/lib/order-email";
 import { notifyOrderEvent } from "@/lib/status-email";
+import { getSetting } from "@/lib/settings";
+import { referralDiscount } from "@/lib/referrals";
 
 const checkoutSchema = z.object({
   shipName: z.string().trim().min(2, "Enter a receiving name"),
@@ -23,7 +25,8 @@ const checkoutSchema = z.object({
   shipPostal: z.string().trim().min(3, "Enter a postal code"),
   shipCountry: z.string().trim().min(2, "Enter a country"),
   phone: z.string().trim().max(30).optional(),
-  paymentMethod: z.enum(["CARD", "NET30", "WIRE"]),
+  /** Checked against the enabled methods in Admin → Site settings → Checkout below. */
+  paymentMethod: z.string().trim().regex(/^[A-Z0-9_]{2,24}$/, "Choose a payment method"),
   dockAccess: z.string().optional(),
   deliveryMethod: z.enum(["FREIGHT", "PICKUP"]).default("FREIGHT"),
   residential: z.string().optional(),
@@ -45,6 +48,20 @@ export async function placeOrder(_: FormState, formData: FormData): Promise<Form
   const parsed = checkoutSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) return { error: parsed.error.issues[0].message };
   const { dockAccess, residential, deliveryMethod, poNumber, notes, phone, terms: _terms, ...ship } = parsed.data;
+
+  // Payment method and checkout fields as configured by the owner.
+  const cfg = await getSetting("checkout");
+  if (!cfg.paymentMethods.some((m) => m.enabled && m.id === ship.paymentMethod)) return { error: "That payment method isn't available. Please choose another." };
+  const req = (on: { show: boolean; required: boolean; label: string }, v?: string) => on.show && on.required && !v;
+  if (req(cfg.fields.phone, phone)) return { error: `Enter: ${cfg.fields.phone.label}` };
+  if (req(cfg.fields.poNumber, poNumber)) return { error: `Enter: ${cfg.fields.poNumber.label}` };
+  if (req(cfg.fields.notes, notes)) return { error: `Enter: ${cfg.fields.notes.label}` };
+  const extras: string[] = [];
+  for (const cf of cfg.customFields) {
+    const v = String(formData.get(`cf_${cf.id}`) ?? "").trim().slice(0, cf.type === "textarea" ? 500 : 200);
+    if (cf.required && !v) return { error: `Enter: ${cf.label}` };
+    if (v) extras.push(`[${cf.label}: ${v}]`);
+  }
 
   if (ship.paymentMethod === "NET30") {
     const u = await db.user.findUnique({ where: { id: session.userId }, select: { certStatus: true } });
@@ -106,6 +123,14 @@ export async function placeOrder(_: FormState, formData: FormData): Promise<Form
           await tx.promo.update({ where: { code: r.code }, data: { uses: { increment: 1 } } });
         }
       }
+      // "Give $100, get $100": applied automatically when no promo code is used (see src/lib/referrals.ts).
+      if (!appliedCode) {
+        const ref = await referralDiscount(session.userId, subtotalCents, tx);
+        if (ref.discount) {
+          discountCents = ref.discount.cents;
+          appliedCode = ref.discount.code;
+        }
+      }
 
       // TODO(payments): for CARD, create a Stripe PaymentIntent here and only confirm the order on webhook success.
       const order = await tx.order.create({
@@ -122,7 +147,7 @@ export async function placeOrder(_: FormState, formData: FormData): Promise<Form
           residential: residential === "on",
           deliveryMethod,
           poNumber: poNumber || null,
-          notes: [phone ? `[Delivery phone: ${phone}]` : "", notes ?? ""].filter(Boolean).join("\n") || null,
+          notes: [phone ? `[Delivery phone: ${phone}]` : "", ...extras, notes ?? ""].filter(Boolean).join("\n") || null,
           ...ship,
           items: {
             create: items.map((i) => ({

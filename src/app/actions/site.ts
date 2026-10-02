@@ -9,7 +9,10 @@ import { db } from "@/lib/db";
 import {
   aboutSchema,
   announcementSchema,
+  BUILTIN_PAYMENT_IDS,
   businessSchema,
+  checkoutSettingsSchema,
+  contactSchema,
   faqsSchema,
   getStoredSettings,
   homeSchema,
@@ -64,6 +67,8 @@ const AREA_PATHS: Record<SettingsKey, string> = {
   home: "/dashboard/site/homepage",
   about: "/dashboard/site/about",
   faqs: "/dashboard/site/faqs",
+  contact: "/dashboard/site/contact",
+  checkout: "/dashboard/site/checkout",
   seo: "/dashboard/site/seo",
 };
 
@@ -112,7 +117,8 @@ export async function saveBusiness(_: SiteFormState, fd: FormData): Promise<Site
   const { user, seller } = await requireStaff("site", AREA_PATHS.business);
   const parsed = businessForm.safeParse(readPayload(fd));
   if (!parsed.success) return invalid(parsed.error);
-  const { storeLocation, ...business } = parsed.data;
+  const { storeLocation, ...rest } = parsed.data;
+  const business = { ...rest, photos: (rest.photos ?? []).filter(Boolean) };
   const res = await store("business", business, user, "Business profile saved");
   if (res?.error) return res;
   if (seller.name !== business.name || seller.location !== storeLocation) {
@@ -169,6 +175,55 @@ export async function saveFaqs(_: SiteFormState, fd: FormData): Promise<SiteForm
   const parsed = faqsSchema.safeParse(readPayload(fd));
   if (!parsed.success) return invalid(parsed.error);
   return store("faqs", parsed.data, user, "FAQs saved");
+}
+
+export async function saveContact(_: SiteFormState, fd: FormData): Promise<SiteFormState> {
+  const { user } = await requireStaff("site", AREA_PATHS.contact);
+  const parsed = contactSchema
+    .superRefine((c, ctx) => {
+      if (c.seoTitle.length > 70) ctx.addIssue({ code: "custom", path: ["seoTitle"], message: "Keep the title under 70 characters" });
+      if (c.seoDescription.length > 200) ctx.addIssue({ code: "custom", path: ["seoDescription"], message: "Keep the description under 200 characters" });
+      c.tips.forEach((t, i) => {
+        if (!t.label && !t.text && !t.linkLabel) ctx.addIssue({ code: "custom", path: ["tips", i, "text"], message: "Add some text or remove this note" });
+        if (t.linkLabel && !t.href) ctx.addIssue({ code: "custom", path: ["tips", i, "href"], message: "Add the link URL" });
+      });
+    })
+    .safeParse(readPayload(fd));
+  if (!parsed.success) return invalid(parsed.error);
+  return store("contact", parsed.data, user, "Contact page saved");
+}
+
+/**
+ * Gift cards are not accepted as a payment method. Demanding payment by gift card is the best-known sign of a scam
+ * (FTC), buyers have no protection, and card networks and Google Merchant Center treat it as a fraud signal.
+ */
+const GIFT_CARD = /gift\s*-?\s*cards?|giftcard|steam\s*card|itunes\s*card|google\s*play\s*card|razer\s*gold|vanilla\s*(visa|gift)/i;
+
+export async function saveCheckout(_: SiteFormState, fd: FormData): Promise<SiteFormState> {
+  const { user } = await requireStaff("site", AREA_PATHS.checkout);
+  const parsed = checkoutSettingsSchema
+    .superRefine((c, ctx) => {
+      const ids = new Set<string>();
+      c.paymentMethods.forEach((m, i) => {
+        if (ids.has(m.id)) ctx.addIssue({ code: "custom", path: ["paymentMethods", i, "id"], message: "Each method needs its own code" });
+        ids.add(m.id);
+        if (GIFT_CARD.test(`${m.id} ${m.name} ${m.description} ${m.instructions}`)) {
+          ctx.addIssue({ code: "custom", path: ["paymentMethods", i, "name"], message: "Gift cards can't be offered as a payment method (a well-known scam signal, with no buyer protection)" });
+        }
+      });
+      for (const id of BUILTIN_PAYMENT_IDS) {
+        if (!ids.has(id)) ctx.addIssue({ code: "custom", path: ["paymentMethods"], message: `Keep the built-in ${id} method (turn it off instead of deleting it)` });
+      }
+      if (!c.paymentMethods.some((m) => m.enabled)) ctx.addIssue({ code: "custom", path: ["paymentMethods"], message: "Turn on at least one payment method" });
+      const fids = new Set<string>();
+      c.customFields.forEach((f, i) => {
+        if (fids.has(f.id)) ctx.addIssue({ code: "custom", path: ["customFields", i, "label"], message: "Two fields have the same name" });
+        fids.add(f.id);
+      });
+    })
+    .safeParse(readPayload(fd));
+  if (!parsed.success) return invalid(parsed.error);
+  return store("checkout", parsed.data, user, "Checkout saved");
 }
 
 export async function saveSeo(_: SiteFormState, fd: FormData): Promise<SiteFormState> {

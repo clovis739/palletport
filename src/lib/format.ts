@@ -100,7 +100,7 @@ export const SOURCES = [
 export const US_STATES = ["AZ", "MN", "NJ", "OH", "TX", "WA"];
 
 export function stateOf(shipsFrom: string) {
-  return shipsFrom.split(",").pop()?.trim() ?? "";
+  return shipsFrom.match(/,\s*([A-Z]{2})(?:\s+\d{5}(?:-\d{4})?)?(?:\s*,|\s*$)/i)?.[1].toUpperCase() ?? shipsFrom.split(",").pop()?.trim() ?? "";
 }
 
 /** Price a buyer pays for one lot, or null when the lot can't be bought (sold out or draft). */

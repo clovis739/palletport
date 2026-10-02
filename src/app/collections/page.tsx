@@ -6,7 +6,7 @@ import { COLLECTION_PHOTOS, photoFor } from "@/content/photos";
 import { NextIcon } from "@/components/Icons";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "Curated liquidation pallet collections",
   description:
     "Curated groups of liquidation lots for specific store types, budgets and seasons: bin store starters, pallets under $1,000, truckloads and more.",

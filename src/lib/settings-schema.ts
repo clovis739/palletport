@@ -24,6 +24,16 @@ const link = z.object({ label: str.min(1, "Every link needs a label"), href: hre
 export type SiteLink = z.infer<typeof link>;
 const imageRef = str; // stock photo key or media URL
 
+/**
+ * Accepts either the bare Smartsupp key or the whole "Chat code" snippet pasted from Smartsupp and returns the key,
+ * so the owner can switch Smartsupp accounts by pasting whatever Smartsupp gives them.
+ */
+export function smartsuppKeyFrom(input: string): string {
+  const v = input.trim();
+  const m = v.match(/_smartsupp\.key\s*=\s*['"]([a-f0-9]{20,64})['"]/i);
+  return m ? m[1] : v.replace(/^['"]|['"]$/g, "");
+}
+
 // ---------- business ----------
 
 export const businessSchema = z.object({
@@ -46,6 +56,15 @@ export const businessSchema = z.object({
   googlePlaceId: optStr,
   /** Public link to the Google Business Profile ("Share" link from Google Maps). */
   googleMapsUrl: optStr.refine((v) => !v || /^https:\/\//.test(v), "Link must start with https://"),
+  /** Real photos of the warehouse / storefront (uploaded, never stock). Shown on the Contact page and given to Google as the business images. */
+  photos: z.array(imageRef).max(6).optional(),
+  /** Part of the name shown in orange in the header logo, e.g. "Port" in PalletPort. Empty = whole name in one colour. */
+  logoAccent: optStr,
+  /** Smartsupp live chat key (Smartsupp → Settings → Chat box → Chat code: the value of _smartsupp.key). Empty = no chat widget. */
+  smartsuppKey: z.preprocess(
+    (v) => (typeof v === "string" ? smartsuppKeyFrom(v) : v),
+    optStr.refine((v) => !v || /^[a-f0-9]{20,64}$/i.test(v), "Paste the Smartsupp key (or the whole chat code)"),
+  ),
 });
 export type BusinessSettings = z.infer<typeof businessSchema>;
 
@@ -146,6 +165,8 @@ export const aboutSchema = z.object({
   /** Supports {name} and {location}. */
   heroIntro: str,
   heroPhotos: z.array(imageRef).max(4),
+  /** Full-width background photo behind the About hero text (like the homepage hero). */
+  heroBg: imageRef,
   statsTitle: str,
   mission: z.object({ eyebrow: str, title: str, paragraphs: z.array(str), linkLabel: str, linkHref: href }),
   sustainability: z.object({ eyebrow: str, title: str, body: str, linkLabel: str, linkHref: href, photo: imageRef }),
@@ -174,6 +195,82 @@ export type FaqPage = (typeof FAQ_PAGES)[number];
 export const faqsSchema = z.object({ home: faqBlock, about: faqBlock, blog: faqBlock });
 export type FaqsSettings = z.infer<typeof faqsSchema>;
 
+// ---------- contact page ----------
+
+const contactTip = z.object({ label: str, text: str, linkLabel: str, href: href });
+export type ContactTip = z.infer<typeof contactTip>;
+export const contactSchema = z.object({
+  /** Browser tab / Google title and description for /contact. */
+  seoTitle: str.min(1, "Enter a page title"),
+  seoDescription: str,
+  title: str.min(1, "Enter a heading"),
+  /** Supports {name} and {location}. */
+  intro: str,
+  /** Short notes in the first box (label in bold, then text, then an optional link). */
+  tips: z.array(contactTip).max(8, "Up to 8 notes"),
+  /** Adds the pickup note from the business profile to the first box. */
+  showPickup: z.boolean(),
+  /** Adds the opening hours from the business profile to the first box. */
+  showHours: z.boolean(),
+  directTitle: str,
+  formTitle: str,
+  bodyLabel: str.min(1, "Enter a label for the message box"),
+  submitLabel: str.min(1, "Enter the button text"),
+  /** Shown above the form when someone comes from a "Book a pickup" link (/contact?topic=pickup). */
+  pickupNotice: str,
+  pickupSubmitLabel: str.min(1, "Enter the button text"),
+  photosTitle: str,
+  showMap: z.boolean(),
+  mapTitle: str,
+  mapNote: str,
+  showReviews: z.boolean(),
+  reviewsTitle: str,
+});
+export type ContactSettings = z.infer<typeof contactSchema>;
+
+// ---------- checkout (payment methods + fields) ----------
+
+/** Built-in methods with special handling at checkout: CARD (card form), WIRE (bank details), NET30 (verified resellers only). */
+export const BUILTIN_PAYMENT_IDS = ["CARD", "WIRE", "NET30"] as const;
+/** Generic icons an admin can pick for a payment method (brand logos are uploaded as images instead). */
+export const PAYMENT_ICONS = ["card", "bank", "transfer", "phone", "wallet", "cash", "invoice", "zap"] as const;
+export type PaymentIcon = (typeof PAYMENT_ICONS)[number];
+
+const paymentMethod = z.object({
+  /** Stable code saved on each order, e.g. "ZELLE". Capital letters, digits and _ only. */
+  id: str.regex(/^[A-Z0-9_]{2,24}$/, "Use 2–24 capital letters, digits or _ (e.g. ZELLE)"),
+  enabled: z.boolean(),
+  name: str.min(1, "Enter the method name"),
+  /** One line under the name in the dropdown. */
+  description: str,
+  /** Shown after the order is placed (order page + confirmation email): where and how to send payment. */
+  instructions: str,
+  icon: z.enum(PAYMENT_ICONS),
+  /** Optional uploaded logo (the provider's official acceptance mark). Replaces the generic icon. */
+  logo: imageRef,
+});
+export type PaymentMethodSetting = z.infer<typeof paymentMethod>;
+
+const fieldSetting = z.object({ show: z.boolean(), required: z.boolean(), label: str.min(1, "Enter a label"), placeholder: str });
+export type CheckoutFieldSetting = z.infer<typeof fieldSetting>;
+const customField = z.object({
+  id: str.regex(/^[a-z0-9_]{2,24}$/, "Use lowercase letters, digits or _"),
+  label: str.min(1, "Enter a label"),
+  type: z.enum(["text", "textarea"]),
+  required: z.boolean(),
+  placeholder: str,
+});
+export type CheckoutCustomField = z.infer<typeof customField>;
+
+export const checkoutSettingsSchema = z.object({
+  paymentTitle: str.min(1, "Enter a heading"),
+  paymentMethods: z.array(paymentMethod).min(1, "Keep at least one payment method").max(12, "Up to 12 payment methods"),
+  fields: z.object({ phone: fieldSetting, poNumber: fieldSetting, notes: fieldSetting }),
+  /** Extra questions at checkout. Answers are saved in the order notes. */
+  customFields: z.array(customField).max(6, "Up to 6 extra fields"),
+});
+export type CheckoutSettings = z.infer<typeof checkoutSettingsSchema>;
+
 // ---------- SEO ----------
 
 export const seoSchema = z.object({
@@ -183,6 +280,10 @@ export const seoSchema = z.object({
   defaultDescription: str,
   /** Media URL or absolute URL; "" = the generated /opengraph-image. */
   ogImage: optStr,
+  /** Google Search Console "HTML tag" verification code (only the content="…" value). */
+  googleVerification: optStr,
+  /** Google Analytics 4 Measurement ID ("G-XXXXXXXXXX"). Empty = analytics off (unless NEXT_PUBLIC_GA_MEASUREMENT_ID is set). */
+  gaMeasurementId: optStr.refine((v) => !v || /^G-[A-Z0-9]{4,20}$/i.test(v.trim()), "Use the Measurement ID, e.g. G-AB12CD34EF"),
 });
 export type SeoSettings = z.infer<typeof seoSchema>;
 
@@ -195,6 +296,8 @@ export const SETTINGS_SCHEMAS = {
   home: homeSchema,
   about: aboutSchema,
   faqs: faqsSchema,
+  contact: contactSchema,
+  checkout: checkoutSettingsSchema,
   seo: seoSchema,
 } as const;
 
@@ -211,6 +314,7 @@ export function isSettingsKey(k: string): k is SettingsKey {
 export const DEFAULTS: SettingsMap = {
   business: {
     name: "PalletPort",
+    logoAccent: "Port",
     tagline: "Manifested liquidation pallets, truckloads and case packs direct from our warehouse",
     email: "",
     salesEmail: "",
@@ -305,7 +409,8 @@ export const DEFAULTS: SettingsMap = {
     heroTitle: "Shop returns & overstock by the case, pallet or truckload.",
     heroSubtitle: "Manifested lots from retailers and distributors at fixed prices. Add to cart, check out, and we ship dock to door.",
     heroSearchPlaceholder: "Search lots — try “air fryer”, “power tools”, “truckload”",
-    heroPhoto: "heroWarehouse",
+    // Warehouse aisle with pallet racking. Photo: Ruchindra Gunasekara on Unsplash (free under the Unsplash License).
+    heroPhoto: "https://images.unsplash.com/photo-1553413077-190dd305871c",
     heroLinks: [
       { label: "Shop all lots", href: "/lots" },
       { label: "New arrivals", href: "/new" },
@@ -348,7 +453,9 @@ export const DEFAULTS: SettingsMap = {
     heroTitle: "Pallets sorted, manifested and sold by us.",
     heroIntro:
       "{name} buys returns and overstock from retailers, sorts and manifests every load in our {location} warehouse, and sells it straight to resellers — by the case, the pallet or the truckload. No middlemen, no third-party sellers.",
-    heroPhotos: ["forklift", "shelving", "boxStack", "aisleTeam"],
+    heroPhotos: [],
+    // Warehouse with forklift and pallet racking. Photo: AFINIS Group on Unsplash (free under the Unsplash License).
+    heroBg: "https://images.unsplash.com/photo-1689942010216-dc412bb1e7a9",
     statsTitle: "PalletPort by the numbers",
     mission: {
       eyebrow: "Our mission",
@@ -489,6 +596,49 @@ export const DEFAULTS: SettingsMap = {
       ],
     },
   },
+  contact: {
+    seoTitle: "Contact our warehouse team",
+    seoDescription:
+      "Questions about a lot, an order, bulk buying or a warehouse pickup appointment? Send our warehouse team a message. We reply within one business day.",
+    title: "Contact us",
+    intro: "Questions about a lot, an order, bulk buying or a pickup appointment? Our warehouse team replies within one business day.",
+    tips: [
+      { label: "Order issue?", text: "Include your order number (for example PP-XXXX) so we can find it quickly.", linkLabel: "", href: "" },
+      { label: "Quick answers:", text: "", linkLabel: "Help center", href: "/help" },
+    ],
+    showPickup: true,
+    showHours: true,
+    directTitle: "Reach us directly",
+    formTitle: "",
+    bodyLabel: "How can we help?",
+    submitLabel: "Send message",
+    pickupNotice:
+      "Requesting a pickup appointment. Include the lot or order number, the vehicle you'll bring and a few days and times that suit you. Please don't travel until we've confirmed.",
+    pickupSubmitLabel: "Request pickup appointment",
+    photosTitle: "Our warehouse",
+    showMap: true,
+    mapTitle: "Find our warehouse",
+    mapNote: "Pickup is by appointment only. Please book before you travel.",
+    showReviews: true,
+    reviewsTitle: "What buyers say on Google",
+  },
+  checkout: {
+    paymentTitle: "Payment",
+    paymentMethods: [
+      { id: "CARD", enabled: true, name: "Credit or debit card", description: "Charged when we confirm your order.", instructions: "", icon: "card", logo: "" },
+      { id: "WIRE", enabled: true, name: "Wire / ACH transfer", description: "We email bank details and an invoice. Ships once funds clear (1–2 business days).", instructions: "We'll email you our bank details and an invoice. Your order ships once the funds clear.", icon: "transfer", logo: "" },
+      { id: "NET30", enabled: true, name: "Net 30 terms", description: "Invoice due 30 days after delivery. For verified resellers.", instructions: "", icon: "invoice", logo: "" },
+      { id: "ZELLE", enabled: true, name: "Zelle", description: "Pay from your bank app. We email the details after you order.", instructions: "We'll email you our Zelle details. Include your order number in the memo. Your order ships once payment arrives.", icon: "bank", logo: "" },
+      { id: "APPLE_PAY", enabled: true, name: "Apple Pay", description: "Pay from your iPhone. We email the details after you order.", instructions: "We'll email you how to pay with Apple Pay. Include your order number with the payment. Your order ships once payment arrives.", icon: "phone", logo: "" },
+      { id: "CHIME", enabled: true, name: "Chime", description: "Pay from your Chime account. We email the details after you order.", instructions: "We'll email you our Chime details. Include your order number with the payment. Your order ships once payment arrives.", icon: "wallet", logo: "" },
+    ],
+    fields: {
+      phone: { show: true, required: false, label: "Delivery contact phone", placeholder: "" },
+      poNumber: { show: true, required: false, label: "PO number (optional)", placeholder: "" },
+      notes: { show: true, required: false, label: "Notes for our team / carrier (optional)", placeholder: "Dock hours, gate code, appointment needed…" },
+    },
+    customFields: [],
+  },
   seo: {
     defaultTitle: "PalletPort — Wholesale liquidation pallets & truckloads",
     titleTemplate: "%s · PalletPort",
@@ -519,6 +669,35 @@ export function deepMerge<T>(base: T, over: unknown): T {
 
 /** Recursive Partial, for patchSetting(). Arrays are replaced whole. */
 export type DeepPartial<T> = T extends (infer _U)[] ? T : T extends object ? { [K in keyof T]?: DeepPartial<T[K]> } : T;
+
+/** The brand name the site shipped with. Text that still says it is shown with the current business name. */
+export const DEFAULT_BRAND = "PalletPort";
+
+/**
+ * Replaces the original brand name ("PalletPort") with `brand` in a piece of text, so renaming the business in
+ * Admin → Business profile renames it everywhere, including text written before the rename. Safe when the new
+ * name contains the old one ("PalletPort USA"): existing occurrences of the new name are left alone.
+ */
+export function rebrandText(text: string, brand: string | undefined | null): string {
+  const b = (brand ?? "").trim();
+  if (!b || b === DEFAULT_BRAND || !text.includes(DEFAULT_BRAND)) return text;
+  return text.split(b).map((part) => part.split(DEFAULT_BRAND).join(b)).join(b);
+}
+
+/** rebrandText() applied to every string inside a value (objects and arrays are copied). */
+export function rebrandDeep<T>(value: T, brand: string | undefined | null): T {
+  const b = (brand ?? "").trim();
+  if (!b || b === DEFAULT_BRAND) return value;
+  const walk = (v: unknown): unknown => {
+    if (typeof v === "string") return rebrandText(v, b);
+    if (Array.isArray(v)) return v.map(walk);
+    if (v && typeof v === "object" && Object.getPrototypeOf(v) === Object.prototype) {
+      return Object.fromEntries(Object.entries(v as Record<string, unknown>).map(([k, x]) => [k, walk(x)]));
+    }
+    return v;
+  };
+  return walk(value) as T;
+}
 
 /** Replaces {name} / {location} tokens in settings text. */
 export function fillTokens(text: string, vars: { name?: string; location?: string }) {

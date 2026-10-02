@@ -8,7 +8,9 @@ import {
   Home,
   Image as ImageIcon,
   Inbox,
+  CreditCard,
   Info,
+  Mail,
   LayoutDashboard,
   Megaphone,
   Menu as MenuIcon,
@@ -81,6 +83,8 @@ export const ADMIN_NAV: AdminNavGroup[] = [
       { href: "/dashboard/site/announcement", label: "Announcement bar", icon: Megaphone, perm: "site" },
       { href: "/dashboard/site/homepage", label: "Homepage", icon: Home, perm: "site" },
       { href: "/dashboard/site/about", label: "About page", icon: Info, perm: "site" },
+      { href: "/dashboard/site/contact", label: "Contact page", icon: Mail, perm: "site" },
+      { href: "/dashboard/site/checkout", label: "Checkout", icon: CreditCard, perm: "site" },
       { href: "/dashboard/site/seo", label: "SEO defaults", icon: Search, perm: "site" },
       // Commerce-owned page (minimum order, pickup at checkout, store bio). Name/location moved to Business profile.
       { href: "/dashboard/settings", label: "Store settings", icon: Store, perm: "owner" },

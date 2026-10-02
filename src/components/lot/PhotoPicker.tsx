@@ -87,7 +87,7 @@ export function PhotoPicker({ existing = [], max = 10 }: { existing?: string[]; 
       <legend className="label">Photos</legend>
       <p className="mb-3 text-xs text-muted">
         Show the actual pallet: all four sides, the top, and a few close-ups of what's inside. Up to {max} photos. JPG, PNG or WebP.
-        Until you add photos, the listing shows stock photos matched to the lot type (no label is shown to buyers).
+        Until you add photos, the listing shows supplier photos matched to the lot type, labelled as representative images.
       </p>
 
       {existing.length > 0 && (

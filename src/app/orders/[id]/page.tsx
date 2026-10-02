@@ -12,11 +12,16 @@ import { Select } from "@/components/ui/Select";
 import { privateMetadata } from "@/lib/seo";
 import { formatVisit } from "@/lib/visits";
 import { CalendarDays } from "lucide-react";
+import { GaEvent } from "@/components/analytics/GaEvent";
+import { getSetting } from "@/lib/settings";
+import { paymentLabel } from "@/lib/commerce";
+import { gaMoney } from "@/lib/analytics";
 
 export const metadata = privateMetadata("Order details");
 
 const STEPS = ["PENDING", "CONFIRMED", "SHIPPED", "DELIVERED"];
 const PAY: Record<string, string> = { CARD: "Card", NET30: "Net 30 terms", WIRE: "Wire / ACH" };
+const payName = (id: string, methods: { id: string; name: string }[]) => methods.find((m) => m.id === id)?.name ?? PAY[id] ?? paymentLabel(id);
 
 export default async function OrderPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ placed?: string }> }) {
   const { id } = await params;
@@ -24,13 +29,31 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
   const user = await requireUser(`/orders/${id}`);
   const order = await db.order.findFirst({
     where: { id, userId: user.id },
-    include: { items: { include: { seller: true, lot: { select: { slug: true } } } }, reviews: true },
+    include: { items: { include: { seller: true, lot: { select: { slug: true, sku: true } } } }, reviews: true },
   });
   if (!order) notFound();
+  const { paymentMethods } = await getSetting("checkout");
+  const payMethod = paymentMethods.find((m) => m.id === order.paymentMethod);
+  // How to pay (Zelle, Wire, …): shown until the order is paid or cancelled.
+  const payInstructions = payMethod?.instructions && order.status === "PENDING" && order.amountPaidCents < order.totalCents ? payMethod.instructions : "";
   const step = STEPS.indexOf(order.status);
 
   return (
     <div className="container-pp max-w-4xl py-10">
+      {placed && (
+        <GaEvent
+          name="purchase"
+          onceKey={`purchase:${order.id}`}
+          params={{
+            transaction_id: order.number,
+            currency: "USD",
+            value: gaMoney(order.totalCents),
+            shipping: gaMoney(order.shippingCents),
+            ...(order.promoCode ? { coupon: order.promoCode } : {}),
+            items: order.items.map((i) => ({ item_id: i.lot.sku, item_name: i.title, price: gaMoney(i.priceCents), quantity: i.quantity })),
+          }}
+        />
+      )}
       {placed && (
         <div className="mb-6 rounded-2xl bg-moss p-5 text-white">
           <p className="font-display text-lg font-bold">{order.visitAt ? "Visit booked — thank you!" : "Order placed — thank you!"}</p>
@@ -43,11 +66,18 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
           </p>
         </div>
       )}
+      {payInstructions && (
+        <div className="mb-6 rounded-2xl bg-sand p-5">
+          <p className="font-display font-bold">How to pay with {payMethod?.name}</p>
+          <p className="mt-1 whitespace-pre-line text-sm text-ink/80">{payInstructions}</p>
+          <p className="mt-2 text-xs text-muted">Your order number: <span className="font-semibold text-ink">{order.number}</span></p>
+        </div>
+      )}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div className="min-w-0">
           <Link href="/orders" className="text-xs text-muted hover:underline"><PrevIcon />All orders</Link>
           <h1 className="break-words font-display text-2xl font-bold sm:text-3xl">Order <span className="break-all">{order.number}</span></h1>
-          <p className="text-sm text-muted">Placed {order.createdAt.toLocaleString()} · {PAY[order.paymentMethod]}</p>
+          <p className="text-sm text-muted">Placed {order.createdAt.toLocaleString()} · {payName(order.paymentMethod, paymentMethods)}</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <StatusPill status={order.status} />
@@ -117,7 +147,7 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
           <div className="card space-y-2 p-5 text-sm">
             <div className="flex justify-between"><span>Subtotal</span><span>{money(order.subtotalCents)}</span></div>
             {order.discountCents > 0 && (
-              <div className="flex justify-between text-moss"><span>Promo {order.promoCode}</span><span>−{money(order.discountCents)}</span></div>
+              <div className="flex justify-between text-moss"><span>{order.promoCode === "REFERRAL-WELCOME" ? "Referral welcome discount" : order.promoCode === "REFERRAL-REWARD" ? "Referral reward" : `Promo ${order.promoCode}`}</span><span>−{money(order.discountCents)}</span></div>
             )}
             <div className="flex justify-between"><span>Freight</span><span>{order.shippingCents ? money(order.shippingCents) : "Free"}</span></div>
             <div className="flex justify-between pt-2 font-bold"><span>Total</span><span className="font-display">{money(order.totalCents)}</span></div>

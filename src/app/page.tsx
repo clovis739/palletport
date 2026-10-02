@@ -6,11 +6,12 @@ import { LotCard } from "@/components/LotCard";
 import { Photo } from "@/components/Photo";
 import { PHOTOS, LOT_SIZE_PHOTOS } from "@/content/photos";
 import { SiteImage } from "@/components/content/SiteImage";
+import { HeroBackground } from "@/components/content/HeroBackground";
 import { categoryImage, getVisibleCategories } from "@/lib/catalog";
 import { CONDITIONS, LOT_SIZES } from "@/lib/format";
 import { COLLECTIONS } from "@/lib/collections";
 import { getPublishedGuides, getPublishedPosts } from "@/lib/content";
-import { getSettings, homeSectionOrder, type HomeSectionKey } from "@/lib/settings";
+import { getSettings, homeSectionOrder, rebrandText, type HomeSectionKey } from "@/lib/settings";
 import { resolveImageRef } from "@/lib/imageRef";
 import { NextIcon } from "@/components/Icons";
 import { SmartLink } from "@/components/NavDropdown";
@@ -28,7 +29,7 @@ const HOME_TITLE = "PalletPort — Liquidation Pallets & Truckloads";
 export async function generateMetadata() {
   const { seo, business } = await getSettings();
   return pageMetadata({
-    title: business.name && business.name !== "PalletPort" ? HOME_TITLE.replace("PalletPort", business.name) : HOME_TITLE,
+    title: rebrandText(HOME_TITLE, business.name),
     absoluteTitle: true,
     description: seo.defaultDescription || undefined,
     path: "/",
@@ -47,14 +48,6 @@ const STAT_COLS: Record<number, string> = { 1: "md:grid-cols-1", 2: "md:grid-col
 type Unit = { kind: "single"; key: HomeSectionKey } | { kind: "collections"; guides: boolean } | { kind: "cards"; keys: HomeSectionKey[] };
 type UnitKind = "band" | "plain" | "cards" | "blog" | null;
 
-function HeroPhoto({ refStr }: { refStr: string }) {
-  const img = resolveImageRef(refStr);
-  if (img.kind === "stock") return <Photo photo={img.photo} width={1600} ratio={16 / 9} sizes="100vw" priority alt="" className="absolute inset-0 h-full w-full" />;
-  if (img.kind === "url")
-    // eslint-disable-next-line @next/next/no-img-element -- media library / external image
-    return <img src={img.src} alt="" width={1600} height={900} fetchPriority="high" className="absolute inset-0 h-full w-full bg-ink object-cover" />;
-  return null;
-}
 
 function Head({ title, subtitle, link, h2 = "font-display text-2xl font-bold sm:text-3xl" }: { title: string; subtitle?: string; link?: ReactNode; h2?: string }) {
   if (!link && !subtitle) return <h2 className={`mb-6 ${h2}`}>{title}</h2>;
@@ -76,44 +69,37 @@ function Head({ title, subtitle, link, h2 = "font-display text-2xl font-bold sm:
 export default async function Home({ searchParams }: { searchParams: Promise<{ recent?: string; value?: string }> }) {
   const sp = await searchParams;
   const weekAgo = new Date(Date.now() - 7 * 86400000);
-  const [newestIds, active, categories, store, inStock, newThisWeek, retail, sizeCounts, recentlySold, settings, posts, guides] = await Promise.all([
-    db.lot.findMany({ where: { status: "ACTIVE" }, select: { id: true }, orderBy: [{ createdAt: "desc" }, { id: "desc" }], take: HOME_PER_PAGE }),
-    db.lot.findMany({ where: { status: "ACTIVE" }, include: lotInclude }),
+  const [active, categories, store, recentlySold, settings, posts, guides] = await Promise.all([
+    db.lot.findMany({ where: { status: "ACTIVE" }, include: lotInclude, orderBy: [{ createdAt: "desc" }, { id: "desc" }] }),
     getVisibleCategories(),
     getStore(),
-    db.lot.count({ where: { status: "ACTIVE" } }),
-    db.lot.count({ where: { status: "ACTIVE", createdAt: { gte: weekAgo } } }),
-    db.lot.aggregate({ where: { status: "ACTIVE" }, _sum: { msrpCents: true } }),
-    db.lot.groupBy({ by: ["lotSize"], where: { status: "ACTIVE" }, _count: true }),
     db.lot.findMany({ where: { status: "SOLD_OUT" }, include: lotInclude, orderBy: { createdAt: "desc" }, take: 4 }),
     getSettings(),
     getPublishedPosts(),
     getPublishedGuides(),
   ]);
+  // This list already drives best value; reuse it to avoid six additional catalog queries.
+  const inStock = active.length;
+  const newThisWeek = active.filter(lot => lot.createdAt >= weekAgo).length;
+  const retailValue = active.reduce((sum, lot) => sum + lot.msrpCents, 0);
   const home = settings.home;
   const sec = home.sections;
   // "Recently added": every in-stock lot, newest first, paginated with ?recent=.
   const recentPage = pageParam(sp.recent, pageCount(inStock, HOME_PER_PAGE));
-  const recent = await db.lot.findMany({
-    where: { status: "ACTIVE" },
-    include: lotInclude,
-    orderBy: [{ createdAt: "desc" }, { id: "desc" }],
-    skip: (recentPage - 1) * HOME_PER_PAGE,
-    take: HOME_PER_PAGE,
-  });
+  const recent = active.slice((recentPage - 1) * HOME_PER_PAGE, recentPage * HOME_PER_PAGE);
   // "Best value": in-stock lots priced lowest against their manifest retail (not the first page of new ones), paginated with ?value=.
-  const newest = new Set(newestIds.map((l) => l.id));
+  const newest = new Set(active.slice(0, HOME_PER_PAGE).map((l) => l.id));
   const valueAll = active.filter((l) => !newest.has(l.id)).sort((a, b) => a.priceCents / a.msrpCents - b.priceCents / b.msrpCents);
   const valuePage = pageParam(sp.value, pageCount(valueAll.length, HOME_PER_PAGE));
   const bestValue = valueAll.slice((valuePage - 1) * HOME_PER_PAGE, valuePage * HOME_PER_PAGE);
   // Each section's pager keeps the other section's page.
   const keep = { recent: recentPage > 1 ? recentPage : undefined, value: valuePage > 1 ? valuePage : undefined };
-  const sizeCount = (k: string) => sizeCounts.find((s) => s.lotSize === k)?._count ?? 0;
+  const sizeCount = (k: string) => active.filter(lot => lot.lotSize === k).length;
 
   const stats: [ReactNode, string][] = [];
   if (home.stats.liveAuctions) stats.push([<CountUp key="n" value={inStock} />, "lots in stock"]);
   if (home.stats.endingHour) stats.push([<CountUp key="n" value={newThisWeek} />, "new this week"]);
-  if (home.stats.retailValue) stats.push([<CountUp key="n" value={retail._sum.msrpCents ?? 0} format="money" />, "retail value listed"]);
+  if (home.stats.retailValue) stats.push([<CountUp key="n" value={retailValue} format="money" />, "retail value listed"]);
   if (home.stats.typicalPrice && home.stats.typicalPriceValue) stats.push([home.stats.typicalPriceValue, home.stats.typicalPriceLabel]);
 
   // Enabled sections in display order, grouped into layout units (collections + guides and the
@@ -341,7 +327,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
     <>
       {/* Hero: search-first */}
       <section className="relative overflow-hidden bg-ink text-white">
-        <HeroPhoto refStr={home.heroPhoto} />
+        <HeroBackground refStr={home.heroPhoto} />
         {/* Hero gradient (left → right): solid navy behind the text, fading so the warehouse photo shows on the right. */}
         <div className="absolute inset-0 bg-linear-to-r from-ink via-ink/85 to-signal-dark/40" />
         <div data-hero className="container-pp relative py-10 sm:py-14 md:py-20">

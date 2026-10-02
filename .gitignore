@@ -1,5 +1,7 @@
 node_modules
 .next
+.next-verify
+tsconfig.tsbuildinfo
 .env
 prisma/*.db
 prisma/*.db-journal
@@ -7,3 +9,9 @@ next-env.d.ts
 
 uploads
 prisma/export.json
+prisma/supplier-import-backup.json
+prisma/jax-attribution-backup.json
+prisma/goldstack-import-backup.json
+prisma/goldstack-raw-products.json
+tmp/location-update/
+tmp/watermark-audit/

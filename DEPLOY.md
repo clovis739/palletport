@@ -1,3 +1,41 @@
+# Deploying PalletPort (free setup: Netlify + Neon + Cloudinary + Resend)
+
+All four services have free plans that allow a commercial store at small scale:
+
+| Service | Job | Free plan (check their pricing pages for changes) |
+|---|---|---|
+| **Netlify** | Hosts the site | 300 credits/month (~15 GB traffic or ~20 deploys). Out of credits = site pauses until next month. |
+| **Neon** | Database | 1 GB storage, 100 compute hours/month, sleeps after 5 min idle and wakes automatically |
+| **Cloudinary** | Lot photos + media library | 25 credits/month (1 credit = 1 GB stored, 1 GB viewed or 1,000 resizes), no card |
+| **Resend** | Emails | 3,000/month, 100/day |
+
+Save Netlify credits: every production deploy costs credits, so push to GitHub in batches rather than after every small edit.
+
+## 1. Cloudinary (photos)
+1. Sign up at cloudinary.com (free).
+2. Dashboard → **API Keys** → copy the **API environment variable** (`cloudinary://KEY:SECRET@CLOUD_NAME`).
+3. You'll paste it into Netlify as `CLOUDINARY_URL` (step 2.3). Locally you can leave it empty (photos then save to `./uploads`).
+
+## 2. Netlify (hosting)
+1. Sign up at netlify.com with GitHub → **Add new project → Import an existing project → GitHub → clovis739/palletport**.
+2. Build settings are read from `netlify.toml` (build `npm run build`, publish `.next`, Node 22). Leave base directory empty.
+3. **Site configuration → Environment variables**, add:
+   - `DATABASE_URL`, `DATABASE_URL_UNPOOLED` (Neon)
+   - `AUTH_SECRET` (a new long random string)
+   - `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_TO`
+   - `APP_URL` = your domain once connected (e.g. `https://liquidationpalletssale.com`); until then leave it out and the site uses its netlify.app address
+   - `CLOUDINARY_URL`
+4. **Deploy**. Then **Domain management → Add a domain** for liquidationpalletssale.com and follow the DNS steps. Keep the Resend DNS records.
+
+## 3. After the first deploy
+- Sign in at `/login` with the admin account and change the password; remove the demo accounts.
+- Upload a lot photo in the admin to confirm Cloudinary works (the photo URL starts with `https://res.cloudinary.com/`).
+- Submit `/sitemap.xml` in Google Search Console and `/merchant-feed.xml` in Merchant Center.
+
+The original Vercel instructions follow; the code still supports Vercel (with Vercel Blob or Cloudinary).
+
+---
+
 # Deploying PalletPort to Vercel + Neon
 
 The app runs on **Vercel** (hosting), with **Neon** (Postgres database) and **Vercel Blob** (uploaded photos).
@@ -75,7 +113,7 @@ Create a **private** repository and push the project. These are git-ignored and 
 ## Google: Merchant Center, Search Console, Business Profile
 
 - **Sitemap:** `https://yourdomain.com/sitemap.xml` (already listed in robots.txt). Submit it in Google Search Console.
-- **Merchant Center feed:** `https://yourdomain.com/merchant-feed.xml`. In Merchant Center → Products → Add products → *Add products from a file* → enter the URL and fetch daily. Only in-stock lots **with their own uploaded photos** are included (stock photos aren't allowed by Google). Set shipping and returns in Merchant Center.
+- **Merchant Center feed:** `https://yourdomain.com/merchant-feed.xml`. In Merchant Center → Products → Add products → *Add products from a file* → enter the URL and fetch daily. In-stock lots with assigned uploaded or imported product galleries are included; category fallback images are excluded. Set shipping and returns in Merchant Center. Shipping labels are `case_pack`, `pallet`, and `truckload`. Run `npm run merchant:export` to generate `docs/merchant-feed.xml` for file upload and `docs/MERCHANT-FEED-REPORT.json` for excluded-product diagnostics. `APP_URL` must be the public HTTPS domain. Run `npm run merchant:check` to validate feed behavior.
 - **Google reviews + map:** in Admin → Site settings → Business profile, fill the street address, the **Google Place ID** and the **Google profile link**. Optional Vercel env vars:
   - `GOOGLE_PLACES_API_KEY` — Places API (New) key; shows your live star rating and latest reviews (paid API after Google's monthly free credit; results refresh hourly).
   - `GOOGLE_MAPS_EMBED_KEY` — Maps Embed API key (free); without it a keyless map embed is used.

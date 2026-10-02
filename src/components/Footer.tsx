@@ -1,4 +1,6 @@
 import { Logo } from "./Logo";
+import { Star } from "lucide-react";
+import { writeReviewUrl } from "@/lib/google-business";
 import { InquiryForm } from "./InquiryForm";
 import { SmartLink } from "./NavDropdown";
 import { ContactDetails, SocialLinks } from "./ContactDetails";
@@ -24,7 +26,17 @@ export async function Footer() {
         <div className="col-span-2 space-y-4 sm:col-span-3 lg:col-span-1">
           <Logo className="text-white" />
           {nav.footerBlurb && <p className="max-w-xs text-sm text-white/60">{nav.footerBlurb}</p>}
-          <ContactDetails business={business} tone="dark" className="max-w-xs text-white/70" />
+          <ContactDetails business={business} tone="dark" fullAddress className="max-w-xs text-white/70" />
+          {(business.googlePlaceId || business.googleMapsUrl) && (
+            <a
+              href={writeReviewUrl(business) || business.googleMapsUrl}
+              target="_blank"
+              rel="noopener"
+              className="tap inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:text-signal"
+            >
+              <Star aria-hidden className="h-4 w-4 fill-signal text-signal" /> {business.googlePlaceId ? "Review us on Google" : "See our Google reviews"}
+            </a>
+          )}
           <SocialLinks links={business.socialLinks} tone="dark" />
           <div className="max-w-sm">
             <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-white">The Monday Manifest</p>

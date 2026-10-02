@@ -7,12 +7,15 @@ import { CheckoutForm } from "./CheckoutForm";
 import { PrevIcon } from "@/components/Icons";
 import { Lock } from "lucide-react";
 import { privateMetadata } from "@/lib/seo";
+import { getSetting } from "@/lib/settings";
+import { GaEvent } from "@/components/analytics/GaEvent";
+import { gaMoney } from "@/lib/analytics";
 
 export const metadata = privateMetadata("Checkout");
 
 export default async function CheckoutPage() {
   const user = await requireUser("/checkout");
-  const cart = await getCart(user.id);
+  const [cart, checkout] = await Promise.all([getCart(user.id), getSetting("checkout")]);
   if (cart.items.length === 0 || cart.minimumsUnmet.length > 0 || cart.unavailable.length > 0) redirect("/cart");
 
   const pickupSellers = [...new Set(cart.items.filter((i) => i.lot.seller.pickup).map((i) => i.lot.sellerId))];
@@ -20,6 +23,15 @@ export default async function CheckoutPage() {
 
   return (
     <div className="container-pp py-8">
+      <GaEvent
+        name="begin_checkout"
+        params={{
+          currency: "USD",
+          value: gaMoney(cart.subtotalCents - cart.discountCents),
+          ...(cart.promo?.ok && cart.promoCode ? { coupon: cart.promoCode } : {}),
+          items: cart.items.map((i) => ({ item_id: i.lot.sku, item_name: i.lot.title, price: gaMoney(i.unitCents), quantity: i.quantity, item_category: i.lot.category.name })),
+        }}
+      />
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
           <Link href="/cart" className="text-xs text-muted hover:underline"><PrevIcon />Back to cart</Link>
@@ -49,10 +61,17 @@ export default async function CheckoutPage() {
         subtotalCents={cart.subtotalCents}
         discountCents={cart.discountCents}
         promoCode={cart.promo?.ok ? cart.promoCode : ""}
+        discountLabel={cart.discountLabel}
         pickupAvailable={allPickup}
         net30Approved={user.certStatus === "APPROVED"}
         taxExempt={user.certStatus === "APPROVED"}
         email={user.email}
+        config={{
+          paymentTitle: checkout.paymentTitle,
+          methods: checkout.paymentMethods.filter((m) => m.enabled).map(({ id, name, description, icon, logo }) => ({ id, name, description, icon, logo })),
+          fields: checkout.fields,
+          customFields: checkout.customFields,
+        }}
         defaults={{
           shipName: user.businessName ?? user.name,
           shipAddress: user.shipAddress ?? "",

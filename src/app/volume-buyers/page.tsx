@@ -1,7 +1,7 @@
 import { ProgramPage } from "@/components/ProgramPage";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "Truckload & volume liquidation buying",
   description:
     "Retail chains, exporters and wholesalers buying 10+ truckloads a month get dedicated sourcing, consolidated freight and custom terms from our warehouse.",

@@ -19,7 +19,7 @@ const TITLE = "Liquidation pallets in Columbus, Ohio";
 const DESCRIPTION =
   "Manifested liquidation pallets, truckloads and case packs from our Columbus, Ohio warehouse, delivered across Ohio and the Midwest. Pickup by appointment.";
 
-export const metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: PATH });
+export const generateMetadata = () => pageMetadata({ title: TITLE, description: DESCRIPTION, path: PATH });
 
 const lotInclude = { category: true, seller: true } as const;
 

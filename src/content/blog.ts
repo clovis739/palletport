@@ -3,9 +3,9 @@ import type { Article } from "./types";
 export const BLOG_CATEGORIES = ["Buying guides", "Industry insights", "Market reports", "Reseller stories"];
 
 export const AUTHORS: Record<string, { name: string; role: string; bio: string }> = {
-  team: { name: "PalletPort Editorial", role: "Marketplace team", bio: "Our buyer-success and marketplace teams write about what they see across thousands of lots every month." },
-  sourcing: { name: "PalletPort Sourcing Desk", role: "Buying & grading", bio: "The team that buys our inbound loads, grades every pallet and writes the manifests." },
-  freight: { name: "PalletPort Logistics", role: "Freight & fulfilment", bio: "Our logistics specialists help buyers move pallets and truckloads across the country." },
+  team: { name: "Editorial Team", role: "Marketplace team", bio: "Our buyer-success and marketplace teams write about what they see across thousands of lots every month." },
+  sourcing: { name: "Sourcing Desk", role: "Buying & grading", bio: "The team that buys our inbound loads, grades every pallet and writes the manifests." },
+  freight: { name: "Logistics Team", role: "Freight & fulfilment", bio: "Our logistics specialists help buyers move pallets and truckloads across the country." },
 };
 
 export const POSTS: Article[] = [
@@ -347,9 +347,9 @@ export const POSTS: Article[] = [
       ] },
       { h: "Checking a lot's grade before you buy", list: [
         "Read the grade and definition on the lot page, under Condition.",
-        "Read the lot description for anything specific to that load, such as the source or known issues.",
+        "Read the lot description for anything specific to that load, such as packaging details or known issues.",
         "Check the manifest. For returns, look at which lines carry the value; a few high-value items raise the stakes on their condition.",
-        "Check the Source field in the lot's key facts.",
+        "Check the product specifications and condition details.",
         "Ask. If you're unsure whether a grade fits your plans, [contact us](/contact) before you order.",
       ] },
       { h: "FAQ", faq: [

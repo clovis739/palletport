@@ -1,13 +1,12 @@
 "use server";
 
 import { notifyOrderEvent } from "@/lib/status-email";
-import { forbidden, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { getSession } from "@/lib/auth";
-import { getStore } from "@/lib/store";
-import { can, isStaff, type Perm } from "@/lib/permissions";
+import { requireAdmin, requireStaff } from "@/lib/auth";
+import { type Perm } from "@/lib/permissions";
 import { logAudit } from "@/lib/audit";
 import { slugify } from "@/lib/format";
 import { saveLotPhotos, deleteLotPhoto } from "@/lib/uploads";
@@ -17,17 +16,11 @@ import type { FormState } from "./auth";
 
 /**
  * Guard for store actions. `perm` is the staff permission required (see src/lib/permissions.ts);
- * "owner" means the ADMIN role only (business settings). Signed out → login; no permission → 403.
+ * "owner" means the ADMIN role only (business settings). Non-staff → 404; missing permission → 403.
  * Returns the company store record and the acting user (for audit logging).
  */
 async function storeFor(next: string, perm: Perm | "owner") {
-  const session = await getSession();
-  if (!session) redirect(`/login?next=${encodeURIComponent(next)}`);
-  const user = await db.user.findUnique({ where: { id: session.userId }, select: { id: true, email: true, role: true } });
-  if (!user) redirect(`/login?next=${encodeURIComponent(next)}`);
-  const allowed = perm === "owner" ? user.role === "ADMIN" : isStaff(user.role) && can(user.role, perm);
-  if (!allowed) forbidden();
-  return { seller: await getStore(), user };
+  return perm === "owner" ? requireAdmin(next) : requireStaff(perm, next);
 }
 
 const manifestLine = z.object({ sku: z.string(), name: z.string().min(1), qty: z.number().int().positive(), unitMsrpCents: z.number().int().nonnegative() });

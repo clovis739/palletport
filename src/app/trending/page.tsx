@@ -6,8 +6,9 @@ import { TrendingUp } from "lucide-react";
 import { pageMetadata } from "@/lib/seo";
 import { NextIcon } from "@/components/Icons";
 import { Pager, pageCount, pageParam } from "@/components/ui/Pager";
+import { getBrand } from "@/lib/brand";
 
-export const metadata = pageMetadata({
+export const generateMetadata = () => pageMetadata({
   title: "Most-viewed and most-saved liquidation lots",
   description:
     "The open liquidation lots resellers view and save most, plus popular searches such as air fryers, power tools and earbuds. A quick read on buyer demand.",
@@ -20,6 +21,7 @@ const SEARCHES = ["air fryer", "power tools", "earbuds", "office chair", "sneake
 const PER_PAGE = 8;
 
 export default async function Trending({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const brand = await getBrand();
   const total = await db.lot.count({ where: { status: "ACTIVE" } });
   const page = pageParam((await searchParams).page, pageCount(total, PER_PAGE));
   const [mostViewed, mostSaved] = await Promise.all([
@@ -30,7 +32,7 @@ export default async function Trending({ searchParams }: { searchParams: Promise
   return (
     <div className="container-pp space-y-14 py-10">
       <header>
-        <h1 className="font-display text-3xl font-bold">Trending on PalletPort</h1>
+        <h1 className="font-display text-3xl font-bold">Trending on {brand}</h1>
         <p className="text-muted">What resellers are looking at, saving and searching for this week.</p>
       </header>
 

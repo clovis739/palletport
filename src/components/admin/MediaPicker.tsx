@@ -22,7 +22,7 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState, type Keyboard
 import { isLotPhotoUrl, isMediaLibUrl } from "@/lib/mediaUrls";
 import { AlertTriangle, Check, ImageIcon, Library, Link2, Loader2, Search, Sparkles, Upload, X } from "lucide-react";
 import { isImageUrl, resolveImageRef, stockPhotoOptions } from "@/lib/imageRef";
-import { PHOTOS } from "@/content/photos";
+import { PHOTOS, photoSrc } from "@/content/photos";
 import { listMediaAction, mediaMetaAction } from "@/app/actions/media";
 import { Dialog } from "./media/Dialog";
 import { UploadZone } from "./media/UploadZone";
@@ -51,7 +51,7 @@ export type MediaPickerProps = {
 
 export function refPreviewSrc(ref: string, width = 320) {
   const r = resolveImageRef(ref);
-  if (r.kind === "stock") return `https://images.unsplash.com/photo-${r.photo.id}?auto=format&fit=crop&w=${width}&q=60`;
+  if (r.kind === "stock") return photoSrc(r.photo, width);
   if (r.kind === "url") return r.src;
   return "";
 }
@@ -95,7 +95,7 @@ function loadMeta(url: string): Promise<MediaMeta | null> {
 function describe(ref: string, meta?: MediaMeta | null): { alt: string; caption: string; kind: PickedImage["source"] | "none" } {
   const r = resolveImageRef(ref);
   if (r.kind === "none") return { alt: "", caption: "", kind: "none" };
-  if (r.kind === "stock") return { alt: r.photo.alt, caption: `Stock photo by ${r.photo.by}`, kind: "stock" };
+  if (r.kind === "stock") return { alt: r.photo.alt, caption: "Representative image", kind: "stock" };
   if (meta) return { alt: meta.alt, caption: [formatDims(meta.width, meta.height), formatBytes(meta.size)].filter(Boolean).join(" · "), kind: "library" };
   return { alt: "", caption: isLotPhotoUrl(r.src) ? "Lot photo" : isMediaLibUrl(r.src) ? "Media library" : "Linked image", kind: "url" };
 }
@@ -531,11 +531,25 @@ function UploadPanel({ onUploaded }: { onUploaded: (items: MediaItem[]) => void 
 
 function StockPanel({ draft, setDraft, onConfirm }: PanelProps) {
   const stock = useMemo(() => stockPhotoOptions(), []);
+  const [query, setQuery] = useState("");
+  const [limit, setLimit] = useState(60);
+  const searchId = useId();
+  const filtered = useMemo(() => {
+    const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    return stock.filter(s => terms.every(term => `${s.key} ${s.alt}`.toLowerCase().includes(term)));
+  }, [stock, query]);
   return (
     <div className="space-y-3">
-      <p className="text-xs text-muted">Free Unsplash photos built into the site. Credits are listed on the Credits page.</p>
+      <p className="text-xs text-muted">Choose a representative product or pallet image.</p>
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="flex-1">
+          <label htmlFor={searchId} className="mb-1 block text-xs font-semibold">Search photos</label>
+          <input id={searchId} type="search" value={query} onChange={e => { setQuery(e.target.value); setLimit(60); }} placeholder="Search products, pallets or image keys" className="w-full rounded-lg border border-line px-3 py-2 text-sm" />
+        </div>
+      </div>
+      <p role="status" className="text-xs text-muted">{filtered.length} matching photos</p>
       <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4 md:grid-cols-5">
-        {stock.map((s) => {
+        {filtered.slice(0, limit).map((s) => {
           const on = draft?.ref === s.key;
           const d: Draft = { ref: s.key, info: { source: "stock", alt: s.alt, width: null, height: null, filename: s.key } };
           return (
@@ -544,7 +558,7 @@ function StockPanel({ draft, setDraft, onConfirm }: PanelProps) {
                 type="button"
                 aria-pressed={on}
                 aria-label={s.alt}
-                title={`${s.alt} — photo by ${PHOTOS[s.key].by}`}
+                title={s.alt}
                 onClick={() => setDraft(d)}
                 onDoubleClick={() => onConfirm(d)}
                 className={`relative block w-full overflow-hidden rounded-lg border-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${on ?"border-signal ring-2 ring-signal/30":"border-transparent hover:border-transparent"}`}
@@ -557,11 +571,12 @@ function StockPanel({ draft, setDraft, onConfirm }: PanelProps) {
                   </span>
                 )}
               </button>
-              <p className="mt-1 truncate text-[11px] text-muted">{PHOTOS[s.key].by}</p>
             </li>
           );
         })}
       </ul>
+      {!filtered.length && <p className="py-4 text-sm text-muted">No photos match. Try another search.</p>}
+      {filtered.length > limit && <button type="button" onClick={() => setLimit(n => n + 60)} className="rounded-lg border border-line px-4 py-2 text-sm font-semibold">Load more photos</button>}
     </div>
   );
 }

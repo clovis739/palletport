@@ -16,6 +16,8 @@ import { Select } from "@/components/ui/Select";
 import { VisitBooking } from "@/components/lot/VisitBooking";
 import { bookedVisitTimes } from "@/lib/visits-server";
 import { addToCart } from "@/app/actions/cart";
+import { GaEvent, GaOnSubmit } from "@/components/analytics/GaEvent";
+import { gaMoney, type GaItem } from "@/lib/analytics";
 import { NextIcon } from "@/components/Icons";
 import { Check, Star, MessageCircle } from "lucide-react";
 import {
@@ -35,7 +37,7 @@ export async function generateMetadata({ params }: { params: Params }) {
   const lot = await db.lot.findUnique({
     where: { slug },
     select: {
-      title: true, description: true, externalSku: true, condition: true, priceCents: true, msrpCents: true, units: true, palletCount: true, lotSize: true,
+      title: true, description: true, sku: true, externalSku: true, condition: true, priceCents: true, msrpCents: true, units: true, palletCount: true, lotSize: true,
       shipsFrom: true, status: true, createdAt: true,
       manifest: { select: { name: true, qty: true, unitMsrpCents: true } },
       orderItems: LATEST_ORDER_SELECT,
@@ -117,16 +119,15 @@ export default async function LotPage({ params }: { params: Params }) {
 
   const facts: [string, string][] = [
     ["Lot #", lotNo],
-    ...(lot.externalSku ? [["SKU", lot.externalSku] as [string, string]] : []),
+    ["SKU", lot.sku],
     ...(lot.sourceOriginalPriceCents ? [["Previous listed price", money(lot.sourceOriginalPriceCents)] as [string, string]] : []),
     ...(lot.msrpCents > 0 ? [["Est. retail", money(lot.msrpCents)] as [string, string]] : []),
     ...(lot.units > 0 ? [["Units", lot.units.toLocaleString()] as [string, string]] : []),
     ["Condition", lot.sourceCondition || CONDITIONS[lot.condition]?.label || lot.condition],
     ["Lot size", LOT_SIZES[lot.lotSize]?.label ?? lot.lotSize],
-    ["Pallets", lot.lotSize === "CASE" ? "—" : String(lot.palletCount)],
+    ["Pallets", lot.lotSize === "CASE" ? "—" : lot.palletCount > 0 ? String(lot.palletCount) : "Not specified"],
     ...(lot.weightLbs > 0 ? [["Weight", `${lot.weightLbs.toLocaleString()} lbs`] as [string, string]] : []),
     ["Ships from", lot.shipsFrom],
-    ["Source", lot.source || "—"],
     ...(lot.brand ? ([["Brand", lot.brand]] as [string, string][]) : []),
     ["Category", lot.subcategory ? `${lot.category.name} / ${lot.subcategory.name}` : lot.category.name],
     ...(perUnit !== null ? [["Price / unit", money(perUnit, { cents: true })] as [string, string]] : []),
@@ -142,9 +143,18 @@ export default async function LotPage({ params }: { params: Params }) {
     { name: lot.title, path: `/lots/${lot.slug}` },
   ];
 
+  const gaItem: GaItem = {
+    item_id: lot.sku,
+    item_name: lot.title,
+    price: gaMoney(buyPrice ?? lot.priceCents),
+    item_category: lot.category.name,
+    ...(lot.subcategory ? { item_category2: lot.subcategory.name } : {}),
+  };
+
   return (
     <div className="container-pp py-6">
       <JsonLd data={[productJsonLd(lot, lot.seller.name), breadcrumbJsonLd(crumbs)]} />
+      <GaEvent name="view_item" params={{ currency: "USD", value: gaItem.price, items: [gaItem] }} />
       <nav className="mb-4 text-xs text-muted">
         <Link href="/" className="hover:underline">Home</Link> /{" "}
         <Link href="/lots" className="hover:underline">Shop</Link> /{" "}
@@ -204,6 +214,7 @@ export default async function LotPage({ params }: { params: Params }) {
             {buyPrice !== null ? (
               <form action={addToCart} className="space-y-3 pt-2">
                 <input type="hidden" name="lotId" value={lot.id} />
+                <GaOnSubmit name="add_to_cart" params={{ currency: "USD", items: [gaItem] }} />
                 {lot.available > 1 && (
                   <label className="flex items-center justify-between text-sm">
                     <span>Quantity</span>
@@ -268,7 +279,7 @@ export default async function LotPage({ params }: { params: Params }) {
 
           <section id="overview" className="scroll-mt-24 space-y-4">
             <h2 className="font-display text-xl font-bold">Overview</h2>
-            <p className="leading-relaxed text-ink/85">{lot.description}</p>
+            <p className="whitespace-pre-line leading-relaxed text-ink/85">{lot.description}</p>
             {(lot.msrpCents > 0 || lot.manifest.length > 0) && <div className="grid gap-3 sm:grid-cols-3">
               {lot.msrpCents > 0 && <>
               <div className="rounded-xl bg-sand/60 p-4">
