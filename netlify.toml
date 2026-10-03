@@ -9,3 +9,5 @@
   NODE_VERSION = "22"
   # Don't let Netlify's default telemetry prompt or cache issues block the build.
   NEXT_TELEMETRY_DISABLED = "1"
+  # The site URL is public in canonical links, feeds and emails. Keep credential scanning enabled.
+  SECRETS_SCAN_OMIT_KEYS = "APP_URL"

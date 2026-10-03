@@ -27,6 +27,13 @@ Save Netlify credits: every production deploy costs credits, so push to GitHub i
    - `CLOUDINARY_URL`
 4. **Deploy**. Then **Domain management → Add a domain** for liquidationpalletssale.com and follow the DNS steps. Keep the Resend DNS records.
 
+### If Netlify secret scanning blocks a deploy
+
+- Generate a fresh random `AUTH_SECRET` for production, for example with `openssl rand -base64 32`, and set it in Netlify's environment variables. Never use a sample value or commit the secret. Changing it signs out existing sessions.
+- `APP_URL` is intentionally public in page links and merchant feeds. `netlify.toml` excludes only this key from value scanning; credential scanning remains enabled.
+- The password CLI example uses a sample email rather than the production `EMAIL_TO` address. Keep `EMAIL_TO` scanning enabled.
+- Do not disable scanning or exclude `AUTH_SECRET`, database passwords, Cloudinary credentials, or API keys. Redeploy after updating the production secret.
+
 ## 3. After the first deploy
 - Sign in at `/login` with the admin account and change the password; remove the demo accounts.
 - Upload a lot photo in the admin to confirm Cloudinary works (the photo URL starts with `https://res.cloudinary.com/`).

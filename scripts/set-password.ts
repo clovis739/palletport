@@ -1,7 +1,7 @@
 /**
  * Set (or reset) the password for any account from your terminal — useful for the owner account before email works.
  *
- *   npm run user:password -- sales@liquidationpalletssale.com
+ *   npm run user:password -- owner@example.com
  *
  * You type the new password when asked (it isn't shown or saved anywhere except as a secure hash).
  */
