@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Check, Share2 } from "lucide-react";
+import { useI18n } from "@/i18n/client";
 
 export function CopyLink() {
+  const { t } = useI18n();
   const [done, setDone] = useState(false);
   return (
     <button
@@ -19,7 +21,7 @@ export function CopyLink() {
         }
       }}
     >
-      {done ? <><Check aria-hidden className="h-4 w-4" /> Link copied</> : <><Share2 aria-hidden className="h-4 w-4" /> Share</>}
+      {done ? <><Check aria-hidden className="h-4 w-4" /> {t("Link copied")}</> : <><Share2 aria-hidden className="h-4 w-4" /> {t("Share")}</>}
     </button>
   );
 }

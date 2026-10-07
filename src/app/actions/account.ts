@@ -78,12 +78,14 @@ export async function requestPasswordReset(_: OkState, formData: FormData): Prom
   if (!user) return { ok };
   const reset = await db.passwordReset.create({ data: { userId: user.id, expiresAt: new Date(Date.now() + 60 * 60 * 1000) } });
   try {
-    const url = new URL(`/reset-password/${reset.token}`, process.env.APP_URL);
+    const { getI18n } = await import("@/i18n/server");
+    const { t, locale } = await getI18n();
+    const url = new URL(`${locale === "es" ? "/es" : ""}/reset-password/${reset.token}`, process.env.APP_URL);
     await sendEmail({
       to: user.email,
-      subject: "Reset your PalletPort password",
-      text: `You requested a password reset for your PalletPort account.\n\nReset your password: ${url.toString()}\n\nThis link expires in one hour. If you did not request this, you can ignore this email.`,
-      html: passwordResetEmailHtml(url.toString()),
+      subject: t("Reset your PalletPort password"),
+      text: `${t("You requested a password reset for your PalletPort account.")}\n\n${t("Reset your password")}: ${url.toString()}\n\n${t("This link expires in one hour. If you did not request this, you can ignore this email.")}`,
+      html: passwordResetEmailHtml(url.toString(), t, locale),
       idempotencyKey: `password-reset/${reset.token}`,
     });
   } catch {

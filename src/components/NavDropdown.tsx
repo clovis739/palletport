@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useI18n } from "@/i18n/client";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 
@@ -11,7 +12,10 @@ type L = { label: string; href: string };
 export const isExternalHref = (href: string) => /^(https?:|mailto:|tel:)/i.test(href);
 
 /** Link that uses next/link for internal paths and a plain <a> (new tab for http) for external ones. */
-export function SmartLink({ href, className, children, onClick }: { href: string; className?: string; children: React.ReactNode; onClick?: () => void }) {
+export function SmartLink({ href: rawHref, className, children, onClick }: { href: string; className?: string; children: React.ReactNode; onClick?: () => void }) {
+  // Internal links keep the visitor's language (/es/… on Spanish pages).
+  const { lh } = useI18n();
+  const href = lh(rawHref);
   if (href.split(/[?#]/)[0] === "/credits") return null;
   if (isExternalHref(href)) {
     const http = /^https?:/i.test(href);
@@ -52,6 +56,7 @@ export function NavDropdown({
   /** Mega-menu mode: links in titled columns (e.g. categories by department). `childLinks` is ignored. */
   groups?: LinkGroup[];
 }) {
+  const { t } = useI18n();
   const mega = !!groups?.length;
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState<{ left: number; top: number; width: number } | null>(null);
@@ -210,7 +215,7 @@ export function NavDropdown({
                 </div>
                 {showAll && (
                   <div className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded-lg bg-sand px-3 py-2.5">
-                    <span className="text-xs text-muted">Every lot, organised by what&apos;s inside.</span>
+                    <span className="text-xs text-muted">{t("Every lot, organised by what's inside.")}</span>
                     <SmartLink href={item.href} onClick={() => setOpen(false)} className="text-sm font-semibold text-signal-dark hover:underline focus-visible:underline focus-visible:outline-none">
                       {allLabel ?? `All ${item.label.toLowerCase()}`} →
                     </SmartLink>

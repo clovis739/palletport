@@ -14,6 +14,9 @@ import { WhatsAppGroups } from "@/components/WhatsAppGroups";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { LiveChat } from "@/components/LiveChat";
 import { BrandProvider } from "@/components/BrandProvider";
+import { I18nProvider } from "@/i18n/client";
+import { getClientDictionary, getI18n, getLocale } from "@/i18n/server";
+import { LOCALE_TAG } from "@/i18n/config";
 import { getBrandLogo } from "@/lib/brand";
 import { gaMeasurementId } from "@/lib/analytics";
 import { SITE_NAME, siteMetadata } from "@/lib/seo";
@@ -26,8 +29,8 @@ const grotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-grotesk" }
 
 /** Root metadata defaults come from Admin → Site → SEO (`seo` settings); brand name from the business profile. */
 export async function generateMetadata(): Promise<Metadata> {
-  const { seo, business } = await getSettings();
-  return siteMetadata(seo, business.name || SITE_NAME, await requestSiteUrl());
+  const [{ seo, business }, { locale, t }] = await Promise.all([getSettings(), getI18n()]);
+  return siteMetadata(seo, business.name || SITE_NAME, await requestSiteUrl(), locale, (x) => t(x));
 }
 
 export const viewport: Viewport = {
@@ -37,22 +40,24 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [announcement, business, seo, staffViewer] = await Promise.all([getSetting("announcement"), getSetting("business"), getSetting("seo"), getStaffUser()]);
+  const [announcement, business, seo, waGroups, staffViewer] = await Promise.all([getSetting("announcement"), getSetting("business"), getSetting("seo"), getSetting("whatsappGroups"), getStaffUser()]);
   const whatsapp = (business.whatsapp || process.env.STORE_WHATSAPP || "").replace(/\D/g, "");
   const isStaffViewer = !!staffViewer;
   // Staff browsing the shop would skew the numbers, so they are never tracked.
   const gaId = isStaffViewer ? null : gaMeasurementId(seo.gaMeasurementId);
   const brand = await getBrandLogo();
+  const [locale, dict] = await Promise.all([getLocale(), getClientDictionary()]);
   const chatKey = isStaffViewer ? "" : (business.smartsuppKey || process.env.NEXT_PUBLIC_SMARTSUPP_KEY || "").trim();
   return (
-    <html lang="en" className={`${inter.variable} ${grotesk.variable}`}>
+    <html lang={LOCALE_TAG[locale]} className={`${inter.variable} ${grotesk.variable}`}>
       <body className="min-h-screen bg-paper">
         {gaId && <GoogleAnalytics id={gaId} />}
+        <I18nProvider locale={locale} dict={dict}>
         <BrandProvider brand={brand}>
         <RouteProgress />
         <MotionProvider>
           <HideOnAdmin active={isStaffViewer}>
-            <WhatsAppGroups />
+            {waGroups.enabled && waGroups.groups.length > 0 && <WhatsAppGroups settings={waGroups} />}
             {announcement.enabled && <AnnouncementBar settings={announcement} />}
             <Header />
           </HideOnAdmin>
@@ -64,6 +69,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <WhatsAppButton number={whatsapp} businessName={business.name || SITE_NAME} />
         <NetworkStatus />
         </BrandProvider>
+        </I18nProvider>
         {chatKey && <LiveChat chatKey={chatKey} />}
         <SiteJsonLd />
       </body>

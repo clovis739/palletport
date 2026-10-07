@@ -23,7 +23,7 @@ export default async function SiteSettingsHub() {
   await requireStaff("site", "/dashboard/site");
   const [stored, rows] = await Promise.all([
     getStoredSettings(),
-    db.siteSetting.findMany({ select: { key: true, updatedAt: true } }).catch(() => [] as { key: string; updatedAt: Date }[]),
+    db.siteSetting.findMany({ where: { NOT: { key: { startsWith: "pref." } } }, select: { key: true, updatedAt: true } }).catch(() => [] as { key: string; updatedAt: Date }[]),
   ]);
   const updated = new Map(rows.map((r) => [r.key, r.updatedAt]));
   const customized = (k: SettingsKey) => JSON.stringify(stored[k]) !== JSON.stringify(DEFAULTS[k]);
@@ -68,6 +68,12 @@ export default async function SiteSettingsHub() {
           );
         })}
       </ul>
+      <Link href="/dashboard/site/translations" className="group mt-4 flex items-center justify-between gap-3 rounded-2xl bg-white p-4 sm:p-5">
+        <span className="min-w-0">
+          <span className="flex items-center gap-1 font-display text-base font-bold">Translations (Español)<ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" /></span>
+          <span className="mt-1 block text-sm text-muted">The Spanish version of the site at /es: review the Spanish text and add Spanish for the text you wrote yourself.</span>
+        </span>
+      </Link>
       <p className="mt-6 text-sm text-muted">
         Store checkout options (minimum order, warehouse pickup at checkout, store bio) live in{" "}
         <Link href="/dashboard/settings" className="font-semibold text-signal-dark hover:underline">Store settings</Link>.

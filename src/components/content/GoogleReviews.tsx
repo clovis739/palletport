@@ -2,6 +2,7 @@ import { ExternalLink, PenLine } from "lucide-react";
 import { Stars } from "@/components/Stars";
 import { getGoogleReviews, writeReviewUrl } from "@/lib/google-business";
 import type { BusinessSettings } from "@/lib/settings-schema";
+import { getT } from "@/i18n/server";
 
 type Props = {
   business: BusinessSettings;
@@ -27,6 +28,7 @@ function GoogleWordmark() {
  * links only. Reviews are shown exactly as Google returns them, with the reviewer's name and Google attribution.
  */
 export async function GoogleReviews({ business, limit = 3, title = "What buyers say on Google", className = "container-pp py-12" }: Props) {
+  const t = await getT();
   const profile = business.googleMapsUrl?.trim();
   const placeId = business.googlePlaceId?.trim();
   if (!profile && !placeId) return null;
@@ -39,12 +41,12 @@ export async function GoogleReviews({ business, limit = 3, title = "What buyers 
     <div className="flex flex-wrap gap-2">
       {readUrl && (
         <a href={readUrl} target="_blank" rel="noopener" className="btn-ghost">
-          {data ? "Read all reviews" : "See our reviews"} <ExternalLink aria-hidden className="ml-1.5 h-4 w-4" />
+          {t(data ? "Read all reviews" : "See our reviews")} <ExternalLink aria-hidden className="ml-1.5 h-4 w-4" />
         </a>
       )}
       {writeUrl && (
         <a href={writeUrl} target="_blank" rel="noopener" className="btn-primary">
-          <PenLine aria-hidden className="mr-1.5 h-4 w-4" /> Write a review
+          <PenLine aria-hidden className="mr-1.5 h-4 w-4" /> {t("Write a review")}
         </a>
       )}
     </div>
@@ -55,19 +57,19 @@ export async function GoogleReviews({ business, limit = 3, title = "What buyers 
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="min-w-0">
           <p className="label">
-            Reviews from <GoogleWordmark />
+            {t("Reviews from")} <GoogleWordmark />
           </p>
-          <h2 id="google-reviews-title" className="font-display text-2xl font-bold sm:text-3xl">{title}</h2>
+          <h2 id="google-reviews-title" className="font-display text-2xl font-bold sm:text-3xl">{t(title)}</h2>
           {data ? (
             <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted">
               <span className="font-display text-2xl font-bold text-ink">{data.rating.toFixed(1)}</span>
               <Stars value={data.rating} size="h-4 w-4" />
               <span>
-                {data.count.toLocaleString()} Google review{data.count === 1 ? "" : "s"}
+                {t(data.count === 1 ? "{n} Google review" : "{n} Google reviews", { n: data.count.toLocaleString() })}
               </span>
             </p>
           ) : (
-            <p className="mt-2 text-sm text-muted">Bought from us? Tell other resellers how it went.</p>
+            <p className="mt-2 text-sm text-muted">{t("Bought from us? Tell other resellers how it went.")}</p>
           )}
         </div>
         {links}

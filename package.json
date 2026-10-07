@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "orders:check": "node --import tsx scripts/check-order-placement.mjs",
+    "sitemap:export": "node --env-file=.env --import tsx scripts/export-sitemap.mjs",
     "photos:cloudinary": "node --env-file=.env scripts/upload-project-images.mjs --upload",
     "security:check": "node --import tsx scripts/check-admin-security.mjs",
     "merchant:export": "node --env-file=.env --import tsx scripts/export-merchant-feed.ts",

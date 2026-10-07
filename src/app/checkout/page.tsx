@@ -6,17 +6,24 @@ import { getCart } from "@/lib/cart";
 import { CheckoutForm } from "./CheckoutForm";
 import { PrevIcon } from "@/components/Icons";
 import { Lock } from "lucide-react";
-import { privateMetadata } from "@/lib/seo";
+import { privateMetadataT } from "@/lib/seo";
 import { getSetting } from "@/lib/settings";
 import { GaEvent } from "@/components/analytics/GaEvent";
 import { gaMoney } from "@/lib/analytics";
+import { getI18n } from "@/i18n/server";
+import { db } from "@/lib/db";
+import { findBlockingOrder } from "@/lib/order-placement";
+import { ExistingOrderNotice } from "@/components/checkout/ExistingOrderNotice";
 
-export const metadata = privateMetadata("Checkout");
+export const generateMetadata = () => privateMetadataT("Checkout");
 
 export default async function CheckoutPage() {
   const user = await requireUser("/checkout");
+  const blockingOrder = await findBlockingOrder(db, user.id);
+  if (blockingOrder) return <ExistingOrderNotice order={blockingOrder} />;
+  const { t, lh } = await getI18n();
   const [cart, checkout] = await Promise.all([getCart(user.id), getSetting("checkout")]);
-  if (cart.items.length === 0 || cart.minimumsUnmet.length > 0 || cart.unavailable.length > 0) redirect("/cart");
+  if (cart.items.length === 0 || cart.minimumsUnmet.length > 0 || cart.unavailable.length > 0) redirect(lh("/cart"));
 
   const pickupSellers = [...new Set(cart.items.filter((i) => i.lot.seller.pickup).map((i) => i.lot.sellerId))];
   const allPickup = [...new Set(cart.items.map((i) => i.lot.sellerId))].every((id) => pickupSellers.includes(id));
@@ -34,12 +41,12 @@ export default async function CheckoutPage() {
       />
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <Link href="/cart" className="text-xs text-muted hover:underline"><PrevIcon />Back to cart</Link>
-          <h1 className="font-display text-3xl font-bold">Checkout</h1>
+          <Link href={lh("/cart")} className="text-xs text-muted hover:underline"><PrevIcon />{t("Back to cart")}</Link>
+          <h1 className="font-display text-3xl font-bold">{t("Checkout")}</h1>
         </div>
         <p className="flex items-center gap-2 text-xs text-muted">
           <Lock aria-hidden className="h-4 w-4" />
-          Secure checkout
+          {t("Secure checkout")}
         </p>
       </div>
       <CheckoutForm

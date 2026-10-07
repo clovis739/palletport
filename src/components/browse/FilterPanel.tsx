@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
+import { useT } from "@/i18n/client";
 
 /**
  * Collapsible wrapper for the browse filters. Below lg the filters sit behind a toggle so
  * results show first; from lg up they are always visible as a sidebar.
  */
 export function FilterPanel({ activeCount, children }: { activeCount: number; children: React.ReactNode }) {
+  const t = useT();
   const [open, setOpen] = useState(false);
   return (
     <aside className="min-w-0">
@@ -20,7 +22,7 @@ export function FilterPanel({ activeCount, children }: { activeCount: number; ch
       >
         <span className="inline-flex items-center gap-2">
           <SlidersHorizontal aria-hidden className="h-4 w-4" />
-          Filters
+          {t("Filters")}
           {activeCount > 0 && <span className="grid h-5 min-w-5 place-items-center rounded-full bg-ink px-1.5 text-[11px] font-bold text-white">{activeCount}</span>}
         </span>
         <ChevronDown aria-hidden className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} />

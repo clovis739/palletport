@@ -14,6 +14,7 @@ import { SmartLink } from "@/components/NavDropdown";
 import { JsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
 import { SiteFaq } from "@/components/content/SiteFaq";
 import { GoogleReviews } from "@/components/content/GoogleReviews";
+import { getI18n } from "@/i18n/server";
 
 export const generateMetadata = () => pageMetadata({
   title: "About our Columbus-area liquidation warehouse",
@@ -45,21 +46,22 @@ export default async function About() {
     db.review.count(),
     db.review.aggregate({ _avg: { rating: true } }),
   ]);
+  const { t, lh } = await getI18n();
 
   const stats: { n: string; label: string; href: string; icon: LucideIcon }[] = [
-    { n: lotsListed.toLocaleString(), label: "lots listed", href: "/search", icon: Boxes },
-    { n: money(retail._sum.msrpCents ?? 0), label: "retail value listed", href: "/lots?sort=retail", icon: DollarSign },
-    { n: (units._sum.units ?? 0).toLocaleString(), label: "units on manifests", href: "/lots?sort=units", icon: Package },
-    { n: soldLots.toLocaleString(), label: "lots sold", href: "/lots?sold=1", icon: ShoppingCart },
-    { n: buyers.toLocaleString(), label: "registered business buyers", href: "/register", icon: Store },
-    { n: reviews ? (avgRating._avg.rating ?? 0).toFixed(1) : `${buyers.toLocaleString()}`, label: reviews ? `average star rating from ${reviews} customer reviews` : "registered buyers", href: "/search", icon: Star },
+    { n: lotsListed.toLocaleString(), label: t("lots listed"), href: lh("/search"), icon: Boxes },
+    { n: money(retail._sum.msrpCents ?? 0), label: t("retail value listed"), href: lh("/lots?sort=retail"), icon: DollarSign },
+    { n: (units._sum.units ?? 0).toLocaleString(), label: t("units on manifests"), href: lh("/lots?sort=units"), icon: Package },
+    { n: soldLots.toLocaleString(), label: t("lots sold"), href: lh("/lots?sold=1"), icon: ShoppingCart },
+    { n: buyers.toLocaleString(), label: t("registered business buyers"), href: lh("/register"), icon: Store },
+    { n: reviews ? (avgRating._avg.rating ?? 0).toFixed(1) : `${buyers.toLocaleString()}`, label: reviews ? t("average star rating from {n} customer reviews", { n: reviews }) : t("registered buyers"), href: lh("/search"), icon: Star },
   ];
 
-  const audiences = guides.map((g) => ({ href: `/guides/${g.slug}`, title: g.title, text: g.excerpt, hue: g.hue ?? 24, slug: g.slug }));
+  const audiences = guides.map((g) => ({ href: lh(`/guides/${g.slug}`), title: g.title, text: g.excerpt, hue: g.hue ?? 24, slug: g.slug }));
 
   return (
     <>
-      <JsonLd data={webPageJsonLd("AboutPage", `About ${store.name}`, "/about", store.bio)} />
+      <JsonLd data={webPageJsonLd("AboutPage", t("About {name}", { name: store.name }), "/about", store.bio)} />
       {/* Hero */}
       <section className="relative overflow-hidden bg-ink text-white">
         <HeroBackground refStr={about.heroBg} />
@@ -71,8 +73,8 @@ export default async function About() {
             <h1 className="mt-3 font-display text-3xl font-bold leading-[1.1] sm:text-5xl sm:leading-[1.05] lg:text-6xl">{about.heroTitle}</h1>
             {about.heroIntro && <p className="mt-5 max-w-2xl text-base text-white/75 sm:text-lg">{fillTokens(about.heroIntro, { name: store.name, location: store.location })}</p>}
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/register" className="btn-primary px-6 py-3">Get started</Link>
-              <Link href="/how-it-works" className="rounded-full px-6 py-3 text-sm font-semibold hover:bg-white/10">How it works</Link>
+              <Link href={lh("/register")} className="btn-primary px-6 py-3">{t("Get started")}</Link>
+              <Link href={lh("/how-it-works")} className="rounded-full px-6 py-3 text-sm font-semibold hover:bg-white/10">{t("How it works")}</Link>
             </div>
           </div>
         </div>
@@ -137,7 +139,7 @@ export default async function About() {
                   <Icon aria-hidden className="mb-3 h-6 w-6 text-signal" />
                   <p className="font-display text-lg font-semibold">{c.title}</p>
                   <p className="mt-1 text-sm text-white/65">{c.text}</p>
-                  {c.href && <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-signal">Learn more <Arrow /></span>}
+                  {c.href && <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-signal">{t("Learn more")} <Arrow /></span>}
                 </>
               );
               return c.href ? (
@@ -162,7 +164,7 @@ export default async function About() {
               <div className="p-5">
                 <p className="font-display text-lg font-bold group-hover:text-signal-dark">{a.title}</p>
                 <p className="mt-1 text-sm text-muted">{a.text}</p>
-                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-signal-dark">Read the guide <Arrow /></span>
+                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-signal-dark">{t("Read the guide")} <Arrow /></span>
               </div>
             </Link>
           ))}

@@ -43,7 +43,7 @@ export function StockPhotos() {
           ))}
         </ul>
       </Card>
-      <Card title="Lot placeholder photos" description="Shown as representative images on lots without uploaded photos, matched by title keywords.">
+      <Card title="Lot placeholder photos" description="Shown on lots without uploaded photos, matched by title keywords.">
         <div className="space-y-6">
           {LOT_TOPICS.map((t) => (
             <section key={t.keywords.source} aria-label={topicLabel(t.keywords)}>

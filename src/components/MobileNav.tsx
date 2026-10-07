@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { useI18n } from "@/i18n/client";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { usePathname } from "next/navigation";
 import { ChevronDown, LayoutDashboard, LogOut, Menu, Search, ShoppingCart, X } from "lucide-react";
 import { logout } from "@/app/actions/auth";
@@ -37,6 +39,7 @@ export function MobileNav({ user, cartCount, links, categoryGroups = [] }: { use
     return () => window.clearTimeout(t);
   }, [open]);
   const pathname = usePathname();
+  const { t: tr, lh } = useI18n();
 
   useEffect(() => setMounted(true), []);
   // Close whenever the route changes.
@@ -63,15 +66,15 @@ export function MobileNav({ user, cartCount, links, categoryGroups = [] }: { use
   }, [open]);
 
   const account: [string, string][] = user
-    ? [["/account", "Account"], ["/orders", "Orders"], ["/account/favorites", "Saved lots"], ["/account/referrals", "Refer a business"]]
+    ? [["/account", "Account"], ["/orders", "Orders"], ["/account/favorites", "Saved lots"], ["/account/referrals", "Refer a business"]].map(([h, l]) => [lh(h), tr(l)])
     : [];
   const link = "flex min-h-11 items-center rounded-lg px-3 py-2 hover:bg-sand";
 
   const drawer = (
-    <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true" aria-label="Site menu" data-lenis-prevent>
+    <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true" aria-label={tr("Site menu")} data-lenis-prevent>
       <button
         type="button"
-        aria-label="Close menu"
+        aria-label={tr("Close menu")}
         className={`absolute inset-0 h-full w-full bg-ink/50 transition-opacity duration-300 ease-out motion-reduce:transition-none ${shown ? "opacity-100" : "opacity-0"}`}
         onClick={() => setOpen(false)}
       />
@@ -82,28 +85,29 @@ export function MobileNav({ user, cartCount, links, categoryGroups = [] }: { use
         }}
       >
         <div className="flex items-center justify-between px-4 py-3">
-          <span className="font-display text-lg font-bold">Menu</span>
-          <button type="button" onClick={() => setOpen(false)} className="grid h-10 w-10 place-items-center rounded-full hover:bg-sand" aria-label="Close menu">
+          <span className="font-display text-lg font-bold">{tr("Menu")}</span>
+          <button type="button" onClick={() => setOpen(false)} className="grid h-10 w-10 place-items-center rounded-full hover:bg-sand" aria-label={tr("Close menu")}>
             <X aria-hidden className="h-5 w-5" />
           </button>
         </div>
         <div className="space-y-5 px-4 py-4 text-sm font-medium">
-          <form action="/search" className="relative" onSubmit={() => setOpen(false)}>
+          <LanguageSwitcher variant="menu" />
+          <form action={lh("/search")} className="relative" onSubmit={() => setOpen(false)}>
             <Search aria-hidden className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
-            <input name="q" type="search" placeholder="Search products, brands, SKUs…" aria-label="Search lots" className="input rounded-full bg-white pl-10" />
+            <input name="q" type="search" placeholder={tr("Search products, brands, SKUs…")} aria-label={tr("Search lots")} className="input rounded-full bg-white pl-10" />
           </form>
 
           {user?.isStaff && (
             <div className="grid gap-2">
               <Link href="/dashboard" className="flex min-h-11 items-center gap-2 rounded-lg bg-sand px-3 py-2 font-semibold hover:bg-line">
-                <LayoutDashboard aria-hidden className="h-4 w-4" /> Admin
+                <LayoutDashboard aria-hidden className="h-4 w-4" /> {tr("Admin")}
               </Link>
-              {user.canInbox && <Link href="/dashboard/inbox" className={link}>Approvals &amp; inbox</Link>}
+              {user.canInbox && <Link href="/dashboard/inbox" className={link}>{tr("Approvals & inbox")}</Link>}
             </div>
           )}
 
           <div>
-            <p className="label px-3">Shop</p>
+            <p className="label px-3">{tr("Shop")}</p>
             <ul>
               {links.map((l, i) => (
                 <li key={`${l.href}-${i}`}>
@@ -132,7 +136,7 @@ export function MobileNav({ user, cartCount, links, categoryGroups = [] }: { use
 
           {categoryGroups.length > 0 && (
             <div>
-              <p className="label px-3">Categories</p>
+              <p className="label px-3">{tr("Categories")}</p>
               <ul>
                 {categoryGroups.map((g) => (
                   <li key={g.label}>
@@ -179,21 +183,21 @@ export function MobileNav({ user, cartCount, links, categoryGroups = [] }: { use
                   <li key={href}><Link href={href} className={link}>{label}</Link></li>
                 ))}
                 <li>
-                  <Link href="/cart" className={`${link} gap-2`}>
-                    <ShoppingCart aria-hidden className="h-4 w-4" /> Cart{cartCount > 0 ? ` (${cartCount})` : ""}
+                  <Link href={lh("/cart")} className={`${link} gap-2`}>
+                    <ShoppingCart aria-hidden className="h-4 w-4" /> {tr("Cart")}{cartCount > 0 ? ` (${cartCount})` : ""}
                   </Link>
                 </li>
                 <li>
                   <form action={logout}>
-                    <button className={`${link} w-full gap-2 text-left text-muted`}><LogOut aria-hidden className="h-4 w-4" /> Sign out</button>
+                    <button className={`${link} w-full gap-2 text-left text-muted`}><LogOut aria-hidden className="h-4 w-4" /> {tr("Sign out")}</button>
                   </form>
                 </li>
               </ul>
             </div>
           ) : (
             <div className="grid gap-2">
-              <Link href="/register" className="btn-dark w-full py-3">Create account</Link>
-              <Link href="/login" className="btn-ghost w-full py-3">Sign in</Link>
+              <Link href={lh("/register")} className="btn-dark w-full py-3">{tr("Create account")}</Link>
+              <Link href={lh("/login")} className="btn-ghost w-full py-3">{tr("Sign in")}</Link>
             </div>
           )}
         </div>
@@ -207,7 +211,7 @@ export function MobileNav({ user, cartCount, links, categoryGroups = [] }: { use
         type="button"
         onClick={() => setOpen(true)}
         className="grid h-10 w-10 place-items-center rounded-full hover:bg-sand lg:hidden"
-        aria-label="Open menu"
+        aria-label={tr("Open menu")}
         aria-expanded={open}
       >
         <Menu aria-hidden className="h-6 w-6" strokeWidth={1.8} />

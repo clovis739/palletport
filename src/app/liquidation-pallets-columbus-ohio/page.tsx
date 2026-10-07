@@ -11,6 +11,7 @@ import { LocationMap } from "@/components/content/LocationMap";
 import { GoogleReviews } from "@/components/content/GoogleReviews";
 import { getSetting } from "@/lib/settings";
 import { JsonLd, breadcrumbJsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
+import { getI18n } from "@/i18n/server";
 
 export const dynamic = "force-dynamic";
 
@@ -31,35 +32,36 @@ export default async function ColumbusOhioPage() {
     getSetting("business"),
   ]);
   const where = store.location;
+  const { t, lh } = await getI18n();
 
   const faqs = [
     {
-      q: "Can I pick up a pallet in Columbus?",
-      a: `Yes, by appointment at our warehouse in ${where}. Open any lot and choose "Warehouse pickup · book a visit" to pick a weekday (Monday to Friday) and a 50-minute time at least 45 hours ahead. Orders of $600 or more pay a refundable 35% deposit to confirm; smaller orders pay in full. There's no walk-in store or showroom.`,
+      q: t("Can I pick up a pallet in Columbus?"),
+      a: t("Yes, by appointment at our warehouse in {place}. Open any lot and choose “Warehouse pickup · book a visit” to pick a weekday (Monday to Friday) and a 50-minute time at least 45 hours ahead. Orders of $600 or more pay a refundable 35% deposit to confirm; smaller orders pay in full. There's no walk-in store or showroom.", { place: where }),
     },
     {
-      q: "Do you deliver to Cleveland, Cincinnati, Dayton and Toledo?",
-      a: "Yes. We ship to any US address, including every city in Ohio. Pallets go by LTL freight, full truckloads on a 53-foot trailer, and case packs by parcel.",
+      q: t("Do you deliver to Cleveland, Cincinnati, Dayton and Toledo?"),
+      a: t("Yes. We ship to any US address, including every city in Ohio. Pallets go by LTL freight, full truckloads on a 53-foot trailer, and case packs by parcel."),
     },
     {
-      q: "How fast is delivery in Ohio?",
-      a: "It depends on the carrier, the lot size and your exact location. Enter your ZIP on any lot page to see a freight estimate with an expected transit time, and your order page shows tracking once the shipment is booked.",
+      q: t("How fast is delivery in Ohio?"),
+      a: t("It depends on the carrier, the lot size and your exact location. Enter your ZIP on any lot page to see a freight estimate with an expected transit time, and your order page shows tracking once the shipment is booked."),
     },
     {
-      q: "Can I see the pallets before I buy?",
-      a: "We don't have a walk-in store. Every lot page has the full manifest with SKUs, quantities and retail values, plus the condition grade. If you have a question about a specific lot, use Ask a question on the lot page and our warehouse team will reply.",
+      q: t("Can I see the pallets before I buy?"),
+      a: t("We don't have a walk-in store. Every lot page has the full manifest with SKUs, quantities and retail values, plus the condition grade. If you have a question about a specific lot, use Ask a question on the lot page and our warehouse team will reply."),
     },
     {
-      q: "Do I need a loading dock?",
-      a: "Not for pallets or case packs. Choose liftgate delivery at checkout if you don't have a dock, and have a pallet jack ready. Full truckloads need a dock and a forklift.",
+      q: t("Do I need a loading dock?"),
+      a: t("Not for pallets or case packs. Choose liftgate delivery at checkout if you don't have a dock, and have a pallet jack ready. Full truckloads need a dock and a forklift."),
     },
   ];
 
   const ways = [
-    { href: "/pallets", icon: Package, t: "Pallets", d: "One or a few standard 48×40 pallets, shipped by LTL freight." },
-    { href: "/truckloads", icon: Truck, t: "Truckloads", d: "Full trailers of 18–26 pallets for volume buyers with a dock." },
-    { href: "/case-packs", icon: Boxes, t: "Case packs", d: "Sealed cartons by parcel. The easiest way to try a category." },
-    { href: "/new", icon: Sparkles, t: "New arrivals", d: "The latest lots from our warehouse floor, all at fixed prices." },
+    { href: lh("/pallets"), icon: Package, t: t("Pallets"), d: t("One or a few standard 48×40 pallets, shipped by LTL freight.") },
+    { href: lh("/truckloads"), icon: Truck, t: t("Truckloads"), d: t("Full trailers of 18–26 pallets for volume buyers with a dock.") },
+    { href: lh("/case-packs"), icon: Boxes, t: t("Case packs"), d: t("Sealed cartons by parcel. The easiest way to try a category.") },
+    { href: lh("/new"), icon: Sparkles, t: t("New arrivals"), d: t("The latest lots from our warehouse floor, all at fixed prices.") },
   ];
 
   const steps = [
@@ -74,7 +76,7 @@ export default async function ColumbusOhioPage() {
       <JsonLd
         data={[
           breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Columbus, Ohio", path: PATH }]),
-          webPageJsonLd("WebPage", TITLE, PATH, DESCRIPTION),
+          webPageJsonLd("WebPage", t(TITLE), PATH, t(DESCRIPTION)),
         ]}
       />
 
@@ -83,19 +85,19 @@ export default async function ColumbusOhioPage() {
         <Photo photo={PHOTOS.boxesOnPallets} width={1600} ratio={16 / 9} sizes="100vw" priority alt="" className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 bg-ink/80" />
         <div data-hero className="container-pp relative py-10 sm:py-14 md:py-20">
-          <nav className="mb-3 text-xs text-white/60"><Link href="/" className="hover:underline">Home</Link> / Columbus, Ohio</nav>
+          <nav className="mb-3 text-xs text-white/60"><Link href={lh("/")} className="hover:underline">{t("Home")}</Link> / Columbus, Ohio</nav>
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-signal">
-            <MapPin aria-hidden className="h-4 w-4 shrink-0" /> Our warehouse: {where}
+            <MapPin aria-hidden className="h-4 w-4 shrink-0" /> {t("Our warehouse:")} {where}
           </p>
           <h1 className="mt-3 max-w-3xl font-display text-3xl font-bold leading-[1.1] sm:text-5xl sm:leading-[1.05]">
-            Liquidation pallets from our Columbus, Ohio warehouse
+            {t("Liquidation pallets from our Columbus, Ohio warehouse")}
           </h1>
           <p className="mt-4 max-w-2xl text-base text-white/75 sm:text-lg">
-            We sell our own manifested lots of customer returns, shelf pulls and overstock by the case, pallet or truckload, and deliver across Ohio and the rest of the country.
+            {t("We sell our own manifested lots of customer returns, shelf pulls and overstock by the case, pallet or truckload, and deliver across Ohio and the rest of the country.")}
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/lots" className="btn-primary">Browse current lots</Link>
-            <Link href="/lots" className="inline-flex min-h-11 items-center rounded-full px-5 py-2 text-sm font-semibold hover:bg-white/10">Book a warehouse visit</Link>
+            <Link href={lh("/lots")} className="btn-primary">{t("Browse current lots")}</Link>
+            <Link href={lh("/lots")} className="inline-flex min-h-11 items-center rounded-full px-5 py-2 text-sm font-semibold hover:bg-white/10">{t("Book a warehouse visit")}</Link>
           </div>
         </div>
       </section>
@@ -104,31 +106,31 @@ export default async function ColumbusOhioPage() {
         {/* Who we are + pickup */}
         <section className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-12">
           <div className="min-w-0">
-            <p className="label">Who we are</p>
-            <h2 className="font-display text-2xl font-bold sm:text-3xl">One warehouse, our own inventory</h2>
+            <p className="label">{t("Who we are")}</p>
+            <h2 className="font-display text-2xl font-bold sm:text-3xl">{t("One warehouse, our own inventory")}</h2>
             <div className="mt-4 max-w-2xl space-y-4 text-[15px] leading-relaxed text-ink/80">
               <p>
-                {store.name} isn&apos;t a marketplace of outside sellers. Every lot on the site is ours: we buy returns, shelf pulls and overstock, then sort, grade and manifest each lot in our warehouse in {where} before it goes on sale.
+                {t("{name} isn't a marketplace of outside sellers. Every lot on the site is ours: we buy returns, shelf pulls and overstock, then sort, grade and manifest each lot in our warehouse in {place} before it goes on sale.", { name: store.name, place: where })}
               </p>
               <p>
-                That makes us a practical source for Ohio and Midwest resellers: bin stores, discount and dollar stores, online sellers, flea-market vendors and refurbishers. Each lot page shows the manifest, the condition grade, the unit count and a freight estimate for your ZIP, so you know what you&apos;re buying and what delivery will cost before you order.
+                {t("That makes us a practical source for Ohio and Midwest resellers: bin stores, discount and dollar stores, online sellers, flea-market vendors and refurbishers. Each lot page shows the manifest, the condition grade, the unit count and a freight estimate for your ZIP, so you know what you're buying and what delivery will cost before you order.")}
               </p>
             </div>
           </div>
           <aside aria-labelledby="pickup-title" className="min-w-0 self-start rounded-2xl bg-sand/70 p-5 sm:p-6">
             <CalendarClock aria-hidden className="h-6 w-6 text-signal-dark" />
-            <h2 id="pickup-title" className="mt-2 font-display text-lg font-bold">Pickup is by appointment only</h2>
+            <h2 id="pickup-title" className="mt-2 font-display text-lg font-bold">{t("Pickup is by appointment only")}</h2>
             <p className="mt-2 text-sm text-ink/80">
-              There&apos;s no walk-in store or showroom. If you&apos;d rather collect than pay for freight, open the lot and choose <strong>Warehouse pickup · book a visit</strong>: pick a weekday and a 50-minute time at least 45 hours ahead. Orders of $600 or more pay a refundable 35% deposit to confirm; smaller orders pay in full.
+              {t("There's no walk-in store or showroom. If you'd rather collect than pay for freight, open the lot and choose")} <strong>{t("Warehouse pickup · book a visit")}</strong>: {t("pick a weekday and a 50-minute time at least 45 hours ahead. Orders of $600 or more pay a refundable 35% deposit to confirm; smaller orders pay in full.")}
             </p>
-            <Link href="/lots" className="btn-dark mt-4 w-full">Choose a lot to collect</Link>
+            <Link href={lh("/lots")} className="btn-dark mt-4 w-full">{t("Choose a lot to collect")}</Link>
           </aside>
         </section>
 
         {/* What you can buy */}
         <section aria-labelledby="buy-title">
-          <p className="label">What you can buy</p>
-          <h2 id="buy-title" className="font-display text-2xl font-bold sm:text-3xl">By the case, pallet or truckload</h2>
+          <p className="label">{t("What you can buy")}</p>
+          <h2 id="buy-title" className="font-display text-2xl font-bold sm:text-3xl">{t("By the case, pallet or truckload")}</h2>
           <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {ways.map((w) => (
               <li key={w.href}>
@@ -142,11 +144,11 @@ export default async function ColumbusOhioPage() {
           </ul>
           {categories.length > 0 && (
             <div className="mt-6">
-              <h3 className="label">Shop by category</h3>
+              <h3 className="label">{t("Shop by category")}</h3>
               <div className="flex flex-wrap gap-2">
                 {categories.map((c) => (
-                  <Link key={c.slug} href={`/c/${c.slug}`} className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-sm font-medium">
-                    {c.name}<span className="text-xs text-muted">{c._count.lots}</span>
+                  <Link key={c.slug} href={lh(`/c/${c.slug}`)} className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-sm font-medium">
+                    {t(c.name)}<span className="text-xs text-muted">{c._count.lots}</span>
                   </Link>
                 ))}
               </div>
@@ -158,8 +160,8 @@ export default async function ColumbusOhioPage() {
         {lots.length > 0 && (
           <section aria-labelledby="lots-title">
             <div className="mb-4 flex flex-wrap items-end justify-between gap-x-4 gap-y-1">
-              <h2 id="lots-title" className="font-display text-2xl font-bold sm:text-3xl">On sale now</h2>
-              <Link href="/lots" className="text-sm font-semibold text-signal-dark hover:underline">All lots<NextIcon /></Link>
+              <h2 id="lots-title" className="font-display text-2xl font-bold sm:text-3xl">{t("On sale now")}</h2>
+              <Link href={lh("/lots")} className="text-sm font-semibold text-signal-dark hover:underline">{t("All lots")}<NextIcon /></Link>
             </div>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{lots.map((l) => <LotCard key={l.id} lot={l} />)}</div>
           </section>
@@ -168,10 +170,10 @@ export default async function ColumbusOhioPage() {
         {/* Delivery */}
         <section aria-labelledby="delivery-title" className="grid grid-cols-1 gap-8 rounded-3xl bg-ink p-6 text-white sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-12">
           <div className="min-w-0">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">Delivery</p>
-            <h2 id="delivery-title" className="mt-2 font-display text-2xl font-bold sm:text-3xl">Across Ohio and neighboring states</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">{t("Delivery")}</p>
+            <h2 id="delivery-title" className="mt-2 font-display text-2xl font-bold sm:text-3xl">{t("Across Ohio and neighboring states")}</h2>
             <p className="mt-3 text-white/75">
-              We ship from {where} to any US address, from Cleveland, Toledo, Dayton and Cincinnati to Indiana, Michigan, Kentucky, Pennsylvania and West Virginia. Enter your ZIP on any lot page for a freight estimate before you order.
+              {t("We ship from {place} to any US address, from Cleveland, Toledo, Dayton and Cincinnati to Indiana, Michigan, Kentucky, Pennsylvania and West Virginia. Enter your ZIP on any lot page for a freight estimate before you order.", { place: where })}
             </p>
           </div>
           <ul className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
@@ -179,43 +181,43 @@ export default async function ColumbusOhioPage() {
               ["LTL freight", "Pallet lots. Dock delivery, or liftgate if you don't have a dock."],
               ["Full truckload", "A 53-foot trailer. Needs a loading dock and a forklift."],
               ["Parcel", "Case packs in sealed cartons. No dock or pallet jack needed."],
-            ].map(([t, d]) => (
-              <li key={t} className="rounded-2xl bg-white/5 p-4">
-                <p className="font-display font-semibold">{t}</p>
-                <p className="mt-1 text-sm text-white/65">{d}</p>
+            ].map(([h, d]) => (
+              <li key={h} className="rounded-2xl bg-white/5 p-4">
+                <p className="font-display font-semibold">{t(h)}</p>
+                <p className="mt-1 text-sm text-white/65">{t(d)}</p>
               </li>
             ))}
           </ul>
         </section>
 
-        <LocationMap business={business} title="Our Columbus warehouse" note="Pickup is by appointment only. Book a visit from any lot page." />
+        <LocationMap business={business} title={t("Our Columbus warehouse")} note={t("Pickup is by appointment only. Book a visit from any lot page.")} />
         <GoogleReviews business={business} className="" />
 
         {/* How buying works */}
         <section aria-labelledby="how-title">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-x-4 gap-y-1">
-            <h2 id="how-title" className="font-display text-2xl font-bold sm:text-3xl">How buying works</h2>
-            <Link href="/how-to-buy" className="text-sm font-semibold text-signal-dark hover:underline">Full buying guide<NextIcon /></Link>
+            <h2 id="how-title" className="font-display text-2xl font-bold sm:text-3xl">{t("How buying works")}</h2>
+            <Link href={lh("/how-to-buy")} className="text-sm font-semibold text-signal-dark hover:underline">{t("Full buying guide")}<NextIcon /></Link>
           </div>
           <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map(([t, d], i) => (
-              <li key={t} className="rounded-2xl bg-sand/60 p-5">
+            {steps.map(([h, d], i) => (
+              <li key={h} className="rounded-2xl bg-sand/60 p-5">
                 <span className="font-display text-sm font-bold text-signal-dark">0{i + 1}</span>
-                <h3 className="mt-2 font-display text-lg font-semibold">{t}</h3>
-                <p className="mt-1 text-sm text-ink/75">{d}</p>
+                <h3 className="mt-2 font-display text-lg font-semibold">{t(h)}</h3>
+                <p className="mt-1 text-sm text-ink/75">{t(d)}</p>
               </li>
             ))}
           </ol>
           <p className="mt-4 flex items-start gap-2 text-sm text-muted">
             <FileText aria-hidden className="mt-0.5 h-4 w-4 shrink-0" />
             <span>
-              15-day returns with written approval, including when an order doesn&apos;t match its listing. See our{" "}
-              <Link href="/legal/returns-and-disputes" className="font-semibold text-signal-dark hover:underline">Return &amp; Refund Policy</Link>.
+              {t("15-day returns with written approval, including when an order doesn't match its listing. See our")}{" "}
+              <Link href={lh("/legal/returns-and-disputes")} className="font-semibold text-signal-dark hover:underline">{t("Return & Refund Policy")}</Link>.
             </span>
           </p>
         </section>
 
-        <FaqSection items={faqs} title="Columbus and Ohio buyers: common questions" className="max-w-3xl" />
+        <FaqSection items={faqs} title={t("Columbus and Ohio buyers: common questions")} className="max-w-3xl" />
       </div>
     </>
   );

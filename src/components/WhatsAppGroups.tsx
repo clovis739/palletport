@@ -2,25 +2,47 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Boxes, MessageCircle, Shirt, X } from "lucide-react";
-import { WHATSAPP_GROUPS, WHATSAPP_POPUP_DELAY_S, WHATSAPP_POPUP_QUIET_PATHS } from "@/content/whatsappGroups";
+import { ArrowUpRight, Boxes, Hammer, MessageCircle, Shirt, Smartphone, Sofa, Star, ToyBrick, X, type LucideIcon } from "lucide-react";
+import { WHATSAPP_POPUP_QUIET_PATHS } from "@/content/whatsappGroups";
+import { useT } from "@/i18n/client";
+import { stripLocale } from "@/i18n/config";
+import type { WaGroupIcon, WhatsAppGroupsSettings } from "@/lib/settings-schema";
 
 const STORAGE_KEY = "pp-wa-groups";
 const WA_GREEN = "#25D366";
 
-function readDismissed() {
+export const WA_ICONS: Record<WaGroupIcon, LucideIcon> = {
+  fashion: Shirt,
+  general: Boxes,
+  electronics: Smartphone,
+  home: Sofa,
+  tools: Hammer,
+  toys: ToyBrick,
+  star: Star,
+};
+
+/**
+ * "Closed" is remembered per set of group links: when the owner pastes new links in the admin, visitors who
+ * closed the old popup see it once more with the new groups.
+ */
+function readDismissed(sig: string) {
   try {
-    return localStorage.getItem(STORAGE_KEY) === "dismissed";
+    return localStorage.getItem(STORAGE_KEY) === `dismissed:${sig}`;
   } catch {
     return false;
   }
 }
-function saveDismissed() {
+function saveDismissed(sig: string) {
   try {
-    localStorage.setItem(STORAGE_KEY, "dismissed");
+    localStorage.setItem(STORAGE_KEY, `dismissed:${sig}`);
   } catch {
     /* private mode: the bar still shows for this visit */
   }
+}
+function signature(links: string[]) {
+  let h = 0;
+  for (const ch of links.join("|")) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  return h.toString(36);
 }
 
 /**
@@ -30,8 +52,11 @@ function saveDismissed() {
  *   above the header offers "Join" and reopens the dialog.
  * Storefront only (rendered inside HideOnAdmin in the root layout).
  */
-export function WhatsAppGroups() {
-  const path = usePathname() ?? "";
+export function WhatsAppGroups({ settings }: { settings: WhatsAppGroupsSettings }) {
+  const groups = settings.groups;
+  const sig = signature(groups.map((g) => g.href));
+  const tr = useT();
+  const path = stripLocale(usePathname() ?? "");
   const [mounted, setMounted] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [open, setOpen] = useState(false);
@@ -41,14 +66,14 @@ export function WhatsAppGroups() {
 
   useEffect(() => {
     setMounted(true);
-    setDismissed(readDismissed());
+    setDismissed(readDismissed(sig));
   }, []);
 
   // First-time visitors: open after a short delay, unless they're mid-purchase or signing in.
   useEffect(() => {
-    if (!mounted || dismissed || open) return;
+    if (!mounted || dismissed || open || !settings.autoOpen) return;
     if (WHATSAPP_POPUP_QUIET_PATHS.some((p) => path === p || path.startsWith(`${p}/`))) return;
-    const t = window.setTimeout(() => openDialog(), WHATSAPP_POPUP_DELAY_S * 1000);
+    const t = window.setTimeout(() => openDialog(), settings.delaySeconds * 1000);
     return () => window.clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted, dismissed, path]);
@@ -61,13 +86,13 @@ export function WhatsAppGroups() {
 
   const close = useCallback(() => {
     setShown(false);
-    saveDismissed();
+    saveDismissed(sig);
     setDismissed(true);
     window.setTimeout(() => {
       setOpen(false);
       returnFocus.current?.focus?.();
     }, 220);
-  }, []);
+  }, [sig]);
 
   // While open: lock page scroll, Esc closes, Tab stays inside the dialog.
   useEffect(() => {
@@ -102,26 +127,28 @@ export function WhatsAppGroups() {
     };
   }, [open, close]);
 
-  if (!mounted) return null;
+  if (!mounted || !settings.enabled || groups.length === 0) return null;
+  // With the popup set not to open by itself, the bar is always the way in.
+  const showBar = dismissed || !settings.autoOpen;
 
   return (
     <>
-      {dismissed && (
+      {showBar && (
         <div className="bg-ink text-white">
           <div className="container-pp flex min-h-10 items-center justify-center gap-3 py-1.5 text-xs sm:text-sm">
             <span aria-hidden className="grid h-6 w-6 shrink-0 place-items-center rounded-full" style={{ backgroundColor: WA_GREEN }}>
               <MessageCircle className="h-3.5 w-3.5 text-white" strokeWidth={2.5} />
             </span>
             <p className="min-w-0 truncate">
-              <span className="font-semibold">Join our WhatsApp groups</span>
-              <span className="hidden text-white/70 sm:inline"> · new lots and private deals first</span>
+              <span className="font-semibold">{settings.barText}</span>
+              {settings.barSubtext && <span className="hidden text-white/70 sm:inline"> · {settings.barSubtext}</span>}
             </p>
             <button
               type="button"
               onClick={openDialog}
               className="inline-flex h-7 shrink-0 items-center rounded-full bg-signal px-3 text-xs font-semibold text-white transition-colors hover:bg-signal-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              Join
+              {tr("Join")}
             </button>
           </div>
         </div>
@@ -131,7 +158,7 @@ export function WhatsAppGroups() {
         <div className="fixed inset-0 z-[75] flex items-end justify-center sm:items-center sm:p-6" data-lenis-prevent>
           <button
             type="button"
-            aria-label="Close"
+            aria-label={tr("Close")}
             tabIndex={-1}
             onClick={close}
             className={`absolute inset-0 h-full w-full cursor-default bg-ink/60 transition-opacity duration-200 motion-reduce:transition-none ${shown ? "opacity-100" : "opacity-0"}`}
@@ -141,7 +168,7 @@ export function WhatsAppGroups() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="wa-groups-title"
-            aria-describedby="wa-groups-desc"
+            aria-describedby={settings.description ? "wa-groups-desc" : undefined}
             className={`relative max-h-[92dvh] w-full overflow-y-auto overscroll-contain rounded-t-2xl bg-white pb-[env(safe-area-inset-bottom)] transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:max-w-md sm:rounded-2xl ${
               shown ? "translate-y-0 opacity-100 sm:scale-100" : "translate-y-6 opacity-0 sm:translate-y-2 sm:scale-[0.98]"
             }`}
@@ -149,7 +176,7 @@ export function WhatsAppGroups() {
             <button
               type="button"
               onClick={close}
-              aria-label="Close"
+              aria-label={tr("Close")}
               data-autofocus
               className="absolute right-3 top-3 grid h-10 w-10 place-items-center rounded-full text-muted transition-colors hover:bg-sand hover:text-ink focus-visible:outline-2 focus-visible:outline-signal"
             >
@@ -160,39 +187,41 @@ export function WhatsAppGroups() {
               <span aria-hidden className="grid h-12 w-12 place-items-center rounded-2xl" style={{ backgroundColor: `${WA_GREEN}1f` }}>
                 <MessageCircle className="h-6 w-6" style={{ color: "#128C7E" }} strokeWidth={2.25} />
               </span>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-muted">WhatsApp groups</p>
+              <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-muted">{tr("WhatsApp groups")}</p>
               <h2 id="wa-groups-title" className="mt-1 pr-8 font-display text-2xl font-bold leading-tight">
-                Join our WhatsApp groups
+                {settings.title}
               </h2>
-              <p id="wa-groups-desc" className="mt-2 text-sm leading-relaxed text-ink/75">
-                The best way to stay in touch. New lots are posted here before anywhere else, including private deals you won&apos;t find on the site.
-              </p>
+              {settings.description && (
+                <p id="wa-groups-desc" className="mt-2 text-sm leading-relaxed text-ink/75">
+                  {settings.description}
+                </p>
+              )}
             </div>
 
             <ul className="space-y-3 px-5 py-4 sm:px-6">
-              {WHATSAPP_GROUPS.map((g) => {
-                const Icon = g.icon === "fashion" ? Shirt : Boxes;
+              {groups.map((g, i) => {
+                const Icon = WA_ICONS[g.icon] ?? Boxes;
                 return (
-                  <li key={g.id} className="flex items-center gap-3 rounded-xl bg-sand p-3 sm:p-4">
+                  <li key={`${g.href}-${i}`} className="flex items-center gap-3 rounded-xl bg-sand p-3 sm:p-4">
                     <span aria-hidden className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-ink">
                       <Icon className="h-5 w-5" />
                     </span>
                     <div className="min-w-0 flex-1">
                       <p className="font-display text-sm font-bold sm:text-base">{g.title}</p>
-                      <p className="text-xs text-muted sm:text-sm">{g.subtitle}</p>
+                      {g.subtitle && <p className="text-xs text-muted sm:text-sm">{g.subtitle}</p>}
                     </div>
                     <a
                       href={g.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => {
-                        saveDismissed();
+                        saveDismissed(sig);
                         setDismissed(true);
                       }}
-                      aria-label={`Join the ${g.title} WhatsApp group (opens WhatsApp)`}
+                      aria-label={tr("Join the {title} WhatsApp group (opens WhatsApp)", { title: g.title })}
                       className="btn-primary shrink-0 px-4 py-2"
                     >
-                      Join <ArrowUpRight aria-hidden className="h-4 w-4" />
+                      {tr("Join")} <ArrowUpRight aria-hidden className="h-4 w-4" />
                     </a>
                   </li>
                 );
@@ -200,9 +229,9 @@ export function WhatsAppGroups() {
             </ul>
 
             <div className="flex items-center justify-between gap-3 px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
-              <p className="text-xs text-muted">Free to join. Leave any time.</p>
+              <p className="text-xs text-muted">{tr("Free to join. Leave any time.")}</p>
               <button type="button" onClick={close} className="rounded-full px-3 py-2 text-sm font-semibold text-muted transition-colors hover:bg-sand hover:text-ink focus-visible:outline-2 focus-visible:outline-signal">
-                Not now
+                {tr("Not now")}
               </button>
             </div>
           </div>

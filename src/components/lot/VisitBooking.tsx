@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { CalendarDays, ChevronLeft, ChevronRight, Clock, Warehouse, X } from "lucide-react";
 import { money } from "@/lib/format";
 import { Select } from "@/components/ui/Select";
+import { useI18n } from "@/i18n/client";
 import {
   BOOKING_DAYS,
   DEPOSIT_THRESHOLD_CENTS,
@@ -28,7 +29,7 @@ type Props = {
 const WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
 /** Group bookable days into Mon–Fri weeks for the calendar grid (null = not bookable / outside range). */
-function toWeeks(days: VisitDay[]) {
+function toWeeks(days: VisitDay[], tag = "en-US") {
   const byDate = new Map(days.map((d) => [d.date, d]));
   if (!days.length) return [];
   const first = new Date(`${days[0].date}T12:00:00Z`);
@@ -39,7 +40,7 @@ function toWeeks(days: VisitDay[]) {
     for (let i = 0; i < 5; i++) {
       const d = new Date(monday.getTime() + (w * 7 + i) * 86_400_000);
       const date = d.toISOString().slice(0, 10);
-      row.push({ date, day: d.getUTCDate(), month: d.toLocaleString("en-US", { month: "short", timeZone: "UTC" }), info: byDate.get(date) });
+      row.push({ date, day: d.getUTCDate(), month: d.toLocaleString(tag, { month: "short", timeZone: "UTC" }), info: byDate.get(date) });
     }
     if (row.every((r) => r.date > days[days.length - 1].date)) break;
     weeks.push({ key: row[0].date, days: row });
@@ -53,6 +54,7 @@ function toWeeks(days: VisitDay[]) {
  */
 export function VisitBooking({ lot, booked, signedIn, location }: Props) {
   const router = useRouter();
+  const { t: tr, locale, lh } = useI18n();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [qty, setQty] = useState(1);
@@ -69,7 +71,7 @@ export function VisitBooking({ lot, booked, signedIn, location }: Props) {
   }, [open]);
 
   const days = useMemo(() => (now ? visitCalendar(now, booked) : []), [now, booked]);
-  const weeks = useMemo(() => toWeeks(days), [days]);
+  const weeks = useMemo(() => toWeeks(days, locale === "es" ? "es-US" : "en-US"), [days, locale]);
   const pages = Math.max(1, Math.ceil(weeks.length / 3));
   const shown = weeks.slice(page * 3, page * 3 + 3);
   const day = days.find((d) => d.date === date);
@@ -100,18 +102,18 @@ export function VisitBooking({ lot, booked, signedIn, location }: Props) {
     };
   }, [open]);
 
-  const next = slot ? `/checkout/visit?lot=${encodeURIComponent(lot.slug)}&qty=${qty}&at=${encodeURIComponent(slot)}` : "";
+  const next = slot ? `${lh("/checkout/visit")}?lot=${encodeURIComponent(lot.slug)}&qty=${qty}&at=${encodeURIComponent(slot)}` : "";
   const go = () => {
     if (!slot) return;
-    router.push(signedIn ? next : `/login?next=${encodeURIComponent(next)}`);
+    router.push(signedIn ? next : `${lh("/login")}?next=${encodeURIComponent(next)}`);
   };
 
   return (
     <>
       <button ref={openerRef} type="button" onClick={() => setOpen(true)} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-moss px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#245a40] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-moss" aria-haspopup="dialog">
-        <Warehouse aria-hidden className="h-4 w-4" /> Warehouse pickup · book a visit
+        <Warehouse aria-hidden className="h-4 w-4" /> {tr("Warehouse pickup · book a visit")}
       </button>
-      <p className="text-center text-xs text-muted">Choose a weekday visit (Mon–Fri) and pick up in {location}.</p>
+      <p className="text-center text-xs text-muted">{tr("Choose a weekday visit (Mon–Fri) and pick up in {place}.", { place: location })}</p>
 
       {open && mounted &&
         createPortal(
@@ -125,25 +127,25 @@ export function VisitBooking({ lot, booked, signedIn, location }: Props) {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h2 id="visit-title" className="font-display text-xl font-bold sm:text-2xl">Book a warehouse visit</h2>
+                  <h2 id="visit-title" className="font-display text-xl font-bold sm:text-2xl">{tr("Book a warehouse visit")}</h2>
                   <p className="mt-1 text-sm text-muted">
-                    Weekday appointments begin at least {LEAD_HOURS} hours from now. Each visit is {VISIT_MINUTES} minutes.
+                    {tr("Weekday appointments begin at least {hours} hours from now. Each visit is {minutes} minutes.", { hours: LEAD_HOURS, minutes: VISIT_MINUTES })}
                   </p>
                 </div>
-                <button type="button" onClick={() => setOpen(false)} className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-sand hover:bg-line" aria-label="Close">
+                <button type="button" onClick={() => setOpen(false)} className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-sand hover:bg-line" aria-label={tr("Close")}>
                   <X aria-hidden className="h-5 w-5" />
                 </button>
               </div>
 
               <div className="mt-5 rounded-2xl bg-sand p-4">
-                <p className="label">Selected product</p>
+                <p className="label">{tr("Selected product")}</p>
                 <p className="font-semibold">{lot.title}</p>
                 <div className="mt-2 flex flex-wrap items-center justify-between gap-3 text-sm">
-                  <span>{money(lot.priceCents)} per lot</span>
+                  <span>{tr("{price} per lot", { price: money(lot.priceCents) })}</span>
                   {lot.available > 1 && (
                     <label className="flex items-center gap-2">
-                      Quantity
-                      <Select value={String(qty)} onChange={(e) => setQty(Number(e.target.value))} className="input w-20 py-1.5" aria-label="Quantity">
+                      {tr("Quantity")}
+                      <Select value={String(qty)} onChange={(e) => setQty(Number(e.target.value))} className="input w-20 py-1.5" aria-label={tr("Quantity")}>
                         {Array.from({ length: Math.min(lot.available, 20) }, (_, i) => i + 1).map((n) => <option key={n} value={n}>{n}</option>)}
                       </Select>
                     </label>
@@ -154,18 +156,18 @@ export function VisitBooking({ lot, booked, signedIn, location }: Props) {
               {/* Calendar: Monday–Friday, three weeks at a time */}
               <div className="mt-6">
                 <div className="mb-3 flex items-center justify-between gap-3">
-                  <p className="flex items-center gap-2 font-semibold"><CalendarDays aria-hidden className="h-4 w-4 text-signal" /> Visit date</p>
+                  <p className="flex items-center gap-2 font-semibold"><CalendarDays aria-hidden className="h-4 w-4 text-signal" /> {tr("Visit date")}</p>
                   <div className="flex gap-1">
-                    <button type="button" onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0} className="grid h-9 w-9 place-items-center rounded-full bg-sand hover:bg-line disabled:opacity-40" aria-label="Earlier weeks">
+                    <button type="button" onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0} className="grid h-9 w-9 place-items-center rounded-full bg-sand hover:bg-line disabled:opacity-40" aria-label={tr("Earlier weeks")}>
                       <ChevronLeft aria-hidden className="h-4 w-4" />
                     </button>
-                    <button type="button" onClick={() => setPage((p) => Math.min(pages - 1, p + 1))} disabled={page >= pages - 1} className="grid h-9 w-9 place-items-center rounded-full bg-sand hover:bg-line disabled:opacity-40" aria-label="Later weeks">
+                    <button type="button" onClick={() => setPage((p) => Math.min(pages - 1, p + 1))} disabled={page >= pages - 1} className="grid h-9 w-9 place-items-center rounded-full bg-sand hover:bg-line disabled:opacity-40" aria-label={tr("Later weeks")}>
                       <ChevronRight aria-hidden className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
-                <div role="grid" aria-label="Choose a visit date" className="grid grid-cols-5 gap-1.5 text-center">
-                  {WEEK.map((w) => <div key={w} role="columnheader" className="pb-1 text-xs font-semibold uppercase tracking-wider text-muted">{w}</div>)}
+                <div role="grid" aria-label={tr("Choose a visit date")} className="grid grid-cols-5 gap-1.5 text-center">
+                  {WEEK.map((w) => <div key={w} role="columnheader" className="pb-1 text-xs font-semibold uppercase tracking-wider text-muted">{tr(w)}</div>)}
                   {shown.flatMap((w) =>
                     w.days.map((d) => {
                       const free = d.info?.slots.some((s) => s.available);
@@ -177,7 +179,7 @@ export function VisitBooking({ lot, booked, signedIn, location }: Props) {
                           role="gridcell"
                           disabled={!free}
                           aria-selected={selected}
-                          aria-label={`${d.info?.weekday ?? ""} ${d.month} ${d.day}${free ? "" : ", unavailable"}`}
+                          aria-label={`${d.info?.weekday ? tr(d.info.weekday) : ""} ${d.month} ${d.day}${free ? "" : tr(", unavailable")}`}
                           data-autofocus={!date && free && !days.find((x) => x.date < d.date && x.slots.some((s) => s.available)) ? true : undefined}
                           onClick={() => { setDate(d.date); setSlot(null); }}
                           className={`flex h-14 flex-col items-center justify-center rounded-xl text-sm transition-colors ${
@@ -192,16 +194,16 @@ export function VisitBooking({ lot, booked, signedIn, location }: Props) {
                   )}
                 </div>
                 <p className="mt-3 text-sm">
-                  <span className="text-muted">Visit date: </span>
-                  <span className="font-semibold">{slot ? formatVisit(slot) : day ? formatVisit(day.slots[0].iso).split(" · ")[0] : "No date selected"}</span>
+                  <span className="text-muted">{tr("Visit date")}: </span>
+                  <span className="font-semibold">{slot ? formatVisit(slot, locale) : day ? formatVisit(day.slots[0].iso, locale).split(" · ")[0] : tr("No date selected")}</span>
                 </p>
               </div>
 
               {/* Times */}
               <div className="mt-5">
-                <p className="mb-2 flex items-center gap-2 font-semibold"><Clock aria-hidden className="h-4 w-4 text-signal" /> Time</p>
+                <p className="mb-2 flex items-center gap-2 font-semibold"><Clock aria-hidden className="h-4 w-4 text-signal" /> {tr("Time")}</p>
                 {!day ? (
-                  <p className="rounded-xl bg-sand p-3 text-sm text-muted">Select a weekday to see available times.</p>
+                  <p className="rounded-xl bg-sand p-3 text-sm text-muted">{tr("Select a weekday to see available times.")}</p>
                 ) : (
                   <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                     {day.slots.map((s) => (
@@ -224,26 +226,24 @@ export function VisitBooking({ lot, booked, signedIn, location }: Props) {
 
               {/* Payment summary */}
               <div className="mt-6 rounded-2xl bg-sand p-4 text-sm">
-                <div className="flex justify-between gap-3"><span>Order total ({qty} × {money(lot.priceCents)})</span><span className="font-semibold">{money(total)}</span></div>
+                <div className="flex justify-between gap-3"><span>{tr("Order total ({qty} × {price})", { qty, price: money(lot.priceCents) })}</span><span className="font-semibold">{money(total)}</span></div>
                 <div className="mt-1 flex justify-between gap-3 text-base font-bold">
-                  <span>{deposit ? "Pay now (35% deposit)" : "Pay now (full amount)"}</span>
+                  <span>{tr(deposit ? "Pay now (35% deposit)" : "Pay now (full amount)")}</span>
                   <span className="text-signal-dark">{money(dueNowCents)}</span>
                 </div>
-                {deposit && <div className="flex justify-between gap-3 text-muted"><span>Balance at your visit</span><span>{money(total - dueNowCents)}</span></div>}
+                {deposit && <div className="flex justify-between gap-3 text-muted"><span>{tr("Balance at your visit")}</span><span>{money(total - dueNowCents)}</span></div>}
                 <p className="mt-3 text-xs leading-relaxed text-ink/75">
-                  Orders of {money(DEPOSIT_THRESHOLD_CENTS)} or more require a refundable 35% payment to confirm the visit. Orders below{" "}
-                  {money(DEPOSIT_THRESHOLD_CENTS)} must be paid in full. The payment is refundable if the product does not match after inspection.
-                  Visits can be booked up to {BOOKING_DAYS} days ahead.
+                  {tr("Orders of {amount} or more require a refundable 35% payment to confirm the visit. Orders below {amount} must be paid in full. The payment is refundable if the product does not match after inspection. Visits can be booked up to {days} days ahead.", { amount: money(DEPOSIT_THRESHOLD_CENTS), days: BOOKING_DAYS })}
                 </p>
               </div>
 
               <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-                <button type="button" onClick={() => setOpen(false)} className="btn-ghost">Cancel</button>
+                <button type="button" onClick={() => setOpen(false)} className="btn-ghost">{tr("Cancel")}</button>
                 <button type="button" onClick={go} disabled={!slot} className="btn-primary">
-                  Continue to order &amp; payment
+                  {tr("Continue to order & payment")}
                 </button>
               </div>
-              {!signedIn && slot && <p className="mt-2 text-right text-xs text-muted">You&apos;ll sign in first, then come straight back to payment.</p>}
+              {!signedIn && slot && <p className="mt-2 text-right text-xs text-muted">{tr("You'll sign in first, then come straight back to payment.")}</p>}
             </div>
           </div>,
           document.body,

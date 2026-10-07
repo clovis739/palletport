@@ -1,6 +1,9 @@
 import "server-only";
 import { db } from "@/lib/db";
 import { emailConfigured, sendEmail, validEmail } from "@/lib/email";
+import { getUserLocale } from "@/lib/user-locale";
+import { getTFor } from "@/i18n/server";
+import type { Locale } from "@/i18n/config";
 import { certificateEmail, orderCancelledEmail, orderDeliveredEmail, orderShippedEmail, welcomeEmail, type Built, type StatusOrder } from "@/lib/email-templates";
 
 /**
@@ -13,11 +16,17 @@ async function deliver(to: string, mail: Built, idempotencyKey: string, replyTo?
   await sendEmail({ to, subject: mail.subject, text: mail.text, html: mail.html, idempotencyKey, ...(replyTo ? { replyTo } : {}) });
 }
 
-async function loadOrder(orderId: string): Promise<StatusOrder | null> {
+/** The customer's language and its translator. */
+async function customerLang(userId: string): Promise<{ lang: Locale; t: Awaited<ReturnType<typeof getTFor>> }> {
+  const lang = await getUserLocale(userId);
+  return { lang, t: await getTFor(lang) };
+}
+
+async function loadOrder(orderId: string): Promise<(StatusOrder & { userId: string }) | null> {
   return db.order.findUnique({
     where: { id: orderId },
     select: {
-      id: true, number: true, totalCents: true, deliveryMethod: true, trackingNo: true, carrier: true, paidAt: true, amountPaidCents: true,
+      id: true, userId: true, number: true, totalCents: true, deliveryMethod: true, trackingNo: true, carrier: true, paidAt: true, amountPaidCents: true,
       shipName: true, shipAddress: true, shipCity: true, shipRegion: true, shipPostal: true,
       user: { select: { name: true, email: true } },
       items: { select: { title: true, quantity: true, priceCents: true } },
@@ -31,14 +40,15 @@ export async function notifyOrderEvent(orderId: string, event: OrderEvent) {
   try {
     const o = await loadOrder(orderId);
     if (!o) return;
+    const { lang, t } = await customerLang(o.userId);
     const jobs: Promise<unknown>[] = [];
     if (event === "shipped" || event === "tracking") {
-      jobs.push(deliver(o.user.email, orderShippedEmail(o, event === "tracking"), `order-shipped/${o.id}/${o.trackingNo ?? ""}`));
+      jobs.push(deliver(o.user.email, orderShippedEmail(o, event === "tracking", t, lang), `order-shipped/${o.id}/${o.trackingNo ?? ""}`));
     } else if (event === "delivered") {
-      jobs.push(deliver(o.user.email, orderDeliveredEmail(o), `order-delivered/${o.id}`));
+      jobs.push(deliver(o.user.email, orderDeliveredEmail(o, t, lang), `order-delivered/${o.id}`));
     } else {
       const byBuyer = event === "buyer-cancelled";
-      jobs.push(deliver(o.user.email, orderCancelledEmail(o, { byBuyer }), `order-cancelled/${o.id}`));
+      jobs.push(deliver(o.user.email, orderCancelledEmail(o, { byBuyer }, t, lang), `order-cancelled/${o.id}`));
       const team = process.env.EMAIL_TO?.trim();
       if (byBuyer && team) jobs.push(deliver(team, orderCancelledEmail(o, { byBuyer, audience: "team" }), `order-cancelled-team/${o.id}`, o.user.email));
     }
@@ -50,7 +60,8 @@ export async function notifyOrderEvent(orderId: string, event: OrderEvent) {
 
 export async function sendWelcomeEmail(user: { id: string; name: string; email: string; businessName?: string | null }) {
   try {
-    await deliver(user.email, welcomeEmail(user), `welcome/${user.id}`);
+    const { lang, t } = await customerLang(user.id);
+    await deliver(user.email, welcomeEmail(user, t, lang), `welcome/${user.id}`);
   } catch {
     console.warn("The welcome email could not be sent.");
   }
@@ -59,7 +70,8 @@ export async function sendWelcomeEmail(user: { id: string; name: string; email: 
 export async function sendCertificateEmail(user: { id: string; name: string; email: string }, status: string, note?: string | null) {
   if (status !== "APPROVED" && status !== "REJECTED") return;
   try {
-    await deliver(user.email, certificateEmail(user, status, note), `certificate/${user.id}/${status}/${Date.now()}`);
+    const { lang, t } = await customerLang(user.id);
+    await deliver(user.email, certificateEmail(user, status, note, t, lang), `certificate/${user.id}/${status}/${Date.now()}`);
   } catch {
     console.warn("The certificate email could not be sent.");
   }

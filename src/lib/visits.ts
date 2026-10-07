@@ -111,8 +111,8 @@ export function amountDueNow(totalCents: number) {
 }
 
 /** "Tuesday, Oct 7 · 10:00am–10:50am ET" */
-export function formatVisit(iso: string | Date) {
+export function formatVisit(iso: string | Date, locale: "en" | "es" = "en") {
   const d = typeof iso === "string" ? new Date(iso) : iso;
-  const day = new Intl.DateTimeFormat("en-US", { weekday: "long", month: "short", day: "numeric", timeZone: VISIT_TZ }).format(d);
+  const day = new Intl.DateTimeFormat(locale === "es" ? "es-US" : "en-US", { weekday: "long", month: "short", day: "numeric", timeZone: VISIT_TZ }).format(d);
   return `${day} · ${slotLabel(partsInTz(d).hour)} ET`;
 }

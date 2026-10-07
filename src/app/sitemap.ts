@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { isLotPhotoUrl } from "@/lib/mediaUrls";
+import { cleanProductPhotos } from "@/lib/product-photos";
 import type { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
 import { COLLECTIONS } from "@/lib/collections";
@@ -41,7 +42,6 @@ const STATIC: { path: string; listing?: Prisma.LotWhereInput }[] = [
   { path: "/help" },
   { path: "/guides" },
   { path: "/blog" },
-  { path: "/reports" },
   { path: "/about" },
   { path: "/liquidation-pallets-columbus-ohio" },
   { path: "/contact" },
@@ -56,12 +56,10 @@ const STATIC: { path: string; listing?: Prisma.LotWhereInput }[] = [
 const date = (d?: string) => (d ? new Date(`${d}T12:00:00Z`) : undefined);
 const later = (a: Date, b?: Date | null) => (b && b > a ? b : a);
 
-/** Real uploaded lot photos only (stock/fallback photos are never listed). */
+/** Assigned product photos only (stock/fallback photos are never listed). */
 const uploadedPhotos = (images: string, base: string) =>
-  images
-    .split("\n")
-    .map((s) => s.trim())
-    .filter((s) => isLotPhotoUrl(s))
+  cleanProductPhotos(images)
+    .filter((s) => isLotPhotoUrl(s) || /^\/images\/products\/(?:clean-)?[a-f0-9]{16}\.(?:webp|png)$/i.test(s))
     .map((s) => (s.startsWith("/") ? `${base}${s}` : s));
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -95,7 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         orderItems: LATEST_ORDER_SELECT,
       },
     }),
-    db.category.findMany({ select: { slug: true } }),
+    db.category.findMany({ where: { hidden: false }, select: { slug: true } }),
     Promise.all(
       STATIC.map((s) =>
         s.listing
@@ -122,7 +120,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
   const latestPost = posts.map((p) => p.updated ?? p.date ?? "").sort().pop();
 
-  const out: Entry[] = [
+  // Pages with a Spanish version (/es/…) are listed twice, each pointing at both languages (hreflang).
+  const bilingual = (e: Entry): Entry[] => {
+    const path = e.url.slice(base.length) || "/";
+    const en = `${base}${path}`;
+    const es = `${base}/es${path === "/" ? "" : path}`;
+    const alternates = { languages: { "en-US": en, "es-US": es, "x-default": en } };
+    return [{ ...e, url: en, alternates }, { ...e, url: es, alternates }];
+  };
+
+  const translated: Entry[] = [
     ...STATIC.map((s, i) => ({
       url: `${base}${s.path || "/"}`,
       lastModified: s.listing ? listingDates[i]?.createdAt : s.path === "/blog" ? date(latestPost) : undefined,
@@ -137,6 +144,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...(images.length ? { images } : {}),
       };
     }),
+  ].flatMap(bilingual);
+
+  const out: Entry[] = [
+    ...translated,
     ...posts.map((p) => ({ url: `${base}/blog/${p.slug}`, lastModified: date(p.updated ?? p.date) })),
     ...blogCats.map((c) => ({ url: `${base}/blog/category/${categorySlug(c)}` })),
     ...help.map((h) => ({ url: `${base}/help/${h.slug}`, lastModified: date(h.updated ?? h.date) })),
@@ -144,5 +155,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...legal.map((l) => ({ url: `${base}/legal/${l.slug}`, lastModified: date(l.updated ?? l.date) })),
     ...pages.map((pg) => ({ url: `${base}/p/${pg.slug}`, lastModified: date(pg.updated ?? pg.date) })),
   ];
-  return out;
+  return [...new Map(out.map((entry) => [entry.url, entry])).values()];
 }

@@ -136,20 +136,26 @@ export async function pageMetadata({
   // Brand name from Admin → Business profile; text written with the original name follows a rename.
   const { getBrand } = await import("@/lib/brand");
   const brand = await getBrand();
-  title = rebrandText(title, brand);
-  description = description ? rebrandText(description, brand) : description;
-  if (imageAlt) imageAlt = rebrandText(imageAlt, brand);
+  // Spanish pages (/es/…): translated title/description, Spanish canonical URL, and hreflang links to both versions.
+  const { getI18n } = await import("@/i18n/server");
+  const { t, locale } = await getI18n();
+  title = t(rebrandText(title, brand));
+  description = description ? t(rebrandText(description, brand)) : description;
+  if (imageAlt) imageAlt = t(rebrandText(imageAlt, brand));
+  const esPath = path === "/" ? "/es" : `/es${path}`;
+  const localPath = locale === "es" ? esPath : path;
   const desc = description ? trimDescription(description) : undefined;
   const fullTitle = absoluteTitle || title.includes(brand) ? title : `${title} · ${brand}`;
   const img = { url: image ?? DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: imageAlt ?? fullTitle };
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description: desc,
-    alternates: { canonical: path },
+    alternates: noIndex ? { canonical: localPath } : { canonical: localPath, languages: { "en-US": path, "es-US": esPath, "x-default": path } },
     openGraph: {
       siteName: brand,
-      locale: "en_US",
-      url: path,
+      locale: locale === "es" ? "es_US" : "en_US",
+      alternateLocale: locale === "es" ? ["en_US"] : ["es_US"],
+      url: localPath,
       title: fullTitle,
       description: desc,
       images: [img],
@@ -173,7 +179,14 @@ export function ogImageUrl(ref: string | null | undefined) {
  * Site-wide metadata defaults for the root layout, from the `seo` settings (Admin → Site → SEO).
  * While the title/template are untouched, a STORE_NAME env override still replaces "PalletPort" in them.
  */
-export function siteMetadata(seo: SeoSettings, brand = SITE_NAME, base = siteUrl()): Metadata {
+export function siteMetadata(
+  seo: SeoSettings,
+  brand = SITE_NAME,
+  base = siteUrl(),
+  locale: "en" | "es" = "en",
+  t: (text: string) => string = (x) => x,
+): Metadata {
+  const es = locale === "es";
   const swap = (v: string, _d: string) => rebrandText(v, brand);
   const title = swap(seo.defaultTitle, DEFAULTS.seo.defaultTitle);
   const template = swap(seo.titleTemplate, DEFAULTS.seo.titleTemplate);
@@ -181,8 +194,8 @@ export function siteMetadata(seo: SeoSettings, brand = SITE_NAME, base = siteUrl
   const custom = image !== DEFAULT_OG_IMAGE;
   const description = seo.defaultDescription || undefined;
   // Shorter share text for social cards (falls back to the meta description).
-  const shareDescription = "Manifested liquidation pallets, truckloads and case packs at fixed prices, sold direct from our Columbus, Ohio warehouse.";
-  const ogImage = custom ? { url: image, width: 1200, height: 630, alt: title } : { url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: `${brand}: wholesale liquidation pallets` };
+  const shareDescription = t("Manifested liquidation pallets, truckloads and case packs at fixed prices, sold direct from our Columbus, Ohio warehouse.");
+  const ogImage = custom ? { url: image, width: 1200, height: 630, alt: title } : { url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: `${brand}: ${t("wholesale liquidation pallets")}` };
   const google = (seo.googleVerification || process.env.GOOGLE_SITE_VERIFICATION || "").trim();
   return {
     metadataBase: new URL(base),
@@ -206,16 +219,22 @@ export function siteMetadata(seo: SeoSettings, brand = SITE_NAME, base = siteUrl
     category: "Wholesale Liquidation",
     referrer: "origin-when-cross-origin",
     manifest: "/manifest.webmanifest",
-    alternates: { canonical: "/" },
+    alternates: { canonical: es ? "/es" : "/", languages: { "en-US": "/", "es-US": "/es", "x-default": "/" } },
     formatDetection: { telephone: false, email: false, address: false },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 } },
-    openGraph: { type: "website", locale: "en_US", url: "/", siteName: brand, title, description: shareDescription, images: [ogImage] },
+    openGraph: { type: "website", locale: es ? "es_US" : "en_US", alternateLocale: es ? ["en_US"] : ["es_US"], url: es ? "/es" : "/", siteName: brand, title, description: shareDescription, images: [ogImage] },
     twitter: { card: "summary_large_image", title, description: shareDescription, images: [ogImage.url] },
     ...(google ? { verification: { google } } : {}),
   };
 }
 
 const NO_INDEX = { index: false, follow: false, googleBot: { index: false, follow: false } };
+
+/** privateMetadata() with the title translated for Spanish pages. */
+export async function privateMetadataT(title: string): Promise<Metadata> {
+  const { getT } = await import("@/i18n/server");
+  return privateMetadata((await getT())(title));
+}
 
 /** Metadata for private / transactional pages: a title for the tab, and never indexed. */
 export function privateMetadata(title?: string): Metadata {

@@ -38,7 +38,7 @@ type UsageIndex = {
 async function usageIndex(): Promise<UsageIndex> {
   const [entries, settings] = await Promise.all([
     db.contentEntry.findMany({ select: { id: true, type: true, title: true, status: true, blocks: true, meta: true } }),
-    db.siteSetting.findMany({ select: { key: true, value: true } }),
+    db.siteSetting.findMany({ where: { NOT: { key: { startsWith: "pref." } } }, select: { key: true, value: true } }),
   ]);
   return {
     entries: entries.map((e) => ({ id: e.id, type: e.type, title: e.title, status: e.status, hay: `${e.blocks}\n${e.meta}` })),

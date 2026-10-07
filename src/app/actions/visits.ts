@@ -11,6 +11,11 @@ import { LIMITS, rateLimit } from "@/lib/rateLimit";
 import { amountDueNow, checkVisitSlot } from "@/lib/visits";
 import type { FormState } from "./auth";
 import { notifyCreatedOrder } from "@/lib/order-email";
+import { rememberRequestLocale } from "@/lib/user-locale";
+import { getT } from "@/i18n/server";
+import { translateMessage } from "@/i18n/config";
+import { Prisma } from "@prisma/client";
+import { guardOrderPlacement } from "@/lib/order-placement";
 
 const visitSchema = z.object({
   lotId: z.string().min(1),
@@ -31,7 +36,13 @@ function orderNumber() {
  * Places a warehouse-pickup order with a booked visit. Payment due now: 35% refundable deposit for orders of $600+,
  * otherwise the full amount. Card = paid now → visit confirmed; Wire/ACH = pending until the payment arrives.
  */
-export async function bookVisit(_: FormState, formData: FormData): Promise<FormState> {
+export async function bookVisit(state: FormState, formData: FormData): Promise<FormState> {
+  const result = await bookVisitInner(state, formData);
+  if (result?.error) return { ...result, error: translateMessage(result.error, await getT()) };
+  return result;
+}
+
+async function bookVisitInner(_: FormState, formData: FormData): Promise<FormState> {
   const session = await getSession();
   if (!session) redirect("/login?next=/lots");
   const rl = rateLimit(`checkout:${session.userId}`, LIMITS.checkout.max, LIMITS.checkout.windowMs);
@@ -44,6 +55,7 @@ export async function bookVisit(_: FormState, formData: FormData): Promise<FormS
   let orderId: string;
   try {
     orderId = await db.$transaction(async (tx) => {
+      await guardOrderPlacement(tx, session.userId);
       const lot = await tx.lot.findUnique({ where: { id: d.lotId } });
       const unit = lot ? purchasePrice(lot) : null;
       if (!lot || unit === null) throw new Error("This lot is no longer available");
@@ -84,10 +96,11 @@ export async function bookVisit(_: FormState, formData: FormData): Promise<FormS
       const remaining = lot.available - d.qty;
       await tx.lot.update({ where: { id: lot.id }, data: { available: remaining, status: remaining <= 0 ? "SOLD_OUT" : lot.status } });
       return order.id;
-    });
+    }, { isolationLevel: Prisma.TransactionIsolationLevel.ReadCommitted });
   } catch (e) {
     return { error: e instanceof Error ? e.message : "Could not book the visit" };
   }
+  await rememberRequestLocale(session.userId);
   await notifyCreatedOrder(orderId);
   revalidatePath("/", "layout");
   redirect(`/orders/${orderId}?placed=1`);

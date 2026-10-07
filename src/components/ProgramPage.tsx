@@ -4,6 +4,9 @@ import { JsonLd } from "./JsonLd";
 import { faqJsonLd } from "@/lib/seo";
 import { getBrand } from "@/lib/brand";
 import { rebrandDeep } from "@/lib/settings-schema";
+import { getI18n } from "@/i18n/server";
+import { translateDeep } from "@/i18n/config";
+import { getDictionary } from "@/i18n/server";
 
 type Topic = "PRO" | "VOLUME" | "AFFILIATE" | "EVENTS" | "INTEGRATIONS";
 
@@ -20,6 +23,7 @@ function ProgramPageView({
   formCta,
   bodyLabel,
   extra,
+  labels = { how: "How it works", questions: "Questions", body: "Tell us about your business" },
 }: {
   eyebrow: string;
   title: string;
@@ -33,6 +37,7 @@ function ProgramPageView({
   formCta: string;
   bodyLabel?: string;
   extra?: React.ReactNode;
+  labels?: { how: string; questions: string; body: string };
 }) {
   return (
     <>
@@ -46,7 +51,7 @@ function ProgramPageView({
           </div>
           <div className="min-w-0 rounded-2xl bg-white/10 p-5 sm:p-6">
             <p className="mb-4 font-display text-lg font-bold">{formTitle}</p>
-            <InquiryForm topic={topic} dark submitLabel={formCta} bodyLabel={bodyLabel ?? "Tell us about your business"} />
+            <InquiryForm topic={topic} dark submitLabel={formCta} bodyLabel={bodyLabel ?? labels.body} />
           </div>
         </div>
       </section>
@@ -62,7 +67,7 @@ function ProgramPageView({
         {extra}
         {steps && (
           <div className="mt-14">
-            <h2 className="mb-5 font-display text-2xl font-bold">How it works</h2>
+            <h2 className="mb-5 font-display text-2xl font-bold">{labels.how}</h2>
             <ol className="grid gap-4 md:grid-cols-3">
               {steps.map((s, i) => (
                 <li key={s} className="flex gap-3 rounded-2xl bg-sand/70 p-5">
@@ -75,7 +80,7 @@ function ProgramPageView({
         )}
         {faqs && (
           <div className="mt-14 max-w-3xl">
-            <h2 className="mb-4 font-display text-2xl font-bold">Questions</h2>
+            <h2 className="mb-4 font-display text-2xl font-bold">{labels.questions}</h2>
             <FaqAccordion items={faqs.map(([q, a]) => ({ q, a }))} defaultOpen={null} className="" />
           </div>
         )}
@@ -86,5 +91,7 @@ function ProgramPageView({
 
 /** Program pages (Pro, Volume buyers, Affiliates, Events, Integrations): text follows the business name. */
 export async function ProgramPage(props: Parameters<typeof ProgramPageView>[0]) {
-  return <ProgramPageView {...rebrandDeep(props, await getBrand())} />;
+  const { extra, ...rest } = props;
+  const [brand, dict, { t }] = await Promise.all([getBrand(), getDictionary(), getI18n()]);
+  return <ProgramPageView {...translateDeep(rebrandDeep(rest, brand), dict)} extra={extra} labels={{ how: t("How it works"), questions: t("Questions"), body: t("Tell us about your business") }} />;
 }

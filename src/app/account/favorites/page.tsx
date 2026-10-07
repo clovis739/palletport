@@ -3,15 +3,17 @@ import { requireUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { LotCard } from "@/components/LotCard";
 import { AccountShell } from "../AccountNav";
-import { privateMetadata } from "@/lib/seo";
+import { privateMetadataT } from "@/lib/seo";
 import { Pager, pageCount, pageParam } from "@/components/ui/Pager";
+import { getI18n } from "@/i18n/server";
 
 const PER_PAGE = 12;
 
-export const metadata = privateMetadata("Saved lots");
+export const generateMetadata = () => privateMetadataT("Saved lots");
 
 export default async function FavoritesPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
   const u = await requireUser("/account/favorites");
+  const { t, lh } = await getI18n();
   const total = await db.favorite.count({ where: { userId: u.id } });
   const page = pageParam((await searchParams).page, pageCount(total, PER_PAGE));
   const favorites = await db.favorite.findMany({
@@ -23,9 +25,9 @@ export default async function FavoritesPage({ searchParams }: { searchParams: Pr
   });
   return (
     <AccountShell active="/account/favorites" title="Saved lots">
-      <p className="mb-4 text-sm text-muted">Lots you&apos;ve saved. Buy them before they sell out.</p>
+      <p className="mb-4 text-sm text-muted">{t("Lots you've saved. Buy them before they sell out.")}</p>
       {favorites.length === 0 ? (
-        <p className="text-sm text-muted">Tap "Watch" on any lot to track it here. <Link href="/lots" className="font-semibold text-signal-dark">Browse lots</Link></p>
+        <p className="text-sm text-muted">{t("Tap “Watch” on any lot to track it here.")} <Link href={lh("/lots")} className="font-semibold text-signal-dark">{t("Browse lots")}</Link></p>
       ) : (
         <>
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{favorites.map((f) => <LotCard key={f.id} lot={f.lot} />)}</div>

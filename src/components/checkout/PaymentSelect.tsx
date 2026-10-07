@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { Check, ChevronDown, Lock } from "lucide-react";
 import { PaymentMethodIcon } from "./PaymentMethodIcon";
 import type { PaymentIcon } from "@/lib/settings-schema";
+import { useT } from "@/i18n/client";
 
 export type PaymentOption = { id: string; name: string; description: string; icon: PaymentIcon; logo: string; locked?: boolean; lockedNote?: string };
 
@@ -14,6 +15,7 @@ export type PaymentOption = { id: string; name: string; description: string; ico
  */
 export function PaymentSelect({ name, options, value, onChange }: { name: string; options: PaymentOption[]; value: string; onChange: (id: string) => void }) {
   const uid = useId();
+  const t = useT();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(() => Math.max(0, options.findIndex((o) => o.id === value)));
   const wrap = useRef<HTMLDivElement>(null);
@@ -80,7 +82,7 @@ export function PaymentSelect({ name, options, value, onChange }: { name: string
   return (
     <div>
       <input type="hidden" name={name} value={selected?.id ?? ""} />
-      <span id={`${uid}-label`} className="label">Payment method</span>
+      <span id={`${uid}-label`} className="label">{t("Payment method")}</span>
       <div ref={wrap} className="relative">
       <button
         ref={button}
@@ -96,7 +98,7 @@ export function PaymentSelect({ name, options, value, onChange }: { name: string
         className="input flex w-full items-center gap-3 py-2.5 text-left focus-visible:outline-2 focus-visible:outline-signal"
       >
         {selected && <PaymentMethodIcon icon={selected.icon} logo={selected.logo} size="sm" />}
-        <span id={`${uid}-value`} className="min-w-0 flex-1 truncate font-semibold">{selected?.name ?? "Choose a payment method"}</span>
+        <span id={`${uid}-value`} className="min-w-0 flex-1 truncate font-semibold">{selected?.name ?? t("Choose a payment method")}</span>
         <ChevronDown aria-hidden className={`h-4 w-4 shrink-0 text-muted transition-transform motion-reduce:transition-none ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (

@@ -95,7 +95,7 @@ function loadMeta(url: string): Promise<MediaMeta | null> {
 function describe(ref: string, meta?: MediaMeta | null): { alt: string; caption: string; kind: PickedImage["source"] | "none" } {
   const r = resolveImageRef(ref);
   if (r.kind === "none") return { alt: "", caption: "", kind: "none" };
-  if (r.kind === "stock") return { alt: r.photo.alt, caption: "Representative image", kind: "stock" };
+  if (r.kind === "stock") return { alt: r.photo.alt, caption: "", kind: "stock" };
   if (meta) return { alt: meta.alt, caption: [formatDims(meta.width, meta.height), formatBytes(meta.size)].filter(Boolean).join(" · "), kind: "library" };
   return { alt: "", caption: isLotPhotoUrl(r.src) ? "Lot photo" : isMediaLibUrl(r.src) ? "Media library" : "Linked image", kind: "url" };
 }

@@ -5,24 +5,26 @@ import Link from "next/link";
 import { Check, Loader2, ShoppingCart } from "lucide-react";
 import { useFormStatus } from "react-dom";
 import { quickAddToCart, type QuickAddState } from "@/app/actions/cart";
+import { useI18n } from "@/i18n/client";
 
 function Button({ added, title }: { added: boolean; title: string }) {
   const { pending } = useFormStatus();
+  const { t } = useI18n();
   return (
     <button
       type="submit"
       disabled={pending}
-      aria-label={added ? `Added ${title} to cart` : `Add ${title} to cart`}
+      aria-label={added ? t("Added {title} to cart", { title }) : t("Add {title} to cart", { title })}
       className={`inline-flex h-10 w-full items-center justify-center gap-2 rounded-full text-sm font-semibold transition-colors disabled:cursor-wait ${
         added ? "bg-moss text-white" : "bg-ink text-white hover:bg-signal"
       }`}
     >
       {pending ? (
-        <><Loader2 aria-hidden className="h-4 w-4 animate-spin" /> Adding…</>
+        <><Loader2 aria-hidden className="h-4 w-4 animate-spin" /> {t("Adding…")}</>
       ) : added ? (
-        <><Check aria-hidden className="h-4 w-4" /> Added</>
+        <><Check aria-hidden className="h-4 w-4" /> {t("Added")}</>
       ) : (
-        <><ShoppingCart aria-hidden className="h-4 w-4" /> Add to cart</>
+        <><ShoppingCart aria-hidden className="h-4 w-4" /> {t("Add to cart")}</>
       )}
     </button>
   );
@@ -32,6 +34,7 @@ function Button({ added, title }: { added: boolean; title: string }) {
 export function CardAddToCart({ lotId, title }: { lotId: string; title: string }) {
   const [state, action] = useActionState<QuickAddState, FormData>(quickAddToCart, undefined);
   const [added, setAdded] = useState(false);
+  const { t: tr, lh } = useI18n();
   // Page to return to after signing in (read on the client so the card stays usable on static pages).
   const [back, setBack] = useState("/");
   useEffect(() => setBack(window.location.pathname + window.location.search), []);
@@ -50,7 +53,7 @@ export function CardAddToCart({ lotId, title }: { lotId: string; title: string }
         {state?.error ? (
           <span className="font-medium text-rust">{state.error}</span>
         ) : added ? (
-          <Link href="/cart" className="font-semibold text-signal-dark hover:underline">View cart</Link>
+          <Link href={lh("/cart")} className="font-semibold text-signal-dark hover:underline">{tr("View cart")}</Link>
         ) : null}
       </p>
     </form>

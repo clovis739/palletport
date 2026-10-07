@@ -7,21 +7,24 @@ import { LotThumb } from "@/components/lot/LotThumb";
 import { ConditionBadge } from "@/components/ConditionBadge";
 import { FREE_FREIGHT_THRESHOLD_CENTS, money } from "@/lib/format";
 import { Minus, Plus, Trash2 } from "lucide-react";
-import { privateMetadata } from "@/lib/seo";
+import { privateMetadataT } from "@/lib/seo";
+import { getI18n } from "@/i18n/server";
+import { translateMessage } from "@/i18n/config";
 
-export const metadata = privateMetadata("Cart");
+export const generateMetadata = () => privateMetadataT("Cart");
 
 export default async function CartPage() {
   const user = await requireUser("/cart");
+  const { t, lh } = await getI18n();
   const cart = await getCart(user.id);
   const toFree = FREE_FREIGHT_THRESHOLD_CENTS - cart.subtotalCents;
 
   if (cart.items.length === 0) {
     return (
       <div className="container-pp grid place-items-center py-16 sm:py-24 text-center">
-        <h1 className="font-display text-3xl font-bold">Your cart is empty</h1>
-        <p className="mt-2 text-muted">Find a pallet that fits your store.</p>
-        <Link href="/lots" className="btn-primary mt-6">Browse lots</Link>
+        <h1 className="font-display text-3xl font-bold">{t("Your cart is empty")}</h1>
+        <p className="mt-2 text-muted">{t("Find a pallet that fits your store.")}</p>
+        <Link href={lh("/lots")} className="btn-primary mt-6">{t("Browse lots")}</Link>
       </div>
     );
   }
@@ -36,42 +39,42 @@ export default async function CartPage() {
 
   return (
     <div className="container-pp py-10">
-      <h1 className="mb-6 font-display text-3xl font-bold">Cart</h1>
+      <h1 className="mb-6 font-display text-3xl font-bold">{t("Cart")}</h1>
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_360px]">
         <div className="min-w-0 space-y-6">
           {[...bySeller.entries()].map(([seller, items]) => (
             <div key={seller} className="card overflow-hidden">
-              <div className="bg-sand/50 px-4 py-3 text-sm font-semibold sm:px-5">Ships from our warehouse in {seller}</div>
+              <div className="bg-sand/50 px-4 py-3 text-sm font-semibold sm:px-5">{t("Ships from our warehouse in {place}", { place: seller })}</div>
               <ul >
                 {items.map((i) => (
                   <li key={i.id} className="flex gap-3 p-4 sm:gap-4 sm:p-5">
-                    <Link href={`/lots/${i.lot.slug}`} className="w-20 shrink-0 self-start overflow-hidden rounded-xl sm:w-28">
+                    <Link href={lh(`/lots/${i.lot.slug}`)} className="w-20 shrink-0 self-start overflow-hidden rounded-xl sm:w-28">
                       <LotThumb lot={i.lot} />
                     </Link>
                     <div className="min-w-0 flex-1 space-y-1">
-                      <Link href={`/lots/${i.lot.slug}`} className="block break-words font-display font-semibold hover:underline">{i.lot.title}</Link>
+                      <Link href={lh(`/lots/${i.lot.slug}`)} className="block break-words font-display font-semibold hover:underline">{i.lot.title}</Link>
                       <p className="font-display text-lg font-bold sm:hidden">{money(i.unitCents * i.quantity)}</p>
-                      {!i.purchasable && <p className="text-xs font-semibold text-rust">No longer available — remove it to continue</p>}
+                      {!i.purchasable && <p className="text-xs font-semibold text-rust">{t("No longer available — remove it to continue")}</p>}
                       <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
                         <ConditionBadge condition={i.lot.condition} />
-                        <span>{i.lot.units.toLocaleString()} units · {i.lot.palletCount} pallet{i.lot.palletCount > 1 ? "s" : ""}</span>
+                        <span>{t("{n} units", { n: i.lot.units.toLocaleString() })} · {i.lot.palletCount} {t(i.lot.palletCount > 1 ? "pallets" : "pallet")}</span>
                       </div>
                       <div className="flex flex-wrap items-center gap-2 pt-2">
                         <form action={updateCartItem}>
                           <input type="hidden" name="id" value={i.id} />
                           <input type="hidden" name="quantity" value={i.quantity - 1} />
-                          <button className="grid h-10 w-10 place-items-center rounded-full sm:h-8 sm:w-8" aria-label="Decrease"><Minus aria-hidden className="h-4 w-4" /></button>
+                          <button className="grid h-10 w-10 place-items-center rounded-full sm:h-8 sm:w-8" aria-label={t("Decrease")}><Minus aria-hidden className="h-4 w-4" /></button>
                         </form>
                         <span className="w-6 text-center font-semibold">{i.quantity}</span>
                         <form action={updateCartItem}>
                           <input type="hidden" name="id" value={i.id} />
                           <input type="hidden" name="quantity" value={i.quantity + 1} />
-                          <button disabled={i.quantity >= i.lot.available} className="grid h-10 w-10 place-items-center rounded-full disabled:opacity-40 sm:h-8 sm:w-8" aria-label="Increase"><Plus aria-hidden className="h-4 w-4" /></button>
+                          <button disabled={i.quantity >= i.lot.available} className="grid h-10 w-10 place-items-center rounded-full disabled:opacity-40 sm:h-8 sm:w-8" aria-label={t("Increase")}><Plus aria-hidden className="h-4 w-4" /></button>
                         </form>
                         <form action={updateCartItem} className="ml-3">
                           <input type="hidden" name="id" value={i.id} />
                           <input type="hidden" name="quantity" value={0} />
-                          <button className="inline-flex min-h-10 items-center gap-1 text-xs font-semibold text-rust hover:underline sm:min-h-0"><Trash2 aria-hidden className="h-3.5 w-3.5" /> Remove</button>
+                          <button className="inline-flex min-h-10 items-center gap-1 text-xs font-semibold text-rust hover:underline sm:min-h-0"><Trash2 aria-hidden className="h-3.5 w-3.5" /> {t("Remove")}</button>
                         </form>
                       </div>
                     </div>
@@ -84,51 +87,51 @@ export default async function CartPage() {
         </div>
 
         <aside className="card h-fit min-w-0 space-y-4 p-5 sm:p-6 lg:sticky lg:top-40">
-          <h2 className="font-display text-lg font-bold">Order summary</h2>
+          <h2 className="font-display text-lg font-bold">{t("Order summary")}</h2>
           <dl className="space-y-2 text-sm">
-            <div className="flex justify-between"><dt>Subtotal</dt><dd className="font-semibold">{money(cart.subtotalCents)}</dd></div>
+            <div className="flex justify-between"><dt>{t("Subtotal")}</dt><dd className="font-semibold">{money(cart.subtotalCents)}</dd></div>
             {cart.discountCents > 0 && (
-              <div className="flex justify-between text-moss"><dt>{cart.discountLabel}</dt><dd className="font-semibold">−{money(cart.discountCents)}</dd></div>
+              <div className="flex justify-between text-moss"><dt>{translateMessage(t(cart.discountLabel), t)}</dt><dd className="font-semibold">−{money(cart.discountCents)}</dd></div>
             )}
-            <div className="flex justify-between gap-3"><dt>Est. freight{cart.freightOpts.toZip ? ` to ${cart.freightOpts.toZip}` : ""}</dt><dd className="font-semibold">{cart.shippingCents ? money(cart.shippingCents) : "Free"}</dd></div>
-            <div className="flex justify-between pt-2 text-base"><dt className="font-semibold">Total</dt><dd className="font-display font-bold">{money(cart.totalCents)}</dd></div>
+            <div className="flex justify-between gap-3"><dt>{cart.freightOpts.toZip ? t("Est. freight to {zip}", { zip: cart.freightOpts.toZip }) : t("Est. freight")}</dt><dd className="font-semibold">{cart.shippingCents ? money(cart.shippingCents) : t("Free")}</dd></div>
+            <div className="flex justify-between pt-2 text-base"><dt className="font-semibold">{t("Total")}</dt><dd className="font-display font-bold">{money(cart.totalCents)}</dd></div>
           </dl>
           {toFree > 0 && (
-            <p className="rounded-lg bg-sand p-3 text-xs">Add <strong>{money(toFree)}</strong> more to unlock free freight.</p>
+            <p className="rounded-lg bg-sand p-3 text-xs">{t("Add {amount} more to unlock free freight.", { amount: money(toFree) })}</p>
           )}
           {cart.referralApplied && (
-            <p className="rounded-lg bg-moss/10 p-3 text-xs text-moss">Your $100 referral {cart.referralApplied.code === "REFERRAL-WELCOME" ? "welcome discount" : "reward"} is applied. Using a promo code instead saves the referral discount for a later order.</p>
+            <p className="rounded-lg bg-moss/10 p-3 text-xs text-moss">{t(cart.referralApplied.code === "REFERRAL-WELCOME" ? "Your $100 referral welcome discount is applied. Using a promo code instead saves the referral discount for a later order." : "Your $100 referral reward is applied. Using a promo code instead saves the referral discount for a later order.")}</p>
           )}
-          {cart.referralHint && <p className="rounded-lg bg-sand p-3 text-xs">{cart.referralHint}</p>}
+          {cart.referralHint && <p className="rounded-lg bg-sand p-3 text-xs">{translateMessage(cart.referralHint, t)}</p>}
           {cart.promo && !cart.promo.ok ? (
-            <p className="text-xs font-medium text-rust">{cart.promoCode}: {cart.promo.error}</p>
+            <p className="text-xs font-medium text-rust">{cart.promoCode}: {translateMessage(cart.promo.error, t)}</p>
           ) : null}
           {cart.promoCode ? (
             <form action={removePromo} className="flex items-center justify-between gap-3 rounded-lg bg-sand px-3 py-2 text-xs">
-              <span className="min-w-0 break-words">Code <strong className="font-mono">{cart.promoCode}</strong>{cart.promo?.ok ? ` — ${cart.promo.description}` : ""}</span>
-              <button className="shrink-0 py-1 font-semibold text-rust">Remove</button>
+              <span className="min-w-0 break-words">{t("Code")} <strong className="font-mono">{cart.promoCode}</strong>{cart.promo?.ok ? ` — ${t(cart.promo.description)}` : ""}</span>
+              <button className="shrink-0 py-1 font-semibold text-rust">{t("Remove")}</button>
             </form>
           ) : (
             <form action={applyPromo} className="flex gap-2">
-              <input name="code" placeholder="Promo code" className="input py-2 uppercase" aria-label="Promo code" />
-              <button className="btn-ghost shrink-0 py-2">Apply</button>
+              <input name="code" placeholder={t("Promo code")} className="input py-2 uppercase" aria-label={t("Promo code")} />
+              <button className="btn-ghost shrink-0 py-2">{t("Apply")}</button>
             </form>
           )}
           {cart.minimumsUnmet.length > 0 && (
             <div className="rounded-lg bg-amber-100 p-3 text-xs text-amber-900">
               {cart.minimumsUnmet.map((m) => (
-                <p key={m.name}>Add {money(m.min - m.total)} more to reach our {money(m.min)} minimum order.</p>
+                <p key={m.name}>{t("Add {amount} more to reach our {min} minimum order.", { amount: money(m.min - m.total), min: money(m.min) })}</p>
               ))}
             </div>
           )}
           {cart.unavailable.length > 0 ? (
-            <button disabled className="btn-primary w-full py-3">Remove unavailable lots to check out</button>
+            <button disabled className="btn-primary w-full py-3">{t("Remove unavailable lots to check out")}</button>
           ) : cart.minimumsUnmet.length > 0 ? (
-            <button disabled className="btn-primary w-full py-3">Reach the minimum order to check out</button>
+            <button disabled className="btn-primary w-full py-3">{t("Reach the minimum order to check out")}</button>
           ) : (
-            <Link href="/checkout" className="btn-primary w-full py-3">Continue to checkout</Link>
+            <Link href={lh("/checkout")} className="btn-primary w-full py-3">{t("Continue to checkout")}</Link>
           )}
-          <Link href="/lots" className="block text-center text-sm font-semibold text-muted hover:text-ink">Keep shopping</Link>
+          <Link href={lh("/lots")} className="block text-center text-sm font-semibold text-muted hover:text-ink">{t("Keep shopping")}</Link>
         </aside>
       </div>
     </div>

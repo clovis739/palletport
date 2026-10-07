@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Building2, CircleHelp, CreditCard, ExternalLink, Home, Info, Mail, Megaphone, Menu as MenuIcon, Search, type LucideIcon } from "lucide-react";
+import { Building2, CircleHelp, CreditCard, ExternalLink, Home, Info, Mail, Megaphone, Menu as MenuIcon, MessageCircle, Search, type LucideIcon } from "lucide-react";
 import { ConfirmButton } from "@/components/admin/ConfirmButton";
 import { resetArea } from "@/app/actions/site";
 import type { SettingsKey } from "@/lib/settings-schema";
@@ -14,6 +14,7 @@ export const SITE_AREAS: { key: SettingsKey; title: string; description: string;
   { key: "faqs", title: "FAQs", description: "The questions and answers at the bottom of the homepage, about page and blog.", href: "/dashboard/site/faqs", preview: "/#faq", icon: CircleHelp },
   { key: "contact", title: "Contact page", description: "Heading, intro, help notes, form labels, pickup message, map and reviews on the Contact us page.", href: "/dashboard/site/contact", preview: "/contact", icon: Mail },
   { key: "checkout", title: "Checkout", description: "Payment methods (add, remove, reorder, turn on/off, logos and instructions) and the checkout fields buyers fill in.", href: "/dashboard/site/checkout", preview: "/checkout", icon: CreditCard },
+  { key: "whatsappGroups", title: "WhatsApp groups", description: "The “Join our WhatsApp groups” popup and bar: group invite links, names, wording, on/off.", href: "/dashboard/site/whatsapp-groups", preview: "/", icon: MessageCircle },
   { key: "seo", title: "SEO defaults", description: "Default page title, title template, description and social sharing image.", href: "/dashboard/site/seo", preview: "/", icon: Search },
 ];
 

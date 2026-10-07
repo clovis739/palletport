@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { LotCard } from "@/components/LotCard";
 import { pageMetadata } from "@/lib/seo";
 import { Pager, pageCount, pageParam } from "@/components/ui/Pager";
+import { getI18n } from "@/i18n/server";
 
 const PER_PAGE = 24;
 
@@ -15,6 +16,7 @@ export const generateMetadata = () => pageMetadata({
 export const dynamic = "force-dynamic";
 
 export default async function NewArrivals({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const { t, lh } = await getI18n();
   const since = new Date(Date.now() - 14 * 86400000);
   const where = { status: "ACTIVE" as const, createdAt: { gte: since } };
   const total = await db.lot.count({ where });
@@ -36,17 +38,17 @@ export default async function NewArrivals({ searchParams }: { searchParams: Prom
 
   return (
     <div className="container-pp py-10">
-      <h1 className="font-display text-3xl font-bold">New arrivals</h1>
-      <p className="mb-8 text-muted">{total} lots listed in the last 14 days. Fresh lots sell fastest — check back daily.</p>
+      <h1 className="font-display text-3xl font-bold">{t("New arrivals")}</h1>
+      <p className="mb-8 text-muted">{t("{n} lots listed in the last 14 days. Fresh lots sell fastest — check back daily.", { n: total })}</p>
 
       {[...groups.entries()].map(([label, items]) => (
         <section key={label} className="mb-12">
-          <h2 className="mb-4 font-display text-xl font-bold">{label} <span className="text-sm font-normal text-muted">· {items.length} lots</span></h2>
+          <h2 className="mb-4 font-display text-xl font-bold">{t(label)} <span className="text-sm font-normal text-muted">· {t(items.length === 1 ? "{n} lot" : "{n} lots", { n: items.length })}</span></h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{items.map((l) => <LotCard key={l.id} lot={l} />)}</div>
         </section>
       ))}
       <Pager base="/new" page={page} perPage={PER_PAGE} total={total} className="-mt-2" />
-      {lots.length === 0 && <p className="card p-6 sm:p-10 text-center text-muted">Nothing new in the last two weeks. <Link href="/lots" className="font-semibold text-signal-dark">Browse all lots</Link></p>}
+      {lots.length === 0 && <p className="card p-6 sm:p-10 text-center text-muted">{t("Nothing new in the last two weeks.")} <Link href={lh("/lots")} className="font-semibold text-signal-dark">{t("Browse all lots")}</Link></p>}
     </div>
   );
 }

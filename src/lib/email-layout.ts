@@ -79,16 +79,23 @@ type Layout = {
   noteHtml?: string;
   /** Why they got this email (footer). */
   reason: string;
+  /** Email language (customer's choice); text passed in is already translated. */
+  lang?: "en" | "es";
 };
 
-export function emailLayout({ title, preheader, eyebrow, heading, introHtml = "", bodyHtml = "", cta, noteHtml, reason }: Layout) {
+/** Site base URL for links in an email, with /es for Spanish readers. */
+export function emailLinkBase(lang: "en" | "es" = "en") {
+  return lang === "es" ? `${emailBase()}/es` : emailBase();
+}
+
+export function emailLayout({ title, preheader, eyebrow, heading, introHtml = "", bodyHtml = "", cta, noteHtml, reason, lang = "en" }: Layout) {
   const base = emailBase();
   const host = base.replace(/^https?:\/\//, "");
   const button = cta
     ? `<table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;margin:0 auto" class="pp-full"><tr><td align="center" style="border-radius:999px;background:${BRAND.signal}"><a class="pp-btn" href="${esc(cta.href)}" style="display:inline-block;padding:14px 26px;border-radius:999px;background:${BRAND.signal};color:#ffffff;font-family:${SANS};font-size:14px;font-weight:700;line-height:1;text-decoration:none">${esc(cta.label)} &rarr;</a></td></tr></table>`
     : "";
   return `<!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="${lang === "es" ? "es" : "en"}" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -134,7 +141,7 @@ export function emailLayout({ title, preheader, eyebrow, heading, introHtml = ""
     ${bodyHtml ? `<tr><td class="pp-pad" style="padding:0 32px 6px">${bodyHtml}</td></tr>` : ""}
     ${cta || noteHtml ? `<tr><td class="pp-pad" align="center" style="padding:26px 32px 32px">${button}${noteHtml ? `<p style="margin:${cta ? "16px" : "0"} 0 0;color:${BRAND.muted};font-family:${SANS};font-size:12px;line-height:1.6;text-align:center">${noteHtml}</p>` : ""}</td></tr>` : `<tr><td style="padding:0 0 26px"></td></tr>`}
     <tr><td class="pp-pad" style="padding:20px 32px;background:${BRAND.ink};color:#c9d2e1;font-family:${SANS};font-size:11px;line-height:1.7">
-      <strong style="color:#ffffff">PalletPort</strong> &middot; Wholesale liquidation pallets<br>
+      <strong style="color:#ffffff">PalletPort</strong> &middot; ${lang === "es" ? "Pallets de liquidación al por mayor" : "Wholesale liquidation pallets"}<br>
       <a href="${esc(base)}" style="color:#ffffff;text-decoration:underline">${esc(host)}</a><br>
       ${esc(reason)}
     </td></tr>
@@ -147,16 +154,17 @@ export function emailLayout({ title, preheader, eyebrow, heading, introHtml = ""
 
 // ---------- password reset ----------
 
-export function passwordResetEmailHtml(url: string) {
+export function passwordResetEmailHtml(url: string, t: (s: string) => string = (s) => s, lang: "en" | "es" = "en") {
   return emailLayout({
-    title: "Reset your PalletPort password",
-    preheader: "Use this link within one hour to choose a new password.",
-    eyebrow: "Account security",
-    heading: "Reset your password",
-    introHtml: "We received a request to reset the password for your PalletPort account. Tap the button below to choose a new one.",
-    cta: { label: "Choose a new password", href: url },
-    noteHtml: `This link expires in one hour and can be used once.<br>If you didn&#39;t ask for this, you can ignore this email; your password won&#39;t change.<br><br>Button not working? Copy this link:<br><a href="${esc(url)}" style="color:${BRAND.signalDark};word-break:break-all">${esc(url)}</a>`,
-    reason: "You are receiving this because a password reset was requested for your account.",
+    lang,
+    title: t("Reset your PalletPort password"),
+    preheader: t("Use this link within one hour to choose a new password."),
+    eyebrow: t("Account security"),
+    heading: t("Reset your password"),
+    introHtml: esc(t("We received a request to reset the password for your PalletPort account. Tap the button below to choose a new one.")),
+    cta: { label: t("Choose a new password"), href: url },
+    noteHtml: `${esc(t("This link expires in one hour and can be used once."))}<br>${esc(t("If you didn't ask for this, you can ignore this email; your password won't change."))}<br><br>${esc(t("Button not working? Copy this link:"))}<br><a href="${esc(url)}" style="color:${BRAND.signalDark};word-break:break-all">${esc(url)}</a>`,
+    reason: t("You are receiving this because a password reset was requested for your account."),
   });
 }
 

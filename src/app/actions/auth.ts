@@ -8,6 +8,7 @@ import { db } from "@/lib/db";
 import { SESSION_COOKIE, sessionCookieOptions, signSession } from "@/lib/session";
 import { LIMITS, clientIp, rateLimit } from "@/lib/rateLimit";
 import { sendWelcomeEmail } from "@/lib/status-email";
+import { rememberRequestLocale } from "@/lib/user-locale";
 import { findReferrer, newReferralCode } from "@/lib/referrals";
 
 export type FormState = { error?: string } | undefined;
@@ -56,6 +57,7 @@ export async function register(_: FormState, formData: FormData): Promise<FormSt
     },
   });
   await startSession(user);
+  await rememberRequestLocale(user.id);
   await sendWelcomeEmail(user);
   redirect(safeNext(formData.get("next")));
 }
@@ -70,6 +72,7 @@ export async function login(_: FormState, formData: FormData): Promise<FormState
     return { error: "Email or password is incorrect" };
   }
   await startSession(user);
+  await rememberRequestLocale(user.id);
   redirect(safeNext(formData.get("next")));
 }
 

@@ -271,6 +271,46 @@ export const checkoutSettingsSchema = z.object({
 });
 export type CheckoutSettings = z.infer<typeof checkoutSettingsSchema>;
 
+// ---------- WhatsApp groups (popup + "Join" bar above the header) ----------
+
+/**
+ * Pulls the group invite link out of whatever the owner pastes: the bare link, or WhatsApp's whole
+ * "Follow this link to join my WhatsApp group: https://chat.whatsapp.com/…" message.
+ */
+export function whatsappLinkFrom(input: string): string {
+  const v = input.trim();
+  const m = v.match(/https?:\/\/(?:chat\.whatsapp\.com\/[A-Za-z0-9]+|(?:www\.)?whatsapp\.com\/channel\/[A-Za-z0-9]+)/i);
+  return m ? m[0].replace(/^http:/i, "https:") : v;
+}
+
+export const WA_GROUP_ICONS = ["fashion", "general", "electronics", "home", "tools", "toys", "star"] as const;
+export type WaGroupIcon = (typeof WA_GROUP_ICONS)[number];
+
+const waGroup = z.object({
+  title: str.min(1, "Enter the group name"),
+  subtitle: str,
+  href: z.preprocess(
+    (v) => (typeof v === "string" ? whatsappLinkFrom(v) : v),
+    str.refine((v) => /^https:\/\/(chat\.whatsapp\.com\/[A-Za-z0-9]+|(www\.)?whatsapp\.com\/channel\/[A-Za-z0-9]+)$/i.test(v), "Paste a WhatsApp group invite link (https://chat.whatsapp.com/…)"),
+  ),
+  icon: z.enum(WA_GROUP_ICONS),
+});
+export type WaGroupSetting = z.infer<typeof waGroup>;
+
+export const whatsappGroupsSchema = z.object({
+  /** Off = no popup and no bar anywhere. */
+  enabled: z.boolean(),
+  /** Open the popup by itself for first-time visitors (otherwise only the bar shows). */
+  autoOpen: z.boolean(),
+  delaySeconds: z.number().int().min(0, "0 or more").max(120, "Up to 120 seconds"),
+  title: str.min(1, "Enter a heading"),
+  description: str,
+  barText: str.min(1, "Enter the bar text"),
+  barSubtext: str,
+  groups: z.array(waGroup).max(6, "Up to 6 groups"),
+});
+export type WhatsAppGroupsSettings = z.infer<typeof whatsappGroupsSchema>;
+
 // ---------- SEO ----------
 
 export const seoSchema = z.object({
@@ -298,6 +338,7 @@ export const SETTINGS_SCHEMAS = {
   faqs: faqsSchema,
   contact: contactSchema,
   checkout: checkoutSettingsSchema,
+  whatsappGroups: whatsappGroupsSchema,
   seo: seoSchema,
 } as const;
 
@@ -638,6 +679,19 @@ export const DEFAULTS: SettingsMap = {
       notes: { show: true, required: false, label: "Notes for our team / carrier (optional)", placeholder: "Dock hours, gate code, appointment needed…" },
     },
     customFields: [],
+  },
+  whatsappGroups: {
+    enabled: true,
+    autoOpen: true,
+    delaySeconds: 6,
+    title: "Join our WhatsApp groups",
+    description: "The best way to stay in touch. New lots are posted here before anywhere else, including private deals you won't find on the site.",
+    barText: "Join our WhatsApp groups",
+    barSubtext: "new lots and private deals first",
+    groups: [
+      { title: "Clothing & Shoes", subtitle: "Apparel, footwear and fashion deals", href: "https://chat.whatsapp.com/FCMn5dzmJBJ7rCT8jBcaij", icon: "fashion" },
+      { title: "Everything Else", subtitle: "Electronics, home goods, tools and toys", href: "https://chat.whatsapp.com/FCMn5dzmJBJ7rCT8jBcaij", icon: "general" },
+    ],
   },
   seo: {
     defaultTitle: "PalletPort — Wholesale liquidation pallets & truckloads",

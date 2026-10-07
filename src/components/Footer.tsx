@@ -5,6 +5,8 @@ import { InquiryForm } from "./InquiryForm";
 import { SmartLink } from "./NavDropdown";
 import { ContactDetails, SocialLinks } from "./ContactDetails";
 import { getSettings } from "@/lib/settings";
+import { getI18n } from "@/i18n/server";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 /** lg column templates by number of link columns (static strings so Tailwind generates them). */
 const LG_COLS: Record<number, string> = {
@@ -18,7 +20,7 @@ const LG_COLS: Record<number, string> = {
 
 /** Storefront footer. Columns, blurb and legal links: `navigation` settings. Contact + social: `business` settings. */
 export async function Footer() {
-  const { navigation: nav, business } = await getSettings();
+  const [{ navigation: nav, business }, { t }] = await Promise.all([getSettings(), getI18n()]);
   const cols = nav.footerColumns.slice(0, 5);
   return (
     <footer className="mt-20 bg-ink text-white/80">
@@ -34,13 +36,13 @@ export async function Footer() {
               rel="noopener"
               className="tap inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:text-signal"
             >
-              <Star aria-hidden className="h-4 w-4 fill-signal text-signal" /> {business.googlePlaceId ? "Review us on Google" : "See our Google reviews"}
+              <Star aria-hidden className="h-4 w-4 fill-signal text-signal" /> {business.googlePlaceId ? t("Review us on Google") : t("See our Google reviews")}
             </a>
           )}
           <SocialLinks links={business.socialLinks} tone="dark" />
           <div className="max-w-sm">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-white">The Monday Manifest</p>
-            <InquiryForm topic="NEWSLETTER" inline dark submitLabel="Join" />
+            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-white">{t("The Monday Manifest")}</p>
+            <InquiryForm topic="NEWSLETTER" inline dark submitLabel={t("Join")} />
           </div>
         </div>
         {cols.map((col, ci) => (
@@ -58,9 +60,9 @@ export async function Footer() {
       </div>
       <div >
         <div className="container-pp flex flex-col gap-3 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] text-xs text-white/50 md:flex-row md:flex-wrap md:items-center md:justify-between">
-          <span>© {new Date().getFullYear()} {business.name}. All rights reserved.</span>
+          <span className="flex flex-wrap items-center gap-3">© {new Date().getFullYear()} {business.name}. {t("All rights reserved.")} <LanguageSwitcher variant="dark" /></span>
           {nav.legalLinks.length > 0 && (
-            <nav aria-label="Legal" className="flex flex-wrap gap-x-4 gap-y-2">
+            <nav aria-label={t("Legal")} className="flex flex-wrap gap-x-4 gap-y-2">
               {nav.legalLinks.map((l, i) => (
                 <SmartLink key={`${l.href}-${i}`} href={l.href} className="tap hover:text-white">{l.label}</SmartLink>
               ))}

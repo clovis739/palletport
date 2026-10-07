@@ -13,6 +13,7 @@ import {
   businessSchema,
   checkoutSettingsSchema,
   contactSchema,
+  whatsappGroupsSchema,
   faqsSchema,
   getStoredSettings,
   homeSchema,
@@ -69,6 +70,7 @@ const AREA_PATHS: Record<SettingsKey, string> = {
   faqs: "/dashboard/site/faqs",
   contact: "/dashboard/site/contact",
   checkout: "/dashboard/site/checkout",
+  whatsappGroups: "/dashboard/site/whatsapp-groups",
   seo: "/dashboard/site/seo",
 };
 
@@ -224,6 +226,17 @@ export async function saveCheckout(_: SiteFormState, fd: FormData): Promise<Site
     .safeParse(readPayload(fd));
   if (!parsed.success) return invalid(parsed.error);
   return store("checkout", parsed.data, user, "Checkout saved");
+}
+
+export async function saveWhatsAppGroups(_: SiteFormState, fd: FormData): Promise<SiteFormState> {
+  const { user } = await requireStaff("site", AREA_PATHS.whatsappGroups);
+  const parsed = whatsappGroupsSchema
+    .superRefine((w, ctx) => {
+      if (w.enabled && w.groups.length === 0) ctx.addIssue({ code: "custom", path: ["groups"], message: "Add at least one group, or turn the popup off" });
+    })
+    .safeParse(readPayload(fd));
+  if (!parsed.success) return invalid(parsed.error);
+  return store("whatsappGroups", parsed.data, user, "WhatsApp groups saved");
 }
 
 export async function saveSeo(_: SiteFormState, fd: FormData): Promise<SiteFormState> {

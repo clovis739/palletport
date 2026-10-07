@@ -2,9 +2,10 @@ import { requireUser } from "@/lib/auth";
 import { submitCertificate } from "@/app/actions/account";
 import { ActionForm } from "@/components/forms/ActionForm";
 import { AccountShell } from "../AccountNav";
-import { privateMetadata } from "@/lib/seo";
+import { privateMetadataT } from "@/lib/seo";
+import { getT } from "@/i18n/server";
 
-export const metadata = privateMetadata("Business verification");
+export const generateMetadata = () => privateMetadataT("Business verification");
 
 const STATUS: Record<string, { title: string; tone: string; text: string }> = {
   NONE: { title: "Not verified", tone: "bg-sand", text: "Add your resale certificate to unlock Net 30 terms and tax-exempt purchasing." },
@@ -15,31 +16,32 @@ const STATUS: Record<string, { title: string; tone: string; text: string }> = {
 
 export default async function VerificationPage() {
   const u = await requireUser("/account/verification");
+  const t = await getT();
   const s = STATUS[u.certStatus] ?? STATUS.NONE;
   return (
     <AccountShell active="/account/verification" title="Business verification">
       <div className="max-w-2xl space-y-6">
         <div className={`rounded-2xl p-5 ${s.tone}`}>
-          <p className="font-display text-lg font-bold">{s.title}</p>
-          <p className="text-sm">{s.text}</p>
+          <p className="font-display text-lg font-bold">{t(s.title)}</p>
+          <p className="text-sm">{t(s.text)}</p>
         </div>
         {u.certStatus !== "APPROVED" && (
           <div className="card p-5 sm:p-6">
             <ActionForm action={submitCertificate} submitLabel={u.certStatus === "PENDING" ? "Update submission" : "Submit for review"}>
               <div className="grid gap-4 sm:grid-cols-2">
-                <div><label className="label" htmlFor="certNumber">Resale certificate number</label><input id="certNumber" name="certNumber" defaultValue={u.certNumber ?? ""} className="input" required /></div>
-                <div><label className="label" htmlFor="certState">Issuing state</label><input id="certState" name="certState" defaultValue={u.certState ?? ""} placeholder="e.g. OH" className="input" required /></div>
+                <div><label className="label" htmlFor="certNumber">{t("Resale certificate number")}</label><input id="certNumber" name="certNumber" defaultValue={u.certNumber ?? ""} className="input" required /></div>
+                <div><label className="label" htmlFor="certState">{t("Issuing state")}</label><input id="certState" name="certState" defaultValue={u.certState ?? ""} placeholder={t("e.g. OH")} className="input" required /></div>
               </div>
-              <p className="text-xs text-muted">We use this only to verify you're a reseller. It's kept private and used only for tax and terms.</p>
+              <p className="text-xs text-muted">{t("We use this only to verify you're a reseller. It's kept private and used only for tax and terms.")}</p>
             </ActionForm>
           </div>
         )}
         <div className="card p-5 sm:p-6 text-sm">
-          <p className="font-display font-semibold">What verification unlocks</p>
+          <p className="font-display font-semibold">{t("What verification unlocks")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-5 text-ink/80">
-            <li>Net 30 payment terms on qualifying orders</li>
-            <li>Tax-exempt checkout where your certificate applies</li>
-            <li>Priority access to new truckloads and warehouse events</li>
+            <li>{t("Net 30 payment terms on qualifying orders")}</li>
+            <li>{t("Tax-exempt checkout where your certificate applies")}</li>
+            <li>{t("Priority access to new truckloads and warehouse events")}</li>
           </ul>
         </div>
       </div>

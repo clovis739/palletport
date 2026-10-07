@@ -18,6 +18,7 @@ import { SmartLink } from "@/components/NavDropdown";
 import { CountUp } from "@/components/motion/CountUp";
 import { MapPin } from "lucide-react";
 import { pageMetadata } from "@/lib/seo";
+import { getI18n } from "@/i18n/server";
 import { SiteFaq } from "@/components/content/SiteFaq";
 import { GoogleReviews } from "@/components/content/GoogleReviews";
 import { Pager, pageCount, pageParam } from "@/components/ui/Pager";
@@ -68,6 +69,7 @@ function Head({ title, subtitle, link, h2 = "font-display text-2xl font-bold sm:
 
 export default async function Home({ searchParams }: { searchParams: Promise<{ recent?: string; value?: string }> }) {
   const sp = await searchParams;
+  const { t, lh } = await getI18n();
   const weekAgo = new Date(Date.now() - 7 * 86400000);
   const [active, categories, store, recentlySold, settings, posts, guides] = await Promise.all([
     db.lot.findMany({ where: { status: "ACTIVE" }, include: lotInclude, orderBy: [{ createdAt: "desc" }, { id: "desc" }] }),
@@ -97,9 +99,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
   const sizeCount = (k: string) => active.filter(lot => lot.lotSize === k).length;
 
   const stats: [ReactNode, string][] = [];
-  if (home.stats.liveAuctions) stats.push([<CountUp key="n" value={inStock} />, "lots in stock"]);
-  if (home.stats.endingHour) stats.push([<CountUp key="n" value={newThisWeek} />, "new this week"]);
-  if (home.stats.retailValue) stats.push([<CountUp key="n" value={retailValue} format="money" />, "retail value listed"]);
+  if (home.stats.liveAuctions) stats.push([<CountUp key="n" value={inStock} />, t("lots in stock")]);
+  if (home.stats.endingHour) stats.push([<CountUp key="n" value={newThisWeek} />, t("new this week")]);
+  if (home.stats.retailValue) stats.push([<CountUp key="n" value={retailValue} format="money" />, t("retail value listed")]);
   if (home.stats.typicalPrice && home.stats.typicalPriceValue) stats.push([home.stats.typicalPriceValue, home.stats.typicalPriceLabel]);
 
   // Enabled sections in display order, grouped into layout units (collections + guides and the
@@ -123,26 +125,26 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
   const top = (prev: UnitKind) => (prev === null || prev === "band" ? "pt-12" : "");
 
   const aboutCard = (
-    <Link key="aboutCard" href="/about" className="group card block p-5 sm:p-6 transition">
+    <Link key="aboutCard" href={lh("/about")} className="group card block p-5 sm:p-6 transition">
       <p className="label">{sec.aboutCard.title}</p>
       <p className="font-display text-xl font-bold">{store.name}</p>
-      <p className="mt-1 flex items-center gap-1.5 text-sm text-muted"><MapPin aria-hidden className="h-4 w-4" /> Warehouse in {store.location}</p>
+      <p className="mt-1 flex items-center gap-1.5 text-sm text-muted"><MapPin aria-hidden className="h-4 w-4" /> {t("Warehouse in {location}", { location: store.location })}</p>
       <p className="mt-3 text-sm text-ink/75">{sec.aboutCard.subtitle || store.bio}</p>
-      <span className="mt-4 inline-flex items-center font-semibold text-signal-dark">About us<NextIcon /></span>
+      <span className="mt-4 inline-flex items-center font-semibold text-signal-dark">{t("About us")}<NextIcon /></span>
     </Link>
   );
   const contactCard = (
-    <Link key="contactCard" href="/contact" className="group card block bg-sand p-5 sm:p-6 transition">
+    <Link key="contactCard" href={lh("/contact")} className="group card block bg-sand p-5 sm:p-6 transition">
       <p className="font-display text-lg font-bold">{sec.contactCard.title}</p>
       {sec.contactCard.subtitle && <p className="mt-1 text-sm text-ink/70">{sec.contactCard.subtitle}</p>}
-      <span className="mt-4 inline-flex items-center font-semibold text-signal-dark">Contact our team<NextIcon /></span>
+      <span className="mt-4 inline-flex items-center font-semibold text-signal-dark">{t("Contact our team")}<NextIcon /></span>
     </Link>
   );
   const guideChips = (className: string) => (
     <div className={`flex flex-wrap items-center gap-2 ${className}`}>
       <span className="text-sm font-semibold">{sec.guides.title}</span>
       {guides.map((g) => (
-        <Link key={g.slug} href={`/guides/${g.slug}`} className="rounded-full bg-white px-3 py-1.5 text-sm">{g.title}</Link>
+        <Link key={g.slug} href={lh(`/guides/${g.slug}`)} className="rounded-full bg-white px-3 py-1.5 text-sm">{g.title}</Link>
       ))}
       {sec.guides.subtitle && <span className="basis-full text-sm text-muted">{sec.guides.subtitle}</span>}
     </div>
@@ -154,11 +156,11 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
       case "closingSoon":
         return (
           <section key={key} id="recently-added" className={`container-pp scroll-mt-24 pb-12 ${top(prev)}`}>
-            <Head title={s.title} subtitle={s.subtitle} link={<Link href="/lots" className="text-sm font-semibold text-signal-dark hover:underline">See all new lots<NextIcon /></Link>} />
+            <Head title={s.title} subtitle={s.subtitle} link={<Link href={lh("/lots")} className="text-sm font-semibold text-signal-dark hover:underline">{t("See all new lots")}<NextIcon /></Link>} />
             {recent.length ? (
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{recent.map((l, i) => <LotCard key={l.id} lot={l} priority={recentPage === 1 && i < 2} />)}</div>
             ) : (
-              <p className="card p-6 text-center text-muted">No lots in stock right now. New pallets are listed every week.</p>
+              <p className="card p-6 text-center text-muted">{t("No lots in stock right now. New pallets are listed every week.")}</p>
             )}
             <Pager base="/" params={keep} param="recent" hash="recently-added" page={recentPage} perPage={HOME_PER_PAGE} total={inStock} className="mt-8" />
           </section>
@@ -172,8 +174,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
                 <Link key={k} href={href} className="group card flex items-center gap-4 overflow-hidden p-4 transition">
                   <div className="h-20 w-24 shrink-0 overflow-hidden rounded-xl sm:h-24 sm:w-32"><Photo photo={PHOTOS[LOT_SIZE_PHOTOS[k]]} width={128} ratio={4 / 3} sizes="128px" className="h-full w-full transition duration-300 group-hover:scale-105" /></div>
                   <div className="min-w-0">
-                    <p className="font-display text-lg font-bold group-hover:text-signal-dark sm:text-xl">{LOT_SIZES[k].plural}</p>
-                    <p className="text-sm text-muted">{LOT_SIZES[k].note}</p>
+                    <p className="font-display text-lg font-bold group-hover:text-signal-dark sm:text-xl">{t(LOT_SIZES[k].plural)}</p>
+                    <p className="text-sm text-muted">{t(LOT_SIZES[k].note)}</p>
                     <p className="mt-1 text-xs font-semibold">{sizeCount(k)} in stock<NextIcon /></p>
                   </div>
                 </Link>
@@ -185,10 +187,10 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
         return (
           <section key={key} >
             <div className="container-pp py-12">
-              <Head title={s.title} subtitle={s.subtitle} link={<Link href="/categories" className="text-sm font-semibold text-signal-dark hover:underline">All categories<NextIcon /></Link>} />
+              <Head title={s.title} subtitle={s.subtitle} link={<Link href={lh("/categories")} className="text-sm font-semibold text-signal-dark hover:underline">{t("All categories")}<NextIcon /></Link>} />
               <div className="grid grid-cols-1 gap-3 min-[400px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
                 {categories.map((c) => (
-                  <Link key={c.id} href={`/c/${c.slug}`} className="group card flex items-center gap-3 p-3 transition">
+                  <Link key={c.id} href={lh(`/c/${c.slug}`)} className="group card flex items-center gap-3 p-3 transition">
                     <div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl"><SiteImage src={categoryImage(c)} alt="" width={56} ratio={1} sizes="56px" className="h-full w-full transition duration-300 group-hover:scale-110" /></div>
                     <div className="min-w-0">
                       <p className="truncate font-display font-semibold">{c.name}</p>
@@ -203,7 +205,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
       case "buyNow":
         return (
           <section key={key} id="best-value" className={`container-pp scroll-mt-24 pb-12 ${top(prev)}`}>
-            <Head title={s.title} subtitle={s.subtitle} link={<Link href="/lots?sort=value" className="text-sm font-semibold text-signal-dark hover:underline">More great value<NextIcon /></Link>} />
+            <Head title={s.title} subtitle={s.subtitle} link={<Link href={lh("/lots?sort=value")} className="text-sm font-semibold text-signal-dark hover:underline">{t("More great value")}<NextIcon /></Link>} />
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{bestValue.map((l) => <LotCard key={l.id} lot={l} />)}</div>
             <Pager base="/" params={keep} param="value" hash="best-value" page={valuePage} perPage={HOME_PER_PAGE} total={valueAll.length} className="mt-8" />
           </section>
@@ -235,9 +237,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
             <Head title={s.title} subtitle={s.subtitle} />
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
               {Object.entries(CONDITIONS).map(([k, c]) => (
-                <Link key={k} href={`/lots?condition=${k}`} className="card p-4 transition">
-                  <span className={`inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${c.tone}`}>{c.label}</span>
-                  <p className="mt-3 text-sm text-ink/75">{c.note}</p>
+                <Link key={k} href={lh(`/lots?condition=${k}`)} className="card p-4 transition">
+                  <span className={`inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${c.tone}`}>{t(c.label)}</span>
+                  <p className="mt-3 text-sm text-ink/75">{t(c.note)}</p>
                 </Link>
               ))}
             </div>
@@ -252,10 +254,10 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
       case "blog":
         return (
           <section key={key} className={`container-pp ${prev === "cards" ? "pt-14" : top(prev)} ${next ? "pb-12" : ""}`}>
-            <Head title={s.title} subtitle={s.subtitle} h2="font-display text-2xl font-bold" link={<Link href="/blog" className="text-sm font-semibold text-signal-dark hover:underline">Read the blog<NextIcon /></Link>} />
+            <Head title={s.title} subtitle={s.subtitle} h2="font-display text-2xl font-bold" link={<Link href={lh("/blog")} className="text-sm font-semibold text-signal-dark hover:underline">{t("Read the blog")}<NextIcon /></Link>} />
             <div className="grid gap-5 md:grid-cols-3">
               {posts.slice(0, 3).map((p) => (
-                <Link key={p.slug} href={`/blog/${p.slug}`} className="card p-5">
+                <Link key={p.slug} href={lh(`/blog/${p.slug}`)} className="card p-5">
                   <p className="label">{p.category}</p>
                   <p className="font-display text-lg font-bold leading-snug">{p.title}</p>
                   <p className="mt-1 line-clamp-2 text-sm text-muted">{p.excerpt}</p>
@@ -277,12 +279,12 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
       const s = sec.collections;
       return (
         <section key="collections" className={`container-pp pb-12 ${top(prev)}`}>
-          <Head title={s.title} subtitle={s.subtitle} link={<Link href="/collections" className="text-sm font-semibold text-signal-dark hover:underline">All collections<NextIcon /></Link>} />
+          <Head title={s.title} subtitle={s.subtitle} link={<Link href={lh("/collections")} className="text-sm font-semibold text-signal-dark hover:underline">{t("All collections")}<NextIcon /></Link>} />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {COLLECTIONS.slice(0, 4).map((c) => (
-              <Link key={c.slug} href={`/collections/${c.slug}`} className="rounded-2xl p-5 transition hover:-translate-y-0.5" style={{ background: `hsl(${c.hue} 45% 92%)` }}>
-                <p className="font-display text-lg font-bold">{c.title}</p>
-                <p className="text-sm text-ink/70">{c.tagline}</p>
+              <Link key={c.slug} href={lh(`/collections/${c.slug}`)} className="rounded-2xl p-5 transition hover:-translate-y-0.5" style={{ background: `hsl(${c.hue} 45% 92%)` }}>
+                <p className="font-display text-lg font-bold">{t(c.title)}</p>
+                <p className="text-sm text-ink/70">{t(c.tagline)}</p>
               </Link>
             ))}
           </div>
@@ -307,7 +309,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
         {recentlySold.length ? (
           <div className="grid gap-5 sm:grid-cols-2">{recentlySold.map((l) => <LotCard key={l.id} lot={l} />)}</div>
         ) : (
-          <p className="card p-5 sm:p-6 text-sm text-muted">Sold-out lots will appear here.</p>
+          <p className="card p-5 sm:p-6 text-sm text-muted">{t("Sold-out lots will appear here.")}</p>
         )}
       </div>
     );
@@ -334,9 +336,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
           {home.heroEyebrow && <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">{home.heroEyebrow}</p>}
           <h1 className="mt-3 max-w-3xl font-display text-3xl font-bold leading-[1.1] sm:text-5xl sm:leading-[1.05] lg:text-6xl">{home.heroTitle}</h1>
           {home.heroSubtitle && <p className="mt-4 max-w-2xl text-base text-white/70 sm:text-lg">{home.heroSubtitle}</p>}
-          <form action="/search" className="mt-6 flex max-w-2xl gap-2 rounded-full border-2 border-white bg-white p-1.5 transition-[box-shadow] focus-within:ring-4 focus-within:ring-signal/40 sm:mt-8">
-            <input name="q" type="search" aria-label="Search lots" placeholder={home.heroSearchPlaceholder || "Search lots"} className="min-w-0 flex-1 rounded-full bg-transparent px-3 text-base text-ink outline-none sm:px-4" />
-            <button className="btn-primary shrink-0 px-5 sm:px-6">Search</button>
+          <form action={lh("/search")} className="mt-6 flex max-w-2xl gap-2 rounded-full border-2 border-white bg-white p-1.5 transition-[box-shadow] focus-within:ring-4 focus-within:ring-signal/40 sm:mt-8">
+            <input name="q" type="search" aria-label={t("Search lots")} placeholder={home.heroSearchPlaceholder || t("Search lots")} className="min-w-0 flex-1 rounded-full bg-transparent px-3 text-base text-ink outline-none sm:px-4" />
+            <button className="btn-primary shrink-0 px-5 sm:px-6">{t("Search")}</button>
           </form>
           {home.heroLinks.length > 0 && (
             <div className="mt-5 flex flex-wrap gap-2 text-sm">

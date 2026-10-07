@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ArrowDown, Download } from "lucide-react";
+import { useI18n } from "@/i18n/client";
 
 type Row = { id: string; sku: string; name: string; qty: number; unitMsrpCents: number };
 
@@ -10,6 +11,7 @@ function usd(c: number, cents = false) {
 }
 
 export function ManifestTable({ rows, csvHref }: { rows: Row[]; csvHref: string }) {
+  const { t: tr } = useI18n();
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<"ext" | "qty" | "unit" | "name">("ext");
   const view = useMemo(() => {
@@ -30,19 +32,19 @@ export function ManifestTable({ rows, csvHref }: { rows: Row[]; csvHref: string 
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap items-center gap-2">
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search this manifest" className="input w-full py-2 sm:max-w-xs" aria-label="Search manifest" />
-        <span className="text-xs text-muted">{view.length} of {rows.length} lines</span>
-        <a href={csvHref} className="btn-ghost py-2 text-xs sm:ml-auto"><Download aria-hidden className="h-3.5 w-3.5" /> Download manifest (CSV)</a>
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={tr("Search this manifest")} className="input w-full py-2 sm:max-w-xs" aria-label={tr("Search manifest")} />
+        <span className="text-xs text-muted">{tr("{n} of {total} lines", { n: view.length, total: rows.length })}</span>
+        <a href={csvHref} className="btn-ghost py-2 text-xs sm:ml-auto"><Download aria-hidden className="h-3.5 w-3.5" /> {tr("Download manifest (CSV)")}</a>
       </div>
       <div className="card overflow-x-auto overscroll-x-contain">
         <table className="w-full min-w-[540px] text-sm">
           <thead className="bg-sand/60 text-left text-xs text-muted">
             <tr>
-              <th className="px-4 py-3 uppercase tracking-wider">SKU</th>
-              {th("name", "Item")}
-              {th("qty", "Qty", true)}
-              {th("unit", "Unit retail", true)}
-              {th("ext", "Ext. retail", true)}
+              <th className="px-4 py-3 uppercase tracking-wider">{tr("SKU")}</th>
+              {th("name", tr("Item"))}
+              {th("qty", tr("Qty"), true)}
+              {th("unit", tr("Unit retail"), true)}
+              {th("ext", tr("Ext. retail"), true)}
             </tr>
           </thead>
           <tbody >
@@ -55,11 +57,11 @@ export function ManifestTable({ rows, csvHref }: { rows: Row[]; csvHref: string 
                 <td className="whitespace-nowrap px-4 py-3 text-right font-semibold">{usd(m.qty * m.unitMsrpCents)}</td>
               </tr>
             ))}
-            {view.length === 0 && <tr><td colSpan={5} className="p-6 text-center text-muted">No lines match “{q}”.</td></tr>}
+            {view.length === 0 && <tr><td colSpan={5} className="p-6 text-center text-muted">{tr("No lines match “{q}”.", { q })}</td></tr>}
           </tbody>
           <tfoot className="font-semibold">
             <tr>
-              <td className="px-4 py-3" colSpan={2}>{q ? "Filtered total" : "Total"}</td>
+              <td className="px-4 py-3" colSpan={2}>{tr(q ? "Filtered total" : "Total")}</td>
               <td className="px-4 py-3 text-right">{units.toLocaleString()}</td>
               <td />
               <td className="px-4 py-3 text-right">{usd(ext)}</td>

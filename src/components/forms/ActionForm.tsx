@@ -2,6 +2,8 @@
 
 import { useActionState, useState } from "react";
 import { SubmitButton } from "@/components/SubmitButton";
+import { useT } from "@/i18n/client";
+import { translateMessage } from "@/i18n/config";
 
 type State = { error?: string; ok?: string } | undefined;
 
@@ -26,6 +28,7 @@ export function ActionForm({
   className?: string;
   resetOnSuccess?: boolean;
 }) {
+  const t = useT();
   const [okCount, setOkCount] = useState(0);
   const [state, formAction] = useActionState(async (prev: State, fd: FormData) => {
     const result = await action(prev, fd);
@@ -36,9 +39,9 @@ export function ActionForm({
   return (
     <form action={formAction} className={className} key={resetOnSuccess ? okCount : 0}>
       {children}
-      {state?.error && <p className="rounded-lg bg-rust/10 p-3 text-sm font-medium text-rust">{state.error}</p>}
-      {success && <p className="rounded-lg bg-moss/10 p-3 text-sm font-medium text-moss">{success}</p>}
-      <SubmitButton className={submitClass}>{submitLabel}</SubmitButton>
+      {state?.error && <p className="rounded-lg bg-rust/10 p-3 text-sm font-medium text-rust">{translateMessage(state.error, t)}</p>}
+      {success && <p className="rounded-lg bg-moss/10 p-3 text-sm font-medium text-moss">{translateMessage(success, t)}</p>}
+      <SubmitButton className={submitClass} pendingText={t("Working…")}>{t(submitLabel)}</SubmitButton>
     </form>
   );
 }

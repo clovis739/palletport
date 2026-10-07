@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ProgramPage } from "@/components/ProgramPage";
 import { pageMetadata } from "@/lib/seo";
+import { getI18n } from "@/i18n/server";
 
 export const generateMetadata = () => pageMetadata({
   title: "Warehouse Days: buying events & lot drops",
@@ -9,7 +10,8 @@ export const generateMetadata = () => pageMetadata({
   path: "/events",
 });
 
-export default function Events() {
+export default async function Events() {
+  const { t, lh } = await getI18n();
   return (
     <ProgramPage
       eyebrow="Events" title="Warehouse Days" hue={330} topic="EVENTS"
@@ -23,10 +25,10 @@ export default function Events() {
       ]}
       extra={
         <div className="mt-14">
-          <h2 className="mb-3 font-display text-2xl font-bold">Upcoming</h2>
+          <h2 className="mb-3 font-display text-2xl font-bold">{t("Upcoming")}</h2>
           <p className="card p-5 text-sm text-muted">
-            No events are scheduled right now. Join the list above and we&apos;ll email you when the next one is set. Questions about visiting the warehouse?{" "}
-            <Link href="/contact?topic=pickup" className="font-semibold text-signal-dark hover:underline">Contact us</Link>.
+            {t("No events are scheduled right now. Join the list above and we'll email you when the next one is set. Questions about visiting the warehouse?")}{" "}
+            <Link href={lh("/contact?topic=pickup")} className="font-semibold text-signal-dark hover:underline">{t("Contact us")}</Link>.
           </p>
         </div>
       }

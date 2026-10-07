@@ -26,7 +26,7 @@ export const getStoredSettings = cache(async (): Promise<SettingsMap> => {
   const out: SettingsMap = structuredClone(DEFAULTS);
   let rows: { key: string; value: string }[] = [];
   try {
-    rows = await db.siteSetting.findMany({ select: { key: true, value: true } });
+    rows = await db.siteSetting.findMany({ where: { NOT: { key: { startsWith: "pref." } } }, select: { key: true, value: true } });
   } catch {
     return out; // table not created yet (before `prisma db push`) — defaults keep the site working
   }
@@ -76,7 +76,11 @@ export const getSettings = cache(async (): Promise<SettingsMap> => {
   if (!b.addressPostal) b.addressPostal = env("STORE_POSTAL");
   if (!b.country) b.country = env("STORE_COUNTRY");
   if (env("STORE_NAME") && b.name === DEFAULTS.business.name) b.name = env("STORE_NAME");
-  return s;
+  // Spanish pages (/es/…): admin-edited text that has a translation (built-in or Admin → Translations) is shown in Spanish.
+  const { getDictionary } = await import("@/i18n/server");
+  const { translateDeep } = await import("@/i18n/config");
+  const dict = await getDictionary();
+  return dict ? translateDeep(s, dict) : s;
 });
 
 /** One settings group, e.g. `const home = await getSetting("home")`. */

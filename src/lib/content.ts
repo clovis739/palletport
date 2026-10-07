@@ -33,11 +33,20 @@ const typeInDb = cache(async (type: ContentType): Promise<boolean> => {
   }
 });
 
-/** Blog posts, guides, help and legal text follow a business rename (see rebrandText in settings-schema). */
-async function rebrandArticles(list: ContentArticle[]): Promise<ContentArticle[]> {
+/**
+ * Blog posts, guides, help and legal text follow a business rename (see rebrandText in settings-schema).
+ * On Spanish pages (/es) guides, help and custom pages come back translated; blog posts and legal pages stay in English.
+ */
+async function rebrandArticles(list: ContentArticle[], type?: ContentType): Promise<ContentArticle[]> {
   const { getBrand } = await import("./brand");
   const brand = await getBrand();
-  return brand === DEFAULT_BRAND ? list : rebrandDeep(list, brand);
+  const out = brand === DEFAULT_BRAND ? list : rebrandDeep(list, brand);
+  if (!type || type === "POST" || type === "LEGAL") return out;
+  const { getI18n } = await import("@/i18n/server");
+  const { t, locale } = await getI18n();
+  if (locale === "en") return out;
+  const { localizeArticle } = await import("@/i18n/content");
+  return out.map((a) => localizeArticle(a, t, locale));
 }
 
 const byDateDesc = (a: ContentArticle, b: ContentArticle) => (b.date ?? "").localeCompare(a.date ?? "");
@@ -49,13 +58,13 @@ const byDateDesc = (a: ContentArticle, b: ContentArticle) => (b.date ?? "").loca
 export const listEntries = cache(async (type: ContentType, opts: { status?: ContentStatus | "ALL" } = {}): Promise<ContentArticle[]> => {
   const status = opts.status ?? "PUBLISHED";
   if (!(await typeInDb(type))) {
-    return status === "DRAFT" ? [] : rebrandArticles(codeContent(type));
+    return status === "DRAFT" ? [] : rebrandArticles(codeContent(type), type);
   }
   const rows = await db.contentEntry.findMany({
     where: { type, ...(status === "ALL" ? {} : { status }) },
     orderBy: [{ publishedAt: "desc" }, { updatedAt: "desc" }],
   });
-  return rebrandArticles(rows.map(rowToArticle));
+  return rebrandArticles(rows.map(rowToArticle), type);
 });
 
 /**
@@ -65,12 +74,12 @@ export const listEntries = cache(async (type: ContentType, opts: { status?: Cont
 export async function getEntry(type: ContentType, slug: string, opts: { preview?: boolean } = {}): Promise<ContentArticle | null> {
   if (!(await typeInDb(type))) {
     const a = codeContent(type).find((x) => x.slug === slug);
-    return a ? (await rebrandArticles([a]))[0] : null;
+    return a ? (await rebrandArticles([a], type))[0] : null;
   }
   const row = await db.contentEntry.findUnique({ where: { type_slug: { type, slug } } });
   if (!row) return null;
   if (row.status !== "PUBLISHED" && !opts.preview) return null;
-  return (await rebrandArticles([rowToArticle(row)]))[0];
+  return (await rebrandArticles([rowToArticle(row)], type))[0];
 }
 
 /** Admin: one entry by id (any status). */

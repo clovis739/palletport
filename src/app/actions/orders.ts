@@ -13,9 +13,14 @@ import { cookies } from "next/headers";
 import { LIMITS, rateLimit } from "@/lib/rateLimit";
 import type { FormState } from "./auth";
 import { notifyCreatedOrder } from "@/lib/order-email";
+import { rememberRequestLocale } from "@/lib/user-locale";
 import { notifyOrderEvent } from "@/lib/status-email";
 import { getSetting } from "@/lib/settings";
 import { referralDiscount } from "@/lib/referrals";
+import { getT } from "@/i18n/server";
+import { translateMessage } from "@/i18n/config";
+import { Prisma } from "@prisma/client";
+import { guardOrderPlacement } from "@/lib/order-placement";
 
 const checkoutSchema = z.object({
   shipName: z.string().trim().min(2, "Enter a receiving name"),
@@ -39,7 +44,17 @@ function orderNumber() {
   return `PP-${Date.now().toString(36).toUpperCase()}-${Math.floor(Math.random() * 1296).toString(36).toUpperCase().padStart(2, "0")}`;
 }
 
-export async function placeOrder(_: FormState, formData: FormData): Promise<FormState> {
+/** Places the order; error messages come back in the shopper's language. */
+export async function placeOrder(state: FormState, formData: FormData): Promise<FormState> {
+  const result = await placeOrderInner(state, formData);
+  if (result?.error) {
+    const t = await getT();
+    return { ...result, error: translateMessage(result.error, t) };
+  }
+  return result;
+}
+
+async function placeOrderInner(_: FormState, formData: FormData): Promise<FormState> {
   const session = await getSession();
   if (!session) redirect("/login?next=/checkout");
 
@@ -73,6 +88,7 @@ export async function placeOrder(_: FormState, formData: FormData): Promise<Form
   let orderId: string;
   try {
     orderId = await db.$transaction(async (tx) => {
+      await guardOrderPlacement(tx, session.userId);
       const rows = await tx.cartItem.findMany({ where: { userId: session.userId }, include: { lot: true } });
       if (rows.length === 0) throw new Error("Your cart is empty");
 
@@ -170,11 +186,12 @@ export async function placeOrder(_: FormState, formData: FormData): Promise<Form
       }
       await tx.cartItem.deleteMany({ where: { userId: session.userId } });
       return order.id;
-    });
+    }, { isolationLevel: Prisma.TransactionIsolationLevel.ReadCommitted });
   } catch (e) {
     return { error: e instanceof Error ? e.message : "Could not place order" };
   }
 
+  await rememberRequestLocale(session.userId);
   await notifyCreatedOrder(orderId);
 
   store.delete(PROMO_COOKIE);
