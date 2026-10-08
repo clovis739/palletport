@@ -1,6 +1,6 @@
 import "server-only";
 import { cache } from "react";
-import { revalidatePath } from "next/cache";
+import { cachedPublic, revalidatePath } from "./public-cache";
 import { db } from "./db";
 import { logAudit, type AuditActor } from "./audit";
 import {
@@ -22,12 +22,13 @@ export * from "./settings-schema";
  * no longer matches its schema falls back to DEFAULTS for that key. No env fallbacks — use this to fill
  * admin forms so owners see exactly what they saved.
  */
-export const getStoredSettings = cache(async (): Promise<SettingsMap> => {
+async function loadStoredSettings(strict = false): Promise<SettingsMap> {
   const out: SettingsMap = structuredClone(DEFAULTS);
   let rows: { key: string; value: string }[] = [];
   try {
-    rows = await db.siteSetting.findMany({ where: { NOT: { key: { startsWith: "pref." } } }, select: { key: true, value: true } });
-  } catch {
+    rows = await db.siteSetting.findMany({ where: { key: { in: [...SETTINGS_KEYS] } }, select: { key: true, value: true } });
+  } catch (error) {
+    if (strict) throw error;
     return out; // table not created yet (before `prisma db push`) — defaults keep the site working
   }
   for (const row of rows) {
@@ -36,6 +37,11 @@ export const getStoredSettings = cache(async (): Promise<SettingsMap> => {
   }
   // Renamed business: every settings text that still says the original brand shows the new name instead.
   return rebrandDeep(out, out.business.name);
+}
+export const getStoredSettings = cache(() => loadStoredSettings());
+const readPublicSettings = cachedPublic(() => loadStoredSettings(true), "site-settings");
+export const getPublicStoredSettings = cache(async () => {
+  try { return await readPublicSettings(); } catch { return structuredClone(DEFAULTS); }
 });
 
 function setKey<K extends SettingsKey>(out: SettingsMap, key: K, raw: string) {
@@ -65,10 +71,10 @@ const env = (name: string) => process.env[name]?.trim() || "";
 /**
  * Effective settings for rendering the site: stored settings with the STORE_* env vars filling any empty
  * business contact fields (STORE_NAME, STORE_EMAIL, STORE_PHONE, STORE_STREET, STORE_POSTAL, STORE_COUNTRY).
- * Cached per request.
+ * Raw settings are cached across requests; environment fallbacks and language are applied per request.
  */
 export const getSettings = cache(async (): Promise<SettingsMap> => {
-  const s = structuredClone(await getStoredSettings());
+  const s = structuredClone(await getPublicStoredSettings());
   const b = s.business;
   if (!b.email) b.email = env("STORE_EMAIL");
   if (!b.phone) b.phone = env("STORE_PHONE");

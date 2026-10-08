@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "queries:check": "node --import tsx scripts/check-public-queries.mjs",
     "orders:check": "node --import tsx scripts/check-order-placement.mjs",
     "sitemap:export": "node --env-file=.env --import tsx scripts/export-sitemap.mjs",
     "photos:cloudinary": "node --env-file=.env scripts/upload-project-images.mjs --upload",
@@ -32,7 +33,13 @@
     "postinstall": "prisma generate",
     "catalog:fetch-goldstack": "node scripts/fetch-goldstack-products.mjs",
     "catalog:check-goldstack": "node --import tsx scripts/import-supplier-products.ts --goldstack --check",
-    "catalog:import-goldstack": "node --env-file=.env --import tsx scripts/import-supplier-products.ts --goldstack"
+    "catalog:import-goldstack": "node --env-file=.env --import tsx scripts/import-supplier-products.ts --goldstack",
+    "catalog:prepare-fresh": "tsx scripts/prepare-fresh-catalog.ts",
+    "db:fresh:check": "node --env-file=.env --import tsx scripts/bootstrap-supabase.ts",
+    "db:fresh": "node --env-file=.env --import tsx scripts/bootstrap-supabase.ts --apply",
+    "db:fresh:verify": "node --env-file=.env --import tsx scripts/verify-fresh-supabase.ts",
+    "pricing:check": "node --import tsx scripts/check-product-pricing.ts",
+    "emails:logos:check": "node --import tsx scripts/check-payment-emails.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

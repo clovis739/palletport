@@ -689,8 +689,8 @@ export const DEFAULTS: SettingsMap = {
     barText: "Join our WhatsApp groups",
     barSubtext: "new lots and private deals first",
     groups: [
-      { title: "Clothing & Shoes", subtitle: "Apparel, footwear and fashion deals", href: "https://chat.whatsapp.com/FCMn5dzmJBJ7rCT8jBcaij", icon: "fashion" },
-      { title: "Everything Else", subtitle: "Electronics, home goods, tools and toys", href: "https://chat.whatsapp.com/FCMn5dzmJBJ7rCT8jBcaij", icon: "general" },
+      { title: "Clothing & Shoes", subtitle: "Apparel, footwear and fashion deals", href: "https://chat.whatsapp.com/LHfSAdo29pV6Y99myA4OXS", icon: "fashion" },
+      { title: "Everything Else", subtitle: "Electronics, home goods, tools and toys", href: "https://chat.whatsapp.com/LHfSAdo29pV6Y99myA4OXS", icon: "general" },
     ],
   },
   seo: {

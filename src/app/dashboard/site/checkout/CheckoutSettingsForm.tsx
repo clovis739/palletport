@@ -69,7 +69,7 @@ export function CheckoutSettingsForm({ initial }: { initial: CheckoutSettings })
                   return (
                     <div className="space-y-3">
                       <div className="flex items-center gap-3">
-                        <PaymentMethodIcon icon={m?.icon ?? "card"} logo={m?.logo} />
+                        <PaymentMethodIcon methodId={m?.id} icon={m?.icon ?? "card"} logo={m?.logo} />
                         <div className="min-w-0 flex-1">
                           <p className="truncate font-semibold">{m?.name || "New payment method"}</p>
                           <p className="text-xs text-muted">{builtin ? BUILTIN_NOTE[m!.id] : "Manual payment: the order stays Pending until you mark it paid."}</p>

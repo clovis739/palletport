@@ -1,5 +1,6 @@
 import "server-only";
 import { cache } from "react";
+import { cachedPublic } from "./public-cache";
 import { db } from "./db";
 import { WAREHOUSE_ADDRESS } from "./warehouse";
 
@@ -24,3 +25,6 @@ export const getStore = cache(async () => {
     },
   });
 });
+
+/** Public warehouse/company display; transactional callers keep using getStore(). */
+export const getPublicStore = cache(cachedPublic(() => getStore(), "public-store"));

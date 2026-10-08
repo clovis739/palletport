@@ -3,6 +3,8 @@ node_modules
 .next-verify
 tsconfig.tsbuildinfo
 .env
+.env.*
+!.env.example
 prisma/*.db
 prisma/*.db-journal
 next-env.d.ts
@@ -16,3 +18,6 @@ prisma/goldstack-raw-products.json
 tmp/location-update/
 tmp/watermark-audit/
 tmp/cloudinary-upload/
+tmp/product-sale/
+tmp/
+prisma/fresh-catalog.json

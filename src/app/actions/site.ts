@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { revalidatePath } from "@/lib/public-cache";
 import { z } from "zod";
 import { requireStaff } from "@/lib/auth";
 import { logAudit, type AuditActor } from "@/lib/audit";

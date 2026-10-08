@@ -97,7 +97,7 @@ export function PaymentSelect({ name, options, value, onChange }: { name: string
         onKeyDown={onKeyDown}
         className="input flex w-full items-center gap-3 py-2.5 text-left focus-visible:outline-2 focus-visible:outline-signal"
       >
-        {selected && <PaymentMethodIcon icon={selected.icon} logo={selected.logo} size="sm" />}
+        {selected && <PaymentMethodIcon methodId={selected.id} icon={selected.icon} logo={selected.logo} size="sm" />}
         <span id={`${uid}-value`} className="min-w-0 flex-1 truncate font-semibold">{selected?.name ?? t("Choose a payment method")}</span>
         <ChevronDown aria-hidden className={`h-4 w-4 shrink-0 text-muted transition-transform motion-reduce:transition-none ${open ? "rotate-180" : ""}`} />
       </button>
@@ -124,7 +124,7 @@ export function PaymentSelect({ name, options, value, onChange }: { name: string
                 onClick={() => choose(i)}
                 className={`flex min-w-0 items-start gap-3 rounded-lg p-2.5 ${o.locked ? "cursor-not-allowed opacity-60" : "cursor-pointer"} ${i === active && !o.locked ? "bg-sand" : ""}`}
               >
-                <PaymentMethodIcon icon={o.icon} logo={o.logo} size="sm" />
+                <PaymentMethodIcon methodId={o.id} icon={o.icon} logo={o.logo} size="sm" />
                 <span className="min-w-0 flex-1">
                   <span className="flex items-center gap-1.5 text-sm font-semibold">
                     {o.name}

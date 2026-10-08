@@ -14,6 +14,7 @@ export type LotCardData = {
   title: string;
   condition: string;
   priceCents: number;
+  compareAtPriceCents?: number;
   msrpCents: number;
   units: number;
   palletCount: number;
@@ -36,6 +37,7 @@ export type LotCardData = {
 export async function LotCard({ lot, priority = false }: { lot: LotCardData; priority?: boolean }) {
   const { t, lh } = await getI18n();
   const pct = pctOfRetail(lot.priceCents, lot.msrpCents);
+  const discount = (lot.compareAtPriceCents ?? 0) > lot.priceCents ? Math.round((1 - lot.priceCents / lot.compareAtPriceCents!) * 100) : 0;
   const cover = lotCover(lot);
   const soldOut = lot.status !== "ACTIVE";
   const stock = lot.available ?? 1;
@@ -67,7 +69,7 @@ export async function LotCard({ lot, priority = false }: { lot: LotCardData; pri
             {LOT_SIZES[lot.lotSize]?.label ? t(LOT_SIZES[lot.lotSize].label) : lot.lotSize}
           </span>
         )}
-        {lot.msrpCents > 0 && <span className="absolute bottom-3 right-3 rounded-md bg-white/90 px-2 py-1 font-display text-xs font-bold text-ink">{pct}% of retail</span>}
+        {(discount > 0 || lot.msrpCents > 0) && <span className="absolute bottom-3 right-3 rounded-md bg-white/90 px-2 py-1 font-display text-xs font-bold text-ink">{discount > 0 ? t("{n}% off", { n: discount }) : `${pct}% of retail`}</span>}
         {soldOut && <span className="absolute inset-0 bg-white/40" />}
       </Link>
 
@@ -98,19 +100,23 @@ export async function LotCard({ lot, priority = false }: { lot: LotCardData; pri
               {lot.units.toLocaleString()}{perUnit ? <span className="text-muted">· {money(perUnit)}/{t("unit")}</span> : null}
             </dd>
           </div>}
-          <div className="flex items-center justify-between gap-3">
-            <dt className="shrink-0 text-muted">{t("Ships from")}</dt>
-            <dd className="inline-flex min-w-0 items-center justify-end gap-1 font-medium">
-              <MapPin aria-hidden className="h-3.5 w-3.5 shrink-0 text-muted" />
-              <span className="truncate">{lot.shipsFrom}</span>
-            </dd>
-          </div>
+          {lot.lotSize === "TRUCKLOAD" ? (
+            <div className="flex items-center justify-between gap-3"><dt className="text-muted">{t("Origin")}</dt><dd className="font-semibold">{t("Imported")}</dd></div>
+          ) : (
+            <div className="flex items-center justify-between gap-3">
+              <dt className="shrink-0 text-muted">{t("Ships from")}</dt>
+              <dd className="inline-flex min-w-0 items-center justify-end gap-1 font-medium">
+                <MapPin aria-hidden className="h-3.5 w-3.5 shrink-0 text-muted" />
+                <span className="truncate">{lot.shipsFrom}</span>
+              </dd>
+            </div>
+          )}
         </dl>
 
         <div className="mt-auto flex items-end justify-between gap-2 pt-1">
           <p className="font-display text-2xl font-bold leading-none">{money(lot.priceCents)}</p>
-          {lot.msrpCents > 0 && <p className="text-right text-xs text-muted">
-            {t("Retail")} <span className="font-semibold text-ink line-through decoration-muted/60">{money(lot.msrpCents)}</span>
+          {(lot.compareAtPriceCents ?? 0) > lot.priceCents && <p className="text-right text-xs text-muted">
+            {t("Original price")} <span className="line-through decoration-muted/60">{money(lot.compareAtPriceCents!)}</span>
           </p>}
         </div>
 

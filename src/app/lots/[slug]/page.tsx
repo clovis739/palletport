@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
+import { getPublicLot, getRelatedCards } from "@/lib/storefront-products";
 import { getSession } from "@/lib/auth";
 import { LotCard } from "@/components/LotCard";
 import { SubmitButton } from "@/components/SubmitButton";
@@ -29,22 +30,14 @@ import {
   purchasePrice,
   timeAgo,
 } from "@/lib/format";
-import { JsonLd, LATEST_ORDER_SELECT, breadcrumbJsonLd, lotIndexable, pageMetadata, productJsonLd } from "@/lib/seo";
+import { JsonLd, breadcrumbJsonLd, lotIndexable, pageMetadata, productJsonLd } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
   const { t } = await getI18n();
-  const lot = await db.lot.findUnique({
-    where: { slug },
-    select: {
-      title: true, description: true, sku: true, externalSku: true, condition: true, priceCents: true, msrpCents: true, units: true, palletCount: true, lotSize: true,
-      shipsFrom: true, status: true, createdAt: true,
-      manifest: { select: { name: true, qty: true, unitMsrpCents: true } },
-      orderItems: LATEST_ORDER_SELECT,
-    },
-  });
+  const lot = await getPublicLot(slug);
   if (!lot || lot.status === "DRAFT") return { title: t("Lot not found"), robots: { index: false } };
   const cond = t(CONDITIONS[lot.condition]?.label ?? lot.condition);
   const suffix = ` — ${cond} · ${money(lot.priceCents)}`;
@@ -85,31 +78,16 @@ const SECTIONS = [
 
 export default async function LotPage({ params }: { params: Params }) {
   const { slug } = await params;
-  const lot = await db.lot.findUnique({
-    where: { slug },
-    include: {
-      category: true,
-      subcategory: true,
-      seller: { include: { _count: { select: { lots: { where: { status: "ACTIVE" } }, reviews: true } } } },
-      manifest: { orderBy: { unitMsrpCents: "desc" } },
-      _count: { select: { favorites: true } },
-    },
-  });
+  const lot = await getPublicLot(slug);
   if (!lot || lot.status === "DRAFT") notFound();
   const { t, lh } = await getI18n();
 
   const session = await getSession();
-  const [saved, reviews, me, related, , booked] = await Promise.all([
+  const [saved, reviews, me, related, booked] = await Promise.all([
     session ? db.favorite.findUnique({ where: { userId_lotId: { userId: session.userId, lotId: lot.id } } }) : null,
     db.review.findMany({ where: { sellerId: lot.sellerId }, include: { user: { select: { businessName: true, name: true } } }, orderBy: { createdAt: "desc" }, take: 3 }),
     session ? db.user.findUnique({ where: { id: session.userId }, select: { shipPostal: true } }) : null,
-    db.lot.findMany({
-      where: { categoryId: lot.categoryId, status: "ACTIVE", NOT: { id: lot.id } },
-      include: { category: true, seller: true },
-      orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
-      take: 4,
-    }),
-    db.lot.update({ where: { id: lot.id }, data: { views: { increment: 1 } } }).then(() => null),
+    getRelatedCards(lot.categoryId, lot.id),
     bookedVisitTimes(),
   ]);
 
@@ -130,7 +108,7 @@ export default async function LotPage({ params }: { params: Params }) {
     [t("Lot size"), t(LOT_SIZES[lot.lotSize]?.label ?? lot.lotSize)],
     [t("Pallets"), lot.lotSize === "CASE" ? "—" : lot.palletCount > 0 ? String(lot.palletCount) : t("Not specified")],
     ...(lot.weightLbs > 0 ? [[t("Weight"), `${lot.weightLbs.toLocaleString()} ${t("lbs")}`] as [string, string]] : []),
-    [t("Ships from"), lot.shipsFrom],
+    [t("FOB"), lot.shipsFrom],
     ...(lot.brand ? ([[t("Brand"), lot.brand]] as [string, string][]) : []),
     [t("Category"), lot.subcategory ? `${t(lot.category.name)} / ${t(lot.subcategory.name)}` : t(lot.category.name)],
     ...(perUnit !== null ? [[t("Price / unit"), money(perUnit, { cents: true })] as [string, string]] : []),
@@ -177,7 +155,7 @@ export default async function LotPage({ params }: { params: Params }) {
           </div>
           <h1 className="break-words font-display text-2xl font-bold leading-tight sm:text-3xl">{lot.title}</h1>
           <p className="mt-1 text-sm text-muted">
-            {lot.units > 0 ? `${t("{n} units", { n: lot.units.toLocaleString() })} · ` : ""}{lot.msrpCents > 0 ? `${t("{price} est. retail", { price: money(lot.msrpCents) })} · ` : ""}{t("ships from {place}", { place: lot.shipsFrom })}
+            {lot.units > 0 ? `${t("{n} units", { n: lot.units.toLocaleString() })} · ` : ""}{lot.msrpCents > 0 ? `${t("{price} est. retail", { price: money(lot.msrpCents) })} · ` : ""}FOB: {lot.shipsFrom}
           </p>
         </div>
         <div className="flex shrink-0 gap-2">
@@ -208,6 +186,7 @@ export default async function LotPage({ params }: { params: Params }) {
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-muted">{t("Price")}</p>
               <p className="font-display text-3xl font-bold sm:text-4xl">{money(lot.priceCents)}</p>
+              {lot.compareAtPriceCents > lot.priceCents && <p className="mt-1 text-sm text-muted">{t("Original price")} <span className="line-through">{money(lot.compareAtPriceCents)}</span></p>}
               <p className="break-words text-sm text-muted">
                 {perUnit !== null ? <>{money(perUnit, { cents: true })} {t("per unit")} ·{" "}</> : null}
                 {buyPrice !== null ? <span className="font-semibold text-moss">{lot.available > 1 ? t("{n} in stock", { n: lot.available }) : t("In stock")}</span> : t("Sold out")}

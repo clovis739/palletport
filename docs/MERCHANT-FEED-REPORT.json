@@ -1,550 +1,522 @@
 {
-  "generatedAt": "2026-10-07T02:04:58.411Z",
-  "listed": 456,
-  "skipped": 136,
+  "generatedAt": "2026-10-08T04:13:30.106Z",
+  "listed": 457,
+  "skipped": 129,
   "omitted": [
     {
-      "sku": "PP-7BB8D70D2B8A",
+      "sku": "PP-7CAE6F227E7C",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-4CF646AF829B",
+      "sku": "PP-F22C7C7D7F74",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-65C3927B66EF",
+      "sku": "PP-B7C407A7A060",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-D96A8F0CF559",
+      "sku": "PP-5E05A86E619F",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-501E9FBCFC83",
+      "sku": "PP-6037B174572E",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-A845541AFD38",
+      "sku": "PP-77751882048F",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-EAA677B61317",
+      "sku": "PP-430CC14D4CE1",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-0DD7097076F5",
+      "sku": "PP-27F3209D8517",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-9CB40C111772",
+      "sku": "PP-83B833F32D75",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-0328AC2810B4",
+      "sku": "PP-B165D3D2EEB8",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-12240EC045A8",
+      "sku": "PP-A8E57A5229ED",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-28CAF126B0BF",
+      "sku": "PP-5BBC7BAA7A71",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-47E782465959",
+      "sku": "PP-D964557EF8D4",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-CB80E04A3F3C",
+      "sku": "PP-BB7CA9193265",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-83F9C49FFA19",
+      "sku": "PP-557B84389761",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-36DC50E399D6",
+      "sku": "PP-580860590E48",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-FD91AD4D3FE8",
+      "sku": "PP-C51AEE9A9AE2",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-33B4A5984880",
+      "sku": "PP-5AD0118AB961",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-717445133464",
+      "sku": "PP-BEFAA5CB9FDB",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-09A12E695320",
+      "sku": "PP-0DB95C2BEAAE",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-9FA12F2C8F6F",
+      "sku": "PP-FB2E8F5468AF",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-14A307320F93",
+      "sku": "PP-0ECB2394589F",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-B05DC309422F",
+      "sku": "PP-A6C30FFAC03C",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-9ABF843E9C1B",
+      "sku": "PP-1CA66223B5C7",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-BA4203E1991A",
+      "sku": "PP-5E6065BDDFFF",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-843992A449BC",
+      "sku": "PP-86CFC7805CA8",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-D67B66D82294",
+      "sku": "PP-5B23FFF506A5",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-04730EF449B4",
+      "sku": "PP-0644B8D139D4",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-393F462018EF",
+      "sku": "PP-234815CBDF59",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-867609B1EEDD",
+      "sku": "PP-72A9C10C1468",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-AC49180EE4D4",
+      "sku": "PP-0A68975871E4",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-890C3D277C5E",
+      "sku": "PP-7849A90D0816",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-525F0D6063F6",
+      "sku": "PP-594C0F8AEDA3",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-99020119F003",
+      "sku": "PP-32E6D3930A82",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-72C91BCF8CA3",
+      "sku": "PP-6DB77BB3B20A",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-71560DA48BE5",
+      "sku": "PP-686F62C3FA40",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-4513CD04BEDC",
+      "sku": "PP-C1612094D577",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-BAD0A46D34AE",
+      "sku": "PP-CBD147D383A4",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-BE1DED6582DD",
+      "sku": "PP-91F634FC4773",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-19704E72CC40",
+      "sku": "PP-6E5AA93CBC92",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-86ED1CC950D7",
+      "sku": "PP-2E1A254A496D",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-7A9F111C0DFA",
+      "sku": "PP-CA8B4BB662BC",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-E62E6CEF6546",
+      "sku": "PP-7E49CAC9D49B",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-A6ABF0D200F4",
+      "sku": "PP-190E4FC06AF2",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-927B7FBD67B6",
+      "sku": "PP-B596C3CD1E08",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-8EF14D979E9E",
+      "sku": "PP-88088175B534",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-BCEEAF0A3FA2",
+      "sku": "PP-597474BA680A",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-FF48B1C7C55A",
+      "sku": "PP-053DE3D1A380",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-E087CA56BC6E",
+      "sku": "PP-5C8C4661FD79",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-A9A44EB6E775",
+      "sku": "PP-79794ABE34DB",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-09A76300DF08",
+      "sku": "PP-969D169943C1",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-1978818E0B81",
+      "sku": "PP-8437D82ACC0F",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-4F8402FE1FC9",
+      "sku": "PP-373B77CF8E9B",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-AA140D09225C",
+      "sku": "PP-B3BDEB81336E",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-AEA992A37CA8",
+      "sku": "PP-14B29C107655",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-CCF044B34CED",
+      "sku": "PP-B3CA631D6953",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-502876E26C15",
+      "sku": "PP-40A14440BD93",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-3AA09C02F87A",
+      "sku": "PP-E808BCFA922C",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-E7AA34F7769B",
+      "sku": "PP-828B484E2B37",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-DAF5E4D31CE6",
+      "sku": "PP-AFE9C2ECBD5D",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-35C0DD650659",
+      "sku": "PP-585725F347D8",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-A899BA92A4D3",
+      "sku": "PP-53926AE69676",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-0EC77E9BE13D",
+      "sku": "PP-C74FE214DD95",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-CA718F579138",
+      "sku": "PP-FDE8B867743F",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-F9207604A6C3",
+      "sku": "PP-CB95FE8F412D",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-1E75E33FD106",
+      "sku": "PP-CC2CB34790A9",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-FBF4BB98B78C",
+      "sku": "PP-E063DAF9D33F",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-82C93085B20C",
+      "sku": "PP-C85801FAC714",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-9F9BABDB4558",
+      "sku": "PP-8D8583E6E0A6",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-6675F48D7079",
+      "sku": "PP-846985BF04BC",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-3927DE95B7B2",
+      "sku": "PP-D2721BCD9A92",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-5F846521D549",
+      "sku": "PP-6E74AB3D203B",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-837F2F9CEAA4",
+      "sku": "PP-B7EE0D0EB4B9",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-FA7ACF5034AD",
+      "sku": "PP-21DC809DADF6",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-DDC08F0DC5C5",
+      "sku": "PP-EFE2E5F7AD83",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-23D59EC258FE",
+      "sku": "PP-DADA5498FC17",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-28403C729662",
+      "sku": "PP-D4B8E10F7833",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-518FF84FAF76",
+      "sku": "PP-7D8D4DE0ED10",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-D93CF3BE15CD",
+      "sku": "PP-1BD4C238F3DB",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-CF063A8B60C3",
+      "sku": "PP-A58FB77E2096",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-26BC9075223D",
+      "sku": "PP-E7AF09BCA2F7",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-6833465820BE",
+      "sku": "PP-17FDA513DA0B",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-AA59139B4FC1",
+      "sku": "PP-868093A11B23",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-80E084766FE8",
+      "sku": "PP-74E33ACDEAB3",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-5CE84D1ACE45",
+      "sku": "PP-06AEEBBAA874",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-F44C3DDE0FFE",
+      "sku": "PP-515C166C100C",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-11EC49DCD1BD",
+      "sku": "PP-4C8615D73012",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-FD8DC802969D",
+      "sku": "PP-9ACCD7A0CCC1",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-5E0F4D5EED26",
+      "sku": "PP-8C1941D1649E",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-A4BC197AE8D0",
+      "sku": "PP-62B0FA5BAC07",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-6C427F1372F9",
+      "sku": "PP-227BBB6356F6",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-F62522377112",
+      "sku": "PP-24AD8DBB9BE0",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-84ACD07D5593",
+      "sku": "PP-81E0A28BDA77",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-9272D40E8D53",
+      "sku": "PP-B45E39952A17",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-DF3CDB805CF4",
+      "sku": "PP-E4579AE4E0F8",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-D05607AF32C6",
+      "sku": "PP-5268BDCCFAE5",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-33E05D686E74",
+      "sku": "PP-CCE27E0E31D5",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-1EE9C5B727EE",
+      "sku": "PP-D87B05485ADD",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-7D12E8928CE2",
+      "sku": "PP-B4B10018F80F",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-15A617C0DC8C",
+      "sku": "PP-B3FCD8D5DE37",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-23D6B3AB191A",
+      "sku": "PP-1C04A9593277",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-43A6499140D8",
+      "sku": "PP-0A3F3FD0F9A3",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-A2B19A12E069",
+      "sku": "PP-F9CC6A76D22A",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-AD5BBE9C7584",
+      "sku": "PP-5998020DB6FB",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-A73691CDECCD",
+      "sku": "PP-F4C8CE1802B9",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-24ABB5F3B2A3",
+      "sku": "PP-E22DD644FB9E",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-8BB0FCD60B7F",
+      "sku": "PP-B273F5DB558A",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-D40AC4DECE60",
+      "sku": "PP-363FD743BC9D",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-5198B840DE5C",
+      "sku": "PP-EF09C7B072DA",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-D398DEEFC8B2",
+      "sku": "PP-C8DFEC986BF9",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-F9A895F5723E",
+      "sku": "PP-8E556F81F7F6",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-EB700EC11613",
+      "sku": "PP-0E9611003E35",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-38EFD83D2D10",
+      "sku": "PP-9BA9D056C366",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-C44F6A45114B",
+      "sku": "PP-D9E6D5820BC6",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-3A3EE92884A2",
+      "sku": "PP-832231C770FB",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-C100438F8A2A",
+      "sku": "PP-89ED7DA747AF",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-E8470442DF1B",
+      "sku": "PP-2856AAA18B45",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-252120172E8D",
+      "sku": "PP-68F7589B8425",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-87DD69A3D8C4",
+      "sku": "PP-692ADA9A6E59",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-AFD45FF86670",
+      "sku": "PP-4FF2724F5197",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-51FD04CECAA5",
+      "sku": "PP-7314E25501A5",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-B2738EF3C5D0",
+      "sku": "PP-E60FFAB99767",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-909481A30511",
+      "sku": "PP-2B6393C80669",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-CDD2AD88BBA2",
+      "sku": "PP-20A6AD90751E",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-36967A1F8C4B",
+      "sku": "PP-EB35ED9990F4",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-3B50B81E1E75",
+      "sku": "PP-7802EDD4C53C",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-E9A8FF421CC0",
+      "sku": "PP-0DA9BE4A78D4",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-7D6D3253FB26",
+      "sku": "PP-9419953D9DB1",
       "reason": "missing_product_photo"
     },
     {
-      "sku": "PP-85363AB54EFA",
-      "reason": "missing_product_photo"
-    },
-    {
-      "sku": "PP-CE7F77C06368",
-      "reason": "missing_product_photo"
-    },
-    {
-      "sku": "PP-148C6519DDE6",
-      "reason": "missing_product_photo"
-    },
-    {
-      "sku": "PP-A812260CD376",
-      "reason": "missing_product_photo"
-    },
-    {
-      "sku": "PP-93033EBC9EAC",
-      "reason": "missing_product_photo"
-    },
-    {
-      "sku": "PP-E48C5545EDC1",
-      "reason": "missing_product_photo"
-    },
-    {
-      "sku": "PP-190E65900AFC",
-      "reason": "missing_product_photo"
-    },
-    {
-      "sku": "PP-FCBA9FCC73B2",
+      "sku": "PP-F131E6C9DB8C",
       "reason": "missing_product_photo"
     }
   ]

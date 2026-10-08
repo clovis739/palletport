@@ -1,6 +1,6 @@
 import "server-only";
 import { cache } from "react";
-import { revalidatePath } from "next/cache";
+import { cachedPublic, revalidatePath } from "./public-cache";
 import { db } from "./db";
 import { logAudit, type AuditActor } from "./audit";
 import { DEFAULT_BRAND, rebrandDeep } from "./settings-schema";
@@ -22,16 +22,19 @@ export * from "./content-model";
  *
  * Rule: if the DB has ANY ContentEntry of a type (draft or published), that type is served from the DB only.
  * Otherwise the TS content in src/content/* is served (so the site works before "Import default content").
- * All reads are cached per request with React cache().
+ * Public raw content is cached across requests; drafts/previews stay fresh and language is applied per request.
  */
 
-const typeInDb = cache(async (type: ContentType): Promise<boolean> => {
-  try {
-    return (await db.contentEntry.count({ where: { type } })) > 0;
-  } catch {
-    return false; // table missing (before `prisma db push`)
-  }
-});
+const readTypePresence = cachedPublic(async (type: ContentType): Promise<boolean> =>
+  (await db.contentEntry.count({ where: { type } })) > 0, "content-type-presence");
+const typeInDb = cache((type: ContentType) => readTypePresence(type).catch(() => false));
+const publishedRows = cachedPublic((type: ContentType) => db.contentEntry.findMany({
+  where: { type, status: "PUBLISHED" }, orderBy: [{ publishedAt: "desc" }, { updatedAt: "desc" }],
+}), "published-content");
+
+const publishedEntry = cachedPublic((type: ContentType, slug: string) => db.contentEntry.findUnique({
+  where: { type_slug: { type, slug }, status: "PUBLISHED" },
+}), "published-content-entry");
 
 /**
  * Blog posts, guides, help and legal text follow a business rename (see rebrandText in settings-schema).
@@ -60,7 +63,7 @@ export const listEntries = cache(async (type: ContentType, opts: { status?: Cont
   if (!(await typeInDb(type))) {
     return status === "DRAFT" ? [] : rebrandArticles(codeContent(type), type);
   }
-  const rows = await db.contentEntry.findMany({
+  const rows = status === "PUBLISHED" ? await publishedRows(type) : await db.contentEntry.findMany({
     where: { type, ...(status === "ALL" ? {} : { status }) },
     orderBy: [{ publishedAt: "desc" }, { updatedAt: "desc" }],
   });
@@ -76,7 +79,7 @@ export async function getEntry(type: ContentType, slug: string, opts: { preview?
     const a = codeContent(type).find((x) => x.slug === slug);
     return a ? (await rebrandArticles([a], type))[0] : null;
   }
-  const row = await db.contentEntry.findUnique({ where: { type_slug: { type, slug } } });
+  const row = opts.preview ? await db.contentEntry.findUnique({ where: { type_slug: { type, slug } } }) : await publishedEntry(type, slug);
   if (!row) return null;
   if (row.status !== "PUBLISHED" && !opts.preview) return null;
   return (await rebrandArticles([rowToArticle(row)], type))[0];

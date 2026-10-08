@@ -1,6 +1,7 @@
 import { ArrowLeftRight, Banknote, CreditCard, FileText, Landmark, Smartphone, Wallet, Zap, type LucideIcon } from "lucide-react";
 import { resolveImageRef } from "@/lib/imageRef";
 import type { PaymentIcon } from "@/lib/settings-schema";
+import { PAYMENT_BRAND_LOGOS } from "@/lib/payment-logos";
 
 const ICONS: Record<PaymentIcon, LucideIcon> = {
   card: CreditCard,
@@ -24,20 +25,30 @@ export const PAYMENT_ICON_LABEL: Record<PaymentIcon, string> = {
 };
 
 /**
- * Payment method mark: the uploaded logo when there is one (the provider's official acceptance mark), otherwise a
- * generic icon on a sand tile. Always decorative: the method name is shown next to it.
+ * Admin uploads override built-in payment brand marks. Unbranded methods use a generic icon.
+ * Always decorative: the method name is shown next to it.
  */
-export function PaymentMethodIcon({ icon, logo, size = "md" }: { icon: PaymentIcon; logo?: string; size?: "sm" | "md" }) {
-  const box = size === "sm" ? "h-7 w-10" : "h-9 w-12";
+export function PaymentMethodIcon({ icon, logo, methodId, size = "md" }: { icon: PaymentIcon; logo?: string; methodId?: string; size?: "sm" | "md" }) {
+  const box = size === "sm" ? "h-8 w-14" : "h-10 w-16";
   const img = resolveImageRef(logo);
-  if (img.kind === "url") {
+  const id = methodId?.toUpperCase() ?? "";
+  const src = img.kind === "url" ? img.src : id !== "CARD" ? PAYMENT_BRAND_LOGOS[id]?.[0] : undefined;
+  if (src) {
     return (
-      <span aria-hidden className={`grid ${box} shrink-0 place-items-center overflow-hidden rounded-md bg-white p-1 ring-1 ring-line`}>
+      <span aria-hidden className={`grid ${box} shrink-0 place-items-center overflow-hidden rounded-md ${id === "ZELLE" && img.kind !== "url" ? "bg-[#6d1ed4]" : "bg-white"} p-1.5 ring-1 ring-line`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={img.src} alt="" className="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+        <img src={src} alt="" className="max-h-full max-w-full object-contain" decoding="async" />
       </span>
     );
   }
+  if (id === "CARD") return (
+    <span aria-hidden className={`flex ${size === "sm" ? "h-8 w-14" : "h-10 w-16"} shrink-0 items-center justify-center gap-1 rounded-md bg-white p-1 ring-1 ring-line`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/images/payments/visa.svg" alt="" className="w-6 object-contain" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/images/payments/mastercard.svg" alt="" className="w-5 object-contain" />
+    </span>
+  );
   const Icon = ICONS[icon] ?? CreditCard;
   return (
     <span aria-hidden className={`grid ${box} shrink-0 place-items-center rounded-md bg-sand text-ink`}>

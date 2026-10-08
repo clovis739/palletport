@@ -19,6 +19,8 @@ export type LotDefaults = {
   subcategoryId?: string | null;
   condition?: string;
   price?: number;
+  originalPrice?: number;
+  shipsFrom?: string;
   palletCount?: number;
   weightLbs?: number;
   available?: number;
@@ -119,7 +121,7 @@ export function LotForm({
 
           <Card title="Manifest" description="Items on the lot. Retail value and unit count are calculated from it.">
             <label className="sr-only" htmlFor="manifest">Manifest</label>
-            <textarea id="manifest" name="manifest" rows={10} defaultValue={defaults.manifest} className="input resize-y font-mono text-xs" placeholder={"Air fryer 5qt, 24, 89.99, SKU-001\nStand blender, 18, 69\nElectric kettle, 40, 34.50"} required />
+            <textarea id="manifest" name="manifest" rows={10} defaultValue={defaults.manifest} className="input resize-y font-mono text-xs" placeholder={"Air fryer 5qt, 24, 89.99, SKU-001\nStand blender, 18, 69\nElectric kettle, 40, 34.50"} />
             <p className="mt-1 text-xs text-muted">One line per item: <code>name, quantity, unit MSRP[, SKU]</code>. Paste rows from a spreadsheet saved as CSV.</p>
           </Card>
         </div>
@@ -127,20 +129,22 @@ export function LotForm({
         <div className="min-w-0 space-y-6">
           <Card title="Pricing & stock" description="Buyers check out at this price. Quantity is how many identical lots you have (0 = sold out).">
             <div className="grid grid-cols-2 gap-4">
-              <div><label className="label" htmlFor="price">Price per lot (USD)</label><input id="price" name="price" type="number" min={1} step="1" defaultValue={defaults.price} className="input" required /></div>
+              <div><label className="label" htmlFor="price">Sale price per lot (USD)</label><input id="price" name="price" type="number" min={0.01} step="0.01" defaultValue={defaults.price} className="input" required /></div>
+              <div><label className="label" htmlFor="originalPrice">Original price (USD)</label><input id="originalPrice" name="originalPrice" type="number" min={0} step="0.01" defaultValue={defaults.originalPrice ?? 0} className="input" /><p className="mt-1 text-xs text-muted">Shown crossed out when higher than the sale price. Use 0 to hide it.</p></div>
               <div><label className="label" htmlFor="available">Quantity in stock</label><input id="available" name="available" type="number" min={editing ? 0 : 1} max={100} defaultValue={defaults.available ?? 1} className="input" required /></div>
             </div>
           </Card>
 
           <Card title="Shipping" description="Used for freight quotes at checkout.">
+            <div className="mb-4"><label className="label" htmlFor="shipsFrom">FOB / ships from address</label><input id="shipsFrom" name="shipsFrom" defaultValue={defaults.shipsFrom ?? "1150 Corrugated Way, Columbus, OH 43201, USA"} className="input" required maxLength={300} /></div>
             <div className="grid grid-cols-2 gap-4">
-              <div><label className="label" htmlFor="palletCount">Pallets</label><input id="palletCount" name="palletCount" type="number" min={1} max={26} defaultValue={defaults.palletCount ?? 1} className="input" required /></div>
-              <div><label className="label" htmlFor="weightLbs">Weight (lbs)</label><input id="weightLbs" name="weightLbs" type="number" min={1} defaultValue={defaults.weightLbs} className="input" required /></div>
+              <div><label className="label" htmlFor="palletCount">Pallets</label><input id="palletCount" name="palletCount" type="number" min={0} max={26} defaultValue={defaults.palletCount ?? 1} className="input" required /></div>
+              <div><label className="label" htmlFor="weightLbs">Weight (lbs)</label><input id="weightLbs" name="weightLbs" type="number" min={0} defaultValue={defaults.weightLbs ?? 0} className="input" required /></div>
             </div>
           </Card>
 
           <Card title="Photos" description="The first photo is the cover. Without photos, a labelled stock photo is shown.">
-            <PhotoPicker existing={defaults.images} />
+            <PhotoPicker existing={defaults.images} max={Math.max(10, defaults.images?.length ?? 0)} />
           </Card>
         </div>
       </div>

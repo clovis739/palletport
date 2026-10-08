@@ -12,6 +12,7 @@ import type { TFunction } from "@/i18n/config";
 type Lang = "en" | "es";
 const same: TFunction = (text, vars) => (vars ? text.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m)) : text);
 import { getSetting } from "@/lib/settings";
+import { paymentEmailHtml } from "@/lib/payment-email";
 
 type OrderNotice = {
   id: string; number: string; status: string; paymentMethod: string;
@@ -45,7 +46,7 @@ function orderFacts(order: OrderNotice, t: TFunction = same, lang: Lang = "en") 
 }
 
 /** Payment instructions for manual methods (Zelle, Wire, …) from Admin → Site settings → Checkout. */
-type PayNote = { name: string; instructions: string } | null;
+type PayNote = { name: string; instructions: string; logo?: string } | null;
 
 function emailHtml(order: OrderNotice, audience: "customer" | "team", pay: PayNote = null, t: TFunction = same, lang: Lang = "en") {
   if (audience === "team") { t = same; lang = "en"; }
@@ -69,7 +70,8 @@ function emailHtml(order: OrderNotice, audience: "customer" | "team", pay: PayNo
   const grand = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse"><tr><td style="padding:14px 0 0;border-top:2px solid ${BRAND.ink};color:${BRAND.ink};font-family:'Space Grotesk',Inter,Helvetica,Arial,sans-serif;font-size:15px;font-weight:700">${esc(t(isBooking ? "Visit total" : "Order total"))}</td><td style="padding:14px 0 0;border-top:2px solid ${BRAND.ink};color:${BRAND.ink};font-family:'Space Grotesk',Inter,Helvetica,Arial,sans-serif;font-size:20px;font-weight:700;text-align:right;white-space:nowrap">${money(order.totalCents)}</td></tr></table>`;
   const body =
     callout(t(isBooking ? "Booking number" : "Order number"), order.number) +
-    (audience === "customer" && pay ? sectionTitle(t("How to pay with {name}", { name: pay.name })) + paragraph(esc(pay.instructions).replace(/\n/g, "<br>")) : "") +
+    paymentEmailHtml(order.paymentMethod, t(pay?.name || paymentLabel(order.paymentMethod)), pay?.logo) +
+    (audience === "customer" && pay?.instructions ? sectionTitle(t("How to pay with {name}", { name: t(pay.name) })) + paragraph(esc(pay.instructions).replace(/\n/g, "<br>")) : "") +
     sectionTitle(t(isBooking ? "Items for your visit" : "Items ordered")) +
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">${items}</table>` +
     factTable(totals, false) + grand +
@@ -117,14 +119,14 @@ export async function notifyStoreOfOrder(order: OrderNotice, t: TFunction = same
   let pay: PayNote = null;
   try {
     const m = (await getSetting("checkout")).paymentMethods.find((x) => x.id === order.paymentMethod);
-    if (m?.instructions && order.status === "PENDING") pay = { name: t(m.name), instructions: t(m.instructions) };
+    if (m) pay = { name: m.name, instructions: m.instructions && order.status === "PENDING" ? t(m.instructions) : "", logo: m.logo };
   } catch {
     /* settings unavailable: send without payment instructions */
   }
   jobs.push(sendEmail({
     to: order.user.email,
     subject: `${t(order.visitAt ? "Visit booking received" : "Order received")} · ${order.number} | PalletPort`,
-    text: orderText(order, "customer", t, lang) + (pay ? `\n\n${t("How to pay with {name}", { name: pay.name })}:\n${pay.instructions}` : ""),
+    text: orderText(order, "customer", t, lang) + (pay?.instructions ? `\n\n${t("How to pay with {name}", { name: t(pay.name) })}:\n${pay.instructions}` : ""),
     html: emailHtml(order, "customer", pay, t, lang),
     idempotencyKey: `order-customer/${order.id}`,
   }).catch(() => console.warn(`Order ${order.number} was saved, but its customer confirmation could not be sent.`)));
@@ -134,7 +136,7 @@ export async function notifyStoreOfOrder(order: OrderNotice, t: TFunction = same
       replyTo: order.user.email,
       subject: `New ${order.visitAt ? "visit booking" : "order"} · ${order.number} | PalletPort`,
       text: orderText(order, "team"),
-      html: emailHtml(order, "team"),
+      html: emailHtml(order, "team", pay),
       idempotencyKey: `order-admin/${order.id}`,
     }).catch(() => console.warn(`Order ${order.number} was saved, but its store notification could not be sent.`)));
   } else {

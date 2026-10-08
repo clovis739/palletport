@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getSetting, fillTokens, type FaqPage } from "@/lib/settings";
-import { getStore } from "@/lib/store";
+import { getPublicStore as getStore } from "@/lib/store";
 import { JsonLd, faqJsonLd } from "@/lib/seo";
 import { FaqAccordion } from "./FaqAccordion";
 import { getI18n } from "@/i18n/server";

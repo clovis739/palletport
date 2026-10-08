@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Boxes, CalendarClock, FileText, MapPin, Package, Sparkles, Truck } from "lucide-react";
 import { db } from "@/lib/db";
-import { getStore } from "@/lib/store";
+import { getPublicStore as getStore } from "@/lib/store";
 import { LotCard } from "@/components/LotCard";
 import { Photo } from "@/components/Photo";
 import { PHOTOS } from "@/content/photos";

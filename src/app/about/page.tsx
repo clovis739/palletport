@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BadgeCheck, Boxes, DollarSign, FileText, Leaf, MessageCircle, Package, Receipt, ShieldCheck, ShoppingCart, Star, Store, Tags, TrendingUp, Truck, type LucideIcon } from "lucide-react";
 import { db } from "@/lib/db";
-import { getStore } from "@/lib/store";
+import { getPublicStore as getStore } from "@/lib/store";
 import { money } from "@/lib/format";
 import { getPublishedGuides } from "@/lib/content";
 import { getSetting, fillTokens } from "@/lib/settings";

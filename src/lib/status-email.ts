@@ -5,6 +5,7 @@ import { getUserLocale } from "@/lib/user-locale";
 import { getTFor } from "@/i18n/server";
 import type { Locale } from "@/i18n/config";
 import { certificateEmail, orderCancelledEmail, orderDeliveredEmail, orderShippedEmail, welcomeEmail, type Built, type StatusOrder } from "@/lib/email-templates";
+import { getSetting } from "@/lib/settings";
 
 /**
  * Lifecycle emails. Every function here swallows its own errors: a mail problem must never undo or block
@@ -26,7 +27,7 @@ async function loadOrder(orderId: string): Promise<(StatusOrder & { userId: stri
   return db.order.findUnique({
     where: { id: orderId },
     select: {
-      id: true, userId: true, number: true, totalCents: true, deliveryMethod: true, trackingNo: true, carrier: true, paidAt: true, amountPaidCents: true,
+      id: true, userId: true, number: true, totalCents: true, deliveryMethod: true, paymentMethod: true, trackingNo: true, carrier: true, paidAt: true, amountPaidCents: true,
       shipName: true, shipAddress: true, shipCity: true, shipRegion: true, shipPostal: true,
       user: { select: { name: true, email: true } },
       items: { select: { title: true, quantity: true, priceCents: true } },
@@ -40,6 +41,10 @@ export async function notifyOrderEvent(orderId: string, event: OrderEvent) {
   try {
     const o = await loadOrder(orderId);
     if (!o) return;
+    try {
+      const method = (await getSetting("checkout")).paymentMethods.find(m => m.id === o.paymentMethod);
+      if (method) { o.paymentName = method.name; o.paymentLogo = method.logo; }
+    } catch { /* Built-in marks remain available if settings cannot be read. */ }
     const { lang, t } = await customerLang(o.userId);
     const jobs: Promise<unknown>[] = [];
     if (event === "shipped" || event === "tracking") {

@@ -2,6 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { headers } from "next/headers";
 import { db } from "@/lib/db";
+import { cachedPublic } from "@/lib/public-cache";
 import { DEFAULT_LOCALE, LOCALE_HEADER, isLocale, localizeHref, makeT, type Dictionary, type Locale, type TFunction } from "./config";
 import { ES } from "./es";
 import { ES_EMAIL } from "./es-email";
@@ -31,15 +32,21 @@ export const getSavedTranslations = cache(async (): Promise<Dictionary> => {
   }
 });
 
+const getPublicTranslations = cachedPublic(async () => {
+  const row = await db.siteSetting.findUnique({ where: { key: TRANSLATIONS_KEY }, select: { value: true } });
+  const value = row ? JSON.parse(row.value) : {};
+  return value && typeof value === "object" ? value as Dictionary : {};
+}, "spanish-translations");
+
 /** Spanish dictionary: built-in translations + the owner's own (owner wins). */
 export const getSpanishDictionary = cache(async (): Promise<Dictionary> => {
-  const saved = await getSavedTranslations();
+  const saved = await getPublicTranslations().catch(() => ({} as Dictionary));
   const clean = Object.fromEntries(Object.entries(saved).filter(([, v]) => typeof v === "string" && v.trim()));
   const merged: Dictionary = { ...ES, ...clean };
   // Follow a business rename: "About PalletPort" → "About <new name>" in both the English key and the Spanish text.
   try {
-    const { getStoredSettings, rebrandText } = await import("@/lib/settings");
-    const brand = (await getStoredSettings()).business.name;
+    const { getPublicStoredSettings, rebrandText } = await import("@/lib/settings");
+    const brand = (await getPublicStoredSettings()).business.name;
     return Object.fromEntries(Object.entries(merged).map(([k, v]) => [rebrandText(k, brand), rebrandText(v, brand)]));
   } catch {
     return merged;

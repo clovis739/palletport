@@ -10,6 +10,7 @@ if (base.protocol !== "https:" || /^(localhost|127\.0\.0\.1)$/.test(base.hostnam
 const load = Module._load;
 Module._load = function (id, parent, isMain) {
   if (id === "server-only") return {};
+  if (id === "next/cache") return { unstable_cache: fn => fn, revalidateTag: () => {}, revalidatePath: () => {} };
   if (id === "next/headers") return { headers: async () => new Headers(), cookies: async () => ({ get: () => undefined }) };
   return load.call(this, id, parent, isMain);
 };

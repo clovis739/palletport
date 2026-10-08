@@ -1,12 +1,13 @@
 import "server-only";
 import { cache } from "react";
+import { cachedPublic } from "./public-cache";
 import { db } from "@/lib/db";
 import { CATEGORY_HERO_PHOTOS, CATEGORY_PHOTOS, photoKeyFor } from "@/content/photos";
 import { groupCategories } from "@/lib/taxonomy";
 
 /**
- * Storefront reads of the catalogue tree (Admin → Categories). One query per request (React cache), ordered by
- * the owner's menu order. Hidden categories are left out of menus and lists but their pages still work.
+ * Storefront catalogue tree and counts, shared for 60 seconds and invalidated by admin/inventory edits.
+ * Hidden categories are left out of menus and lists but their pages still work.
  */
 
 export const CATEGORY_ORDER = [{ position: "asc" as const }, { name: "asc" as const }];
@@ -43,7 +44,7 @@ async function loadCatalog() {
 }
 
 /** Every category (hidden ones included) with subcategories and active-lot counts. */
-export const getCatalog = cache(loadCatalog);
+export const getCatalog = cache(cachedPublic(loadCatalog, "category-tree", 60));
 
 /** Visible categories only, in menu order. */
 export const getVisibleCategories = cache(async () => (await getCatalog()).filter((c) => !c.hidden));
@@ -58,7 +59,7 @@ export function categoryImage(c: { slug: string; image?: string | null }, hero =
 }
 
 /** Distinct brands with active-lot counts, optionally within one category (for filters and the admin). */
-export async function brandCounts(where: { categoryId?: string; subcategoryId?: string; activeOnly?: boolean } = {}) {
+const cachedBrandCounts = cachedPublic(async (where: { categoryId?: string; subcategoryId?: string; activeOnly?: boolean } = {}) => {
   const rows = await db.lot.groupBy({
     by: ["brand"],
     where: {
@@ -70,7 +71,8 @@ export async function brandCounts(where: { categoryId?: string; subcategoryId?: 
     _count: { _all: true },
   });
   return rows.map((r) => ({ brand: r.brand, count: r._count._all })).sort((a, b) => b.count - a.count || a.brand.localeCompare(b.brand));
-}
+}, "brand-counts", 60);
+export const brandCounts = cachedBrandCounts;
 
 /** Options for the admin lot form: the category tree (menu order), known brands and sources for suggestions. */
 export async function lotFormOptions() {

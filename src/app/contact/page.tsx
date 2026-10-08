@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { InquiryForm } from "@/components/InquiryForm";
 import { JsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
-import { getStore } from "@/lib/store";
+import { getPublicStore as getStore } from "@/lib/store";
 import { DEFAULTS, fillTokens, getSetting } from "@/lib/settings";
 import { ContactDetails, SocialLinks, hasDirectContact } from "@/components/ContactDetails";
 import { LocationMap } from "@/components/content/LocationMap";

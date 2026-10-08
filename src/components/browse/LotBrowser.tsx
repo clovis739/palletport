@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { Search, X } from "lucide-react";
 import type { Prisma } from "@prisma/client";
-import { db } from "@/lib/db";
+import { getBrowseProducts } from "@/lib/storefront-products";
 import { brandCounts, getCatalog } from "@/lib/catalog";
 import { groupCategories } from "@/lib/taxonomy";
-import { Pager, pageCount, pageParam } from "@/components/ui/Pager";
+import { Pager, pageParam } from "@/components/ui/Pager";
 import { LotCard } from "@/components/LotCard";
 import { CONDITIONS, LOT_SIZES, US_STATES } from "@/lib/format";
 import { FilterPanel } from "./FilterPanel";
 import { Select } from "@/components/ui/Select";
-import { getStore } from "@/lib/store";
+import { getPublicStore as getStore } from "@/lib/store";
 import { LISTING_COPY, localizeListingCopy, type ListingKey } from "@/content/listingCopy";
 import { ListingGuide } from "@/components/content/ListingGuide";
 import { CI } from "@/lib/dbText";
@@ -27,7 +27,6 @@ const SORTS: Record<string, string> = {
   retail: "Highest retail value",
   units: "Most units",
 };
-
 
 function one(v: string | string[] | undefined) {
   return Array.isArray(v) ? v[0] : v;
@@ -108,27 +107,13 @@ export async function LotBrowser({
       : {}),
   };
 
-  const [all, catalog] = await Promise.all([db.lot.findMany({ where, include: { category: true, seller: true } }), getCatalog()]);
+  const [{ lots, total, page }, catalog] = await Promise.all([getBrowseProducts(where, sort, pageParam(get("page"))), getCatalog()]);
   // Hidden categories stay out of the filter list unless one is selected (e.g. reached by a direct link).
   const categories = catalog.filter((c) => !c.hidden || c.slug === category);
   const catGroups = groupCategories(categories);
   const scopeCat = categories.find((c) => c.slug === category);
   const scopeSub = scopeCat?.subcategories.find((s) => s.slug === sub);
   const brands = await brandCounts({ categoryId: scopeCat?.id, subcategoryId: scopeSub?.id });
-
-  const sorted = [...all].sort((a, b) => {
-    switch (sort) {
-      case "value": return a.priceCents / a.msrpCents - b.priceCents / b.msrpCents;
-      case "price_asc": return a.priceCents - b.priceCents;
-      case "price_desc": return b.priceCents - a.priceCents;
-      case "popular": return b.views - a.views;
-      case "retail": return b.msrpCents - a.msrpCents;
-      case "units": return b.units - a.units;
-      default: return b.createdAt.getTime() - a.createdAt.getTime();
-    }
-  });
-  const page = pageParam(get("page"), pageCount(sorted.length, PAGE_SIZE));
-  const lots = sorted.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   const current: Record<string, string> = { q, category, sub, brand, condition, size, state, min: min ? String(min) : "", max: max ? String(max) : "", sort: sort === defaultSort ? "" : sort, sold: showSold ? "1" : "" };
   for (const k of Object.keys(fixed)) delete current[k];
@@ -165,7 +150,7 @@ export async function LotBrowser({
         <div className="min-w-0">
           <h1 className="break-words font-display text-2xl font-bold sm:text-3xl">{title}</h1>
           <p className="text-sm text-muted">
-            <span className="font-semibold text-ink">{t(sorted.length === 1 ? "{n} lot" : "{n} lots", { n: sorted.length.toLocaleString() })}</span>
+            <span className="font-semibold text-ink">{t(total === 1 ? "{n} lot" : "{n} lots", { n: total.toLocaleString() })}</span>
             {lead ? ` · ${lead}` : activeCat ? ` · ${t(activeCat.blurb)}` : ""}
           </p>
         </div>
@@ -298,7 +283,7 @@ export async function LotBrowser({
               {lots.map((l, i) => <LotCard key={l.id} lot={l} priority={i < 2} />)}
             </div>
           )}
-          <Pager base={basePath} params={Object.fromEntries(params)} page={page} perPage={PAGE_SIZE} total={sorted.length} />
+          <Pager base={basePath} params={Object.fromEntries(params)} page={page} perPage={PAGE_SIZE} total={total} />
         </section>
       </div>
       {copy && <ListingGuide copy={copy} />}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { db } from "@/lib/db";
-import { getStore } from "@/lib/store";
+import { getHomeInventory, getPublicCards, getRecentlySoldCards } from "@/lib/storefront-products";
+import { getPublicStore as getStore } from "@/lib/store";
 import { LotCard } from "@/components/LotCard";
 import { Photo } from "@/components/Photo";
 import { PHOTOS, LOT_SIZE_PHOTOS } from "@/content/photos";
@@ -37,7 +37,6 @@ export async function generateMetadata() {
   });
 }
 
-const lotInclude = { category: true, seller: true } as const;
 /** Lots per page in the paginated home sections ("Recently added" ?recent=, "Best value" ?value=). */
 const HOME_PER_PAGE = 8;
 
@@ -48,7 +47,6 @@ const STAT_COLS: Record<number, string> = { 1: "md:grid-cols-1", 2: "md:grid-col
 
 type Unit = { kind: "single"; key: HomeSectionKey } | { kind: "collections"; guides: boolean } | { kind: "cards"; keys: HomeSectionKey[] };
 type UnitKind = "band" | "plain" | "cards" | "blog" | null;
-
 
 function Head({ title, subtitle, link, h2 = "font-display text-2xl font-bold sm:text-3xl" }: { title: string; subtitle?: string; link?: ReactNode; h2?: string }) {
   if (!link && !subtitle) return <h2 className={`mb-6 ${h2}`}>{title}</h2>;
@@ -72,15 +70,15 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
   const { t, lh } = await getI18n();
   const weekAgo = new Date(Date.now() - 7 * 86400000);
   const [active, categories, store, recentlySold, settings, posts, guides] = await Promise.all([
-    db.lot.findMany({ where: { status: "ACTIVE" }, include: lotInclude, orderBy: [{ createdAt: "desc" }, { id: "desc" }] }),
+    getHomeInventory(),
     getVisibleCategories(),
     getStore(),
-    db.lot.findMany({ where: { status: "SOLD_OUT" }, include: lotInclude, orderBy: { createdAt: "desc" }, take: 4 }),
+    getRecentlySoldCards(),
     getSettings(),
     getPublishedPosts(),
     getPublishedGuides(),
   ]);
-  // This list already drives best value; reuse it to avoid six additional catalog queries.
+  // Small cached summaries drive statistics and selection; full cards are fetched only for the displayed lots.
   const inStock = active.length;
   const newThisWeek = active.filter(lot => lot.createdAt >= weekAgo).length;
   const retailValue = active.reduce((sum, lot) => sum + lot.msrpCents, 0);
@@ -88,12 +86,16 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ r
   const sec = home.sections;
   // "Recently added": every in-stock lot, newest first, paginated with ?recent=.
   const recentPage = pageParam(sp.recent, pageCount(inStock, HOME_PER_PAGE));
-  const recent = active.slice((recentPage - 1) * HOME_PER_PAGE, recentPage * HOME_PER_PAGE);
+  const recentSummaries = active.slice((recentPage - 1) * HOME_PER_PAGE, recentPage * HOME_PER_PAGE);
   // "Best value": in-stock lots priced lowest against their manifest retail (not the first page of new ones), paginated with ?value=.
   const newest = new Set(active.slice(0, HOME_PER_PAGE).map((l) => l.id));
   const valueAll = active.filter((l) => !newest.has(l.id)).sort((a, b) => a.priceCents / a.msrpCents - b.priceCents / b.msrpCents);
   const valuePage = pageParam(sp.value, pageCount(valueAll.length, HOME_PER_PAGE));
-  const bestValue = valueAll.slice((valuePage - 1) * HOME_PER_PAGE, valuePage * HOME_PER_PAGE);
+  const valueSummaries = valueAll.slice((valuePage - 1) * HOME_PER_PAGE, valuePage * HOME_PER_PAGE);
+  const cards = await getPublicCards([...new Set([...recentSummaries, ...valueSummaries].map(l => l.id))]);
+  const cardById = new Map(cards.map(l => [l.id, l]));
+  const recent = recentSummaries.flatMap(l => { const card = cardById.get(l.id); return card ? [card] : []; });
+  const bestValue = valueSummaries.flatMap(l => { const card = cardById.get(l.id); return card ? [card] : []; });
   // Each section's pager keeps the other section's page.
   const keep = { recent: recentPage > 1 ? recentPage : undefined, value: valuePage > 1 ? valuePage : undefined };
   const sizeCount = (k: string) => active.filter(lot => lot.lotSize === k).length;

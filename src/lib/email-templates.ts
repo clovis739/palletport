@@ -4,6 +4,7 @@
  */
 import { money } from "./format";
 import { BRAND, callout, emailBase, emailLayout, emailLinkBase, esc, factTable, paragraph, sectionTitle } from "./email-layout";
+import { paymentEmailHtml } from "./payment-email";
 
 /** Translation for the customer's language (identity for English and for team emails). */
 export type Tr = (text: string, vars?: Record<string, string | number>) => string;
@@ -17,6 +18,9 @@ export type StatusOrder = {
   number: string;
   totalCents: number;
   deliveryMethod: string;
+  paymentMethod?: string;
+  paymentName?: string;
+  paymentLogo?: string;
   trackingNo?: string | null;
   carrier?: string | null;
   paidAt?: Date | null;
@@ -39,7 +43,7 @@ function itemList(order: StatusOrder, t: Tr = same) {
         `<tr><td style="padding:11px 12px 11px 0;border-bottom:1px solid ${BRAND.line};color:${BRAND.ink};font-family:${SANS};font-size:13px;line-height:1.5">${esc(i.title)}<br><span style="color:${BRAND.muted}">${esc(t("Qty {n}", { n: i.quantity }))}</span></td><td style="padding:11px 0;border-bottom:1px solid ${BRAND.line};color:${BRAND.ink};font-family:${SANS};font-size:13px;font-weight:600;text-align:right;white-space:nowrap;vertical-align:top">${money(i.priceCents * i.quantity)}</td></tr>`,
     )
     .join("");
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">${rows}</table>${factTable([[t("Order total"), money(order.totalCents)]], false)}`;
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">${rows}</table>${factTable([[t("Order total"), money(order.totalCents)]], false)}${paymentEmailHtml(order.paymentMethod, order.paymentName ? t(order.paymentName) : undefined, order.paymentLogo)}`;
 }
 
 const orderUrl = (o: StatusOrder, lang: Lang = "en") => `${emailLinkBase(lang)}/orders/${encodeURIComponent(o.id)}`;

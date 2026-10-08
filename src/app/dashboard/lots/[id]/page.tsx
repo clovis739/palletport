@@ -85,6 +85,8 @@ export default async function EditLotPage({ params, searchParams }: { params: Pr
           subcategoryId: lot.subcategoryId,
           condition: lot.condition,
           price: lot.priceCents / 100,
+          originalPrice: lot.compareAtPriceCents / 100,
+          shipsFrom: lot.shipsFrom,
           lotSize: lot.lotSize,
           source: lot.source,
           brand: lot.brand,

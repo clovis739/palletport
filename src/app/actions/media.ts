@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath } from "@/lib/public-cache";
 import { z } from "zod";
 import { getCurrentUser, requireStaff } from "@/lib/auth";
 import { logAudit } from "@/lib/audit";

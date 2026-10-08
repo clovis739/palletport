@@ -3,6 +3,7 @@ import { isLotPhotoUrl } from "@/lib/mediaUrls";
 import { cleanProductPhotos } from "@/lib/product-photos";
 import type { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
+import { cachedPublic } from "@/lib/public-cache";
 import { COLLECTIONS } from "@/lib/collections";
 import { blogCategories, categorySlug } from "@/lib/blog";
 import { getHelpArticles, getLegalPages, getPublishedGuides, getPublishedPages, getPublishedPosts, type ContentArticle } from "@/lib/content";
@@ -62,8 +63,7 @@ const uploadedPhotos = (images: string, base: string) =>
     .filter((s) => isLotPhotoUrl(s) || /^\/images\/products\/(?:clean-)?[a-f0-9]{16}\.(?:webp|png)$/i.test(s))
     .map((s) => (s.startsWith("/") ? `${base}${s}` : s));
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = await requestSiteUrl();
+const getSitemapInventory = cachedPublic(async () => {
   const soldCutoff = new Date(Date.now() - SOLD_INDEX_DAYS * 86400000);
   // SOLD_OUT candidates: anything that could still be inside the window (lotIndexable() makes the final call).
   const lotWhere: Prisma.LotWhereInput = {
@@ -72,19 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { status: "SOLD_OUT", OR: [{ createdAt: { gte: soldCutoff } }, { orderItems: { some: { order: { createdAt: { gte: soldCutoff } } } } }] },
     ],
   };
-
-  // Content (DB entries, or the built-in TS content before import). Entries marked noindex are left out.
-  const indexable = (list: ContentArticle[]) => list.filter((a) => !a.meta.noindex);
-  const [posts, help, guides, legal, pages, blogCats] = await Promise.all([
-    getPublishedPosts().then(indexable),
-    getHelpArticles().then(indexable),
-    getPublishedGuides().then(indexable),
-    getLegalPages().then(indexable),
-    getPublishedPages().then(indexable),
-    blogCategories(),
-  ]);
-
-  const [candidates, categories, listingDates, collectionDates] = await Promise.all([
+  return Promise.all([
     db.lot.findMany({
       where: lotWhere,
       select: {
@@ -106,7 +94,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         db.lot.findFirst({ where: { AND: [c.where, { status: "ACTIVE" }] }, orderBy: { createdAt: "desc" }, select: { createdAt: true } }),
       ),
     ),
+  ] as const);
+}, "sitemap-inventory", 300);
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const base = await requestSiteUrl();
+
+  // Content (DB entries, or the built-in TS content before import). Entries marked noindex are left out.
+  const indexable = (list: ContentArticle[]) => list.filter((a) => !a.meta.noindex);
+  const [posts, help, guides, legal, pages, blogCats] = await Promise.all([
+    getPublishedPosts().then(indexable),
+    getHelpArticles().then(indexable),
+    getPublishedGuides().then(indexable),
+    getLegalPages().then(indexable),
+    getPublishedPages().then(indexable),
+    blogCategories(),
   ]);
+
+  const [candidates, categories, listingDates, collectionDates] = await getSitemapInventory();
 
   const now = Date.now();
   const lots = candidates.filter((l) => lotIndexable(l, now));

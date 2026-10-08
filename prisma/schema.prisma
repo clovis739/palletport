@@ -4,8 +4,8 @@ generator client {
   binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
-// Postgres (Neon). DATABASE_URL = pooled connection (used by the app), DATABASE_URL_UNPOOLED = direct connection
-// (used by `prisma db push` / migrations). The Neon integration on Vercel sets both; copy them into .env locally.
+// PostgreSQL: DATABASE_URL is the app pooler; DATABASE_URL_UNPOOLED is the migration connection.
+// Supabase can use its session pooler for migrations on IPv4 networks. See docs/SUPABASE-FRESH-SETUP.md.
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
@@ -124,6 +124,7 @@ model Lot {
   description              String
   condition                String
   priceCents               Int
+  compareAtPriceCents      Int            @default(0)
   msrpCents                Int
   units                    Int
   palletCount              Int            @default(1)

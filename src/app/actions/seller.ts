@@ -2,7 +2,7 @@
 
 import { notifyOrderEvent } from "@/lib/status-email";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { revalidatePath } from "@/lib/public-cache";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { requireAdmin, requireStaff } from "@/lib/auth";
@@ -13,6 +13,7 @@ import { saveLotPhotos, deleteLotPhoto } from "@/lib/uploads";
 import { MAX_LOT_PHOTOS, parseImages } from "@/lib/lotImages";
 import { withFlash } from "@/components/admin/flashUrl";
 import type { FormState } from "./auth";
+import { productPriceFields, updateProductFob } from "@/lib/product-pricing";
 
 /**
  * Guard for store actions. `perm` is the staff permission required (see src/lib/permissions.ts);
@@ -34,12 +35,13 @@ const lotSchema = z.object({
   lotSize: z.enum(["CASE", "PALLET", "TRUCKLOAD"]).default("PALLET"),
   source: z.string().trim().max(80).optional().default(""),
   brand: z.string().trim().max(60).optional().default(""),
-  price: z.coerce.number().positive("Enter a price"),
-  palletCount: z.coerce.number().int().min(1).max(26),
-  weightLbs: z.coerce.number().int().min(1, "Enter a weight"),
+  ...productPriceFields,
+  shipsFrom: z.string().trim().min(3, "Enter the FOB address").max(300),
+  palletCount: z.coerce.number().int().min(0).max(26),
+  weightLbs: z.coerce.number().int().min(0, "Enter a weight"),
   available: z.coerce.number().int().min(0).max(100),
-  manifest: z.string().trim().min(1, "Add at least one manifest line"),
-});
+  manifest: z.string().trim().default(""),
+}).refine(d => !d.originalPrice || Math.round(d.originalPrice * 100) >= Math.round(d.price * 100), { message: "Original price must be at least the sale price", path: ["originalPrice"] });
 
 /** Reuse the existing spelling of a brand ("dewalt" → "DeWALT") so brand filters don't split. */
 async function canonicalBrand(brand: string) {
@@ -104,18 +106,19 @@ export async function createLot(_: FormState, formData: FormData): Promise<FormS
     data: {
       slug: `${slugify(d.title)}-${Date.now().toString(36)}`,
       title: d.title,
-      description: d.description,
+      description: updateProductFob(d.description, d.shipsFrom),
       condition: d.condition,
       lotSize: d.lotSize,
       source: d.source,
       brand,
       priceCents: Math.round(d.price * 100),
+      compareAtPriceCents: Math.round(d.originalPrice * 100),
       msrpCents,
       units,
       palletCount: d.palletCount,
       weightLbs: d.weightLbs,
       available: d.available,
-      shipsFrom: seller.location,
+      shipsFrom: d.shipsFrom,
       categoryId: d.categoryId,
       subcategoryId: d.subcategoryId || null,
       sellerId: seller.id,
@@ -178,7 +181,8 @@ export async function updateLot(_: FormState, formData: FormData): Promise<FormS
   let kept = formData.getAll("keepImage").map(String).filter((u) => existing.includes(u));
   if (cover && kept.includes(cover)) kept = [cover, ...kept.filter((u) => u !== cover)];
   const photos = formData.getAll("photos").filter((f): f is File => f instanceof File && f.size > 0);
-  if (kept.length + photos.length > MAX_LOT_PHOTOS) return { error: `A lot can have up to ${MAX_LOT_PHOTOS} photos — remove some first.` };
+  const photoLimit = Math.max(MAX_LOT_PHOTOS, existing.length);
+  if (kept.length + photos.length > photoLimit) return { error: `A lot can have up to ${photoLimit} photos — remove some first.` };
   const saved = await saveLotPhotos(photos, id);
   if (saved.error) {
     await Promise.all(saved.urls.map(deleteLotPhoto));
@@ -193,12 +197,15 @@ export async function updateLot(_: FormState, formData: FormData): Promise<FormS
       where: { id },
       data: {
         title: d.title,
-        description: d.description,
+        description: updateProductFob(d.description, d.shipsFrom, lot.shipsFrom),
+        shipsFrom: d.shipsFrom,
+        sourceDelivery: updateProductFob(lot.sourceDelivery || "", d.shipsFrom, lot.shipsFrom),
         condition: d.condition,
         lotSize: d.lotSize,
         source: d.source,
         brand,
         priceCents: Math.round(d.price * 100),
+        compareAtPriceCents: Math.round(d.originalPrice * 100),
         palletCount: d.palletCount,
         weightLbs: d.weightLbs,
         available: d.available,
@@ -206,8 +213,8 @@ export async function updateLot(_: FormState, formData: FormData): Promise<FormS
         status: lot.status === "SOLD_OUT" && d.available > 0 ? "ACTIVE" : lot.status === "ACTIVE" && d.available === 0 ? "SOLD_OUT" : lot.status,
         categoryId: d.categoryId,
         subcategoryId: d.subcategoryId || null,
-        msrpCents: manifest.reduce((a, m) => a + m.qty * m.unitMsrpCents, 0),
-        units: manifest.reduce((a, m) => a + m.qty, 0),
+        msrpCents: manifest.length || d.manifest ? manifest.reduce((a, m) => a + m.qty * m.unitMsrpCents, 0) : lot.msrpCents,
+        units: manifest.length || d.manifest ? manifest.reduce((a, m) => a + m.qty, 0) : lot.units,
         manifest: { create: manifest },
         images,
       },
