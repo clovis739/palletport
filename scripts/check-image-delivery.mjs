@@ -1,0 +1,54 @@
+import assert from "node:assert/strict";
+import Module, { createRequire } from "node:module";
+import { readFile } from "node:fs/promises";
+
+const require = createRequire(import.meta.url);
+const original = Module._load;
+Module._load = function (name, ...args) {
+  if (name === "server-only") return {};
+  return original.call(this, name, ...args);
+};
+const { displayImage, imageSrcSet } = require("../src/lib/mediaUrls.ts");
+const { lotImages, parseImages } = require("../src/lib/lotImages.ts");
+const { PHOTOS, photoSrc } = require("../src/content/photos.ts");
+const { ProductPhoto } = require("../src/components/lot/ProductPhoto.tsx");
+const { Photo } = require("../src/components/Photo.tsx");
+const React = require("react");
+globalThis.React = React;
+const { renderToStaticMarkup } = require("react-dom/server");
+Module._load = original;
+const mapping = JSON.parse(await readFile(new URL("../src/content/project-image-cdn.json", import.meta.url), "utf8"));
+const [local, cdn] = Object.entries(mapping)[0];
+const lot = { slug: "cdn-test", title: "Test product", images: local };
+assert.equal(lotImages(lot)[0].src, cdn);
+assert.equal(lotImages(lot)[0].sourceSrc, local);
+assert.deepEqual(parseImages(local), [local], "Admin storage and Merchant image validation retain original paths");
+assert.equal(lotImages({ ...lot, images: "/images/new-unmapped.webp" })[0].src, "/images/new-unmapped.webp");
+const sized = displayImage(cdn, 320);
+assert.equal(displayImage(sized, 160), displayImage(cdn, 160), "Thumbnails must replace previous resize layers");
+assert.equal(displayImage(displayImage(cdn, 640), 640), displayImage(cdn, 640));
+assert.ok(displayImage(cdn, 10000).includes("w_2000"));
+assert.ok(!displayImage(cdn, Infinity).includes("w_Infinity"));
+for (const url of ["/images/new.webp", "blob:test", "https://example.com/image.jpg"]) {
+  assert.equal(displayImage(url, 320), url);
+  assert.equal(imageSrcSet(url), undefined);
+}
+const custom = cdn.replace("/upload/", "/upload/c_fill,h_300,w_400/");
+assert.ok(displayImage(custom, 160).includes("/c_fill,h_300,w_400/"), "Preserve caller crop transformations");
+assert.ok(imageSrcSet(sized, 320).includes("w_160"));
+assert.ok(!imageSrcSet(sized, 320).includes("w_640"));
+const html = renderToStaticMarkup(React.createElement(ProductPhoto, { src: cdn, width: 320, height: 200, sizes: "320px", alt: "Product" }));
+assert.ok(html.includes('srcSet="https://res.cloudinary.com/'));
+assert.ok(html.includes('sizes="320px"'));
+assert.ok(html.includes('loading="lazy"'));
+assert.ok(!html.includes("/_next/image"));
+const stock = renderToStaticMarkup(React.createElement(Photo, { photo: PHOTOS.heroWarehouse, width: 800 }));
+assert.ok(stock.includes("https://res.cloudinary.com/"));
+assert.ok(!stock.includes("/_next/image"));
+for (const photo of Object.values(PHOTOS)) assert.ok(photoSrc(photo).startsWith("https://res.cloudinary.com/"), "Every stock image has a CDN copy");
+const lighting = JSON.parse(await readFile(new URL("../src/content/photo-lighting.json", import.meta.url), "utf8"));
+const corrected = Object.keys(lighting).find(path => mapping[path]);
+if (corrected) assert.ok(renderToStaticMarkup(React.createElement(ProductPhoto, { src: mapping[corrected], sourceSrc: corrected })).includes("brightness("), "Preserve existing brightness corrections");
+const card = await readFile(new URL("../src/components/LotCard.tsx", import.meta.url), "utf8");
+assert.equal((card.match(/<Link/g) ?? []).length, (card.match(/<Link prefetch=\{false\}/g) ?? []).length);
+console.log(`Image delivery checks passed: ${Object.keys(mapping).length} paths, stock CDN coverage, responsive HTML, bounded/idempotent transforms, local fallback, brightness and disabled card prefetch.`);

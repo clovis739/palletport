@@ -1,7 +1,6 @@
 import { Photo } from "@/components/Photo";
-import { displayImage } from "@/lib/mediaUrls";
+import { ProductPhoto } from "@/components/lot/ProductPhoto";
 import { resolveImageRef } from "@/lib/imageRef";
-import { photoLightingStyle } from '@/lib/photo-lighting';
 
 /**
  * Renders an image ref (stock photo key or media URL — see src/lib/imageRef.ts) in a slot.
@@ -38,9 +37,8 @@ export function SiteImage({
   const h = height ?? Math.round(width / (ratio ?? 3 / 2));
   return (
     // eslint-disable-next-line @next/next/no-img-element -- media library files are served pre-sized from /media/lib
-    <img
-      src={displayImage(img.src, width * 2)}
-      style={photoLightingStyle(img.src)}
+    <ProductPhoto
+      src={img.src}
       alt={alt ?? ""}
       width={width}
       height={h}

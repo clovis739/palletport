@@ -17,6 +17,8 @@ export function LotGallery({ images, badge }: { images: LotImage[]; badge?: Reac
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <ProductPhoto
           src={img.src}
+          sourceSrc={img.sourceSrc}
+          sizes="(max-width: 1023px) 100vw, 60vw"
           alt={img.alt}
           width={1200}
           height={750}
@@ -38,7 +40,7 @@ export function LotGallery({ images, badge }: { images: LotImage[]; badge?: Reac
           {images.map((im, i) => (
             <button key={im.src} type="button" onClick={() => setActive(i)} aria-label={t("Show photo {n}", { n: i + 1 })} className={`overflow-hidden rounded-lg border-2 ${i === active ? "border-signal" : "border-transparent opacity-70 hover:opacity-100"}`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <ProductPhoto src={im.src} alt="" width={160} height={120} loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover" />
+              <ProductPhoto src={im.src} sourceSrc={im.sourceSrc} sizes="(max-width: 639px) 30vw, 160px" alt="" width={160} height={120} loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover" />
             </button>
           ))}
         </div>

@@ -1,10 +1,13 @@
 // Representative supplier photography, served from local verified image files.
 // Legacy image keys remain stable for saved settings and content references.
 import sourcePhotos from "./source-photos.json";
+import { displayImage } from "@/lib/mediaUrls";
 
 export type StockPhoto = {
   id: string;
   src: string;
+  /** Verified Cloudinary copy; original local path stays available for audits. */
+  cdnSrc?: string;
   sourceUrl: string;
   alt: string;
   by: string;
@@ -377,5 +380,5 @@ export function photoKeyFor(key: string, map?: Record<string, PhotoKey>): PhotoK
 
 /** Local representative image. Layout cropping is handled by the image component. */
 export function photoSrc(photo: StockPhoto, _width = 800, _ratio?: number) {
-  return photo.src;
+  return displayImage(photo.cdnSrc ?? photo.src, _width);
 }

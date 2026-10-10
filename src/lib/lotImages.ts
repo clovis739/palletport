@@ -1,10 +1,11 @@
 // Lot photos: real uploads when the lot has them, otherwise a category stock photo that the UI labels as such.
+import { projectImageUrl } from "./project-image-cdn";
 import { CATEGORY_POOLS, LOT_TOPICS, PHOTOS, photoSrc, type StockPhoto } from "@/content/photos";
 import { cleanProductPhotos } from './product-photos';
 
 export const MAX_LOT_PHOTOS = 10;
 
-export type LotImage = { src: string; alt: string; stock: boolean };
+export type LotImage = { src: string; alt: string; stock: boolean; sourceSrc?: string };
 
 export function parseImages(images?: string | null): string[] {
   return cleanProductPhotos(images);
@@ -49,8 +50,8 @@ function uploadAlt(title: string, i: number, n: number) {
 /** All photos for a lot's gallery. Stock photos are cropped by the CDN to `ratio` (width / height). */
 export function lotImages(lot: LotLike, width = 1200, ratio = 16 / 10): LotImage[] {
   const real = parseImages(lot.images);
-  if (real.length) return real.map((src, i) => ({ src, alt: uploadAlt(lot.title, i, real.length), stock: false }));
-  return stockFor(lot.slug, lot.title, lot.category?.slug).map((ph) => ({ src: photoSrc(ph, width, ratio), alt: ph.alt, stock: true }));
+  if (real.length) return real.map((src, i) => ({ src: projectImageUrl(src), sourceSrc: src, alt: uploadAlt(lot.title, i, real.length), stock: false }));
+  return stockFor(lot.slug, lot.title, lot.category?.slug).map((ph) => ({ src: projectImageUrl(photoSrc(ph, width, ratio)), sourceSrc: ph.src, alt: ph.alt, stock: true }));
 }
 
 /** Cover photo for cards, cart and checkout thumbnails. */

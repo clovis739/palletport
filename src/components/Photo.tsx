@@ -1,6 +1,5 @@
 import { photoSrc, type StockPhoto } from "@/content/photos";
-import Image from "next/image";
-import { photoLightingStyle } from '@/lib/photo-lighting';
+import { ProductPhoto } from "./lot/ProductPhoto";
 
 /** Responsive stock photo. The parent controls size; the image fills it with object-cover. */
 export function Photo({
@@ -25,9 +24,9 @@ export function Photo({
   alt?: string;
 }) {
   return (
-    <Image
+    <ProductPhoto
       src={photoSrc(photo, width, ratio)}
-      style={photoLightingStyle(photo.src)}
+      sourceSrc={photo.src}
       sizes={sizes ?? `(max-width: 640px) 100vw, ${width}px`}
       width={width}
       height={Math.round(width / ratio)}

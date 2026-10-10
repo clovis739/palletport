@@ -34,8 +34,19 @@ function cloudinaryKind(url: string) {
  */
 export function displayImage(url: string, width?: number) {
   if (!url || !isCloudinaryUrl(url)) return url;
-  const t = ["f_auto", "q_auto", ...(width ? ["c_limit", `w_${Math.round(Math.min(width, 2000))}`] : [])].join(",");
-  return url.replace(/\/image\/upload\//, `/image/upload/${t}/`);
+  // Replace our generated sizing layer rather than stacking it on each render.
+  const base = url.replace(/\/image\/upload\/((?:f_auto|q_auto|c_limit|w_\d+)(?:,(?:f_auto|q_auto|c_limit|w_\d+))*)\//, "/image/upload/");
+  const size = width && Number.isFinite(width) ? Math.round(Math.max(32, Math.min(width, 2000))) : undefined;
+  const t = ["f_auto", "q_auto", ...(size ? ["c_limit", `w_${size}`] : [])].join(",");
+  return base.replace(/\/image\/upload\//, `/image/upload/${t}/`);
+}
+
+/** Browser chooses a bounded CDN variant; local, Blob and third-party URLs are untouched. */
+export function imageSrcSet(url: string, maxWidth = 1600): string | undefined {
+  if (!isCloudinaryUrl(url)) return undefined;
+  const limit = Number.isFinite(maxWidth) ? Math.round(Math.max(32, Math.min(maxWidth, 2000))) : 1600;
+  const widths = [...new Set([160, 320, 480, 640, 960, 1280, 1600, 2000].filter(w => w < limit).concat(limit))];
+  return widths.map(w => `${displayImage(url, w)} ${w}w`).join(", ");
 }
 
 /** A lot photo we uploaded (disk, Vercel Blob or Cloudinary). */

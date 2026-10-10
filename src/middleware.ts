@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { SESSION_COOKIE, verifySession } from "@/lib/session";
 import { isStaff } from "@/lib/permissions";
 import { LOCALE_COOKIE, LOCALE_HEADER, isLocalizablePath, stripLocale } from "@/i18n/config";
+import { rejectCrawler } from "@/lib/crawler-access";
 
 const PROTECTED = ["/cart", "/checkout", "/orders", "/account"]; // the admin (/dashboard) is guarded server-side and 404s for non-staff
 
@@ -20,6 +21,13 @@ export async function middleware(req: NextRequest) {
   const isEs = rawPath === "/es" || rawPath.startsWith("/es/");
   // All checks below use the page path without the /es prefix.
   const pathname = isEs ? stripLocale(rawPath) : rawPath;
+  // Small response before rendering or database reads; never trust UA strings for authentication.
+  if (rejectCrawler(req.headers.get("user-agent") ?? "", rawPath, req.method)) {
+    return new NextResponse(req.method === "HEAD" ? null : "Forbidden", {
+      status: 403,
+      headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "private, no-store", "X-Robots-Tag": "noindex" },
+    });
+  }
   const pageRequest = req.method === "GET" && isLocalizablePath(pathname);
 
   // 5a. Language switch back to English: /lots?lang=en → /lots (cookie = en).

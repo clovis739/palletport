@@ -47,10 +47,12 @@ export async function LotCard({ lot, priority = false }: { lot: LotCardData; pri
 
   return (
     <article className="group card flex flex-col overflow-hidden transition hover:-translate-y-0.5">
-      <Link href={href} aria-label={t("View details: {title}", { title: lot.title })} className="relative block overflow-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-signal">
+      <Link prefetch={false} href={href} aria-label={t("View details: {title}", { title: lot.title })} className="relative block overflow-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-signal">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <ProductPhoto
           src={cover.src}
+          sourceSrc={cover.sourceSrc}
+          sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 320px"
           alt=""
           width={640}
           height={400}
@@ -76,7 +78,7 @@ export async function LotCard({ lot, priority = false }: { lot: LotCardData; pri
       <div className="flex flex-1 flex-col gap-3 p-4">
         <h3 className="font-display text-[15px] font-semibold leading-snug">
           {lot.brand && <span className="mb-0.5 block text-[11px] font-semibold uppercase tracking-wider text-muted">{lot.brand}</span>}
-          <Link href={href} className="line-clamp-2 hover:text-signal-dark hover:underline focus-visible:outline-2 focus-visible:outline-signal">
+          <Link prefetch={false} href={href} className="line-clamp-2 hover:text-signal-dark hover:underline focus-visible:outline-2 focus-visible:outline-signal">
             {lot.title}
           </Link>
         </h3>
@@ -120,7 +122,7 @@ export async function LotCard({ lot, priority = false }: { lot: LotCardData; pri
           </p>}
         </div>
 
-        <Link href={href} tabIndex={-1} className="tap inline-flex w-fit items-center gap-1 text-xs font-semibold text-signal-dark hover:underline">
+        <Link prefetch={false} href={href} tabIndex={-1} className="tap inline-flex w-fit items-center gap-1 text-xs font-semibold text-signal-dark hover:underline">
           {t("View details")} <ArrowRight aria-hidden className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
         </Link>
 

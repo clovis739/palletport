@@ -1,5 +1,6 @@
 import { Photo } from "@/components/Photo";
 import { resolveImageRef } from "@/lib/imageRef";
+import { ProductPhoto } from "@/components/lot/ProductPhoto";
 
 const UNSPLASH = /^https:\/\/images\.unsplash\.com\//;
 
@@ -39,5 +40,5 @@ export function HeroBackground({ refStr }: { refStr: string }) {
     );
   }
   // eslint-disable-next-line @next/next/no-img-element -- media library / external image
-  return <img src={img.src} alt="" width={1600} height={900} fetchPriority="high" className="absolute inset-0 h-full w-full bg-ink object-cover" />;
+  return <ProductPhoto src={img.src} sizes="100vw" alt="" width={1600} height={900} loading="eager" fetchPriority="high" className="absolute inset-0 h-full w-full bg-ink object-cover" />;
 }

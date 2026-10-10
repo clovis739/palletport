@@ -1,14 +1,17 @@
 import type { ImgHTMLAttributes } from "react";
-import { displayImage } from "@/lib/mediaUrls";
+import { displayImage, imageSrcSet } from "@/lib/mediaUrls";
 import { photoLightingStyle } from '@/lib/photo-lighting';
 
 /** Display product photography without added text or logo overlays. */
-export function ProductPhoto({ className = "", src, style, ...props }: ImgHTMLAttributes<HTMLImageElement>) {
-  // Cloudinary photos are resized to twice the shown width (sharp on high-density screens) and served as WebP/AVIF.
-  const w = Number(props.width) || undefined;
-  const shown = typeof src === "string" ? displayImage(src, w ? w * 2 : undefined) : src;
+export function ProductPhoto({ className = "", src, sourceSrc, style, sizes, srcSet, ...props }: ImgHTMLAttributes<HTMLImageElement> & { sourceSrc?: string }) {
+  const width = Number(props.width) || 800;
+  const url = typeof src === "string" ? src : undefined;
+  const candidates = srcSet ?? (url ? imageSrcSet(url, width * 2) : undefined);
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img {...props} src={shown} style={photoLightingStyle(typeof src === 'string' ? src : undefined, style)} className={`block h-full w-full object-cover ${className}`} />
+    <img {...props} src={url ? displayImage(url, width) : src}
+      srcSet={candidates} sizes={candidates ? (sizes ?? `(max-width: 640px) 100vw, ${width}px`) : sizes}
+      loading={props.loading ?? "lazy"} decoding={props.decoding ?? "async"}
+      style={photoLightingStyle(sourceSrc ?? url, style)} className={`block h-full w-full object-cover ${className}`} />
   );
 }

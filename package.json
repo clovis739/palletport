@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "crawlers:check": "node --import tsx scripts/check-crawler-controls.mjs",
     "queries:check": "node --import tsx scripts/check-public-queries.mjs",
     "orders:check": "node --import tsx scripts/check-order-placement.mjs",
     "sitemap:export": "node --env-file=.env --import tsx scripts/export-sitemap.mjs",
@@ -39,7 +40,9 @@
     "db:fresh": "node --env-file=.env --import tsx scripts/bootstrap-supabase.ts --apply",
     "db:fresh:verify": "node --env-file=.env --import tsx scripts/verify-fresh-supabase.ts",
     "pricing:check": "node --import tsx scripts/check-product-pricing.ts",
-    "emails:logos:check": "node --import tsx scripts/check-payment-emails.mjs"
+    "emails:logos:check": "node --import tsx scripts/check-payment-emails.mjs",
+    "images:cdn:prepare": "node scripts/prepare-image-cdn.mjs",
+    "images:check": "node --import tsx scripts/check-image-delivery.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
