@@ -5,7 +5,7 @@ export const generateMetadata = () => pageMetadata({
   title: "PalletPort Pro: membership for weekly pallet buyers",
   absoluteTitle: true,
   description:
-    "For resellers who buy every week: free freight from $3,000 instead of $7,500, 24-hour early access to new lots, Net 60 terms and priority support.",
+    "For resellers who buy every week: $100 shipping per order, 24-hour early access to new lots, Net 60 terms and priority support.",
   path: "/pro",
 });
 
@@ -16,7 +16,7 @@ export default function Pro() {
       lead="A membership for resellers who buy every week. Lower freight, first look at new lots and extended payment terms."
       formTitle="Join the Pro waitlist" formCta="Request an invite" bodyLabel="Roughly how many pallets do you buy per month?"
       benefits={[
-        ["Free freight from $3,000", "Instead of the standard $7,500 threshold."],
+        ["$100 shipping per order", "One flat delivery fee for your whole order."],
         ["Early access", "See new lots 24 hours before everyone else."],
         ["Net 60 terms", "For approved members with a good payment history."],
         ["Priority support", "A named account manager and same-day replies."],

@@ -29,11 +29,15 @@ export const LEGAL: Article[] = [
     ],
   },
   {
-    slug: "returns-and-disputes", title: "Return & Refund Policy", date: "2026-09-27", excerpt: "15-day returns, cancellations, order problems, return freight and refunds.",
+    slug: "returns-and-disputes", title: "Return & Refund Policy", date: "2026-10-12", excerpt: "15-day returns (60 days for orders placed November 1 through December 31 each year), cancellations, order problems, return freight and refunds.",
     body: [
-      { h: "15-day returns", p: [
-        "You can request a return on any order placed on our website within 15 days of pickup or delivery.",
+      { h: "Standard and holiday returns", p: [
+        "You can request a return on any order placed on our website within 15 days of pickup or delivery (60 days for orders placed November 1 through December 31 each year).",
         "Every return must be approved by us in writing before anything is sent back — a single item, a pallet or a whole lot. We can't accept returns that arrive without written approval.",
+      ] },
+      { h: "Holiday return extension", p: [
+        "Orders placed November 1 through December 31, inclusive, each year have a 60-day return-request window after delivery or pickup. The order placement date determines eligibility, and the 60-day period begins on the date the goods are delivered or collected. Orders placed outside this period have the standard 15-day window.",
+        "The holiday extension applies to all products covered by this policy. Written approval, product condition requirements, return costs and refund terms remain the same. Record visible freight damage before signing for delivery and report damage promptly; the extension does not change carrier claim deadlines.",
       ] },
       { h: "Condition of returned goods", p: [
         "Send items back in the condition you received them, together with the original lot contents and any labels, manifests, accessories, packaging and paperwork that came with them.",
@@ -44,7 +48,7 @@ export const LEGAL: Article[] = [
         "Once payment is received or freight is scheduled, the order is final unless we agree to a cancellation in writing.",
       ] },
       { h: "Problems with an order", p: [
-        "Contact us within 15 days of pickup or delivery if you'd like to return an order, you received the wrong order, something you paid for is unavailable, or the order doesn't match its written listing in a material way.",
+        "Contact us within 15 days of pickup or delivery (60 days for orders placed November 1 through December 31 each year) if you'd like to return an order, you received the wrong order, something you paid for is unavailable, or the order doesn't match its written listing in a material way.",
         "Include your order number, your name and phone number, photos or videos of the goods, and any freight paperwork. We may decline claims that arrive without these details.",
       ] },
       { h: "Return freight and delivery damage", p: [

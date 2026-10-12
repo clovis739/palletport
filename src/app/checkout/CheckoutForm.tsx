@@ -248,7 +248,7 @@ export function CheckoutForm(props: {
         </div>
         <div className="rounded-2xl bg-sand/60 p-4 text-xs text-ink/75">
           <p className="font-semibold text-ink">{t("Buyer protection")}</p>
-          <p className="mt-1">{t("If the order doesn't match its written listing in a material way, contact us within 15 days of pickup or delivery with photos. See our Return & Refund Policy.")}</p>
+          <p className="mt-1">{t("If the order doesn't match its written listing in a material way, contact us within 15 days of pickup or delivery (60 days for orders placed November 1 through December 31 each year) with photos. See our Return & Refund Policy.")}</p>
         </div>
       </aside>
     </form>

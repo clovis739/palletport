@@ -1,4 +1,5 @@
 import type { Lot } from '@prisma/client';
+import { FLAT_SHIPPING_CENTS } from './shipping-policy';
 import { CONDITIONS, LOT_SIZES } from './format';
 import { isLotPhotoUrl } from './mediaUrls';
 import sourcePhotos from '../content/source-photos.json';
@@ -54,6 +55,7 @@ export function buildMerchantFeed(lots: MerchantLot[], siteUrl: string, storeNam
     items.push([
       '<item>', ...fields.filter(([,value]) => value).map(([key,value]) => `<${key}>${xml(value!)}</${key}>`),
       ...(structured ? [`<g:structured_description><g:digital_source_type>trained_algorithmic_media</g:digital_source_type><g:content>${xml(description)}</g:content></g:structured_description>`] : []),
+      `<g:shipping><g:country>US</g:country><g:service>Standard delivery</g:service><g:price>${(FLAT_SHIPPING_CENTS / 100).toFixed(2)} USD</g:price></g:shipping>`,
       ...photos.slice(1,11).map(p => `<g:additional_image_link>${xml(p)}</g:additional_image_link>`), '</item>',
     ].join(''));
   }

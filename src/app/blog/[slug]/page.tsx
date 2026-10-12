@@ -8,7 +8,7 @@ import { ShareBar } from "@/components/blog/ShareBar";
 import { authorOf, categorySlug, formatDate, getPost, imageRefUrl, neighbours, postCover, postFaq, postReadMins, postToc, relatedPosts } from "@/lib/blog";
 import { canPreview, PREVIEW_ROBOTS } from "@/lib/preview";
 import { NextIcon, PrevIcon } from "@/components/Icons";
-import { ChevronDown } from "lucide-react";
+import { BookOpen, ChevronDown } from "lucide-react";
 import { JsonLd, absoluteUrl, articleJsonLd, breadcrumbJsonLd, faqJsonLd, pageMetadata } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
@@ -46,6 +46,7 @@ export default async function BlogPost({ params, searchParams }: { params: Param
   const cover = postCover(post);
   const coverUrl = imageRefUrl(cover)?.url;
   const readMins = postReadMins(post);
+  const initials = author.name.split(/\s+/).filter(Boolean).slice(0, 2).map(word => word[0]).join("");
 
   const crumbs = [
     { name: "Home", path: "/" },
@@ -64,52 +65,43 @@ export default async function BlogPost({ params, searchParams }: { params: Param
           ...(faqLd ? [faqLd] : []),
         ]}
       />
-      <header className="bg-sand/50">
-        <div className="container-pp max-w-4xl py-8 sm:py-10">
-          <nav className="mb-4 text-xs text-muted">
-            <Link href="/" className="hover:underline">Home</Link> / <Link href="/blog" className="hover:underline">Blog</Link>
-            {post.category && <> /{" "}<Link href={`/blog/category/${categorySlug(post.category)}`} className="hover:underline">{post.category}</Link></>}
+      <header className="bg-sand/70">
+        <div className="container-pp py-6 sm:py-10 lg:py-14">
+          <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap items-center gap-2 text-sm text-muted">
+            <Link href="/" className="hover:text-ink hover:underline">Home</Link><span aria-hidden>/</span>
+            <Link href="/blog" className="hover:text-ink hover:underline">Blog</Link>
+            {post.category && <><span aria-hidden>/</span><Link href={`/blog/category/${categorySlug(post.category)}`} className="hover:text-ink hover:underline">{post.category}</Link></>}
           </nav>
-          <div className="mb-3 flex flex-wrap gap-2">
-            {post.category && <Link href={`/blog/category/${categorySlug(post.category)}`} className="rounded-full bg-ink px-3 py-1 text-xs font-bold uppercase tracking-wide text-white hover:bg-ink-2">{post.category}</Link>}
-            {post.tags?.map((t) => (
-              <Link key={t} href={`/blog?tag=${encodeURIComponent(t)}`} className="rounded-full bg-white px-3 py-1 text-xs font-semibold">{t}</Link>
-            ))}
-          </div>
-          <h1 className="break-words font-display text-3xl font-bold leading-tight sm:text-5xl">{post.title}</h1>
-          <p className="mt-4 text-base text-ink/70 sm:text-lg">{post.excerpt}</p>
-          <div className="mt-6 flex flex-wrap items-center gap-3 text-sm">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ink font-display text-xs font-bold text-white">PP</span>
-            <span>
-              <span className="block font-semibold">{author.name}</span>
-              <span className="text-xs text-muted">
-                {formatDate(post.date, "long")}
-                {post.updated && post.updated !== post.date && <> · Updated <time dateTime={post.updated}>{formatDate(post.updated, "long")}</time></>}
-                {" "}· {readMins} min read
-              </span>
-            </span>
+          <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
+            <div className="min-w-0">
+              {post.category && <Link href={`/blog/category/${categorySlug(post.category)}`} className="mb-4 inline-flex min-h-9 items-center rounded-full bg-white px-4 text-xs font-semibold text-signal-dark">{post.category}</Link>}
+              <h1 className="text-balance break-words font-display text-3xl font-bold leading-[1.12] tracking-tight sm:text-4xl xl:text-5xl">{post.title}</h1>
+              <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted sm:text-lg">{post.excerpt}</p>
+              <div className="mt-7 flex items-center gap-3">
+                <span aria-hidden className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-ink font-display text-sm font-bold text-white">{initials}</span>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold">{author.name}</p>
+                  <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
+                    {post.date && <time dateTime={post.date}>{formatDate(post.date, "long")}</time>}
+                    <span className="inline-flex items-center gap-1.5"><BookOpen aria-hidden className="h-3.5 w-3.5" />{readMins} min read</span>
+                    {post.updated && post.updated !== post.date && <span>Updated <time dateTime={post.updated}>{formatDate(post.updated, "long")}</time></span>}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="min-w-0 overflow-hidden rounded-2xl bg-sand sm:rounded-3xl">
+              <SiteImage src={cover} alt={post.title} width={960} ratio={4 / 3} sizes="(max-width: 1023px) calc(100vw - 48px), (max-width: 1280px) 46vw, 560px" priority className="aspect-[4/3] w-full object-cover" />
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="container-pp grid grid-cols-1 gap-10 py-8 sm:py-10 lg:grid-cols-[minmax(0,1fr)_240px] xl:grid-cols-[200px_minmax(0,1fr)_220px]">
-        {/* TOC (desktop) */}
-        <aside className="hidden xl:block">
-          {toc.length > 0 && (
-            <nav className="sticky top-[148px] text-sm" aria-label="On this page">
-              <p className="label">On this page</p>
-              <ol className="space-y-1.5 pl-3">
-                {toc.map((t) => <li key={t.id}><a href={`#${t.id}`} className="block text-ink/70 hover:text-signal-dark">{t.h}</a></li>)}
-              </ol>
-            </nav>
-          )}
-        </aside>
-
-        <article className="min-w-0 max-w-2xl">
+      <div className="container-pp grid grid-cols-1 gap-10 py-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-16 xl:gap-24">
+        <article className="min-w-0 w-full max-w-[720px] lg:justify-self-center">
           {/* TOC (phones, tablets and small laptops) */}
           {toc.length > 0 && (
-            <details className="group mb-6 rounded-2xl bg-white xl:hidden">
-              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2 text-sm font-semibold [&::-webkit-details-marker]:hidden">
+            <details className="group mb-6 rounded-2xl bg-sand lg:hidden">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-semibold [&::-webkit-details-marker]:hidden">
                 On this page
                 <ChevronDown aria-hidden className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" />
               </summary>
@@ -120,8 +112,8 @@ export default async function BlogPost({ params, searchParams }: { params: Param
               </nav>
             </details>
           )}
-          <SiteImage src={cover} width={1000} ratio={16 / 9} sizes="(max-width: 1024px) 100vw, 1000px" priority className="mb-8 aspect-[16/9] w-full rounded-2xl" />
-          <Blocks blocks={post.blocks} />
+
+          <Blocks blocks={post.blocks} className="sm:text-[17px] leading-[1.85] [&_h2]:pt-6 [&_h2]:leading-snug [&_h3]:pt-3 [&_li]:pl-1 [&_figure]:py-3" />
 
           {/* CTA */}
           <Link href="/lots" className="group mt-12 flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-ink p-5 text-white sm:p-6">
@@ -134,7 +126,7 @@ export default async function BlogPost({ params, searchParams }: { params: Param
 
           {/* Author */}
           <div className="card mt-8 flex gap-4 p-5">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-ink font-display text-sm font-bold text-white">PP</span>
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-ink font-display text-sm font-bold text-white">{initials}</span>
             <div className="min-w-0">
               <p className="font-semibold">{author.name} <span className="font-normal text-muted">· {author.role}</span></p>
               <p className="mt-1 text-sm text-ink/75">{author.bio}</p>
@@ -158,8 +150,16 @@ export default async function BlogPost({ params, searchParams }: { params: Param
           </nav>
         </article>
 
-        <aside className="min-w-0 space-y-6 lg:sticky lg:top-[148px] lg:h-fit">
+        <aside className="min-w-0 space-y-6 lg:sticky lg:top-[160px] lg:h-fit">
+          {toc.length > 0 && <nav className="hidden rounded-2xl bg-sand p-5 lg:block" aria-label="On this page">
+            <p className="mb-3 text-sm font-semibold">On this page</p>
+            <ol className="max-h-[45vh] space-y-1 overflow-y-auto text-sm" data-lenis-prevent>
+              {toc.map((item, index) => <li key={item.id}><a href={`#${item.id}`} className="flex min-h-10 items-start gap-3 rounded-lg px-2 py-2 leading-relaxed text-muted hover:bg-white hover:text-ink"><span aria-hidden className="mt-0.5 shrink-0 text-xs text-signal-dark">{String(index + 1).padStart(2, "0")}</span>{item.h}</a></li>)}
+            </ol>
+          </nav>}
           <ShareBar title={post.title} />
+          {!!post.tags?.length && <div><p className="mb-3 text-sm font-semibold">Topics</p><div className="flex flex-wrap gap-2">{post.tags.map(tag => <Link key={tag} href={`/blog?tag=${encodeURIComponent(tag)}`} className="inline-flex min-h-9 items-center rounded-full bg-sand px-3 text-xs font-medium hover:bg-ink hover:text-white">{tag}</Link>)}</div></div>}
+
           <div className="rounded-2xl bg-sand p-5 text-sm">
             <p className="font-display font-bold">New to liquidation?</p>
             <p className="mt-1 text-ink/75">Our ordering guide covers checkout, payment options, freight and delivery.</p>
@@ -169,7 +169,7 @@ export default async function BlogPost({ params, searchParams }: { params: Param
       </div>
 
       {related.length > 0 && (
-        <section >
+        <section className="bg-sand/50">
           <div className="container-pp py-12">
             <div className="mb-6 flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
               <h2 className="font-display text-2xl font-bold">Keep reading</h2>

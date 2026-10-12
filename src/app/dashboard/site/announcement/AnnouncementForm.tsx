@@ -62,7 +62,7 @@ export function AnnouncementForm({ initial }: { initial: AnnouncementSettings })
             <Switch f={f} path="enabled" label="Show the announcement bar" description="On every storefront page, above the header." />
           </FormSection>
           <FormSection title="Message" description="Keep it short. The phone version is used on small screens.">
-            <Text f={f} path="text" label="Text" max={160} ideal={[20, 100]} placeholder="Fixed prices on every lot · Free freight on orders over $7,500" />
+            <Text f={f} path="text" label="Text" max={160} ideal={[20, 100]} placeholder="Fixed prices on every lot · $100 shipping per order" />
             <Text f={f} path="mobileText" label="Shorter text for phones" max={70} hint="Optional. Falls back to the text above." />
           </FormSection>
           <FormSection title="Link" description="Optional. Shown next to the text on tablets and desktops.">

@@ -211,7 +211,7 @@ export default async function ColumbusOhioPage() {
           <p className="mt-4 flex items-start gap-2 text-sm text-muted">
             <FileText aria-hidden className="mt-0.5 h-4 w-4 shrink-0" />
             <span>
-              {t("15-day returns with written approval, including when an order doesn't match its listing. See our")}{" "}
+              {t("15-day returns (60 days for orders placed November 1 through December 31 each year) with written approval, including when an order doesn't match its listing. See our")}{" "}
               <Link href={lh("/legal/returns-and-disputes")} className="font-semibold text-signal-dark hover:underline">{t("Return & Refund Policy")}</Link>.
             </span>
           </p>

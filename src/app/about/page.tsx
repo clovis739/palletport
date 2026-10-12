@@ -57,39 +57,40 @@ export default async function About() {
     { n: reviews ? (avgRating._avg.rating ?? 0).toFixed(1) : `${buyers.toLocaleString()}`, label: reviews ? t("average star rating from {n} customer reviews", { n: reviews }) : t("registered buyers"), href: lh("/search"), icon: Star },
   ];
 
+  const heroImage = about.heroPhotos[0] || about.heroBg;
   const audiences = guides.map((g) => ({ href: lh(`/guides/${g.slug}`), title: g.title, text: g.excerpt, hue: g.hue ?? 24, slug: g.slug }));
 
   return (
     <>
       <JsonLd data={webPageJsonLd("AboutPage", t("About {name}", { name: store.name }), "/about", store.bio)} />
       {/* Hero */}
-      <section className="relative overflow-hidden bg-ink text-white">
-        <HeroBackground refStr={about.heroBg} />
-        {/* Same treatment as the homepage hero: solid navy behind the text, fading so the warehouse shows on the right. */}
-        <div className="absolute inset-0 bg-linear-to-r from-ink via-ink/85 to-signal-dark/40" />
-        <div className="container-pp relative py-12 sm:py-16 md:py-24">
-          <div className="max-w-3xl">
-            {about.heroEyebrow && <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">{about.heroEyebrow}</p>}
-            <h1 className="mt-3 font-display text-3xl font-bold leading-[1.1] sm:text-5xl sm:leading-[1.05] lg:text-6xl">{about.heroTitle}</h1>
-            {about.heroIntro && <p className="mt-5 max-w-2xl text-base text-white/75 sm:text-lg">{fillTokens(about.heroIntro, { name: store.name, location: store.location })}</p>}
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href={lh("/register")} className="btn-primary px-6 py-3">{t("Get started")}</Link>
-              <Link href={lh("/how-it-works")} className="rounded-full px-6 py-3 text-sm font-semibold hover:bg-white/10">{t("How it works")}</Link>
+      <section className="bg-ink text-white">
+        <div className={`container-pp grid items-center gap-10 py-10 sm:py-14 ${heroImage ? "lg:grid-cols-[1fr_1fr]" : ""} lg:gap-14 lg:py-20`}>
+          <div className="min-w-0">
+            {about.heroEyebrow && <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">{about.heroEyebrow}</p>}
+            <h1 className="mt-4 text-balance font-display text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl xl:text-6xl">{about.heroTitle}</h1>
+            {about.heroIntro && <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-white/80 sm:text-lg">{fillTokens(about.heroIntro, { name: store.name, location: store.location })}</p>}
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link href={lh("/register")} className="btn-primary min-h-12 px-6">{t("Get started")} <Arrow /></Link>
+              <Link href={lh("/how-it-works")} className="inline-flex min-h-12 items-center rounded-full bg-white/10 px-6 text-sm font-semibold hover:bg-white/20">{t("How it works")}</Link>
             </div>
           </div>
+          {heroImage && <div className="relative aspect-[4/3] min-w-0 overflow-hidden rounded-2xl bg-ink-2 sm:rounded-3xl lg:aspect-[5/6]">
+            <HeroBackground refStr={heroImage} sizes="(max-width: 1023px) calc(100vw - 48px), (max-width: 1280px) 46vw, 560px" />
+          </div>}
         </div>
       </section>
 
       {/* Numbers — every card links to the matching listing */}
-      <section className="container-pp py-10 sm:py-14">
+      <section className="container-pp py-12 sm:py-16">
         <h2 className="mb-6 font-display text-2xl font-bold sm:text-3xl">{about.statsTitle}</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {stats.map((s) => (
-            <Link key={s.label} href={s.href} className="group card flex items-end justify-between p-5 sm:p-6 transition hover:-translate-y-0.5">
+            <Link key={s.label} href={s.href} className="group card flex min-w-0 items-end justify-between gap-4 p-5 sm:p-6 transition-colors hover:bg-ink hover:text-white">
               <div>
-                <s.icon aria-hidden className="mb-3 h-6 w-6 text-signal" />
-                <p className="font-display text-3xl sm:text-4xl font-bold">{s.n}</p>
-                <p className="mt-1 text-sm text-muted">{s.label}</p>
+                <s.icon aria-hidden className="mb-4 h-5 w-5 text-signal" />
+                <p className="font-display text-2xl sm:text-3xl font-bold tracking-tight">{s.n}</p>
+                <p className="mt-2 text-sm text-muted group-hover:text-white/80">{s.label}</p>
               </div>
               <span className="text-signal-dark"><Arrow /></span>
             </Link>
@@ -98,13 +99,13 @@ export default async function About() {
       </section>
 
       {/* Mission */}
-      <section >
-        <div className="container-pp grid gap-10 py-10 sm:py-16 md:grid-cols-2">
+      <section className="bg-sand/50">
+        <div className="container-pp grid gap-6 py-12 sm:gap-10 sm:py-20 md:grid-cols-[0.8fr_1.2fr]">
           <div>
             {about.mission.eyebrow && <p className="label">{about.mission.eyebrow}</p>}
             <h2 className="font-display text-2xl sm:text-3xl font-bold leading-tight">{about.mission.title}</h2>
           </div>
-          <div className="space-y-4 text-ink/80">
+          <div className="space-y-5 text-base leading-relaxed text-ink/80 sm:text-lg">
             {about.mission.paragraphs.map((para, i) => <p key={i}>{para}</p>)}
             {about.mission.linkLabel && about.mission.linkHref && (
               <SmartLink href={about.mission.linkHref} className="group inline-flex items-center gap-1 font-semibold text-signal-dark">{about.mission.linkLabel} <Arrow /></SmartLink>
@@ -114,12 +115,12 @@ export default async function About() {
       </section>
 
       {/* Sustainability */}
-      <section className={`container-pp grid items-center gap-10 py-10 sm:py-16 ${about.sustainability.photo ? "md:grid-cols-[1fr_1.2fr]" : ""}`}>
-        <SiteImage src={about.sustainability.photo} width={720} ratio={1.6} sizes="(max-width: 768px) 100vw, 45vw" className="aspect-[16/10] w-full rounded-2xl" />
+      <section className={`container-pp grid items-center gap-8 py-12 sm:gap-14 sm:py-20 ${about.sustainability.photo ? "md:grid-cols-[1fr_1.2fr]" : ""}`}>
+        {about.sustainability.photo && <SiteImage src={about.sustainability.photo} width={720} ratio={4 / 3} sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1280px) 40vw, 500px" className="aspect-[4/3] w-full rounded-2xl sm:rounded-3xl" />}
         <div>
           <p className="label inline-flex items-center gap-1.5"><Leaf aria-hidden className="h-4 w-4 text-moss" /> {about.sustainability.eyebrow}</p>
           <h2 className="font-display text-2xl sm:text-3xl font-bold leading-tight">{about.sustainability.title}</h2>
-          {about.sustainability.body && <p className="mt-4 text-ink/80">{about.sustainability.body}</p>}
+          {about.sustainability.body && <p className="mt-4 text-base leading-relaxed text-ink/80 sm:text-lg">{about.sustainability.body}</p>}
           {about.sustainability.linkLabel && about.sustainability.linkHref && (
             <SmartLink href={about.sustainability.linkHref} className="group mt-5 inline-flex items-center gap-1 font-semibold text-signal-dark">{about.sustainability.linkLabel} <Arrow /></SmartLink>
           )}
@@ -131,21 +132,21 @@ export default async function About() {
         <div className="container-pp py-10 sm:py-16">
           {about.transparent.eyebrow && <p className="text-xs font-semibold uppercase tracking-[0.2em] text-signal">{about.transparent.eyebrow}</p>}
           <h2 className="mt-2 max-w-2xl font-display text-2xl sm:text-3xl font-bold">{about.transparent.title}</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-4">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {about.transparent.cards.map((c, i) => {
               const Icon = TRANSPARENT_ICONS[i % TRANSPARENT_ICONS.length];
               const body = (
                 <>
-                  <Icon aria-hidden className="mb-3 h-6 w-6 text-signal" />
+                  <Icon aria-hidden className="mb-4 h-5 w-5 text-signal" />
                   <p className="font-display text-lg font-semibold">{c.title}</p>
-                  <p className="mt-1 text-sm text-white/65">{c.text}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-white/80">{c.text}</p>
                   {c.href && <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-signal">{t("Learn more")} <Arrow /></span>}
                 </>
               );
               return c.href ? (
-                <SmartLink key={i} href={c.href} className="group rounded-2xl bg-white/5 p-5 transition hover:bg-white/10">{body}</SmartLink>
+                <SmartLink key={i} href={c.href} className="group rounded-2xl bg-white/10 p-6 transition hover:bg-white/10">{body}</SmartLink>
               ) : (
-                <div key={i} className="rounded-2xl bg-white/5 p-5">{body}</div>
+                <div key={i} className="rounded-2xl bg-white/10 p-6">{body}</div>
               );
             })}
           </div>
@@ -160,10 +161,10 @@ export default async function About() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {audiences.map((a) => (
             <Link key={a.slug} href={a.href} className="group card overflow-hidden transition hover:-translate-y-0.5">
-              <Photo photo={photoFor(a.slug, GUIDE_PHOTOS)} width={480} ratio={2} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="aspect-[16/8] w-full" />
+              <Photo photo={photoFor(a.slug, GUIDE_PHOTOS)} width={480} ratio={4 / 3} sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) 46vw, 380px" className="aspect-[4/3] w-full" />
               <div className="p-5">
                 <p className="font-display text-lg font-bold group-hover:text-signal-dark">{a.title}</p>
-                <p className="mt-1 text-sm text-muted">{a.text}</p>
+                <p className="mt-1 line-clamp-3 text-sm leading-relaxed text-muted">{a.text}</p>
                 <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-signal-dark">{t("Read the guide")} <Arrow /></span>
               </div>
             </Link>
@@ -172,7 +173,7 @@ export default async function About() {
       </section>
 
       {/* Advantages */}
-      <section >
+      <section className="bg-sand/50">
         <div className="container-pp py-10 sm:py-16">
           {about.advantages.eyebrow && <p className="label">{about.advantages.eyebrow}</p>}
           <h2 className="mb-8 font-display text-2xl sm:text-3xl font-bold">{about.advantages.title}</h2>
@@ -196,7 +197,7 @@ export default async function About() {
       <SiteFaq page="about" />
 
       {/* Thank you */}
-      <section className="container-pp py-10 sm:py-16 text-center">
+      <section className="container-pp py-14 text-center sm:py-20">
         <h2 className="font-display text-2xl sm:text-3xl font-bold">{about.thanks.title}</h2>
         {about.thanks.body && <p className="mx-auto mt-3 max-w-2xl text-ink/75">{about.thanks.body}</p>}
         <div className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-3">

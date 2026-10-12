@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
 import { getStore } from "@/lib/store";
-import { CONDITIONS, FREE_FREIGHT_THRESHOLD_CENTS, LOT_SIZES, SHIPPING_PER_PALLET_CENTS, money } from "@/lib/format";
+import { CONDITIONS, LOT_SIZES, money } from "@/lib/format";
 import { COLLECTIONS } from "@/lib/collections";
 import { getHelpArticles, getLegalPages, getPublishedGuides, getPublishedPages, getPublishedPosts } from "@/lib/content";
 import { absoluteUrl } from "@/lib/seo";
@@ -51,11 +51,11 @@ export async function GET() {
     "- Every lot has one fixed price (no auctions or bidding). Add lots to the cart and check out; freight is added at checkout.",
     "- Every lot page shows its manifest (SKUs, quantities and retail values), condition grade, units, percent of retail and price per unit.",
     "- Payment: card, wire/ACH, or Net 30 for verified resellers. Card orders are confirmed immediately.",
-    `- Freight: most lots ship LTL, estimated at ${money(SHIPPING_PER_PALLET_CENTS)} per pallet and free on orders over ${money(FREE_FREIGHT_THRESHOLD_CENTS)}. Most pallets arrive in 3–7 business days.`,
+    "- Shipping: $100 per order for pallets, truckloads and case packs. No additional liftgate or residential delivery fees. Warehouse pickup is free by appointment. Transit estimates vary by destination.",
     store.pickup
       ? `- Warehouse pickup in ${store.location} is by appointment: choose pickup at checkout and we email you to book a time. There is no walk-in store.`
       : `- Warehouse pickup in ${store.location} is by appointment: book a weekday (Mon–Fri) 50-minute visit from any lot page, at least 45 hours ahead. Orders of $600+ pay a refundable 35% deposit to confirm; smaller orders pay in full. There is no walk-in store.`,
-    "- Returns: requests within 15 days of pickup or delivery, approved in writing before anything is sent back; buyer pays return freight unless the error is ours. See the Return & Refund Policy (/legal/returns-and-disputes).",
+    "- Returns: requests within 15 days of pickup or delivery (60 days for orders placed November 1 through December 31 each year), approved in writing before anything is sent back; buyer pays return freight unless the error is ours. See the Return & Refund Policy (/legal/returns-and-disputes).",
     "",
     "## Contact",
     "",

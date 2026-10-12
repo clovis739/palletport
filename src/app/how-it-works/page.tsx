@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONDITIONS, FREE_FREIGHT_THRESHOLD_CENTS, money } from "@/lib/format";
+import { CONDITIONS, money } from "@/lib/format";
 import { Photo } from "@/components/Photo";
 import { PHOTOS } from "@/content/photos";
 import { pageMetadata } from "@/lib/seo";
@@ -37,7 +37,7 @@ export default async function HowItWorks() {
               ["Browse and compare", "Filter by category, condition, lot size and price. Every lot shows its manifest, percent of retail and price per unit."],
               ["Ask before you buy", "Contact our warehouse team about photos, testing or bundle deals."],
               ["Check out", "Pay by card, wire/ACH, or Net 30. Add a promo code if you have one."],
-              ["Receive and review", t("Freight is {perPallet} per pallet and free over {free}. Track your PRO number and leave a review after delivery.", { perPallet: money(17500), free: money(FREE_FREIGHT_THRESHOLD_CENTS) })],
+              ["Receive and review", t("Shipping is $100 per order. Track your PRO number and leave a review after delivery.")],
             ].map(([h, d], i) => (
               <li key={h} className="flex gap-4">
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-signal font-display font-bold text-white">{i + 1}</span>

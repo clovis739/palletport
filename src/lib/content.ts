@@ -1,4 +1,6 @@
 import "server-only";
+import { currentReturnCopy } from "./return-policy";
+import { currentShippingCopy } from "./shipping-copy";
 import { cache } from "react";
 import { cachedPublic, revalidatePath } from "./public-cache";
 import { db } from "./db";
@@ -43,7 +45,8 @@ const publishedEntry = cachedPublic((type: ContentType, slug: string) => db.cont
 async function rebrandArticles(list: ContentArticle[], type?: ContentType): Promise<ContentArticle[]> {
   const { getBrand } = await import("./brand");
   const brand = await getBrand();
-  const out = brand === DEFAULT_BRAND ? list : rebrandDeep(list, brand);
+  const updated = currentReturnCopy(currentShippingCopy(list));
+  const out = brand === DEFAULT_BRAND ? updated : rebrandDeep(updated, brand);
   if (!type || type === "POST" || type === "LEGAL") return out;
   const { getI18n } = await import("@/i18n/server");
   const { t, locale } = await getI18n();

@@ -7,6 +7,7 @@ const product: Product = {sku:'PP-ABCDEF123456',slug:'lot-one',title:'Lot & Good
 const base = 'https://example.com';
 const feed = buildMerchantFeed([product],base);
 assert.equal(feed.listed,1);
+assert.ok(feed.body.includes("<g:shipping><g:country>US</g:country><g:service>Standard delivery</g:service><g:price>100.00 USD</g:price></g:shipping>"));
 assert.ok(feed.body.includes('<g:id>PP-ABCDEF123456</g:id>'));
 assert.ok(feed.body.includes('<g:price>123.45 USD</g:price>'));
 const sale = buildMerchantFeed([{...product,compareAtPriceCents:20000}],base).body;

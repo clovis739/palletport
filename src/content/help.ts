@@ -65,7 +65,7 @@ export const HELP: Article[] = [
     slug: "freight-and-delivery", category: "Orders & freight", title: "How freight and delivery work",
     excerpt: "Pallets ship LTL freight. Here's what to expect on delivery day.",
     body: [
-      { p: ["Most lots ship by less-than-truckload (LTL) freight. Freight is estimated at $175 per pallet and is free on orders over $7,500. When we ship, you'll see a PRO (tracking) number on your order page."] },
+      { p: ["Shipping costs $100 per order for pallets, truckloads and case packs, regardless of order value, quantity or destination within our delivery area. Liftgate and residential delivery are included where applicable. Warehouse pickup is free by appointment. When we ship, you'll see tracking on your order page."] },
       { h: "Dock or liftgate?", p: ["If your location has a loading dock, tick the dock box at checkout. Otherwise the carrier will bring a liftgate truck and lower pallets to the ground. Make sure you have a pallet jack or help to move them."] },
       { h: "Warehouse pickup", p: ["Pickup from our warehouse is by appointment. Book a warehouse visit from any lot page: pick a weekday (Monday to Friday) and a 50-minute time at least 45 hours ahead. Orders of $600 or more pay a refundable 35% deposit to confirm; smaller orders pay in full. There's no walk-in store. Please don't travel until your visit is confirmed."] },
     ],
@@ -85,7 +85,7 @@ export const HELP: Article[] = [
   {
     slug: "manifest-discrepancies", category: "Orders & freight", title: "What if the manifest doesn't match?",
     excerpt: "Small variances are normal; large ones are covered.",
-    body: [{ p: ["Manifests are prepared by our warehouse team and small count variances happen. If the order doesn't match its written listing in a material way, contact us within 15 days of pickup or delivery with your order number and photos. See our Return & Refund Policy."] }],
+    body: [{ p: ["Manifests are prepared by our warehouse team and small count variances happen. If the order doesn't match its written listing in a material way, contact us within 15 days of pickup or delivery (60 days for orders placed November 1 through December 31 each year) with your order number and photos. See our Return & Refund Policy."] }],
   },
   {
     slug: "reset-password", category: "Account & security", title: "Resetting your password",

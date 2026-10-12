@@ -145,11 +145,11 @@ export const POSTS: Article[] = [
       ] },
       { p: ["Pair the manifest with the freight estimate on the same page. Enter your ZIP and you'll see an estimate that includes dock or liftgate delivery. Our [freight guide](/blog/ltl-freight-101) explains what goes into it."] },
       { h: "If a lot arrives below its manifest", p: [
-        "Lots are sold as-is according to their condition grade, so an individual defective unit in a returns or salvage lot isn't grounds for a refund. Under our [Return & Refund Policy](/legal/returns-and-disputes) you can request a return within 15 days of pickup or delivery, including when an order doesn't match its written listing in a material way.",
-        "To raise a problem, contact us within 15 days of pickup or delivery with your order number, photos or videos and any freight paperwork. Returns need our written approval before anything is sent back. Count and photograph the contents as you unpack, before anything is sold or mixed with other stock. That record is what makes a discrepancy easy to prove. See also [what to do if the manifest doesn't match](/help/manifest-discrepancies).",
+        "Lots are sold as-is according to their condition grade, so an individual defective unit in a returns or salvage lot isn't grounds for a refund. Under our [Return & Refund Policy](/legal/returns-and-disputes) you can request a return within 15 days of pickup or delivery (60 days for orders placed November 1 through December 31 each year), including when an order doesn't match its written listing in a material way.",
+        "To raise a problem, contact us within 15 days of pickup or delivery (60 days for orders placed November 1 through December 31 each year) with your order number, photos or videos and any freight paperwork. Returns need our written approval before anything is sent back. Count and photograph the contents as you unpack, before anything is sold or mixed with other stock. That record is what makes a discrepancy easy to prove. See also [what to do if the manifest doesn't match](/help/manifest-discrepancies).",
       ] },
       { h: "FAQ", faq: [
-        { q: "How accurate are liquidation manifests?", a: "Accurate enough to price a lot, but small count variances are normal on any manifest. On PalletPort, if an order doesn't match its written listing in a material way, contact us within 15 days of pickup or delivery under our Return & Refund Policy." },
+        { q: "How accurate are liquidation manifests?", a: "Accurate enough to price a lot, but small count variances are normal on any manifest. On PalletPort, if an order doesn't match its written listing in a material way, contact us within 15 days of pickup or delivery (60 days for orders placed November 1 through December 31 each year) under our Return & Refund Policy." },
         { q: "Is manifest retail value the same as what I can sell the items for?", a: "No. Retail value is the original list price. Your resale value depends on condition, current sold prices on your channel and how many units you actually sell. Use sold listings to estimate it." },
         { q: "Are manifested pallets worth the higher price?", a: "If you sell item by item or need to research prices before buying, usually yes, because you can value the lot before you commit. If you sell by the bin or by the bag, variety may matter more than knowing each item." },
         { q: "How many lines should I research before buying?", a: "Start with the lines that make up most of the extended retail, often the top five to ten. Estimate the remaining small lines as a group, using a conservative price per unit." },
@@ -174,7 +174,7 @@ export const POSTS: Article[] = [
     slug: "ltl-freight-101", category: "Buying guides", date: "2026-09-08", updated: "2026-09-24", readMins: 8, hue: 10, author: "freight",
     tags: ["Freight", "Receiving"],
     title: "Liquidation pallet shipping: LTL freight costs explained",
-    excerpt: "Parcel vs. LTL vs. truckload, what drives the cost of shipping a pallet, liftgate and residential fees, and how to receive freight without losing a claim.",
+    excerpt: "Parcel vs. LTL vs. truckload, our $100 shipping fee per order, and how to receive freight without losing a claim.",
     body: [
       { p: [
         "Most liquidation pallets ship by LTL (less-than-truckload) freight, where your pallets share a trailer with other shippers' freight. The cost depends on weight, how many pallets you order and how much space they take, the distance, the freight class, and extra services such as a liftgate or residential delivery. Case packs usually go by parcel. Full truckloads get their own trailer.",
@@ -224,14 +224,14 @@ export const POSTS: Article[] = [
         "Transit damage is claimed with the carrier, which is why the notes on the delivery receipt matter. Contact us within 15 days of delivery with your order number, photos and the freight paperwork, and we'll tell you the next steps. See our [Return & Refund Policy](/legal/returns-and-disputes). Report problems quickly; the sooner we hear, the easier it is to take up with the carrier.",
       ] },
       { h: "How PalletPort shows freight before you buy", p: [
-        "Every lot page has an Estimate shipping box. Enter your delivery ZIP, tick Loading dock if you have one (otherwise the estimate includes liftgate delivery), and tick Residential if it applies. The estimate shows the shipping mode, the freight amount, any liftgate or residential fees, and an approximate transit time.",
+        "Every lot page has an Estimate shipping box. Enter your delivery ZIP, tick Loading dock if you have one (otherwise the estimate includes liftgate delivery), and tick Residential if it applies. The estimate shows the shipping mode, our flat $100 shipping fee per order, and an approximate transit time. Liftgate and residential delivery are included where applicable.",
         "At checkout, freight is calculated again for your whole cart using the same ZIP and delivery options. Everything we sell ships from our own warehouse, so all the lots in one order travel together as one shipment. Final freight is confirmed at checkout.",
         "Want to collect instead? Use “Warehouse pickup · book a visit” on any lot page to book a weekday visit at our Columbus-area warehouse. Bring a truck or trailer sized for your pallets.",
       ] },
       { h: "How to lower freight cost per unit", list: [
-        "Put more on each shipment. Much of an LTL bill is fixed per shipment: pickup, delivery and any liftgate or residential fees. Two or three pallets in one order usually cost less per pallet than the same pallets shipped separately.",
+        "Combine purchases into one order. Our $100 shipping fee applies once per order, regardless of how many pallets or case packs you buy.",
         "Combine lots in one order. Because everything ships from one warehouse, lots in the same cart ship together as one shipment. Add them before you check out rather than placing separate orders.",
-        "Use a dock or a commercial address. Dock delivery avoids the liftgate fee, and a business address avoids the residential surcharge.",
+        "Tell us whether you have a loading dock and whether the address is residential so we can arrange the right delivery equipment. These options do not add to our $100 shipping fee.",
         "Favour dense, high-unit lots. Freight follows weight and space, so a lot with more sellable units per pallet spreads the cost further. Check the units and weight in the lot's key facts.",
         "Move up to a truckload when volume allows. Once you're buying many pallets at a time, a full truckload can cost less per pallet than several LTL shipments.",
         "Be ready on delivery day. Missed appointments and redeliveries add fees. Answer the carrier's call and keep your unloading area clear.",
@@ -272,7 +272,7 @@ export const POSTS: Article[] = [
         "Read the full manifest. Sort by extended MSRP and look at the top five lines: they carry most of the value.",
         "Match the condition grade to your channel. Customer returns suit bin stores and refurbishers; new overstock suits online marketplaces.",
         "Check customer reviews and whether the lot has photos or testing notes.",
-        "Price in freight. At $175 per pallet, a $400 lot really costs $575.",
+        "Price in shipping. With $100 shipping per order, a $400 lot costs $500 before any applicable tax.",
       ] },
       { h: "When it arrives", list: [
         "Inspect before you sign the delivery receipt.",
@@ -355,7 +355,7 @@ export const POSTS: Article[] = [
       { h: "FAQ", faq: [
         { q: "What's the difference between shelf pulls and customer returns?", a: "Shelf pulls were removed from store shelves without being sold, so they're unused but may have stickers or box wear. Customer returns were bought and returned by shoppers, and they're untested, so you'll find a mix of working, cosmetic and defective units." },
         { q: "Are customer return pallets worth it?", a: "They can be if your channel handles mixed quality, such as a bin store, flea-market table or repair shop, and you've priced in testing time and a share of units you can't sell. They're harder to make work if you sell online item by item without testing capacity." },
-        { q: "Can I get a refund for defective items in a customer return pallet?", a: "Individual defective units aren't grounds for a refund, because the grade tells you to expect them. If the order doesn't match its written listing in a material way, you can request a return within 15 days of pickup or delivery under our Return & Refund Policy." },
+        { q: "Can I get a refund for defective items in a customer return pallet?", a: "Individual defective units aren't grounds for a refund, because the grade tells you to expect them. If the order doesn't match its written listing in a material way, you can request a return within 15 days of pickup or delivery (60 days for orders placed November 1 through December 31 each year) under our Return & Refund Policy." },
         { q: "Can I sell shelf pulls as new?", a: "Shelf pulls are unused, but packaging may show stickers or wear. How you can describe them depends on the item and on each marketplace's condition rules, so check those rules before listing." },
         { q: "Which grade should I start with?", a: "Start with the grade your channel can sell with the least extra work, and a lot size you can afford to learn from. For many first-time online sellers that's shelf pulls; for bin stores it's customer returns or mixed lots." },
       ] },

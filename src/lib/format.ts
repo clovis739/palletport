@@ -24,15 +24,6 @@ export function conditionLabel(c: string) {
   return CONDITIONS[c]?.label ?? c;
 }
 
-export const SHIPPING_PER_PALLET_CENTS = 17500;
-export const FREE_FREIGHT_THRESHOLD_CENTS = 750000;
-
-export function shippingFor(subtotalCents: number, pallets: number) {
-  if (pallets === 0) return 0;
-  if (subtotalCents >= FREE_FREIGHT_THRESHOLD_CENTS) return 0;
-  return pallets * SHIPPING_PER_PALLET_CENTS;
-}
-
 export function slugify(s: string) {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }

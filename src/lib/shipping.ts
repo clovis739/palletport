@@ -2,6 +2,7 @@
 // Replace with a live LTL rate API (e.g. via a freight broker) before launch — see README.
 
 import { stateOf } from './format';
+import { FLAT_SHIPPING_CENTS } from './shipping-policy';
 export type DeliveryMethod = "FREIGHT" | "PICKUP";
 
 export type FreightOptions = {
@@ -37,10 +38,6 @@ export type Shipment = {
   notes: string[];
 };
 
-export const FREE_FREIGHT_CENTS = 750000;
-const LIFTGATE_CENTS = 7500;
-const RESIDENTIAL_CENTS = 9500;
-
 // First ZIP digit by state — a rough stand-in for distance zones.
 const STATE_ZIP_DIGIT: Record<string, number> = {
   CT: 0, MA: 0, ME: 0, NH: 0, NJ: 0, RI: 0, VT: 0, PR: 0,
@@ -74,12 +71,11 @@ function transit(zone: number, mode: Shipment["mode"]) {
 }
 
 /** Groups cart lines by seller (each seller ships separately) and prices each shipment. */
-export function estimateShipments(lines: ShipLine[], opts: FreightOptions, subtotalCents: number): Shipment[] {
+export function estimateShipments(lines: ShipLine[], opts: FreightOptions, _subtotalCents: number): Shipment[] {
   const bySeller = new Map<string, ShipLine[]>();
   for (const l of lines) bySeller.set(l.sellerId, [...(bySeller.get(l.sellerId) ?? []), l]);
-  const freeLinehaul = subtotalCents >= FREE_FREIGHT_CENTS;
 
-  return [...bySeller.values()].map((ls) => {
+  return [...bySeller.values()].map((ls, shipmentIndex) => {
     const first = ls[0];
     const zone = zoneBetween(first.shipsFrom, opts.toZip);
     const weight = ls.reduce((a, l) => a + l.weightLbs * l.quantity, 0);
@@ -92,37 +88,13 @@ export function estimateShipments(lines: ShipLine[], opts: FreightOptions, subto
       return { ...base, mode: "PICKUP" as const, linehaulCents: 0, accessorialCents: 0, totalCents: 0, transitDays: transit(zone, "PICKUP"), notes: [`Pickup by appointment at our warehouse in ${first.shipsFrom}. We'll email you to book a time; bring a truck or trailer sized for ${pallets || cases} ${pallets ? "pallet" : "case"}${(pallets || cases) === 1 ? "" : "s"}.`] };
     }
 
-    let mode: Shipment["mode"];
-    let linehaul = 0;
-    const notes: string[] = [];
-    if (trucks > 0) {
-      mode = "TRUCKLOAD";
-      linehaul += trucks * (140000 + zone * 18000);
-      const loosePallets = pallets - ls.filter((l) => l.lotSize === "TRUCKLOAD").reduce((a, l) => a + l.palletCount * l.quantity, 0);
-      linehaul += Math.max(0, loosePallets) * (12500 + zone * 2000);
-      notes.push("Full truckload — requires a loading dock and forklift.");
-    } else if (pallets > 0) {
-      mode = "LTL";
-      linehaul += pallets * (12500 + zone * 2000);
-    } else {
-      mode = "PARCEL";
-      linehaul += cases * 1800 + Math.round(weight * 45) + zone * 150 * cases;
-    }
-    if (mode !== "PARCEL" && cases > 0) linehaul += cases * 900; // cases ride along on the pallet shipment
+    const mode: Shipment["mode"] = trucks > 0 ? "TRUCKLOAD" : pallets > 0 ? "LTL" : "PARCEL";
+    // Assign the single order fee to the first shipment so totals never multiply it.
+    const linehaul = shipmentIndex === 0 ? FLAT_SHIPPING_CENTS : 0;
+    const accessorial = 0;
+    const notes = ["Flat shipping: $100 per order, including liftgate and residential delivery where applicable."];
+    if (mode === "TRUCKLOAD") notes.push("Full truckload - requires a loading dock and forklift.");
 
-    let accessorial = 0;
-    if (mode === "LTL" && opts.liftgate) {
-      accessorial += LIFTGATE_CENTS;
-      notes.push("Liftgate lowers pallets to the ground — you'll need a pallet jack.");
-    }
-    if (mode !== "PARCEL" && opts.residential) {
-      accessorial += RESIDENTIAL_CENTS;
-      notes.push("Residential delivery surcharge applies.");
-    }
-    if (freeLinehaul && mode !== "PARCEL") {
-      notes.push("Free freight applied (order over $7,500).");
-      linehaul = 0;
-    }
     return { ...base, mode, linehaulCents: linehaul, accessorialCents: accessorial, totalCents: linehaul + accessorial, transitDays: transit(zone, mode), notes };
   });
 }

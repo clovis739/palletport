@@ -18,9 +18,9 @@ function unsplashSrc(url: string, w: number) {
  * Full-bleed background photo for dark hero sections (home, about). Decorative (alt=""), loaded with high priority.
  * Accepts a stock key, a media-library URL or an https URL (e.g. images.unsplash.com).
  */
-export function HeroBackground({ refStr }: { refStr: string }) {
+export function HeroBackground({ refStr, sizes = "100vw" }: { refStr: string; sizes?: string }) {
   const img = resolveImageRef(refStr);
-  if (img.kind === "stock") return <Photo photo={img.photo} width={1600} ratio={16 / 9} sizes="100vw" priority alt="" className="absolute inset-0 h-full w-full" />;
+  if (img.kind === "stock") return <Photo photo={img.photo} width={1600} ratio={16 / 9} sizes={sizes} priority alt="" className="absolute inset-0 h-full w-full" />;
   if (img.kind !== "url") return null;
   if (UNSPLASH.test(img.src)) {
     const widths = [640, 1080, 1600, 2200];
@@ -29,7 +29,7 @@ export function HeroBackground({ refStr }: { refStr: string }) {
       <img
         src={unsplashSrc(img.src, 1600)}
         srcSet={widths.map((w) => `${unsplashSrc(img.src, w)} ${w}w`).join(", ")}
-        sizes="100vw"
+        sizes={sizes}
         alt=""
         width={1600}
         height={900}
@@ -40,5 +40,5 @@ export function HeroBackground({ refStr }: { refStr: string }) {
     );
   }
   // eslint-disable-next-line @next/next/no-img-element -- media library / external image
-  return <ProductPhoto src={img.src} sizes="100vw" alt="" width={1600} height={900} loading="eager" fetchPriority="high" className="absolute inset-0 h-full w-full bg-ink object-cover" />;
+  return <ProductPhoto src={img.src} sizes={sizes} alt="" width={1600} height={900} loading="eager" fetchPriority="high" className="absolute inset-0 h-full w-full bg-ink object-cover" />;
 }

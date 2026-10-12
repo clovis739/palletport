@@ -39,6 +39,7 @@ const STATIC: { path: string; listing?: Prisma.LotWhereInput }[] = [
   { path: "/new", listing: {} },
   { path: "/trending" },
   { path: "/how-to-buy" },
+  { path: "/shipping" },
   { path: "/how-it-works" },
   { path: "/help" },
   { path: "/guides" },

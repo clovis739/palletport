@@ -86,7 +86,7 @@ export default async function HowToBuy() {
               ))}
             </div>
             <p className="mt-4 text-sm text-ink/80">
-              {t("Pallet freight is estimated at {perPallet} per pallet and free on orders over {free}. Truckloads are quoted per trailer.", { perPallet: money(17500), free: money(750000) })}{" "}
+              {t("Shipping is $100 per order for pallets, truckloads and case packs. No additional liftgate or residential delivery fees.")}{" "}
               {t("Warehouse pickup is available by appointment only:")}{" "}
               <Link href={lh("/contact?topic=pickup")} className="font-semibold text-signal-dark hover:underline">{t("request it through Contact")}</Link> {t("before checkout.")}
             </p>

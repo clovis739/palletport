@@ -19,7 +19,7 @@ export default async function RegisterPage({ searchParams }: { searchParams: Pro
           {[
             "Full manifests on every lot — no mystery boxes",
             "Pay by card, wire, or Net 30 once approved",
-            "Free freight on orders over $7,500",
+            "$100 shipping per order",
             "Every pallet sorted and manifested in our own warehouse",
           ].map((x) => (
             <li key={x} className="flex gap-2"><CircleCheck aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-signal" />{t(x)}</li>

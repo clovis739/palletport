@@ -54,7 +54,7 @@ export const LISTING_COPY: Record<ListingKey, ListingCopy> = {
       },
       {
         q: "What if the pallet doesn't match the manifest?",
-        a: "If the order doesn't match its written listing in a material way, contact us within 15 days of pickup or delivery with photos. See our Return & Refund Policy. Note any visible damage on the delivery receipt before you sign.",
+        a: "If the order doesn't match its written listing in a material way, contact us within 15 days of pickup or delivery (60 days for orders placed November 1 through December 31 each year) with photos. See our Return & Refund Policy. Note any visible damage on the delivery receipt before you sign.",
       },
       PICKUP_FAQ,
     ],

@@ -332,7 +332,7 @@ export default async function LotPage({ params }: { params: Params }) {
                 </p>
               </div>
             </div>
-            <p className="text-xs text-muted">{t("Freight is free on orders over $7,500 (liftgate and residential fees still apply). Inspect pallets and note any damage on the delivery receipt before signing.")}</p>
+            <p className="text-xs text-muted">{t("Shipping is $100 per order, including liftgate and residential delivery where applicable. Inspect pallets and note any damage on the delivery receipt before signing.")}</p>
           </section>
 
           <section id="terms" className="scroll-mt-24 space-y-3">
@@ -342,7 +342,7 @@ export default async function LotPage({ params }: { params: Params }) {
                 ["Payment", "Card, wire/ACH, or Net 30 for verified resellers."],
                 ["Checkout", "Pay the listed price plus freight. We confirm and prepare your order within one business day."],
                 ["Sales tax", "Charged where applicable unless a valid resale certificate is on file."],
-                ["Returns", "15-day returns with written approval. Sold per the condition grade; see the Return & Refund Policy."],
+                ["Returns", "15-day returns (60 days for orders placed November 1 through December 31 each year) with written approval. Sold per the condition grade; see the Return & Refund Policy."],
               ].map(([h, d]) => (
                 <li key={h} className="rounded-xl bg-white p-4">
                   <p className="font-semibold">{t(h)}</p>

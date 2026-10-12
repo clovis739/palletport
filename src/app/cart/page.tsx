@@ -5,7 +5,7 @@ import { updateCartItem } from "@/app/actions/cart";
 import { applyPromo, removePromo } from "@/app/actions/promo";
 import { LotThumb } from "@/components/lot/LotThumb";
 import { ConditionBadge } from "@/components/ConditionBadge";
-import { FREE_FREIGHT_THRESHOLD_CENTS, money } from "@/lib/format";
+import { money } from "@/lib/format";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { privateMetadataT } from "@/lib/seo";
 import { getI18n } from "@/i18n/server";
@@ -17,7 +17,6 @@ export default async function CartPage() {
   const user = await requireUser("/cart");
   const { t, lh } = await getI18n();
   const cart = await getCart(user.id);
-  const toFree = FREE_FREIGHT_THRESHOLD_CENTS - cart.subtotalCents;
 
   if (cart.items.length === 0) {
     return (
@@ -96,9 +95,7 @@ export default async function CartPage() {
             <div className="flex justify-between gap-3"><dt>{cart.freightOpts.toZip ? t("Est. freight to {zip}", { zip: cart.freightOpts.toZip }) : t("Est. freight")}</dt><dd className="font-semibold">{cart.shippingCents ? money(cart.shippingCents) : t("Free")}</dd></div>
             <div className="flex justify-between pt-2 text-base"><dt className="font-semibold">{t("Total")}</dt><dd className="font-display font-bold">{money(cart.totalCents)}</dd></div>
           </dl>
-          {toFree > 0 && (
-            <p className="rounded-lg bg-sand p-3 text-xs">{t("Add {amount} more to unlock free freight.", { amount: money(toFree) })}</p>
-          )}
+          <p className="rounded-lg bg-sand p-3 text-xs">{t("Shipping is $100 per order. Warehouse pickup is free.")}</p>
           {cart.referralApplied && (
             <p className="rounded-lg bg-moss/10 p-3 text-xs text-moss">{t(cart.referralApplied.code === "REFERRAL-WELCOME" ? "Your $100 referral welcome discount is applied. Using a promo code instead saves the referral discount for a later order." : "Your $100 referral reward is applied. Using a promo code instead saves the referral discount for a later order.")}</p>
           )}

@@ -1,4 +1,5 @@
 import "server-only";
+import { currentReturnCopy } from "./return-policy";
 import { cache } from "react";
 import { cachedPublic, revalidatePath } from "./public-cache";
 import { db } from "./db";
@@ -74,7 +75,13 @@ const env = (name: string) => process.env[name]?.trim() || "";
  * Raw settings are cached across requests; environment fallbacks and language are applied per request.
  */
 export const getSettings = cache(async (): Promise<SettingsMap> => {
-  const s = structuredClone(await getPublicStoredSettings());
+  const s = currentReturnCopy(structuredClone(await getPublicStoredSettings()));
+  for (const field of ["text", "mobileText"] as const) {
+    s.announcement[field] = (s.announcement[field] ?? "").replace(/Free freight (?:on orders )?over \$7,500/gi, "$100 shipping per order");
+  }
+  if (!s.navigation.legalLinks.some(link => link.href === "/shipping")) {
+    s.navigation.legalLinks.push({ label: "Shipping policy", href: "/shipping" });
+  }
   const b = s.business;
   if (!b.email) b.email = env("STORE_EMAIL");
   if (!b.phone) b.phone = env("STORE_PHONE");

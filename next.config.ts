@@ -27,6 +27,8 @@ const nextConfig: NextConfig = {
   // Old marketplace URLs (multi-seller features were removed): send visitors somewhere useful.
   async redirects() {
     return [
+      // Legacy homepage URL reported by Search Console.
+      { source: "/Homepage", destination: "/", permanent: true },
       { source: "/sell", destination: "/contact", permanent: true },
       { source: "/sell/:path*", destination: "/contact", permanent: true },
       { source: "/sellers", destination: "/about", permanent: true },
