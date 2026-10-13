@@ -102,7 +102,7 @@ export async function Header() {
               </div>
             </>
           )}
-          <LanguageSwitcher className="hidden lg:inline-flex" />
+          <div className="hidden lg:block"><LanguageSwitcher /></div>
           <Link href={lh("/cart")} className="relative grid h-10 w-10 place-items-center rounded-full hover:bg-sand" aria-label={t("Cart")}>
             <ShoppingCart aria-hidden className="h-6 w-6" strokeWidth={1.8} />
             {cartCount > 0 && <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-signal px-1 text-[11px] font-bold text-white">{cartCount}</span>}

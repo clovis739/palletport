@@ -61,8 +61,8 @@ export async function neighbours(slug: string) {
   return { newer: i > 0 ? list[i - 1] : undefined, older: i >= 0 && i < list.length - 1 ? list[i + 1] : undefined };
 }
 
-export function formatDate(d?: string, style: "medium" | "long" = "medium") {
-  return d ? new Date(`${d}T12:00:00`).toLocaleDateString("en-US", { dateStyle: style }) : "";
+export function formatDate(d?: string, style: "medium" | "long" = "medium", locale: "en" | "es" = "en") {
+  return d ? new Date(`${d}T12:00:00`).toLocaleDateString(locale === "es" ? "es-US" : "en-US", { dateStyle: style }) : "";
 }
 
 /** Cover image ref of a post: the editor's cover, else the built-in photo for the slug (else a default). */

@@ -56,8 +56,8 @@ export function LotsBulkBar({ back, tree = [] }: { back: string; /** Categories 
         Select all on page
       </label>
       <span className="text-xs text-muted" aria-live="polite">{count ? `${count} selected` : "None selected"}</span>
-      <div className="ml-auto flex items-center gap-2">
-        <div className="w-44">
+      <div className="flex w-full flex-wrap items-center gap-2 sm:ml-auto sm:w-auto">
+        <div className="min-w-0 flex-1 sm:w-44 sm:flex-none">
           <Select name="op" value={op} onChange={(e) => setOp(e.target.value)} aria-label="Bulk action" className="input py-1.5 text-sm" required>
             <option value="" disabled>Bulk action…</option>
             <option value="publish">Publish</option>
@@ -69,7 +69,7 @@ export function LotsBulkBar({ back, tree = [] }: { back: string; /** Categories 
           </Select>
         </div>
         {op === "move" && (
-          <div className="w-60">
+          <div className="w-full sm:w-60">
             <Select name="target" defaultValue="" aria-label="Move to" className="input py-1.5 text-sm" required>
               <option value="" disabled>Move to…</option>
               {tree.flatMap((c) => [

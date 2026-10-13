@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { BlogIndex } from "@/components/blog/BlogIndex";
 import { categoryFromSlug } from "@/lib/blog";
 import { JsonLd, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { getT } from "@/i18n/server";
 
 type Params = Promise<{ slug: string }>;
 
@@ -10,8 +11,8 @@ export async function generateMetadata({ params }: { params: Params }) {
   const c = await categoryFromSlug(slug);
   if (!c) return { title: "Blog", robots: { index: false } };
   return pageMetadata({
-    title: `${c} — liquidation reselling blog`,
-    description: `${c} from The Loading Dock, the PalletPort blog for businesses that buy and resell liquidation pallets, truckloads and case packs.`,
+    title: (await getT())("{category} — liquidation reselling blog", { category: (await getT())(c) }),
+    description: (await getT())("{category} from The Loading Dock, the PalletPort blog for businesses that buy and resell liquidation pallets, truckloads and case packs.", { category: (await getT())(c) }),
     path: `/blog/category/${slug}`,
   });
 }

@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Check, Link2, Mail, Share2 } from "lucide-react";
+import { useT } from "@/i18n/client";
 
 export function ShareBar({ title }: { title: string }) {
+  const tr = useT();
   const [copied, setCopied] = useState(false);
   const share = (base: string) => {
     const url = encodeURIComponent(window.location.href);
@@ -12,12 +14,12 @@ export function ShareBar({ title }: { title: string }) {
   };
   return (
     <div>
-      <p className="label">Share this article</p>
+      <p className="label">{tr("Share this article")}</p>
       <div className="flex flex-wrap gap-2">
         <button type="button" onClick={() => share("https://www.linkedin.com/sharing/share-offsite/?url={url}")} className="btn-ghost px-3 py-2 text-xs"><Share2 aria-hidden className="h-3.5 w-3.5" /> LinkedIn</button>
         <button type="button" onClick={() => share("https://www.facebook.com/sharer/sharer.php?u={url}")} className="btn-ghost px-3 py-2 text-xs"><Share2 aria-hidden className="h-3.5 w-3.5" /> Facebook</button>
         <button type="button" onClick={() => share("https://x.com/intent/post?url={url}&text={title}")} className="btn-ghost px-3 py-2 text-xs"><Share2 aria-hidden className="h-3.5 w-3.5" /> X</button>
-        <button type="button" onClick={() => share("mailto:?subject={title}&body={url}")} className="btn-ghost px-3 py-2 text-xs"><Mail aria-hidden className="h-3.5 w-3.5" /> Email</button>
+        <button type="button" onClick={() => share("mailto:?subject={title}&body={url}")} className="btn-ghost px-3 py-2 text-xs"><Mail aria-hidden className="h-3.5 w-3.5" /> {tr("Email")}</button>
         <button
           type="button"
           onClick={async () => {
@@ -31,7 +33,7 @@ export function ShareBar({ title }: { title: string }) {
           }}
           className="btn-ghost px-3 py-2 text-xs"
         >
-          {copied ? <><Check aria-hidden className="h-3.5 w-3.5" /> Copied!</> : <><Link2 aria-hidden className="h-3.5 w-3.5" /> Copy link</>}
+          {copied ? <><Check aria-hidden className="h-3.5 w-3.5" /> {tr("Copied!")}</> : <><Link2 aria-hidden className="h-3.5 w-3.5" /> {tr("Copy link")}</>}
         </button>
       </div>
     </div>
