@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { LotCard } from "@/components/LotCard";
 import { SiteImage } from "@/components/content/SiteImage";
-import { SUBCATEGORY_ORDER, brandCounts, categoryImage } from "@/lib/catalog";
+import { SUBCATEGORY_ORDER, brandCounts, categoryImage, getVisibleCategories } from "@/lib/catalog";
 import { NextIcon } from "@/components/Icons";
 import { Pager, pageCount, pageParam } from "@/components/ui/Pager";
 import { JsonLd, breadcrumbJsonLd, itemListJsonLd, pageMetadata } from "@/lib/seo";
@@ -21,7 +21,8 @@ export async function generateMetadata({ params }: { params: Params }) {
   const c = await db.category.findUnique({ where: { slug }, select: { name: true, blurb: true, _count: { select: { lots: { where: { status: "ACTIVE" } } } } } });
   if (!c) return { title: t("Category not found"), robots: { index: false } };
   return pageMetadata({
-    title: t("{name} liquidation pallets", { name: t(c.name) }),
+    // Matches how buyers search ("automotive liquidation pallets for sale").
+    title: t("{name} liquidation pallets for sale", { name: t(c.name) }),
     description: `${t(c.blurb)} ${t("{n} {name} lots available now — manifested pallets, truckloads and case packs sold direct from our warehouse.", { n: c._count.lots, name: t(c.name).toLowerCase() })}`,
     path: `/c/${slug}`,
   });
@@ -44,7 +45,16 @@ export default async function CategoryLanding({ params, searchParams }: { params
   const name = t(category.name);
 
   const base = { categoryId: category.id, status: "ACTIVE" };
-  const [bestValue, brands] = await Promise.all([db.lot.findMany({ where: base, include: lotInclude }), brandCounts({ categoryId: category.id })]);
+  const [bestValue, brands, allCategories] = await Promise.all([
+    db.lot.findMany({ where: base, include: lotInclude }),
+    brandCounts({ categoryId: category.id }),
+    getVisibleCategories(),
+  ]);
+  // Related categories: same department first, then the rest by size. Links help buyers (and Google) move between categories.
+  const related = allCategories
+    .filter((c) => c.id !== category.id)
+    .sort((a, b) => Number(b.group === category.group) - Number(a.group === category.group) || b.lotCount - a.lotCount)
+    .slice(0, 8);
   const total = bestValue.length;
   // "Newly listed" (?page=) and "Best value" (?value=) are paginated separately; each pager keeps the other's page.
   const newPage = pageParam(sp.page, pageCount(total, NEW_PER_PAGE));
@@ -74,7 +84,10 @@ export default async function CategoryLanding({ params, searchParams }: { params
         <div className="container-pp grid grid-cols-1 items-center gap-6 py-8 sm:py-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-8">
           <div className="min-w-0">
             <nav className="mb-2 text-xs text-muted"><Link href={lh("/categories")} className="hover:underline">{t("Categories")}</Link> / {name}</nav>
-            <h1 className="break-words font-display text-3xl font-bold sm:text-5xl">{name}</h1>
+            <h1 className="break-words font-display text-3xl font-bold sm:text-5xl">
+              {name}
+              <span className="mt-1 block text-lg font-semibold text-ink/70 sm:text-2xl">{t("liquidation pallets for sale")}</span>
+            </h1>
             <p className="mt-2 max-w-lg text-ink/70">{t(category.blurb)}. {t("Manifested pallets from our own warehouse, priced well below retail.")}</p>
             <Link href={lh(`/lots?category=${category.slug}`)} className="btn-dark mt-5">{t("Shop all {name}", { name: name.toLowerCase() })}</Link>
           </div>
@@ -177,6 +190,22 @@ export default async function CategoryLanding({ params, searchParams }: { params
         )}
 
         {copy && <FaqSection items={copy.faqs.map((f) => ({ ...f, q: t(f.q), a: t(f.a) }))} title={t("{name} lots: common questions", { name })} className="max-w-3xl" />}
+
+        {related.length > 0 && (
+          <section aria-labelledby="related-categories-title">
+            <h2 id="related-categories-title" className="mb-4 font-display text-2xl font-bold">{t("Related categories")}</h2>
+            <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+              {related.map((c) => (
+                <li key={c.id} className="min-w-0">
+                  <Link href={lh(`/c/${c.slug}`)} className="card flex h-full min-w-0 flex-col p-4 transition hover:text-signal-dark">
+                    <span className="break-words font-display font-semibold">{t("{name} liquidation pallets", { name: t(c.name) })}</span>
+                    <span className="mt-0.5 text-xs text-muted">{t(c.lotCount === 1 ? "{n} lot" : "{n} lots", { n: c.lotCount })}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
     </>
   );

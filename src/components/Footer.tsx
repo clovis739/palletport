@@ -7,6 +7,8 @@ import { ContactDetails, SocialLinks } from "./ContactDetails";
 import { getSettings } from "@/lib/settings";
 import { getI18n } from "@/i18n/server";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { getVisibleCategories } from "@/lib/catalog";
+import Link from "next/link";
 
 /** lg column templates by number of link columns (static strings so Tailwind generates them). */
 const LG_COLS: Record<number, string> = {
@@ -20,7 +22,7 @@ const LG_COLS: Record<number, string> = {
 
 /** Storefront footer. Columns, blurb and legal links: `navigation` settings. Contact + social: `business` settings. */
 export async function Footer() {
-  const [{ navigation: nav, business }, { t }] = await Promise.all([getSettings(), getI18n()]);
+  const [{ navigation: nav, business }, { t, lh }, categories] = await Promise.all([getSettings(), getI18n(), getVisibleCategories()]);
   const cols = nav.footerColumns.slice(0, 5);
   return (
     <footer className="mt-20 bg-ink text-white/80">
@@ -58,6 +60,19 @@ export async function Footer() {
           </div>
         ))}
       </div>
+      {categories.length > 0 && (
+        // Every category linked from every page, so buyers and Google can always reach the category pages.
+        <nav aria-label={t("Shop liquidation pallets by category")} className="container-pp border-t border-white/10 py-6">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-white">{t("Shop liquidation pallets by category")}</p>
+          <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+            {categories.map((c) => (
+              <li key={c.id}>
+                <Link href={lh(`/c/${c.slug}`)} className="tap inline-block py-0.5 hover:text-signal">{t(c.name)}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
       <div >
         <div className="container-pp flex flex-col gap-3 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] text-xs text-white/50 md:flex-row md:flex-wrap md:items-center md:justify-between">
           <span className="flex flex-wrap items-center gap-3">© {new Date().getFullYear()} {business.name}. {t("All rights reserved.")} <LanguageSwitcher variant="dark" /></span>

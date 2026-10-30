@@ -8,6 +8,7 @@ import { ES_SITE } from "./es-site";
 import { ES_GUIDES } from "./es-guides";
 import { ES_CONTENT } from "./es-content";
 import { ES_PAGES } from "./es-pages";
+import { ES_SEO } from "./es-seo";
 
 /**
  * Built-in Spanish translations, keyed by the exact English text (draft by Claude — please have a Spanish speaker
@@ -25,6 +26,7 @@ export const ES: Dictionary = {
   ...ES_GUIDES,
   ...ES_CONTENT,
   ...ES_PAGES,
+  ...ES_SEO,
   // ---- language switcher ----
   "Language": "Idioma",
   "English": "English",

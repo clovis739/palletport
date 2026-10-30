@@ -194,4 +194,303 @@ export const CATEGORY_COPY: Record<string, CategoryCopy> = {
       },
     ],
   },
+
+  "phones-computers": {
+    intro: [
+      "Phones and computers lots include smartphones, laptops, tablets and e-readers, desktops and monitors, and the accessories that go with them: cases, chargers, cables, keyboards and mice. Most come from carrier and big-box returns, trade-in programs and overstock. The manifest lists each model and its retail value.",
+      "Devices that store data need the most care. Returned phones, tablets and laptops can carry activation, carrier or account locks, and some will have cracked screens, weak batteries or missing chargers. Check each unit's lock status before you price it, wipe every device to factory settings, and keep a record of serial numbers. New and shelf-pull accessories are usually ready to sell as they are.",
+      "These lots suit online resellers who can test and photograph each device, repair shops that can replace screens and batteries, and exporters who buy by volume. If you're new to the category, accessory lots are a lower-risk way to start.",
+    ],
+    popularWith: ["online-resellers", "refurbishers", "exporters"],
+    faqs: [
+      {
+        q: "Can returned phones be locked?",
+        a: "Yes. Some returned phones and tablets have activation, carrier or account locks. Check each unit before you list it, and price locked units for parts.",
+      },
+      {
+        q: "Do laptops and phones come with chargers?",
+        a: "Not always. Returned devices are often missing chargers or cables, so budget for replacements when you work out your margin.",
+      },
+      {
+        q: "Should I wipe devices before reselling them?",
+        a: "Yes. Reset every phone, tablet and computer to factory settings before you sell it, so no previous owner's data goes to your customer.",
+      },
+    ],
+  },
+
+  "tvs-home-theater": {
+    intro: [
+      "TV and home theater lots cover televisions, soundbars and home audio, projectors and streaming devices, and TV mounts and accessories. Most are big-box and online returns, with some overstock and open-box units. The manifest lists screen sizes, models and retail values.",
+      "Screens are fragile, so inspect TV pallets on delivery and note any visible damage before you sign. Returned TVs can have cracked panels, dead pixels or missing stands and remotes, so power on each set and check the full screen. Soundbars and streaming devices are lighter and easier to test, and often ship with fewer problems.",
+      "TV lots suit repair shops that can replace parts and resellers with space to store and test large boxes. Plan for freight: TV pallets are bulky, and large screens need careful handling from the truck to your shelf.",
+    ],
+    popularWith: ["refurbishers", "online-resellers"],
+    faqs: [
+      {
+        q: "Are returned TVs tested?",
+        a: "No. Returned TVs are sold untested, so expect some units with screen damage or missing parts. Power on and check every set.",
+      },
+      {
+        q: "What should I check when a TV pallet arrives?",
+        a: "Look for crushed boxes or broken panels before you sign the delivery receipt, and write any damage on it. Then test each TV with a remote or the side buttons.",
+      },
+      {
+        q: "Do TVs come with remotes and stands?",
+        a: "Many do, but returns are often missing remotes, stands or screws. Universal remotes and replacement stands are cheap fixes that make a set easier to sell.",
+      },
+    ],
+  },
+
+  "video-games": {
+    intro: [
+      "Video game lots include consoles, physical games, controllers and accessories such as headsets, charging stations and cases. They come from retail returns, overstock and seasonal clear-outs. The manifest lists platforms, titles and retail values.",
+      "Sealed games and new accessories are usually ready to sell. Returned consoles and controllers should be tested: check that consoles power on and connect, that controllers pair and hold a charge, and that disc drives read. Check returned game cases to make sure the disc inside matches the cover.",
+      "Games and accessories sell well online, at flea markets and in bin stores, and demand rises before the holidays. Consoles have a higher value per unit, so they suit resellers who can test and photograph each one.",
+    ],
+    popularWith: ["online-resellers", "flea-market-vendors", "bin-stores"],
+    faqs: [
+      {
+        q: "Are returned consoles tested?",
+        a: "No. Returned consoles are sold untested. Power on each one, check it connects and reads discs, and look for account or parental locks.",
+      },
+      {
+        q: "Do returned games have the right disc inside?",
+        a: "Usually, but not always. Open each returned case and check that the disc matches the cover before you list it.",
+      },
+      {
+        q: "When do video game lots sell best?",
+        a: "Demand peaks before the holiday season and around major game releases, so buying a few weeks ahead gives you time to test and list.",
+      },
+    ],
+  },
+
+  appliances: {
+    intro: [
+      "Appliance lots cover large appliances such as refrigerators, washers and dryers, ranges and dishwashers, plus home comfort items like air conditioners, heaters and fans. They come from retail returns, scratch-and-dent stock and overstock. The manifest lists models and retail values.",
+      "Scratch-and-dent units have cosmetic damage but often work, while returned appliances should be connected and tested before resale. Check for missing shelves, hoses, racks and installation parts, and look for freight damage on delivery. Large appliances are heavy, so you'll need a dock or liftgate delivery and an appliance dolly.",
+      "Appliance lots suit appliance repair shops, used-appliance stores and discount retailers with floor space and a way to deliver to their customers. Smaller comfort appliances are easier to start with if you don't have heavy-lifting equipment.",
+    ],
+    popularWith: ["refurbishers", "discount-stores"],
+    faqs: [
+      {
+        q: "What does scratch-and-dent mean?",
+        a: "The appliance has cosmetic damage such as dents or scratches. It may still work normally, but test it before you sell it.",
+      },
+      {
+        q: "How do I receive an appliance lot?",
+        a: "Check the weight on the lot page and plan for a dock or liftgate delivery, a pallet jack and an appliance dolly. Inspect for freight damage before you sign.",
+      },
+      {
+        q: "Should I test returned appliances?",
+        a: "Yes. Connect and run each unit, and check for missing shelves, hoses or parts before you price it.",
+      },
+    ],
+  },
+
+  shoes: {
+    intro: [
+      "Shoe lots include athletic sneakers, boots, dress shoes, sandals and kids' footwear. They come from department store and online returns, overstock and end-of-season clear-outs. The manifest lists brands, styles and retail values, and some lots also list sizes.",
+      "Expect a spread of sizes rather than full size runs. Returned shoes can be mismatched, worn or missing boxes, so pair every shoe on arrival and set aside singles and mismatched pairs. New overstock is usually boxed and ready to sell.",
+      "Branded sneakers sell well online, while mixed footwear does well at flea markets and in bin stores. Because shoe boxes are bulky, a pallet holds fewer pairs than you might expect, so check the unit count on the lot page.",
+    ],
+    popularWith: ["online-resellers", "flea-market-vendors", "bin-stores"],
+    faqs: [
+      {
+        q: "Are shoe lots sorted by size?",
+        a: "Usually not. Expect a mix of sizes. Some manifests list sizes, so check the manifest on the lot page.",
+      },
+      {
+        q: "Can returned shoes be mismatched?",
+        a: "Yes. Pair every shoe when the lot arrives and check the size and style on both shoes before you list a pair.",
+      },
+      {
+        q: "Do shoes come in their original boxes?",
+        a: "New overstock usually does. Returns may be in damaged boxes or no box at all, which can lower the price you can ask online.",
+      },
+    ],
+  },
+
+  "accessories-jewelry": {
+    intro: [
+      "Accessories and jewelry lots include handbags and wallets, watches, fashion jewelry, sunglasses, hats, belts and scarves. They come from department store and online returns, overstock and seasonal clear-outs. The manifest lists brands, item types and retail values.",
+      "These are small, high-count lots, so a single case can hold hundreds of pieces. Check returned items for missing tags, scratches, broken clasps and watches that need new batteries. Fashion jewelry is usually costume rather than fine jewelry, so price it that way unless the manifest says otherwise.",
+      "Accessories are light and easy to ship, which suits online resellers, and they sell well at flea markets and in discount stores. A case pack is a good way to test demand before you buy a full pallet.",
+    ],
+    popularWith: ["online-resellers", "flea-market-vendors", "discount-stores"],
+    faqs: [
+      {
+        q: "Is the jewelry in these lots real gold or silver?",
+        a: "Most is fashion or costume jewelry. Only treat items as fine jewelry when the manifest describes them that way, and have valuable pieces checked.",
+      },
+      {
+        q: "Do returned watches work?",
+        a: "Many only need a new battery. Test each watch and replace batteries before you list it.",
+      },
+      {
+        q: "Are accessories lots good for online selling?",
+        a: "Yes. They're light, small and cheap to ship, and branded handbags, wallets and sunglasses are popular online.",
+      },
+    ],
+  },
+
+  "household-essentials": {
+    intro: [
+      "Household essentials lots cover cleaning supplies, laundry detergent, paper goods, diapers and wipes, storage, and bed and bath linens. They come from retail overstock, packaging changes and returns. The manifest lists products, quantities and retail values.",
+      "These are everyday products that customers buy again and again, so they sell steadily. Check packaging on arrival: dented bottles, torn cases and leaks happen in transit, and liquids can damage other items on the same pallet. Keep stock dry and rotate older items to the front.",
+      "Discount stores, dollar stores and bin stores use household essentials to bring in repeat customers. Diapers, paper goods and detergent are bulky, so check the pallet count and weight on the lot page before you order.",
+    ],
+    popularWith: ["discount-stores", "bin-stores"],
+    faqs: [
+      {
+        q: "What's in a household essentials pallet?",
+        a: "Everyday products such as cleaning supplies, detergent, paper goods, diapers and linens. The manifest on each lot page lists exactly what's included.",
+      },
+      {
+        q: "What should I check on arrival?",
+        a: "Look for leaks, dented bottles and torn cases, and separate damaged items so they don't spoil the rest of the stock.",
+      },
+      {
+        q: "Are household essentials good for a discount store?",
+        a: "Yes. They're everyday purchases, so they bring customers back regularly and turn over steadily.",
+      },
+    ],
+  },
+
+  "grocery-beverages": {
+    intro: [
+      "Grocery and beverage lots include snacks, candy, pantry staples such as cereal, pasta and canned goods, and soft drinks and other beverages. They come from manufacturer and retail overstock, packaging changes and short-dated stock. Lot pages list the products and their dates.",
+      "Dates matter most in this category. Read the best-by or expiration dates on the lot page before you order, and plan to sell short-dated stock quickly. Follow your state and local rules for reselling food, check for damaged or opened packaging, and store everything cool and dry.",
+      "Grocery lots suit discount grocers, dollar stores, bin stores and exporters who can move stock quickly. Beverage pallets are heavy, so check the weight and plan for a dock or liftgate delivery.",
+    ],
+    popularWith: ["discount-stores", "bin-stores", "exporters"],
+    faqs: [
+      {
+        q: "Are grocery lots close to their dates?",
+        a: "Some are. Dates are listed on the lot page, so check them before you order and plan to sell short-dated items quickly.",
+      },
+      {
+        q: "Can I resell food from a liquidation lot?",
+        a: "Rules vary by state and city. Check your local food resale requirements before you sell, and don't sell items past their expiration date.",
+      },
+      {
+        q: "How should I store grocery stock?",
+        a: "Keep it cool, dry and off the floor, away from cleaning chemicals, and put the earliest dates at the front.",
+      },
+    ],
+  },
+
+  collectibles: {
+    intro: [
+      "Collectibles lots include sealed trading cards, collectible figures, vinyl figures, die-cast models and other collector items. They come from retail overstock, returns and store clear-outs. The manifest lists products, quantities and retail values.",
+      "Collectors care about condition, so packaging matters as much as the item. Check for crushed boxes, torn shrink wrap and opened packs, and keep sealed products sealed. Prices for collectibles can move quickly, so check recent sold listings before you set your prices.",
+      "Collectibles suit online resellers and flea market and convention vendors who know their market. Sealed card products and popular figure lines tend to sell fastest.",
+    ],
+    popularWith: ["online-resellers", "flea-market-vendors"],
+    faqs: [
+      {
+        q: "Are trading cards in these lots sealed?",
+        a: "The manifest describes each item. Sealed products are listed as sealed, and returns may include opened packs, so check the condition grade on the lot page.",
+      },
+      {
+        q: "Does box damage affect the value of collectibles?",
+        a: "Yes. Collectors pay more for mint packaging, so inspect boxes on arrival and price damaged ones lower.",
+      },
+      {
+        q: "How should I price collectibles?",
+        a: "Check recent sold prices for each item before you list it, because collectible prices change faster than most products.",
+      },
+    ],
+  },
+
+  "sports-outdoors": {
+    intro: [
+      "Sports and outdoors lots include fitness equipment, camping gear, fishing tackle, hunting accessories, team sports equipment and bikes. They come from sporting goods and big-box returns, overstock and seasonal clear-outs. The manifest lists products and retail values.",
+      "Returned fitness equipment and bikes may be missing hardware, so check each box against its parts list before you sell it. Inflatables, tents and coolers should be checked for leaks and tears. Seasonal items such as camping and pool gear are cheapest after the season ends.",
+      "Sports lots suit flea market vendors, discount stores and online resellers, and demand follows the seasons: fitness gear in January, outdoor and camping gear in spring and summer, and hunting gear in the fall.",
+    ],
+    popularWith: ["flea-market-vendors", "online-resellers", "discount-stores"],
+    faqs: [
+      {
+        q: "Do returned fitness machines include all parts?",
+        a: "Not always. Check each box against its parts list and sell incomplete units for less or for parts.",
+      },
+      {
+        q: "When should I buy sports and outdoors lots?",
+        a: "Buy seasonal gear after its season ends when prices are lowest, and plan to sell it when the next season starts.",
+      },
+      {
+        q: "Are bikes in these lots assembled?",
+        a: "Usually they're boxed and partly assembled. Check that all parts are there and have each bike assembled and adjusted before you sell it.",
+      },
+    ],
+  },
+
+  seasonal: {
+    intro: [
+      "Seasonal and holiday lots include Christmas decor and lights, Halloween costumes and decorations, summer and pool items, and back-to-school supplies. They come from retail overstock and end-of-season clear-outs. The manifest lists products and retail values.",
+      "Seasonal stock is cheapest right after the holiday it's made for, so you can buy low if you have space to store it until next year. Test lights and animated decor before you sell them, and check costumes for sizes and missing pieces.",
+      "Seasonal lots suit bin stores, discount stores and flea market vendors who sell in the weeks before each holiday. Plan your buying around the calendar so stock arrives before demand peaks.",
+    ],
+    popularWith: ["bin-stores", "discount-stores", "flea-market-vendors"],
+    faqs: [
+      {
+        q: "When is the best time to buy seasonal lots?",
+        a: "Right after the season ends, when prices are lowest. Store the stock and sell it in the weeks before the next season.",
+      },
+      {
+        q: "Should I test holiday lights and decor?",
+        a: "Yes. Plug in lights and animated decorations before you sell them, and set aside anything that doesn't work.",
+      },
+      {
+        q: "Do I need storage space for seasonal lots?",
+        a: "If you buy after the season to save money, yes. Keep stock dry and boxed until the next season.",
+      },
+    ],
+  },
+
+  automotive: {
+    intro: [
+      "Automotive lots include replacement parts, wheels and tires, car electronics such as dash cams and stereos, and car care products like cleaners, waxes and accessories. They come from auto parts and big-box returns, overstock and discontinued stock. The manifest lists products and retail values.",
+      "Parts are often vehicle-specific, so check fitment details and part numbers before you list them. Returned parts can be used or missing hardware, and car electronics should be tested. Car care liquids should be checked for leaks on arrival.",
+      "Automotive lots suit online parts resellers who can list by part number, repair shops and flea market vendors. Car care products and accessories are the easiest place to start because they fit most vehicles.",
+    ],
+    popularWith: ["flea-market-vendors", "online-resellers", "refurbishers"],
+    faqs: [
+      {
+        q: "How do I know which vehicles a part fits?",
+        a: "Look up the part number from the manifest or the box. Listing parts with their part numbers and fitment helps buyers find them.",
+      },
+      {
+        q: "Are returned auto parts new?",
+        a: "Not always. Returns can include opened, used or incomplete parts, so inspect each one and check the condition grade on the lot page.",
+      },
+      {
+        q: "Which automotive lots are best for beginners?",
+        a: "Car care and accessory lots. They fit most vehicles, so they're easier to sell than model-specific parts.",
+      },
+    ],
+  },
+
+  "warehouse-industrial": {
+    intro: [
+      "Warehouse and industrial lots include pallet jacks and material handling equipment, shelving and racking, empty pallets, packaging supplies such as boxes, tape and stretch wrap, and other business supplies. They come from business overstock, returns and warehouse clear-outs. The manifest lists products and retail values.",
+      "Equipment such as pallet jacks should be checked for leaks and tested under load before resale or use. Racking and shelving can be missing beams or hardware, so check the parts against the manifest. Packaging supplies are usually new overstock and ready to use or sell.",
+      "These lots suit resellers who sell to small businesses and warehouses, and liquidation buyers who need equipment and supplies for their own operation. Industrial items are heavy, so check the weight and delivery requirements on the lot page.",
+    ],
+    popularWith: ["exporters", "discount-stores"],
+    faqs: [
+      {
+        q: "Are pallet jacks in these lots tested?",
+        a: "Returned equipment is sold untested. Check for hydraulic leaks and test each jack under load before you use or sell it.",
+      },
+      {
+        q: "Can I use these supplies for my own resale business?",
+        a: "Yes. Many buyers use packaging supplies, shelving and pallet jacks in their own store or warehouse.",
+      },
+      {
+        q: "Is racking complete?",
+        a: "Check beams, uprights and hardware against the manifest when the lot arrives, because returned racking can be missing parts.",
+      },
+    ],
+  },
 };

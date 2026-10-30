@@ -30,19 +30,30 @@ import {
   purchasePrice,
   timeAgo,
 } from "@/lib/format";
-import { JsonLd, breadcrumbJsonLd, lotIndexable, pageMetadata, productJsonLd } from "@/lib/seo";
+import { JsonLd, breadcrumbJsonLd, lotIndexable, lotNumber, pageMetadata, productJsonLd } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
-  const { t } = await getI18n();
+  const { t, locale } = await getI18n();
   const lot = await getPublicLot(slug);
   if (!lot || lot.status === "DRAFT") return { title: t("Lot not found"), robots: { index: false } };
   const cond = t(CONDITIONS[lot.condition]?.label ?? lot.condition);
-  const suffix = ` — ${cond} · ${money(lot.priceCents)}`;
-  const room = Math.max(24, 60 - suffix.length);
-  const short = lot.title.length <= room ? lot.title : `${lot.title.slice(0, room - 1).replace(/\s+\S*$/, "")}…`;
+  const fit = (suffix: string) => {
+    const room = Math.max(24, 60 - suffix.length);
+    return lot.title.length <= room ? lot.title : `${lot.title.slice(0, room - 1).replace(/\s+\S*$/, "")}…`;
+  };
+  let suffix = ` — ${cond} · ${money(lot.priceCents)}`;
+  let short = fit(suffix);
+  // Lots whose search title would read the same as another lot's (same title, or the same start once shortened)
+  // get their lot number added, so each result in Google is distinct.
+  const shared = short.endsWith("…") ? { startsWith: short.slice(0, -1) } : { equals: lot.title };
+  const twins = await db.lot.count({ where: { title: shared, status: { not: "DRAFT" }, NOT: { id: lot.id } } });
+  if (twins) {
+    suffix += ` · #${lotNumber(lot)}`;
+    short = fit(suffix);
+  }
   const priceBit = lot.status === "ACTIVE" ? t("{price}, in stock.", { price: money(lot.priceCents) }) : t("Sold out.");
   // Lead with this lot's own manifest: the two lines with the highest extended retail (qty × unit MSRP).
   const top = [...lot.manifest]
@@ -51,20 +62,29 @@ export async function generateMetadata({ params }: { params: Params }) {
     .map((m) => (m.qty > 1 ? `${m.qty}× ${m.name}` : m.name));
   const units = lot.units > 0 ? t("{n} units", { n: lot.units.toLocaleString("en-US") }) : t("Assorted inventory");
   const size = lot.palletCount > 1 ? t(" on {n} pallets", { n: lot.palletCount }) : lot.lotSize === "CASE" ? t(" (case pack)") : "";
-  const lead = top.length ? `${units}${size} ${t("incl.")} ${top.join(" & ")}${lot.manifest.length > 2 ? t(" + more") : ""}.` : `${units}${size}.`;
+  // No manifest and no unit count (some imported lots): open with the start of the lot's own description instead.
+  const blurb = lot.description.replace(/\s+/g, " ").trim();
+  const opening = blurb.length > 110 ? `${blurb.slice(0, 110).replace(/\s+\S*$/, "")}…` : blurb;
+  const lead = top.length
+    ? `${units}${size} ${t("incl.")} ${top.join(" & ")}${lot.manifest.length > 2 ? t(" + more") : ""}.`
+    : lot.units > 0 || !opening ? `${units}${size}.` : opening;
   const pct = pctOfRetail(lot.priceCents, lot.msrpCents);
+  // Led by this lot's own data (units, manifest, condition, price), so each snippet is specific to the lot even when
+  // its free-text description is supplier copy shared with other sites.
+  const retailBit = lot.msrpCents > 0 && pct > 0 ? ` · ${t("{pct}% of {retail} retail", { pct, retail: money(lot.msrpCents) })}` : "";
   return pageMetadata({
     title: `${short}${suffix}`,
     absoluteTitle: true,
-    description: lot.externalSku
-      ? `${lot.description.slice(0, 150)} ${priceBit} ${t("Ships from {place}.", { place: lot.shipsFrom })}`
-      : `${lead} ${cond} · ${t("{pct}% of {retail} retail", { pct, retail: money(lot.msrpCents) })} · ${priceBit} ${t("Ships from {place}.", { place: lot.shipsFrom })}`,
+    description: `${lead} ${cond}${retailBit} · ${priceBit} ${t("Ships from {place}.", { place: lot.shipsFrom })}`,
     path: `/lots/${slug}`,
     image: `/lots/${slug}/opengraph-image`,
     imageAlt: lot.title,
     // Sold-out lots more than SOLD_INDEX_DAYS past their sale stay reachable
     // for buyers but drop out of search results (the sitemap applies the same rule via lotIndexable()).
-    noIndex: !lotIndexable(lot),
+    // Spanish lot pages keep working for visitors but stay out of Google: lot titles and descriptions are English,
+    // so Google treats them as duplicates of the English page. No hreflang either (see sitemap.ts).
+    noIndex: !lotIndexable(lot) || locale === "es",
+    localized: false,
   });
 }
 

@@ -12,6 +12,7 @@ import { ES_SITE } from "@/i18n/es-site";
 import { ES_GUIDES } from "@/i18n/es-guides";
 import { ES_CONTENT } from "@/i18n/es-content";
 import { ES_PAGES } from "@/i18n/es-pages";
+import { ES_SEO } from "@/i18n/es-seo";
 import { TranslationsForm, type TranslationRow } from "./TranslationsForm";
 
 export const metadata = { title: "Translations" };
@@ -51,6 +52,7 @@ export default async function TranslationsPage() {
     ["Emails", ES_EMAIL],
     ["Site settings text", ES_SITE],
     ["Information pages", ES_PAGES],
+    ["Category guides (SEO)", ES_SEO],
     ["Buyer's guides", ES_GUIDES],
     ["Help center & guides", ES_CONTENT],
   ];

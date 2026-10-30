@@ -142,18 +142,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     ...categories.map((c) => ({ url: `${base}/c/${c.slug}`, lastModified: catUpdated.get(c.slug) })),
     ...COLLECTIONS.map((c, i) => ({ url: `${base}/collections/${c.slug}`, lastModified: collectionDates[i]?.createdAt })),
-    ...lots.map((l) => {
-      const images = uploadedPhotos(l.images, base);
-      return {
-        url: `${base}/lots/${l.slug}`,
-        lastModified: later(l.createdAt, l.orderItems?.[0]?.order.createdAt),
-        ...(images.length ? { images } : {}),
-      };
-    }),
   ].flatMap(bilingual);
+
+  // Lot pages are English only in the sitemap: their titles and descriptions are not translated, so the /es copies
+  // are kept out of Google (noindex) and Google's visits go to the English pages.
+  const lotEntries: Entry[] = lots.map((l) => {
+    const images = uploadedPhotos(l.images, base);
+    return {
+      url: `${base}/lots/${l.slug}`,
+      lastModified: later(l.createdAt, l.orderItems?.[0]?.order.createdAt),
+      ...(images.length ? { images } : {}),
+    };
+  });
 
   const out: Entry[] = [
     ...translated,
+    ...lotEntries,
     ...posts.map((p) => ({ url: `${base}/blog/${p.slug}`, lastModified: date(p.updated ?? p.date) })),
     ...blogCats.map((c) => ({ url: `${base}/blog/category/${categorySlug(c)}` })),
     ...help.map((h) => ({ url: `${base}/help/${h.slug}`, lastModified: date(h.updated ?? h.date) })),

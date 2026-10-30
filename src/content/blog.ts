@@ -10,6 +10,150 @@ export const AUTHORS: Record<string, { name: string; role: string; bio: string }
 
 export const POSTS: Article[] = [
   {
+    slug: "are-liquidation-pallets-worth-it", category: "Buying guides", date: "2026-10-30", readMins: 8, hue: 150, author: "team",
+    tags: ["Getting started", "Risk", "Profit"],
+    title: "Are liquidation pallets worth it? How to tell before you buy",
+    excerpt: "When liquidation pallets make money, when they don't, and a simple way to check a lot's numbers before you order.",
+    body: [
+      { p: [
+        "Liquidation pallets can be worth it, but not automatically. A pallet is worth buying when the money you'll get from the items you actually sell is comfortably more than everything the lot costs you: the price, shipping, your time, and the items you can't sell. The retail value printed on a manifest is not that number.",
+        "This guide explains where the profit in a pallet comes from, the costs new buyers forget, a quick way to check a lot before you order, and the kinds of buyers who do well with liquidation. The example numbers are placeholders. Replace them with your own prices and results.",
+      ] },
+      { h: "What you're actually buying", p: [
+        "A liquidation pallet is inventory a retailer or manufacturer no longer wants to sell itself: customer returns, overstock, shelf pulls from changed displays, and seasonal leftovers. It's sold in bulk at a fraction of its original retail price because the seller wants it gone quickly, and because some of it won't be sellable at full price.",
+        "The condition grade tells you which of those you're getting. New and overstock items are usually sealed. Customer returns can be anything from untouched to broken. Our guide to [customer returns vs. shelf pulls](/blog/returns-vs-shelf-pulls) explains each grade and who it suits.",
+      ] },
+      { h: "Where the profit comes from", p: [
+        "Your profit is the gap between what you pay per item and what you sell each item for, minus the items that don't sell. A lot bought at 15% of retail looks cheap, but if you can only sell the items at 30% of retail and a fifth of them are unsellable, most of the margin disappears once shipping and your time are counted.",
+        "So the question isn't \"how far below retail is this pallet?\" It's \"what will I really sell these items for, how many of them, and how long will it take?\" That depends on your sales channel, the category and the condition grade far more than on the retail value.",
+      ] },
+      { h: "The costs people forget", list: [
+        "Shipping. On PalletPort delivery is a flat $100 per order, so a $400 pallet costs $500 delivered. Elsewhere freight can cost more than the pallet itself.",
+        "Unsellable items. Returns lots in particular include broken, incomplete or missing items. Budget for a share of the lot to be scrap or parts.",
+        "Your time. Unpacking, sorting, testing, cleaning, photographing and listing take hours per pallet. Put a value on that time.",
+        "Selling fees and shipping to your customers if you sell online.",
+        "Space. Pallets need somewhere dry to be unpacked and stored until they sell.",
+        "Disposal. Getting rid of packaging, broken items and leftovers can cost money too.",
+      ] },
+      { h: "A quick check before you order", p: [
+        "Use this rough check on any lot before you buy. It takes ten minutes with the manifest open.",
+      ], list: [
+        "Add up your landed cost: lot price plus shipping.",
+        "Look at the manifest lines that make up most of the retail value, usually the top five to ten. Look up recent sold prices for those items on the channel where you'll sell them.",
+        "Estimate what you'd realistically get for the rest of the lot per unit, conservatively.",
+        "Take off a share for unsellable items, larger for customer returns than for new stock.",
+        "Take off your selling fees, then compare the result with your landed cost plus the value of your time.",
+      ], table: {
+        caption: "Example check (placeholder numbers)",
+        head: ["Line", "Amount"],
+        rows: [
+          ["Lot price", "$600"],
+          ["Shipping (flat, per order)", "$100"],
+          ["Landed cost", "$700"],
+          ["Expected sales from sellable items", "$1,500"],
+          ["Selling fees (about 15%)", "−$225"],
+          ["Net after fees", "$1,275"],
+          ["Profit before your time", "$575"],
+        ],
+      } },
+      { p: [
+        "If your time to process the pallet is worth more than the profit left over, the lot isn't worth it for you, even if it looks cheap. Our guide on [how to read a manifest](/blog/how-to-read-a-manifest) walks through valuing the top lines in more detail.",
+      ] },
+      { h: "When liquidation pallets are usually worth it", list: [
+        "You already know the category and can price items quickly.",
+        "You have a sales channel that suits the grade: a bin store or flea market table for mixed returns, online listings for new and branded items, a repair bench for defective electronics.",
+        "You have the space and time to sort and process a whole pallet within a few weeks.",
+        "You track your results, so each lot you buy is based on real sell-through numbers, not guesses.",
+      ] },
+      { h: "When they're usually not", list: [
+        "You're buying purely because the retail value looks big.",
+        "You don't have a way to sell the low-value items, which often make up most of the unit count.",
+        "Freight would cost a large share of the lot price.",
+        "You can't test the items you're buying, such as returned electronics, and you're pricing them as if they all work.",
+      ] },
+      { h: "How to lower the risk on your first lots", list: [
+        "Start small. A [case pack](/case-packs) or a single pallet in a category you know is cheaper tuition than a truckload.",
+        "Choose a higher grade first. New, overstock and shelf-pull lots are more predictable than customer returns.",
+        "Read the manifest, condition grade and lot description, and ask us if anything is unclear before you order.",
+        "Keep records for every lot: what you paid, what sold, for how much, how long it took, and what you scrapped.",
+        "Follow our [first pallet checklist](/blog/first-pallet-checklist) for the full list.",
+      ] },
+      { h: "FAQ", faq: [
+        { q: "Are liquidation pallets worth it for beginners?", a: "They can be, if you start with a small lot in a category you know, choose a predictable grade such as new or shelf pull, and work out your numbers before you buy rather than relying on the retail value." },
+        { q: "How much profit can you make on a liquidation pallet?", a: "It varies widely with the category, condition, your sales channel and how much of the lot you sell. There's no typical figure you can count on. Estimate each lot from recent sold prices, and use your own records once you have a few lots behind you." },
+        { q: "Is the retail value on the manifest what I'll make?", a: "No. Retail value is the original list price. What you make depends on what each item really sells for in its condition, how many items you sell, and your costs." },
+        { q: "Are mystery pallets worth it?", a: "Unmanifested mystery pallets are hard to value because you can't check the contents first. A manifested lot lets you price the main items before you commit. Every lot on PalletPort comes with a manifest." },
+      ] },
+    ],
+  },
+  {
+    slug: "liquidation-pallet-prices", category: "Market reports", date: "2026-10-30", readMins: 6, hue: 45, author: "sourcing",
+    tags: ["Pricing", "Getting started", "Sourcing"],
+    title: "How much do liquidation pallets cost? Prices by size and condition",
+    excerpt: "What liquidation pallets, case packs and truckloads cost on PalletPort right now, how condition changes the price, and what to add on top.",
+    body: [
+      { p: [
+        "The price of a liquidation pallet depends mostly on three things: how much is in it, what condition it's in, and what kind of products it holds. On PalletPort in late October 2026, most pallets were priced between about $350 and $1,000, case packs in a similar range, and full truckloads between about $5,000 and $12,000.",
+        "Below are the figures from the lots in stock on our site, how condition affects price, and the other costs to add before you compare lots. These figures describe our own listings at the time of writing and will change as stock changes.",
+      ] },
+      { h: "Prices by lot size", p: [
+        "These are the prices of in-stock lots on PalletPort at the end of October 2026. The middle half of lots fall between the low and high figures, so a few lots sit outside each range.",
+      ], table: {
+        caption: "PalletPort in-stock lots, October 2026",
+        head: ["Lot size", "Lots in stock", "Middle half of prices", "Median price"],
+        rows: [
+          ["Pallet", "483", "$350 – $1,010", "$565"],
+          ["Case pack", "39", "$325 – $975", "$555"],
+          ["Truckload", "64", "$5,200 – $12,025", "$8,530"],
+        ],
+      } },
+      { p: [
+        "Pallets vary most because they cover everything from a single category of small accessories to large appliances. Truckloads usually hold 18 to 26 pallets, so they cost more in total but less per pallet.",
+      ] },
+      { h: "How condition changes the price", p: [
+        "Condition has a bigger effect on price than almost anything else. For lots where the manifest lists the total retail value, here is the median price as a share of that retail value.",
+      ], table: {
+        caption: "Median price as a share of manifest retail value, PalletPort, October 2026",
+        head: ["Condition grade", "Median share of retail", "What that means"],
+        rows: [
+          ["New / Overstock", "about 21%", "Sealed, ready to sell, priced highest"],
+          ["Shelf pull", "about 17%", "Unsold store stock, usually good condition"],
+          ["Customer return", "about 10%", "Untested, mixed condition"],
+          ["Mixed condition", "about 9%", "A blend of grades in one lot"],
+          ["Salvage", "about 5% (few lots)", "Damaged or for parts"],
+        ],
+      } },
+      { p: [
+        "A lower share of retail isn't automatically a better deal. Customer returns are cheaper because some items won't sell, and you'll spend more time testing and sorting. Our guide to [customer returns vs. shelf pulls](/blog/returns-vs-shelf-pulls) shows how to compare grades on cost per sellable item.",
+      ] },
+      { h: "What else affects the price", list: [
+        "Category. Electronics, branded apparel and tools usually carry higher retail values than general household goods.",
+        "Brands. Recognisable brands resell faster and are priced higher.",
+        "Unit count and weight. A pallet of small items holds far more pieces than a pallet of furniture or appliances.",
+        "Manifest detail. Fully manifested lots let you value the contents before you buy.",
+        "Season. Seasonal goods are cheapest just after their season ends.",
+      ] },
+      { h: "Costs to add on top of the price", list: [
+        "Shipping. On PalletPort delivery is a flat $100 per order, whether you buy one case pack or several pallets. Warehouse pickup by appointment is free.",
+        "Sales tax, where it applies to your order.",
+        "Equipment. Full truckloads need a loading dock and forklift; pallets need a pallet jack or liftgate delivery.",
+        "Your time and costs to sort, test, list and sell the items.",
+      ] },
+      { p: [
+        "Add these to the lot price to get your landed cost, then compare it with what you expect to sell the items for. Our guide [are liquidation pallets worth it?](/blog/are-liquidation-pallets-worth-it) walks through that check step by step.",
+      ] },
+      { h: "Where to start", p: [
+        "If you're new, a [case pack](/case-packs) or a single [pallet](/pallets) in a category you know keeps your first purchase small. Buyers stocking a store each week often move up to [truckloads](/truckloads) for the lower price per pallet. Every lot page shows the manifest, condition grade and price before you order.",
+      ] },
+      { h: "FAQ", faq: [
+        { q: "How much does a pallet of liquidation merchandise cost?", a: "On PalletPort in October 2026, the middle half of pallets were priced between about $350 and $1,000, with a median of about $565. Prices depend on size, condition and category." },
+        { q: "How much does a truckload of liquidation cost?", a: "On PalletPort in October 2026, the middle half of truckloads were priced between about $5,200 and $12,000, with a median of about $8,500." },
+        { q: "How much is shipping on a liquidation pallet?", a: "On PalletPort, delivery is a flat $100 per order within our supported delivery area, and warehouse pickup by appointment is free." },
+        { q: "Why are customer return pallets cheaper?", a: "Because they're untested and some items will be damaged, incomplete or unsellable. The lower price reflects that risk and the extra time you'll spend testing and sorting." },
+      ] },
+    ],
+  },
+  {
     slug: "liquidation-myths-vs-facts", category: "Industry insights", date: "2026-09-20", readMins: 11, hue: 250, author: "team", featured: true,
     tags: ["Getting started", "Risk", "Sourcing"],
     title: "Liquidation myths vs. facts: what new resellers get wrong",

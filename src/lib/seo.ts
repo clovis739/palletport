@@ -19,7 +19,7 @@
  *   STORE_SAME_AS       Comma-separated official profile URLs (Google Business Profile, LinkedIn, Facebook, ...)
  *   ALLOW_AI_CRAWLERS   "false" disallows AI crawlers in robots.txt (default: allowed) — see src/app/robots.ts
  */
-import { FLAT_SHIPPING_CENTS } from "./shipping-policy";
+import { FLAT_SHIPPING_CENTS, HANDLING_DAYS, TRANSIT_DAYS } from "./shipping-policy";
 import type { Metadata } from "next";
 import { CONDITIONS, LOT_SIZES } from "@/lib/format";
 import { parseImages } from "@/lib/lotImages";
@@ -120,6 +120,7 @@ export async function pageMetadata({
   publishedTime,
   modifiedTime,
   authors,
+  localized = true,
 }: {
   title: string;
   description?: string;
@@ -133,6 +134,8 @@ export async function pageMetadata({
   publishedTime?: string;
   modifiedTime?: string;
   authors?: string[];
+  /** false: the page has no indexable Spanish twin, so no hreflang links (e.g. lot pages, whose text is English). */
+  localized?: boolean;
 }): Promise<Metadata> {
   // Brand name from Admin → Business profile; text written with the original name follows a rename.
   const { getBrand } = await import("@/lib/brand");
@@ -146,12 +149,16 @@ export async function pageMetadata({
   const esPath = path === "/" ? "/es" : `/es${path}`;
   const localPath = locale === "es" ? esPath : path;
   const desc = description ? trimDescription(description) : undefined;
-  const fullTitle = absoluteTitle || title.includes(brand) ? title : `${title} · ${brand}`;
+  // The brand suffix (" · Pallet Liquidation-US", 24 characters) only fits short titles. Past ~65 characters
+  // Google cuts the title off, so long titles go out on their own and Google shows the site name separately.
+  const withBrand = `${title} · ${brand}`;
+  const dropBrand = !absoluteTitle && !title.includes(brand) && withBrand.length > 65;
+  const fullTitle = absoluteTitle || dropBrand || title.includes(brand) ? title : withBrand;
   const img = { url: image ?? DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: imageAlt ?? fullTitle };
   return {
-    title: absoluteTitle ? { absolute: title } : title,
+    title: absoluteTitle || dropBrand ? { absolute: title } : title,
     description: desc,
-    alternates: noIndex ? { canonical: localPath } : { canonical: localPath, languages: { "en-US": path, "es-US": esPath, "x-default": path } },
+    alternates: noIndex || !localized ? { canonical: localPath } : { canonical: localPath, languages: { "en-US": path, "es-US": esPath, "x-default": path } },
     openGraph: {
       siteName: brand,
       locale: locale === "es" ? "es_US" : "en_US",
@@ -501,6 +508,11 @@ export function productJsonLd(lot: LotForSchema, sellerName = SITE_NAME): Json |
         "@type": "OfferShippingDetails",
         shippingDestination: { "@type": "DefinedRegion", addressCountry: "US" },
         shippingRate: { "@type": "MonetaryAmount", value: FLAT_SHIPPING_CENTS / 100, currency: "USD" },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: { "@type": "QuantitativeValue", minValue: HANDLING_DAYS.min, maxValue: HANDLING_DAYS.max, unitCode: "DAY" },
+          transitTime: { "@type": "QuantitativeValue", minValue: TRANSIT_DAYS.min, maxValue: TRANSIT_DAYS.max, unitCode: "DAY" },
+        },
       },
       hasMerchantReturnPolicy: { "@id": absoluteUrl("/legal/returns-and-disputes#policy") },
       ...(lot.status === "ACTIVE" && lot.available ? { inventoryLevel: { "@type": "QuantitativeValue", value: lot.available } } : {}),
