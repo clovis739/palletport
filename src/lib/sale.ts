@@ -4,7 +4,7 @@
  * After SALE_END everything switches off by itself: the listed price (Lot.priceCents) is simply the price.
  * To run another sale, change these dates.
  */
-export const SALE_START = "2026-10-30T00:00:00-04:00";
+export const SALE_START = "2026-10-29T00:00:00-04:00";
 /** Owner: the sale ends on January 2 (end of day, US Eastern). */
 export const SALE_END = "2027-01-02T23:59:59-05:00";
 
