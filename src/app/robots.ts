@@ -17,7 +17,11 @@ const FILTERS = ["", "/es"].flatMap(prefix => [
   ...FACETS.flatMap(key => [`${prefix}/c/*?${key}=`, `${prefix}/c/*?*&${key}=`]),
   ...["recent", "value"].flatMap(key => [`${prefix || "/"}?${key}=`, `${prefix || "/"}?*&${key}=`]),
 ]);
-const EXCLUSIONS = [...PRIVATE, ...PRIVATE.map(path => `/es${path}`), ...FILTERS];
+// Not pages: Next.js link-prefetch data (?_rsc=, over half of Googlebot's requests in Search Console's
+// crawl stats), "?lang=en" language switches (they only redirect) and manifest CSV downloads.
+// Blocking them leaves Google's crawl budget for real pages. Rendering does not need them.
+const CRAWL_WASTE = ["/*?_rsc=", "/*&_rsc=", "/*?lang=", "/*&lang=", "/*/manifest.csv"];
+const EXCLUSIONS = [...PRIVATE, ...PRIVATE.map(path => `/es${path}`), ...FILTERS, ...CRAWL_WASTE];
 
 // Search engines — always allowed. (Bingbot also powers Bing, DuckDuckGo and Copilot answers; blocking it removes
 // the site from Bing search, so it lives here rather than in the AI list.)
