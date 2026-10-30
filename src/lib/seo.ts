@@ -19,6 +19,7 @@
  *   STORE_SAME_AS       Comma-separated official profile URLs (Google Business Profile, LinkedIn, Facebook, ...)
  *   ALLOW_AI_CRAWLERS   "false" disallows AI crawlers in robots.txt (default: allowed) — see src/app/robots.ts
  */
+import { FLAT_SHIPPING_CENTS } from "./shipping-policy";
 import type { Metadata } from "next";
 import { CONDITIONS, LOT_SIZES } from "@/lib/format";
 import { parseImages } from "@/lib/lotImages";
@@ -364,6 +365,7 @@ export function organizationJsonLd(store: StoreLike, business?: OrgBusiness): Js
     telephone: phone,
     email,
     sameAs: sameAs?.length ? sameAs : undefined,
+    hasMerchantReturnPolicy: merchantReturnPolicyJsonLd(),
   };
 }
 
@@ -434,10 +436,38 @@ const dollars = (cents: number) => (cents / 100).toFixed(2);
 /** The "Lot #" shown on lot pages. */
 export const lotNumber = (lot: { id: string }) => lot.id.slice(-6).toUpperCase();
 
-export function productJsonLd(lot: LotForSchema, sellerName = SITE_NAME): Json {
+/** Standard return terms, including the published annual holiday extension. */
+export function merchantReturnPolicyJsonLd(year = new Date().getUTCFullYear()): Json {
+  return {
+    "@type": "MerchantReturnPolicy",
+    "@id": absoluteUrl("/legal/returns-and-disputes#policy"),
+    applicableCountry: "US",
+    returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+    merchantReturnDays: 15,
+    returnFees: "https://schema.org/ReturnFeesCustomerResponsibility",
+    merchantReturnLink: absoluteUrl("/legal/returns-and-disputes"),
+    returnPolicySeasonalOverride: [year - 1, year, year + 1].map(y => ({
+      "@type": "MerchantReturnPolicySeasonalOverride",
+      startDate: `${y}-11-01`,
+      endDate: `${y}-12-31`,
+      returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+      merchantReturnDays: 60,
+    })),
+  };
+}
+
+export function productJsonLd(lot: LotForSchema, sellerName = SITE_NAME): Json | null {
   const url = absoluteUrl(`/lots/${lot.slug}`);
   // Only real uploaded photos describe the product. Stock photos are illustrative, so they're left out.
-  const images = parseImages(lot.images).map((src) => absoluteUrl(src));
+  const images = parseImages(lot.images).flatMap((src) => {
+    try {
+      if (!/^(https?:\/\/|\/(?!\/))/.test(src)) return [];
+      const image = new URL(absoluteUrl(src));
+      return ["https:", "http:"].includes(image.protocol) ? [image.href] : [];
+    } catch { return []; }
+  });
+  // A product photo is required for merchant markup. Category fallback photos do not identify the lot.
+  if (!images.length) return null;
   const props: Json[] = [
       ...(lot.units > 0 ? [{ "@type": "PropertyValue", name: "Units", value: lot.units }] : []),
     { "@type": "PropertyValue", name: "Lot size", value: LOT_SIZES[lot.lotSize]?.label ?? lot.lotSize },
@@ -467,6 +497,12 @@ export function productJsonLd(lot: LotForSchema, sellerName = SITE_NAME): Json {
       availability: AVAILABILITY[lot.status] ?? "https://schema.org/InStock",
       itemCondition: ITEM_CONDITION[lot.condition],
       seller: { "@type": "Organization", "@id": ORG_ID(), name: sellerName },
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingDestination: { "@type": "DefinedRegion", addressCountry: "US" },
+        shippingRate: { "@type": "MonetaryAmount", value: FLAT_SHIPPING_CENTS / 100, currency: "USD" },
+      },
+      hasMerchantReturnPolicy: { "@id": absoluteUrl("/legal/returns-and-disputes#policy") },
       ...(lot.status === "ACTIVE" && lot.available ? { inventoryLevel: { "@type": "QuantitativeValue", value: lot.available } } : {}),
     },
   };

@@ -16,6 +16,9 @@ const nextConfig: NextConfig = {
   distDir: process.env.PALLET_BUILD_DIR || ".next",
   serverExternalPackages: ["bcryptjs"],
   poweredByHeader: false,
+  // Put <title>, description, canonical and Open Graph tags in <head> for every visitor. Next 15 otherwise
+  // streams them into <body> on dynamic pages, and Google ignores a canonical link that is in the body.
+  htmlLimitedBots: /.*/,
   experimental: {
     // Enables forbidden() / unauthorized() and the app/forbidden.tsx + app/unauthorized.tsx screens.
     authInterrupts: true,

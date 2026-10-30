@@ -134,7 +134,7 @@ export default async function LotPage({ params }: { params: Params }) {
 
   return (
     <div className="container-pp py-6">
-      <JsonLd data={[productJsonLd(lot, lot.seller.name), breadcrumbJsonLd(crumbs)]} />
+      <JsonLd data={[productJsonLd(lot, lot.seller.name), breadcrumbJsonLd(crumbs)].filter((item): item is NonNullable<typeof item> => item !== null)} />
       <GaEvent name="view_item" params={{ currency: "USD", value: gaItem.price, items: [gaItem] }} />
       <nav className="mb-4 text-xs text-muted">
         <Link href={lh("/")} className="hover:underline">{t("Home")}</Link> /{" "}
