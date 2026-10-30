@@ -186,7 +186,7 @@ export const CATEGORY_COPY: Record<string, CategoryCopy> = {
       },
       {
         q: "Are mystery pallets manifested?",
-        a: "Yes. Every lot we sell has a manifest listing items, quantities and retail values, including mixed lots.",
+        a: "Many do. Lots with a manifest show it on the lot page with items, quantities and retail values. For lots without one, contact us before ordering for photos and contents details.",
       },
       {
         q: "Are general merchandise lots good for a new bin store?",

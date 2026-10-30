@@ -1,5 +1,9 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
+import LOT_REDIRECTS from "@/content/lot-redirects.json";
+
+/** Old lot addresses (renamed, or duplicates merged into another lot) → current slug. Permanent (308) redirects. */
+const movedTo = (slug: string): string | undefined => (LOT_REDIRECTS as Record<string, string>)[slug];
 import { db } from "@/lib/db";
 import { getPublicLot, getRelatedCards } from "@/lib/storefront-products";
 import { getSession } from "@/lib/auth";
@@ -30,13 +34,16 @@ import {
   purchasePrice,
   timeAgo,
 } from "@/lib/format";
+import { compareAtPrice } from "@/lib/sale";
 import { JsonLd, breadcrumbJsonLd, lotIndexable, lotNumber, pageMetadata, productJsonLd } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
-  const { t, locale } = await getI18n();
+  const { t, locale, lh } = await getI18n();
+  const moved = movedTo(slug);
+  if (moved) permanentRedirect(lh(`/lots/${moved}`));
   const lot = await getPublicLot(slug);
   if (!lot || lot.status === "DRAFT") return { title: t("Lot not found"), robots: { index: false } };
   const cond = t(CONDITIONS[lot.condition]?.label ?? lot.condition);
@@ -98,6 +105,8 @@ const SECTIONS = [
 
 export default async function LotPage({ params }: { params: Params }) {
   const { slug } = await params;
+  const moved = movedTo(slug);
+  if (moved) permanentRedirect((await getI18n()).lh(`/lots/${moved}`));
   const lot = await getPublicLot(slug);
   if (!lot || lot.status === "DRAFT") notFound();
   const { t, lh } = await getI18n();
@@ -206,7 +215,7 @@ export default async function LotPage({ params }: { params: Params }) {
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-muted">{t("Price")}</p>
               <p className="font-display text-3xl font-bold sm:text-4xl">{money(lot.priceCents)}</p>
-              {lot.compareAtPriceCents > lot.priceCents && <p className="mt-1 text-sm text-muted">{t("Original price")} <span className="line-through">{money(lot.compareAtPriceCents)}</span></p>}
+              {compareAtPrice(lot) > 0 && <p className="mt-1 text-sm text-muted">{t("Original price")} <span className="line-through">{money(compareAtPrice(lot))}</span></p>}
               <p className="break-words text-sm text-muted">
                 {perUnit !== null ? <>{money(perUnit, { cents: true })} {t("per unit")} ·{" "}</> : null}
                 {buyPrice !== null ? <span className="font-semibold text-moss">{lot.available > 1 ? t("{n} in stock", { n: lot.available }) : t("In stock")}</span> : t("Sold out")}

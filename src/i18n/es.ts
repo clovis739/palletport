@@ -90,8 +90,8 @@ export const ES: Dictionary = {
   "Columbus, Ohio pallets": "Pallets en Columbus, Ohio",
   "Affiliates": "Afiliados",
   "Contact": "Contacto",
-  "Liquidation pallets sold direct from our own warehouse. Every lot manifested and shipped by LTL, truckload or parcel. Warehouse pickup by appointment only.":
-    "Pallets de liquidación vendidos directamente desde nuestro propio almacén. Cada lote con manifiesto y envío por LTL, camión completo o paquetería. Recogida en el almacén solo con cita.",
+  "Liquidation pallets sold direct from our own warehouse. Shipped by LTL, truckload or parcel. Warehouse pickup by appointment only.":
+    "Pallets de liquidación vendidos directamente desde nuestro propio almacén. Envío por LTL, camión completo o paquetería. Recogida en el almacén solo con cita.",
   "Terms": "Términos",
   "Privacy": "Privacidad",
   "Cookies": "Cookies",
@@ -114,8 +114,8 @@ export const ES: Dictionary = {
   // ---- homepage ----
   "Liquidation pallets, direct from our warehouse": "Pallets de liquidación, directo de nuestro almacén",
   "Shop returns & overstock by the case, pallet or truckload.": "Devoluciones y excedentes por caja, pallet o camión completo.",
-  "Manifested lots from retailers and distributors at fixed prices. Add to cart, check out, and we ship dock to door.":
-    "Lotes con manifiesto de minoristas y distribuidores a precio fijo. Agrega al carrito, paga y te lo enviamos hasta tu puerta.",
+  "Lots from retailers and distributors at fixed prices. Add to cart, check out, and we ship dock to door.":
+    "Lotes de minoristas y distribuidores a precios fijos. Agrega al carrito, paga y enviamos de muelle a puerta.",
   "Search lots — try “air fryer”, “power tools”, “truckload”": "Busca lotes: prueba “freidora de aire”, “herramientas”, “camión”",
   "lots in stock": "lotes disponibles",
   "new this week": "nuevos esta semana",
@@ -152,7 +152,7 @@ export const ES: Dictionary = {
   "Register your business": "Registra tu negocio",
   "Free account. Add a resale certificate to unlock Net 30 and tax-exempt buying.": "Cuenta gratuita. Agrega un certificado de reventa para acceder a Net 30 y compras exentas de impuestos.",
   "Add to cart & check out": "Agrega al carrito y paga",
-  "Read the manifest, pick a quantity and pay the listed price. No bidding, no waiting.": "Lee el manifiesto, elige la cantidad y paga el precio publicado. Sin subastas ni esperas.",
+  "Check the lot details, pick a quantity and pay the listed price. No bidding, no waiting.": "Revisa los detalles del lote, elige la cantidad y paga el precio indicado. Sin pujas ni esperas.",
   "Pay & receive": "Paga y recibe",
   "Pay by card, wire/ACH or Net 30. Lots ship by LTL, truckload or parcel. Pickup is by appointment only.":
     "Paga con tarjeta, transferencia/ACH o Net 30. Los lotes se envían por LTL, camión completo o paquetería. La recogida es solo con cita.",
@@ -228,15 +228,15 @@ export const ES: Dictionary = {
 
   // ---- about page (default settings text) ----
   "About PalletPort": "Sobre PalletPort",
-  "Pallets sorted, manifested and sold by us.": "Pallets clasificados, con manifiesto y vendidos por nosotros.",
-  "{name} buys returns and overstock from retailers, sorts and manifests every load in our {location} warehouse, and sells it straight to resellers — by the case, the pallet or the truckload. No middlemen, no third-party sellers.":
-    "{name} compra devoluciones y excedentes a minoristas, clasifica y documenta cada carga en nuestro almacén de {location} y la vende directamente a revendedores, por caja, pallet o camión completo. Sin intermediarios ni vendedores externos.",
+  "Pallets sorted, graded and sold by us.": "Pallets clasificados, calificados y vendidos por nosotros.",
+  "{name} buys returns and overstock from retailers, sorts and grades every load in our {location} warehouse, and sells it straight to resellers — by the case, the pallet or the truckload. No middlemen, no third-party sellers.":
+    "{name} compra devoluciones y excedentes a minoristas, clasifica y califica cada carga en nuestro almacén de {location} y la vende directamente a revendedores, por caja, pallet o camión completo. Sin intermediarios ni vendedores externos.",
   "PalletPort by the numbers": "PalletPort en cifras",
   "Get started": "Empezar",
   "Our mission": "Nuestra misión",
   "Make buying surplus inventory as clear as buying anything else online.": "Que comprar inventario excedente sea tan claro como comprar cualquier otra cosa en línea.",
-  "Liquidation used to mean phone calls, blind pallets and guesswork. We think resellers deserve better: a full manifest on every lot, honest condition grades and real freight quotes — from one company that stands behind every pallet it ships.":
-    "Antes, la liquidación significaba llamadas, pallets a ciegas y conjeturas. Creemos que los revendedores merecen algo mejor: un manifiesto completo en cada lote, grados de condición honestos y cotizaciones de flete reales, de una sola empresa que respalda cada pallet que envía.",
+  "Liquidation used to mean phone calls, blind pallets and guesswork. We think resellers deserve better: clear lot details, honest condition grades and simple flat-rate delivery — from one company that stands behind every pallet it ships.":
+    "Antes, la liquidación significaba llamadas, pallets a ciegas y conjeturas. Creemos que los revendedores merecen algo mejor: detalles claros de cada lote, grados de condición honestos y envío con tarifa fija, de una sola empresa que respalda cada pallet que envía.",
   "Because we handle every lot ourselves, from receiving to wrapping, you always know who you're buying from and who to call if something isn't right.":
     "Como manejamos cada lote nosotros mismos, desde la recepción hasta el embalaje, siempre sabes a quién le compras y a quién llamar si algo no está bien.",
   "See how it works": "Ver cómo funciona",
@@ -247,8 +247,8 @@ export const ES: Dictionary = {
   "Why reselling returns is good for the planet": "Por qué revender devoluciones es bueno para el planeta",
   "A transparent buying experience": "Una experiencia de compra transparente",
   "No mystery boxes. No surprises at checkout.": "Sin cajas misteriosas. Sin sorpresas al pagar.",
-  "Full manifests": "Manifiestos completos",
-  "Every lot lists SKUs, quantities and retail values — search, sort or download them.": "Cada lote indica SKU, cantidades y valores de venta: búscalos, ordénalos o descárgalos.",
+  "Clear lot details": "Detalles claros de cada lote",
+  "Lot pages show the condition, price and contents, plus a full manifest of SKUs, quantities and retail values where we have one.": "Las páginas de los lotes muestran la condición, el precio y el contenido, además de un manifiesto completo con SKU, cantidades y valores de venta al público cuando lo tenemos.",
   "Clear condition grades": "Grados de condición claros",
   "New, shelf pull, customer return, mixed or salvage — labelled on every lot.": "Nuevo, retirado de estante, devolución, mixto o para recuperar: indicado en cada lote.",
   "Freight up front": "Flete por adelantado",
@@ -260,7 +260,7 @@ export const ES: Dictionary = {
   "Our advantages": "Nuestras ventajas",
   "Why resellers choose PalletPort": "Por qué los revendedores eligen PalletPort",
   "Buy with confidence": "Compra con confianza",
-  "Every pallet is sorted, graded and manifested by our own team — one company, one standard, one point of contact.": "Nuestro propio equipo clasifica, califica y documenta cada pallet: una empresa, un estándar, un solo contacto.",
+  "Every pallet is sorted and graded by our own team — one company, one standard, one point of contact.": "Cada pallet lo clasifica y califica nuestro propio equipo: una empresa, un estándar, un solo punto de contacto.",
   "Inside our warehouse": "Dentro de nuestro almacén",
   "No hidden fees": "Sin cargos ocultos",
   "You see the price, freight estimate and payment terms before you commit. The price on the page is the price you pay.": "Ves el precio, el flete estimado y las condiciones de pago antes de comprometerte. El precio de la página es el que pagas.",

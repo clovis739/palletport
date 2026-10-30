@@ -115,13 +115,13 @@ export const ES_PAGES: Dictionary = {
   "We buy customer returns and overstock by the truckload, then sort, grade and manifest every pallet in our own Columbus-area warehouse to sell direct.":
     "Compramos devoluciones de clientes y excedentes por camión completo; luego clasificamos, calificamos y hacemos el manifiesto de cada pallet en nuestro propio almacén del área de Columbus para venderlo directo.",
   "How {brand} works": "Cómo funciona {brand}",
-  "We buy returns and overstock by the truckload, sort and manifest every pallet in our own warehouse, and sell it direct to resellers — so you see exactly what's on a pallet before you buy.":
-    "Compramos devoluciones y excedentes por camión completo, clasificamos y hacemos el manifiesto de cada pallet en nuestro propio almacén y lo vendemos directo a revendedores, para que veas exactamente qué trae un pallet antes de comprar.",
+  "We buy returns and overstock by the truckload, sort and grade it in our own warehouse, and sell it direct to resellers, with the condition, contents and price on every lot page.":
+    "Compramos devoluciones y excedentes por camión completo, los clasificamos en nuestro propio almacén y los vendemos directo a revendedores, con la condición, el contenido y el precio en la página de cada lote.",
   "What happens in our warehouse": "Qué pasa en nuestro almacén",
   "Behind the scenes": "Detrás de escena",
   "One warehouse, our own inventory": "Un almacén, inventario propio",
-  "{name} isn't a marketplace of outside sellers. Every lot on the site is ours: we buy returns, shelf pulls and overstock, then sort, grade and manifest each lot in our warehouse in {place} before it goes on sale.":
-    "{name} no es un marketplace de vendedores externos. Cada lote del sitio es nuestro: compramos devoluciones, retiros de estantería y excedentes, y luego clasificamos, calificamos y hacemos el manifiesto de cada lote en nuestro almacén en {place} antes de ponerlo a la venta.",
+  "{name} isn't a marketplace of outside sellers. Every lot on the site is ours: we buy returns, shelf pulls and overstock, then sort and grade each lot in our warehouse in {place} before it goes on sale.":
+    "{name} no es un marketplace de vendedores externos. Cada lote del sitio es nuestro: compramos devoluciones, retiros de estantería y excedentes, y luego clasificamos y calificamos cada lote en nuestro almacén en {place} antes de ponerlo a la venta.",
   "For buyers": "Para compradores",
   "Buy with the full picture": "Compra con toda la información",
   "Freight is {perPallet} per pallet and free over {free}. Track your PRO number and leave a review after delivery.":
@@ -357,7 +357,7 @@ export const ES_PAGES: Dictionary = {
   "Every load is unpacked, graded by condition and rebuilt onto pallets or into case packs.": "Cada carga se desempaca, se clasifica por condición y se rearma en pallets o cajas.",
   "Every lot has one fixed price. Pick a quantity, add it to your cart and check out.": "Cada lote tiene un solo precio fijo. Elige la cantidad, agrégalo al carrito y paga.",
   "Every lot page lists the SKUs, quantities, retail values and condition grade, plus a freight estimate for your ZIP.": "Cada página de lote muestra los SKU, cantidades, valores de venta y la clasificación de condición, además de un estimado de flete para tu código postal.",
-  "Filter by category, condition, lot size and price. Every lot shows its manifest, percent of retail and price per unit.": "Filtra por categoría, condición, tamaño de lote y precio. Cada lote muestra su manifiesto, el porcentaje del precio de venta y el precio por unidad.",
+  "Filter by category, condition, lot size and price. Lot pages show the condition, price and, where we have one, a full manifest.": "Filtra por categoría, condición, tamaño de lote y precio. Las páginas de los lotes muestran la condición, el precio y, cuando lo tenemos, un manifiesto completo.",
   "Find a lot": "Encuentra un lote",
   "Free for any reseller. Add your resale certificate to unlock Net 30 terms.": "Gratis para cualquier revendedor. Agrega tu certificado de reventa para desbloquear crédito Net 30.",
   "Message": "Mensaje",

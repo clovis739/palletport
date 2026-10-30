@@ -1,5 +1,6 @@
 import type { Lot } from '@prisma/client';
 import { FLAT_SHIPPING_CENTS, HANDLING_DAYS, TRANSIT_DAYS } from './shipping-policy';
+import { SALE_END, SALE_START, compareAtPrice } from './sale';
 import { CONDITIONS, LOT_SIZES } from './format';
 import { isLotPhotoUrl } from './mediaUrls';
 import sourcePhotos from '../content/source-photos.json';
@@ -40,12 +41,14 @@ export function buildMerchantFeed(lots: MerchantLot[], siteUrl: string, storeNam
     const condition = lot.sourceCondition || CONDITIONS[lot.condition]?.label || lot.condition;
     const description = plain(lot.description, 5000);
     const structured = /^(GS|LS|USA)-/.test(lot.externalSku ?? '');
-    const onSale = (lot.compareAtPriceCents ?? 0) > lot.priceCents;
+    const was = compareAtPrice(lot);
+    const onSale = was > 0;
     const fields: [string, string | undefined][] = [
       ['g:id', lot.sku], ['g:title', plain(lot.title, 150)], ['g:description', structured ? undefined : description],
       ['g:link', `${base}/lots/${encodeURIComponent(lot.slug)}`], ['g:image_link', photos[0]],
-      ['g:availability', 'in_stock'], ['g:price', `${((onSale ? lot.compareAtPriceCents! : lot.priceCents) / 100).toFixed(2)} USD`],
+      ['g:availability', 'in_stock'], ['g:price', `${((onSale ? was : lot.priceCents) / 100).toFixed(2)} USD`],
       ['g:sale_price', onSale ? `${(lot.priceCents / 100).toFixed(2)} USD` : undefined],
+      ['g:sale_price_effective_date', onSale ? `${SALE_START}/${SALE_END}` : undefined],
       ['g:condition', googleCondition[lot.condition] ?? 'used'], ['g:brand', lot.brand || undefined], ['g:identifier_exists', 'no'],
       ['g:product_type', [lot.category?.name, lot.subcategory?.name].filter(Boolean).join(' > ') || undefined],
       ['g:shipping_weight', lot.weightLbs > 0 && lot.weightLbs <= 2000 ? `${lot.weightLbs} lb` : undefined],

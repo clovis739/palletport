@@ -322,8 +322,8 @@ export const ES_GUIDES: Dictionary = {
     "Una mezcla de departamentos en lugar de una sola categoría. El manifiesto en cada página de lote muestra exactamente qué incluye.",
   "Are mystery pallets manifested?":
     "¿Los pallets sorpresa tienen manifiesto?",
-  "Yes. Every lot we sell has a manifest listing items, quantities and retail values, including mixed lots.":
-    "Sí. Cada lote que vendemos tiene un manifiesto con los artículos, las cantidades y los valores de venta al público, incluidos los lotes mixtos.",
+  "Many do. Lots with a manifest show it on the lot page with items, quantities and retail values. For lots without one, contact us before ordering for photos and contents details.":
+    "Muchos sí. Los lotes con manifiesto lo muestran en la página del lote con artículos, cantidades y valores de venta al público. Para los lotes sin manifiesto, contáctanos antes de pedir para obtener fotos y detalles del contenido.",
   "Are general merchandise lots good for a new bin store?":
     "¿Los lotes de mercancía general son buenos para un bin store nuevo?",
   "They're a common starting point because the variety fills shelves quickly. Plan time and space to sort each load when it arrives.":

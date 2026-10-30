@@ -3,8 +3,8 @@ import type { Article } from "./types";
 export const BLOG_CATEGORIES = ["Buying guides", "Industry insights", "Market reports", "Reseller stories"];
 
 export const AUTHORS: Record<string, { name: string; role: string; bio: string }> = {
-  team: { name: "Editorial Team", role: "Marketplace team", bio: "Our buyer-success and marketplace teams write about what they see across thousands of lots every month." },
-  sourcing: { name: "Sourcing Desk", role: "Buying & grading", bio: "The team that buys our inbound loads, grades every pallet and writes the manifests." },
+  team: { name: "Editorial Team", role: "Marketplace team", bio: "Our team writes practical guides for resellers buying liquidation stock." },
+  sourcing: { name: "Sourcing Desk", role: "Buying & grading", bio: "The team that buys and grades our inbound loads." },
   freight: { name: "Logistics Team", role: "Freight & fulfilment", bio: "Our logistics specialists help buyers move pallets and truckloads across the country." },
 };
 
@@ -82,7 +82,7 @@ export const POSTS: Article[] = [
         { q: "Are liquidation pallets worth it for beginners?", a: "They can be, if you start with a small lot in a category you know, choose a predictable grade such as new or shelf pull, and work out your numbers before you buy rather than relying on the retail value." },
         { q: "How much profit can you make on a liquidation pallet?", a: "It varies widely with the category, condition, your sales channel and how much of the lot you sell. There's no typical figure you can count on. Estimate each lot from recent sold prices, and use your own records once you have a few lots behind you." },
         { q: "Is the retail value on the manifest what I'll make?", a: "No. Retail value is the original list price. What you make depends on what each item really sells for in its condition, how many items you sell, and your costs." },
-        { q: "Are mystery pallets worth it?", a: "Unmanifested mystery pallets are hard to value because you can't check the contents first. A manifested lot lets you price the main items before you commit. Every lot on PalletPort comes with a manifest." },
+        { q: "Are mystery pallets worth it?", a: "Unmanifested mystery pallets are hard to value because you can't check the contents first. A manifested lot lets you price the main items before you commit, so ask for a manifest or contents details before you buy." },
       ] },
     ],
   },
@@ -143,7 +143,7 @@ export const POSTS: Article[] = [
         "Add these to the lot price to get your landed cost, then compare it with what you expect to sell the items for. Our guide [are liquidation pallets worth it?](/blog/are-liquidation-pallets-worth-it) walks through that check step by step.",
       ] },
       { h: "Where to start", p: [
-        "If you're new, a [case pack](/case-packs) or a single [pallet](/pallets) in a category you know keeps your first purchase small. Buyers stocking a store each week often move up to [truckloads](/truckloads) for the lower price per pallet. Every lot page shows the manifest, condition grade and price before you order.",
+        "If you're new, a [case pack](/case-packs) or a single [pallet](/pallets) in a category you know keeps your first purchase small. Buyers stocking a store each week often move up to [truckloads](/truckloads) for the lower price per pallet. Every lot page shows the condition grade and price before you order, plus the manifest where we have one.",
       ] },
       { h: "FAQ", faq: [
         { q: "How much does a pallet of liquidation merchandise cost?", a: "On PalletPort in October 2026, the middle half of pallets were priced between about $350 and $1,000, with a median of about $565. Prices depend on size, condition and category." },
@@ -195,7 +195,7 @@ export const POSTS: Article[] = [
         "Fact: many resellers build loyal followings around curation — 'the best kitchen finds every Friday' or 'tested tools with a 30-day guarantee'. Your brand is the experience you add: testing, cleaning, honest descriptions and service.",
       ] },
       { h: "Myth: You never know who you're really buying from", p: [
-        "Fact: on many marketplaces that's true — lots pass through several hands before they reach you. PalletPort is different: we buy, sort, grade and ship every pallet ourselves, so there's one company responsible for the manifest and one team to call if something isn't right.",
+        "Fact: on many marketplaces that's true — lots pass through several hands before they reach you. PalletPort is different: we buy, sort, grade and ship every pallet ourselves, so there's one company responsible for the lot and one team to call if something isn't right.",
       ] },
       { h: "The bottom line", p: [
         "Liquidation isn't a lottery and it isn't a guaranteed win. It's a sourcing channel that rewards buyers who read manifests, understand condition grades, price in freight and know their customers. Start with a lot you can afford to learn from, track your results, and scale what works.",
@@ -210,7 +210,7 @@ export const POSTS: Article[] = [
     body: [
       { p: [
         "A liquidation manifest is the line-by-line list of what's in a lot: item codes, descriptions, quantities and the retail price of each item. Reading one well comes down to three habits. Find the handful of lines that carry most of the value. Research what those items actually sell for, in the condition the lot is graded. Then add freight before you compare the result with the price.",
-        "This guide walks through every column, shows the math on an example manifest, and lists the warning signs that should make you slow down. Every lot on PalletPort has a manifest, so you can practise on real lots as you read.",
+        "This guide walks through every column, shows the math on an example manifest, and lists the warning signs that should make you slow down. Many lots on PalletPort include a manifest, so you can practise on real lots as you read.",
       ] },
       { h: "What a liquidation manifest is", p: [
         "When a retailer or manufacturer clears returns, overstock or shelf pulls, the goods are counted and listed before they're sold. That list is the manifest. It tells you what was put on the pallet or truck, so you can price a lot before you commit to it.",

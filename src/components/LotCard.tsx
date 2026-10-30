@@ -5,6 +5,7 @@ import { ConditionBadge } from "./ConditionBadge";
 import { getI18n } from "@/i18n/server";
 import { CardAddToCart } from "./lot/CardAddToCart";
 import { LOT_SIZES, money, pctOfRetail } from "@/lib/format";
+import { compareAtPrice } from "@/lib/sale";
 import { ArrowRight, MapPin, Package } from "lucide-react";
 
 export type LotCardData = {
@@ -37,7 +38,8 @@ export type LotCardData = {
 export async function LotCard({ lot, priority = false }: { lot: LotCardData; priority?: boolean }) {
   const { t, lh } = await getI18n();
   const pct = pctOfRetail(lot.priceCents, lot.msrpCents);
-  const discount = (lot.compareAtPriceCents ?? 0) > lot.priceCents ? Math.round((1 - lot.priceCents / lot.compareAtPriceCents!) * 100) : 0;
+  const was = compareAtPrice(lot);
+  const discount = was ? Math.round((1 - lot.priceCents / was) * 100) : 0;
   const cover = lotCover(lot);
   const soldOut = lot.status !== "ACTIVE";
   const stock = lot.available ?? 1;
@@ -117,8 +119,8 @@ export async function LotCard({ lot, priority = false }: { lot: LotCardData; pri
 
         <div className="mt-auto flex items-end justify-between gap-2 pt-1">
           <p className="font-display text-2xl font-bold leading-none">{money(lot.priceCents)}</p>
-          {(lot.compareAtPriceCents ?? 0) > lot.priceCents && <p className="text-right text-xs text-muted">
-            {t("Original price")} <span className="line-through decoration-muted/60">{money(lot.compareAtPriceCents!)}</span>
+          {was > 0 && <p className="text-right text-xs text-muted">
+            {t("Original price")} <span className="line-through decoration-muted/60">{money(was)}</span>
           </p>}
         </div>
 

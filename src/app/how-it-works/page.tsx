@@ -23,7 +23,7 @@ export default async function HowItWorks() {
         <div className="absolute inset-0 bg-ink/75" />
         <div className="container-pp relative py-12 sm:py-20 text-center">
           <h1 className="font-display text-3xl font-bold sm:text-5xl">{t("How {brand} works", { brand })}</h1>
-          <p className="mx-auto mt-3 max-w-2xl text-white/70">{t("We buy returns and overstock by the truckload, sort and manifest every pallet in our own warehouse, and sell it direct to resellers — so you see exactly what's on a pallet before you buy.")}</p>
+          <p className="mx-auto mt-3 max-w-2xl text-white/70">{t("We buy returns and overstock by the truckload, sort and grade it in our own warehouse, and sell it direct to resellers, with the condition, contents and price on every lot page.")}</p>
         </div>
       </section>
 
@@ -34,7 +34,7 @@ export default async function HowItWorks() {
           <ol className="mt-6 space-y-5">
             {[
               ["Create a business account", "Free for any reseller. Add your resale certificate to unlock Net 30 terms."],
-              ["Browse and compare", "Filter by category, condition, lot size and price. Every lot shows its manifest, percent of retail and price per unit."],
+              ["Browse and compare", "Filter by category, condition, lot size and price. Lot pages show the condition, price and, where we have one, a full manifest."],
               ["Ask before you buy", "Contact our warehouse team about photos, testing or bundle deals."],
               ["Check out", "Pay by card, wire/ACH, or Net 30. Add a promo code if you have one."],
               ["Receive and review", t("Shipping is $100 per order. Track your PRO number and leave a review after delivery.")],

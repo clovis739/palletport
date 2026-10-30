@@ -426,7 +426,7 @@ export const DEFAULTS: SettingsMap = {
       },
     ],
     footerBlurb:
-      "Liquidation pallets sold direct from our own warehouse. Every lot manifested and shipped by LTL, truckload or parcel. Warehouse pickup by appointment only.",
+      "Liquidation pallets sold direct from our own warehouse. Shipped by LTL, truckload or parcel. Warehouse pickup by appointment only.",
     legalLinks: [
       { label: "Terms", href: "/legal/terms" },
       { label: "Privacy", href: "/legal/privacy" },
@@ -449,7 +449,7 @@ export const DEFAULTS: SettingsMap = {
   home: {
     heroEyebrow: "Liquidation pallets, direct from our warehouse",
     heroTitle: "Shop returns & overstock by the case, pallet or truckload.",
-    heroSubtitle: "Manifested lots from retailers and distributors at fixed prices. Add to cart, check out, and we ship dock to door.",
+    heroSubtitle: "Lots from retailers and distributors at fixed prices. Add to cart, check out, and we ship dock to door.",
     heroSearchPlaceholder: "Search lots — try “air fryer”, “power tools”, “truckload”",
     // Warehouse aisle with pallet racking. Photo: Ruchindra Gunasekara on Unsplash (free under the Unsplash License).
     heroPhoto: "https://images.unsplash.com/photo-1553413077-190dd305871c",
@@ -485,16 +485,16 @@ export const DEFAULTS: SettingsMap = {
     },
     howItWorksSteps: [
       { title: "Register your business", text: "Free account. Add a resale certificate to unlock Net 30 and tax-exempt buying." },
-      { title: "Add to cart & check out", text: "Read the manifest, pick a quantity and pay the listed price. No bidding, no waiting." },
+      { title: "Add to cart & check out", text: "Check the lot details, pick a quantity and pay the listed price. No bidding, no waiting." },
       { title: "Pay & receive", text: "Pay by card, wire/ACH or Net 30. Lots ship by LTL, truckload or parcel. Pickup is by appointment only." },
     ],
     howItWorksCta: { label: "How ordering works", href: "/how-to-buy" },
   },
   about: {
     heroEyebrow: "About PalletPort",
-    heroTitle: "Pallets sorted, manifested and sold by us.",
+    heroTitle: "Pallets sorted, graded and sold by us.",
     heroIntro:
-      "{name} buys returns and overstock from retailers, sorts and manifests every load in our {location} warehouse, and sells it straight to resellers — by the case, the pallet or the truckload. No middlemen, no third-party sellers.",
+      "{name} buys returns and overstock from retailers, sorts and grades every load in our {location} warehouse, and sells it straight to resellers — by the case, the pallet or the truckload. No middlemen, no third-party sellers.",
     heroPhotos: [],
     // Warehouse with forklift and pallet racking. Photo: AFINIS Group on Unsplash (free under the Unsplash License).
     heroBg: "https://images.unsplash.com/photo-1689942010216-dc412bb1e7a9",
@@ -503,7 +503,7 @@ export const DEFAULTS: SettingsMap = {
       eyebrow: "Our mission",
       title: "Make buying surplus inventory as clear as buying anything else online.",
       paragraphs: [
-        "Liquidation used to mean phone calls, blind pallets and guesswork. We think resellers deserve better: a full manifest on every lot, honest condition grades and real freight quotes — from one company that stands behind every pallet it ships.",
+        "Liquidation used to mean phone calls, blind pallets and guesswork. We think resellers deserve better: clear lot details, honest condition grades and simple flat-rate delivery — from one company that stands behind every pallet it ships.",
         "Because we handle every lot ourselves, from receiving to wrapping, you always know who you're buying from and who to call if something isn't right.",
       ],
       linkLabel: "See how it works",
@@ -521,7 +521,7 @@ export const DEFAULTS: SettingsMap = {
       eyebrow: "A transparent buying experience",
       title: "No mystery boxes. No surprises at checkout.",
       cards: [
-        { title: "Full manifests", text: "Every lot lists SKUs, quantities and retail values — search, sort or download them.", href: "/blog/how-to-read-a-manifest" },
+        { title: "Clear lot details", text: "Lot pages show the condition, price and contents, plus a full manifest of SKUs, quantities and retail values where we have one.", href: "/blog/how-to-read-a-manifest" },
         { title: "Clear condition grades", text: "New, shelf pull, customer return, mixed or salvage — labelled on every lot.", href: "/how-it-works#conditions" },
         { title: "Freight up front", text: "Estimate shipping by ZIP on the lot page before you order, or book a weekday pickup visit.", href: "/blog/ltl-freight-101" },
         { title: "Buyer protection", text: "15-day returns (60 days for orders placed November 1 through December 31 each year) with written approval when an order doesn't match its listing.", href: "/legal/returns-and-disputes" },
@@ -532,7 +532,7 @@ export const DEFAULTS: SettingsMap = {
       eyebrow: "Our advantages",
       title: "Why resellers choose PalletPort",
       cards: [
-        { title: "Buy with confidence", text: "Every pallet is sorted, graded and manifested by our own team — one company, one standard, one point of contact.", href: "/how-it-works", cta: "Inside our warehouse" },
+        { title: "Buy with confidence", text: "Every pallet is sorted and graded by our own team — one company, one standard, one point of contact.", href: "/how-it-works", cta: "Inside our warehouse" },
         { title: "No hidden fees", text: "You see the price, freight estimate and payment terms before you commit. The price on the page is the price you pay.", href: "/how-to-buy", cta: "How buying works" },
         { title: "Scale with ease", text: "Start with a single case pack and grow to weekly truckloads — plus Net 30 terms once your business is verified.", href: "/truckloads", cta: "Shop truckloads" },
       ],

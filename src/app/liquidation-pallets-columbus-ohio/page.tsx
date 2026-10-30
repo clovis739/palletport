@@ -110,7 +110,7 @@ export default async function ColumbusOhioPage() {
             <h2 className="font-display text-2xl font-bold sm:text-3xl">{t("One warehouse, our own inventory")}</h2>
             <div className="mt-4 max-w-2xl space-y-4 text-[15px] leading-relaxed text-ink/80">
               <p>
-                {t("{name} isn't a marketplace of outside sellers. Every lot on the site is ours: we buy returns, shelf pulls and overstock, then sort, grade and manifest each lot in our warehouse in {place} before it goes on sale.", { name: store.name, place: where })}
+                {t("{name} isn't a marketplace of outside sellers. Every lot on the site is ours: we buy returns, shelf pulls and overstock, then sort and grade each lot in our warehouse in {place} before it goes on sale.", { name: store.name, place: where })}
               </p>
               <p>
                 {t("That makes us a practical source for Ohio and Midwest resellers: bin stores, discount and dollar stores, online sellers, flea-market vendors and refurbishers. Each lot page shows the manifest, the condition grade, the unit count and a freight estimate for your ZIP, so you know what you're buying and what delivery will cost before you order.")}
