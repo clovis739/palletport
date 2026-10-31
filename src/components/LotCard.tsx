@@ -104,17 +104,13 @@ export async function LotCard({ lot, priority = false }: { lot: LotCardData; pri
               {lot.units.toLocaleString()}{perUnit ? <span className="text-muted">· {money(perUnit)}/{t("unit")}</span> : null}
             </dd>
           </div>}
-          {lot.lotSize === "TRUCKLOAD" ? (
-            <div className="flex items-center justify-between gap-3"><dt className="text-muted">{t("Origin")}</dt><dd className="font-semibold">{t("Imported")}</dd></div>
-          ) : (
-            <div className="flex items-center justify-between gap-3">
-              <dt className="shrink-0 text-muted">{t("Ships from")}</dt>
-              <dd className="inline-flex min-w-0 items-center justify-end gap-1 font-medium">
-                <MapPin aria-hidden className="h-3.5 w-3.5 shrink-0 text-muted" />
-                <span className="truncate">{lot.shipsFrom}</span>
-              </dd>
-            </div>
-          )}
+          <div className="flex items-center justify-between gap-3">
+            <dt className="shrink-0 text-muted">{t("Ships from")}</dt>
+            <dd className="inline-flex min-w-0 items-center justify-end gap-1 font-medium">
+              <MapPin aria-hidden className="h-3.5 w-3.5 shrink-0 text-muted" />
+              <span className="truncate">{lot.shipsFrom}</span>
+            </dd>
+          </div>
         </dl>
 
         <div className="mt-auto flex items-end justify-between gap-2 pt-1">
