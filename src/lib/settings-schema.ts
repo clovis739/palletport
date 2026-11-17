@@ -667,9 +667,7 @@ export const DEFAULTS: SettingsMap = {
   checkout: {
     paymentTitle: "Payment",
     paymentMethods: [
-      { id: "CARD", enabled: true, name: "Credit or debit card", description: "Charged when we confirm your order.", instructions: "", icon: "card", logo: "" },
-      { id: "WIRE", enabled: true, name: "Wire / ACH transfer", description: "We email bank details and an invoice. Ships once funds clear (1–2 business days).", instructions: "We'll email you our bank details and an invoice. Your order ships once the funds clear.", icon: "transfer", logo: "" },
-      { id: "NET30", enabled: true, name: "Net 30 terms", description: "Invoice due 30 days after delivery. For verified resellers.", instructions: "", icon: "invoice", logo: "" },
+      { id: "WIRE", enabled: true, name: "Bank transfer", description: "We email bank details and an invoice. Ships once funds clear (1–2 business days).", instructions: "We'll email you our bank details and an invoice. Your order ships once the funds clear.", icon: "transfer", logo: "" },
       { id: "ZELLE", enabled: true, name: "Zelle", description: "Pay from your bank app. We email the details after you order.", instructions: "We'll email you our Zelle details. Include your order number in the memo. Your order ships once payment arrives.", icon: "bank", logo: "" },
       { id: "APPLE_PAY", enabled: true, name: "Apple Pay", description: "Pay from your iPhone. We email the details after you order.", instructions: "We'll email you how to pay with Apple Pay. Include your order number with the payment. Your order ships once payment arrives.", icon: "phone", logo: "" },
       { id: "CHIME", enabled: true, name: "Chime", description: "Pay from your Chime account. We email the details after you order.", instructions: "We'll email you our Chime details. Include your order number with the payment. Your order ships once payment arrives.", icon: "wallet", logo: "" },

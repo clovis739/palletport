@@ -98,7 +98,7 @@ export const ORDER_STATUS_LABEL: Record<string, string> = {
 export const PAYMENT_LABEL: Record<string, string> = {
   CARD: "Card",
   NET30: "Net 30",
-  WIRE: "Wire / ACH",
+  WIRE: "Bank transfer",
   ZELLE: "Zelle",
   APPLE_PAY: "Apple Pay",
   CHIME: "Chime",
